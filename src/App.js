@@ -1,25 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container mx-auto mt-4">
+      <h1 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-secondary  to-primary ">
+        Tailwind V3  in React - cripto web OMNI
+      </h1>
     </div>
   );
 }
+
 
 export default App;
