@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { NavBar } from 'app/components/NavBar';
-import { PageWrapper } from 'app/components/PageWrapper';
-
+import styled from 'styled-components/macro';
 
 export function HomePage() {
   return (
@@ -13,8 +12,15 @@ export function HomePage() {
       </Helmet>
       <NavBar />
       <PageWrapper>
-      <span>My HomePage</span>
+        <span>My HomePage</span>
       </PageWrapper>
     </>
   );
 }
+const PageWrapper = styled.div`
+   {
+    display: flex 1;
+    align-items: center;
+    justify-content: space-between;
+  }
+`;

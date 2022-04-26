@@ -1,20 +1,15 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import { Button } from '../Button';
+import { ButtonLink } from '../ButtonLink';
 
 export function Nav() {
   return (
     <Wrapper>
       <Item>
-        <Link to="/login">
-          <Button />1
-        </Link>
+        <ButtonLink path="/register" label="Register" />
       </Item>
       <Item>
-        <Link to="/register">
-          <Button />2
-        </Link>
+        <ButtonLink path="/login" label="Login" />
       </Item>
     </Wrapper>
   );
