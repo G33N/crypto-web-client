@@ -3,17 +3,19 @@ import { Helmet } from 'react-helmet-async';
 import { NavBar } from 'app/components/NavBar';
 import { PageWrapper } from 'app/components/PageWrapper';
 
-
-export function HomePage() {
+export function LoginPage() {
   return (
     <>
       <Helmet>
-        <title>HomePage</title>
-        <meta name="description" content="Omni wallet application homepage" />
+        <title>LoginPage</title>
+        <meta
+          name="description"
+          content="Omni wallet application Loginpage"
+        />
       </Helmet>
       <NavBar />
       <PageWrapper>
-      <span>My HomePage</span>
+      <span>Pagina Login</span>
       </PageWrapper>
     </>
   );
