@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
+import { CardValidationPass } from '../CardValidationPass';
 
 const messages = {
   required: 'Este campo es obligatorio',
   fullname: 'El formato introducido no es el correcto',
-  mail: 'Debes introducir una dirección correcta',
+  mail: 'Debes introducir una dirección de correo correcta',
   phone: 'Debes introducir un número correcto',
   password: 'La contrasena es obligatoria',
+  passwordConfirm: 'Las contrasenas no coinciden',
 };
 
 const patterns = {
@@ -15,6 +17,7 @@ const patterns = {
   mail: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
   phone: /^[0-9]+$/i,
   password: '',
+  passwordConfirm: '',
 };
 
 export function Formulario() {
@@ -25,6 +28,7 @@ export function Formulario() {
   } = useForm({
     mode: 'onChange',
   });
+
   const onSubmit = data => {
     console.log(JSON.stringify(data));
   };
@@ -66,6 +70,19 @@ export function Formulario() {
         })}
       />
       {errors.password && <Validator>{errors.password.message}</Validator>}
+
+      <BoxPass>
+        <CardValidationPass />
+      </BoxPass>
+
+      <Label htmlFor="passwordConfirm">Confirmacion de nueva contrasena</Label>
+      <Input
+        placeholder="Ingrese nuevamente su contrasena"
+        type="text"
+        {...register('passwordConfirm', {
+          required: messages.required,
+        })}
+      />
       <div>
         <Button type="submit" />
       </div>
@@ -79,6 +96,11 @@ export function Formulario() {
 
 const Form = styled.form`
   text-align: center;
+`;
+
+const BoxPass = styled.form`
+  text-align: left;
+  margin-top: 10px;
 `;
 
 const Label = styled.label`
