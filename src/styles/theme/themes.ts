@@ -1,6 +1,6 @@
 const lightTheme = {
   primary: 'rgba(0,0,0,1)',
-  text: 'rgba(0,0,0,1)',
+  text: '#9b9b9b',
   textSecondary: 'rgba(255,165,0,1)',
   background: 'rgba(255,255,255,1)',
   backgroundVariant: 'rgba(251,249,249,1)',
@@ -10,7 +10,7 @@ const lightTheme = {
 
 const darkTheme: Theme = {
   primary: 'rgba(255,255,255,1)',
-  text: 'rgba(255,255,255,1)',
+  text: '#9b9b9b',
   textSecondary: 'rgba(255,165,0,1)',
   background: 'rgba(0,0,0,1)',
   backgroundVariant: 'rgba(28,26,26,1)',
