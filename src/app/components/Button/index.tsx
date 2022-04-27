@@ -1,21 +1,36 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
-import { Link } from 'react-router-dom';
 
 export const Button = (props: any) => {
-  return <LinkButton to={props.path}>{props.label}</LinkButton>;
+  return (
+    <Wrap>
+      <Input type={props.type}>{props.label}</Input>
+    </Wrap>
+  );
 };
 
-const LinkButton = styled(Link)`
-  color: ${p => p.theme.primary};
+const Wrap = styled.div`
+  color: ${p => p.theme.textSecondary};
+  cursor: pointer;
   text-decoration: none;
+  display: flex;
+  padding: 0.25rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  align-items: center;
 
   &:hover {
-    text-decoration: underline;
     opacity: 0.8;
   }
 
   &:active {
     opacity: 0.4;
+  }
+`;
+
+const Input = styled.input`
+  font-size: 18px;
+  padding: 10px;
+  color: ${p => p.theme.text};
   }
 `;
