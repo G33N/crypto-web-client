@@ -34,7 +34,7 @@ export function Formulario() {
       <Label htmlFor="fullname">Nombre completo</Label>
       <Input
         placeholder="Ingrese su nombre completo"
-        {...register('name', {
+        {...register('fullname', {
           required: messages.required,
           pattern: {
             value: patterns.fullname,
@@ -42,6 +42,7 @@ export function Formulario() {
           },
         })}
       />
+      {errors.fullname && <Validator>{errors.fullname.message}</Validator>}
 
       <Label htmlFor="mail">Correo electronico</Label>
       <Input
@@ -54,6 +55,7 @@ export function Formulario() {
           },
         })}
       />
+      {errors.mail && <Validator>{errors.mail.message}</Validator>}
 
       <Label htmlFor="passsword">Contrasena nueva</Label>
       <Input
@@ -63,16 +65,12 @@ export function Formulario() {
           required: messages.required,
         })}
       />
-
+      {errors.password && <Validator>{errors.password.message}</Validator>}
       <div>
         <Button type="submit" />
       </div>
       {/* {submitValue} */}
-      <div>
-        {errors.name && <p>{errors.name.message}</p>}
-        {errors.mail && <p>{errors.mail.message}</p>}
-        {errors.password && <p>{errors.password.message}</p>}
-      </div>
+      <div></div>
     </Form>
   );
 }
@@ -89,6 +87,16 @@ const Label = styled.label`
   font-weight: bold;
   width: 100%;
   line-height: 2;
+  text-align: left;
+  display: block;
+  margin-bottom: 13px;
+  margin-top: 20px;
+`;
+const Validator = styled.p`
+  font-size: 0.6rem;
+  color: ${p => p.theme.textSecondary};
+  font-weight: bold;
+  width: 100%;
   text-align: left;
   display: block;
   margin-bottom: 13px;
