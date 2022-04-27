@@ -1,6 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { NavBar } from 'app/components/NavBar';
+import { StyleConstants } from 'styles/StyleConstants';
 import styled from 'styled-components/macro';
 
 export function LoginPage() {
@@ -11,16 +12,13 @@ export function LoginPage() {
         <meta name="description" content="Omni wallet application Loginpage" />
       </Helmet>
       <NavBar />
-      <PageWrapper>
-        <span>Pagina Login</span>
-      </PageWrapper>
+      <Conteiner>
+        <span>Form Login</span>
+      </Conteiner>
     </>
   );
 }
-const PageWrapper = styled.div`
-   {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+const Conteiner = styled.div`
+  margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
+  padding: 4em;
 `;

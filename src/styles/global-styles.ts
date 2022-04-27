@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,600');
+
   html,
   body {
     height: 100%;
@@ -8,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Poppins', Helvetica, Arial, sans-serif;
+    font-family: Poppins, Helvetica, Arial, sans-serif;
   }
 
   #root {
@@ -18,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
 
   p,
   label {
-    font-family: Poppins, Times, 'Times New Roman', serif;
+    font-family: Poppins, Helvetica, Arial, sans-serif;
     line-height: 1.5em;
   }
 
