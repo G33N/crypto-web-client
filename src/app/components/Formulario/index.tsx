@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
+import { CardValidationPass } from '../CardValidationPass';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+const eye = <FontAwesomeIcon icon={faEye} />;
 
 const messages = {
   required: 'Este campo es obligatorio',
   fullname: 'El formato introducido no es el correcto',
-  mail: 'Debes introducir una dirección correcta',
+  mail: 'Debes introducir una dirección de correo electronico correcta',
   phone: 'Debes introducir un número correcto',
   password: 'La contrasena es obligatoria',
+  passwordConfirm: 'Las contrasenas no coinciden',
 };
 
 const patterns = {
@@ -15,6 +20,7 @@ const patterns = {
   mail: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
   phone: /^[0-9]+$/i,
   password: '',
+  passwordConfirm: '',
 };
 
 export function Formulario() {
@@ -25,12 +31,18 @@ export function Formulario() {
   } = useForm({
     mode: 'onChange',
   });
+
   const onSubmit = data => {
     console.log(JSON.stringify(data));
   };
 
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
+
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form>
       <Label htmlFor="fullname">Nombre completo</Label>
       <Input
         placeholder="Ingrese su nombre completo"
@@ -60,16 +72,36 @@ export function Formulario() {
       <Label htmlFor="passsword">Contrasena nueva</Label>
       <Input
         placeholder="Ingrese su contrasena"
-        type="text"
+        type={passwordShown ? 'text' : 'password'}
         {...register('password', {
           required: messages.required,
         })}
       />
-      {errors.password && <Validator>{errors.password.message}</Validator>}
-      <div>
-        <Button type="submit" />
-      </div>
-      {/* {submitValue} */}
+      <i onClick={togglePasswordVisiblity}>{eye}</i>
+
+      {errors.password && (
+        <>
+          <Validator>{errors.password.message}</Validator>
+          <BoxPass>
+            <CardValidationPass />
+          </BoxPass>
+        </>
+      )}
+      <Label htmlFor="passwordConfirm">Confirmacion de nueva contrasena</Label>
+      <Input
+        placeholder="Ingrese nuevamente su contrasena"
+        type="text"
+        {...register('passwordConfirm', {
+          required: messages.required,
+        })}
+      />
+      {{ ...register('password') } === { ...register('passwordConfirm') } && (
+        <Validator>{errors.passwordConfirm.message}</Validator>
+      )}
+
+      <Button type="submit" onClick={handleSubmit(onSubmit)}>
+        Crear cuenta
+      </Button>
       <div></div>
     </Form>
   );
@@ -79,6 +111,11 @@ export function Formulario() {
 
 const Form = styled.form`
   text-align: center;
+`;
+
+const BoxPass = styled.div`
+  text-align: left;
+  margin-top: 10px;
 `;
 
 const Label = styled.label`
@@ -118,7 +155,7 @@ const Input = styled.input`
   }
 `;
 
-const Button = styled.input`
+const Button = styled.button`
   margin-top: 40px;
   width: 100%;
   height: 70px;
@@ -128,6 +165,7 @@ const Button = styled.input`
   border-radius: 6px;
   color: ${p => p.theme.background};
   ::placeholder {
-    color: ${p => p.theme.text};
+    color: ${p => p.theme.primary};
+    text-align: center;
   }
 `;
