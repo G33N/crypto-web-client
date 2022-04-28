@@ -39,7 +39,7 @@ const Item = styled.a`
 
   &:hover {
     color: ${p => p.theme.background};
-    background-color: ${p => p.theme.primary};
+    background-color: ${p => p.theme.background};
   }
 
   .icon {
