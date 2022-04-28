@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { CardValidationPass } from '../CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 const messages = {
@@ -12,15 +13,14 @@ const messages = {
   mail: 'Debes introducir una dirección de correo electronico correcta',
   phone: 'Debes introducir un número correcto',
   password: 'La contrasena es obligatoria',
-  passwordConfirm: 'Las contrasenas no coinciden',
 };
+const messageConfirmPass = 'Las contrasenas deben ser iguales';
 
 const patterns = {
   fullname: /^[A-Za-z]+$/i,
   mail: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
   phone: /^ \d{4}\-\d{4}\$/,
   password: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
-  passwordConfirm: '',
 };
 
 export function Formulario() {
@@ -93,6 +93,7 @@ export function Formulario() {
       <Label htmlFor="passsword">Contrasena nueva</Label>
       <InputPass>
         <Input
+          id="pass"
           placeholder="Ingrese su contrasena"
           type={passwordShown ? 'text' : 'password'}
           {...register('password', {
@@ -115,14 +116,18 @@ export function Formulario() {
       )}
       <Label htmlFor="passwordConfirm">Confirmacion de nueva contrasena</Label>
       <Input
+        id="passConfirm"
         placeholder="Ingrese nuevamente su contrasena"
         type="text"
         {...register('passwordConfirm', {
           required: messages.required,
         })}
       />
-      {{ ...register('password') } === { ...register('passwordConfirm') } && (
-        <Validator>{errors.passwordConfirm.message}</Validator>
+      {document.getElementById('passConfirm') ===
+      document.getElementById('pass') ? (
+        <Validator>{messageConfirmPass}</Validator>
+      ) : (
+        ''
       )}
 
       <Button type="submit" onClick={handleSubmit(onSubmit)}>
