@@ -123,7 +123,7 @@ export function Formulario() {
           required: messages.required,
         })}
       />
-      {document.getElementById('passConfirm') ===
+      {document.getElementById('passConfirm') !==
       document.getElementById('pass') ? (
         <Validator>{messageConfirmPass}</Validator>
       ) : (
