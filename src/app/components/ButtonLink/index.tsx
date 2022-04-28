@@ -14,7 +14,7 @@ const setTransitionTime = time => `all ${time}ease-in-out`;
 
 const LinkButton = styled(Link)`
   text-decoration: none;
-  color: ${p => p.theme.primary};
+  color: ${p => p.theme.background};
   padding: 0.25rem 1rem;
 
   &:hover {
@@ -28,8 +28,8 @@ const LinkButton = styled(Link)`
 `;
 
 const Item = styled.a`
-  background-color: ${p => p.theme.background};
-  color: ${p => p.theme.text};
+  background-color: ${p => p.theme.primary};
+  color: ${p => p.theme.background};
   cursor: pointer;
   margin: 1em;
   display: flex;
@@ -40,11 +40,6 @@ const Item = styled.a`
   &:hover {
     color: ${p => p.theme.background};
     background-color: ${p => p.theme.primary};
-  }
-
-  &:active {
-    background-color: ${p => p.theme.text};
-    color: ${p => p.theme.background};
   }
 
   .icon {
