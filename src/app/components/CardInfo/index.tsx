@@ -6,10 +6,8 @@ export function CardInfo() {
     <Wrapper>
       <Title>Informacion de usuario</Title>
       <Description>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur minus
-        veniam error? Beatae repellendus, vero eveniet quod recusandae
-        exercitationem provident totam enim. Nulla quos vero molestiae nisi.
-        Dolorem, consequatur repudiandae?
+        Ingresa tu nombre, numero telefonico y correo electronico para comenzar
+        tu proceso de registro.
       </Description>
     </Wrapper>
   );
@@ -30,6 +28,6 @@ const Title = styled.div`
 
 const Description = styled.div`
   font-size: 0.875rem;
-  color: ${p => p.theme.text};
+  color: ${p => p.theme.primary};
   font-weight: normal;
 `;

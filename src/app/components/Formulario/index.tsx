@@ -18,8 +18,8 @@ const messages = {
 const patterns = {
   fullname: /^[A-Za-z]+$/i,
   mail: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-  phone: /^[0-9]+$/i,
-  password: '',
+  phone: /^ \d{4}\-\d{4}\$/,
+  password: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
   passwordConfirm: '',
 };
 
@@ -69,16 +69,42 @@ export function Formulario() {
       />
       {errors.mail && <Validator>{errors.mail.message}</Validator>}
 
-      <Label htmlFor="passsword">Contrasena nueva</Label>
+      {/* <Label htmlFor="phone">Numero telefonico</Label>
       <Input
-        placeholder="Ingrese su contrasena"
-        type={passwordShown ? 'text' : 'password'}
-        {...register('password', {
+        placeholder=" +506 "
+        {...register('phone', {
           required: messages.required,
+          minLength: {
+            value: 9,
+            message: messages.phone,
+          },
+          maxLength: {
+            value: 9,
+            message: messages.phone,
+          },
+          pattern: {
+            value: patterns.phone,
+            message: messages.phone,
+          },
         })}
       />
-      <i onClick={togglePasswordVisiblity}>{eye}</i>
+      {errors.phone && <Validator>{errors.phone.message}</Validator>} */}
 
+      <Label htmlFor="passsword">Contrasena nueva</Label>
+      <InputPass>
+        <Input
+          placeholder="Ingrese su contrasena"
+          type={passwordShown ? 'text' : 'password'}
+          {...register('password', {
+            required: messages.required,
+            minLength: {
+              value: 8,
+              message: messages.password,
+            },
+          })}
+        />
+        <Icon onClick={togglePasswordVisiblity}>{eye}</Icon>
+      </InputPass>
       {errors.password && (
         <>
           <Validator>{errors.password.message}</Validator>
@@ -152,6 +178,18 @@ const Input = styled.input`
   border-radius: 6px;
   ::placeholder {
     color: ${p => p.theme.text};
+  }
+`;
+
+const InputPass = styled.div`
+  position: relative;
+  display: flex;
+  margin-bottom: 14px;
+`;
+const Icon = styled.i`
+  &:hover {
+    color: ${p => p.theme.text};
+    opacity: 0.8;
   }
 `;
 

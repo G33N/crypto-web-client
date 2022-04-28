@@ -31,8 +31,8 @@ export function RegisterPage() {
 const Conteiner = styled.div`
   margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
   padding: 4em;
-  padding-left: 30rem;
-  padding-right: 30rem;
+  padding-left: 30%;
+  padding-right: 35%;
 `;
 
 const Title = styled.div`
