@@ -11,7 +11,7 @@ const messages = {
   required: 'Este campo es obligatorio',
   fullname: 'El formato introducido no es el correcto',
   mail: 'Debes introducir una dirección de correo electronico correcta',
-  phone: 'Debes introducir un número correcto',
+  phone: 'Debes introducir un número correcto, con formato 0000-0000',
   password: 'La contrasena es obligatoria',
 };
 const messageConfirmPass = 'Las contrasenas deben ser iguales';
@@ -91,8 +91,8 @@ export function Formulario() {
       {errors.phone && <Validator>{errors.phone.message}</Validator>} */}
 
       <Label htmlFor="passsword">Contrasena nueva</Label>
-      <InputPass>
-        <Input
+      <InputBoxPass>
+        <InputPass
           id="pass"
           placeholder="Ingrese su contrasena"
           type={passwordShown ? 'text' : 'password'}
@@ -105,7 +105,7 @@ export function Formulario() {
           })}
         />
         <Icon onClick={togglePasswordVisiblity}>{eye}</Icon>
-      </InputPass>
+      </InputBoxPass>
       {errors.password && (
         <>
           <Validator>{errors.password.message}</Validator>
@@ -186,10 +186,30 @@ const Input = styled.input`
   }
 `;
 
-const InputPass = styled.div`
+const InputPass = styled.input`
+  width: 100%;
+  height: 60px;
+  font-size: 0.875rem;
+  color: ${p => p.theme.primary};
+  font-weight: normal;
+  padding: 10px;
+  border: 1;
+  bottom: 1px;
+  border-radius: 6px;
+  ::placeholder {
+    color: ${p => p.theme.text};
+  }
+`;
+const InputBoxPass = styled.div`
   position: relative;
   display: flex;
   margin-bottom: 14px;
+  color: ${p => p.theme.primary};
+  border: 2px;
+  bottom: 1px;
+  border-radius: 6px;
+  border-color: yellow;
+  background-color: red; /// background blanco con borde negro y scar la linea divisoria, color blanco
 `;
 const Icon = styled.i`
   &:hover {
