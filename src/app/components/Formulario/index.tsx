@@ -178,8 +178,6 @@ const Input = styled.input`
   color: ${p => p.theme.primary};
   font-weight: normal;
   padding: 10px;
-  border: 1;
-  bottom: 1px;
   border-radius: 6px;
   ::placeholder {
     color: ${p => p.theme.text};
@@ -190,26 +188,31 @@ const InputPass = styled.input`
   width: 100%;
   height: 60px;
   font-size: 0.875rem;
-  color: ${p => p.theme.primary};
   font-weight: normal;
   padding: 10px;
-  border: 1;
-  bottom: 1px;
-  border-radius: 6px;
+  border: transparent;
   ::placeholder {
     color: ${p => p.theme.text};
   }
 `;
+
 const InputBoxPass = styled.div`
-  position: relative;
   display: flex;
-  margin-bottom: 14px;
+  align-items: center;
   color: ${p => p.theme.primary};
-  border: 2px;
-  bottom: 1px;
+  border: inset 2px ${p => p.theme.primary};
+
+  opacity: 0.8;
   border-radius: 6px;
-  border-color: yellow;
-  background-color: red; /// background blanco con borde negro y scar la linea divisoria, color blanco
+  padding: 0;
+  background-color: transparent;
+  ::placeholder {
+    color: ${p => p.theme.text};
+  }
+  &:hover {
+    color: ${p => p.theme.primary};
+    border: solid 2px ${p => p.theme.primary};
+  }
 `;
 const Icon = styled.i`
   &:hover {
