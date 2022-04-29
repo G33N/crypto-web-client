@@ -9,7 +9,7 @@ import FontFaceObserver from 'fontfaceobserver';
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
 
-import { App } from 'app';
+import App from 'app';
 
 import { HelmetProvider } from 'react-helmet-async';
 
