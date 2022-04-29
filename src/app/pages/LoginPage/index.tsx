@@ -34,16 +34,14 @@ export const LoginPage = ({ useAuth }) => {
       </Helmet>
 
       <Conteiner>
-        <span>Form Login</span>
-        <p>DEBE LOGEARSE PARA VER DASHBOARD</p>
-
+        <Text>Pagina Login </Text>
         <form onSubmit={handleSubmit}>
           <label>
             Username: <input name="username" type="text" />
           </label>{' '}
           <button type="submit">Login</button>
         </form>
-        <p>ingresar un nombre</p>
+        (ingresar un nombre)
       </Conteiner>
     </>
   );
@@ -52,4 +50,15 @@ export const LoginPage = ({ useAuth }) => {
 const Conteiner = styled.div`
   margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
   padding: 4em;
+  background: papayawhip;
+`;
+const Text = styled.p`
+  font-size: 2rem;
+  color: ${p => p.theme.textSecondary};
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+  display: block;
+  margin-bottom: 13px;
+  margin-top: 20px;
 `;

@@ -17,16 +17,17 @@ export const Dashboard = ({ useAuth }) => {
 
       <Conteiner>
         <span>RUTA SOLO CON LOGIN</span>
-        <p>SOY EL DASHBOARD</p>
+        <Text>SOY EL DASHBOARD</Text>
+        <div></div>{' '}
         <p>
           BIENVENIDO {auth.user}!{' '}
-          <button
+          <Button
             onClick={() => {
               auth.signout(() => navigate('/'));
             }}
           >
             CERRAR SESION
-          </button>
+          </Button>
         </p>
       </Conteiner>
     </>
@@ -36,4 +37,38 @@ export const Dashboard = ({ useAuth }) => {
 const Conteiner = styled.div`
   margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
   padding: 4em;
+`;
+const Text = styled.p`
+  font-size: 2rem;
+  color: ${p => p.theme.textSecondary};
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+  display: block;
+  margin-bottom: 50px;
+  margin-top: 20px;
+`;
+const Button = styled.div`
+  background-color: ${p => p.theme.primary};
+  color: ${p => p.theme.textSecondary};
+  width: 250px;
+  height: 60px;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 1rem;
+  margin-top: 60px;
+  padding: 1rem;
+  border-radius: 0.75rem;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.4;
+  }
 `;

@@ -12,11 +12,7 @@ export function HomePage() {
       </Helmet>
 
       <Conteiner>
-        <span>Pagina principal - se ve sin login</span>
-
-        {/* <button type="button" onClick={handleLogin}>
-          Ingresar
-        </button> */}
+        <Text>Pagina principal - se ve sin login</Text>
       </Conteiner>
     </>
   );
@@ -25,4 +21,14 @@ const Conteiner = styled.div`
   margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
   padding: 4em;
   background: papayawhip;
+`;
+const Text = styled.p`
+  font-size: 2rem;
+  color: ${p => p.theme.textSecondary};
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+  display: block;
+  margin-bottom: 13px;
+  margin-top: 20px;
 `;
