@@ -3,7 +3,8 @@ import styled from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from '../CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 const messages = {
@@ -12,15 +13,14 @@ const messages = {
   mail: 'Debes introducir una dirección de correo electronico correcta',
   phone: 'Debes introducir un número correcto, con formato 0000-0000',
   password: 'La contrasena es obligatoria',
-  passwordConfirm: 'Las contrasenas no coinciden',
 };
+const messageConfirmPass = 'Las contrasenas deben ser iguales';
 
 const patterns = {
   fullname: /^[A-Za-z]+$/i,
   mail: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
   phone: /^ \d{4}\-\d{4}\$/,
   password: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
-  passwordConfirm: '',
 };
 
 export function Formulario() {
@@ -69,7 +69,7 @@ export function Formulario() {
       />
       {errors.mail && <Validator>{errors.mail.message}</Validator>}
 
-      {/* <Label htmlFor="phone">Numero telefonico</Label>
+      <Label htmlFor="phone">Numero telefonico</Label>
       <Input
         placeholder=" +506 "
         {...register('phone', {
@@ -88,11 +88,12 @@ export function Formulario() {
           },
         })}
       />
-      {errors.phone && <Validator>{errors.phone.message}</Validator>} */}
+      {errors.phone && <Validator>{errors.phone.message}</Validator>}
 
       <Label htmlFor="passsword">Contrasena nueva</Label>
       <InputBoxPass>
         <InputPass
+          id="pass"
           placeholder="Ingrese su contrasena"
           type={passwordShown ? 'text' : 'password'}
           {...register('password', {
@@ -115,14 +116,18 @@ export function Formulario() {
       )}
       <Label htmlFor="passwordConfirm">Confirmacion de nueva contrasena</Label>
       <Input
+        id="passConfirm"
         placeholder="Ingrese nuevamente su contrasena"
         type="text"
         {...register('passwordConfirm', {
           required: messages.required,
         })}
       />
-      {{ ...register('password') } === { ...register('passwordConfirm') } && (
-        <Validator>{errors.passwordConfirm.message}</Validator>
+      {document.getElementById('passConfirm') !==
+      document.getElementById('pass') ? (
+        <Validator>{messageConfirmPass}</Validator>
+      ) : (
+        ''
       )}
 
       <Button type="submit" onClick={handleSubmit(onSubmit)}>
@@ -140,7 +145,7 @@ const Form = styled.form`
 `;
 
 const BoxPass = styled.div`
-  text-align: left;
+  text-align: left;lack, white;
   margin-top: 10px;
 `;
 
@@ -173,8 +178,6 @@ const Input = styled.input`
   color: ${p => p.theme.primary};
   font-weight: normal;
   padding: 10px;
-  border: 1;
-  bottom: 1px;
   border-radius: 6px;
   ::placeholder {
     color: ${p => p.theme.text};
@@ -185,31 +188,36 @@ const InputPass = styled.input`
   width: 100%;
   height: 60px;
   font-size: 0.875rem;
-  color: ${p => p.theme.primary};
   font-weight: normal;
   padding: 10px;
-  border: 1;
-  bottom: 1px;
+  border: transparent;
+  ::placeholder {
+    color: ${p => p.theme.text};
+  }
+  &:active {
+    color: ${p => p.theme.primary};
+  }
+`;
+
+const InputBoxPass = styled.div`
+  display: flex;
+  align-items: center;
+  color: ${p => p.theme.primary};
+  border: inset 2px ${p => p.theme.primary};
+  opacity: 0.8;
   border-radius: 6px;
+  padding: 4px;
+  background-color: transparent;
   ::placeholder {
     color: ${p => p.theme.text};
   }
 `;
-const InputBoxPass = styled.div`
-  position: relative;
-  display: flex;
-  margin-bottom: 14px;
-  color: ${p => p.theme.primary};
-  border: 2px;
-  bottom: 1px;
-  border-radius: 6px;
-  border-color: yellow;
-  background-color: red; /// background blanco con borde negro y scar la linea divisoria, color blanco
-`;
+
 const Icon = styled.i`
   &:hover {
     color: ${p => p.theme.text};
     opacity: 0.8;
+    content: '\faEyeSlash';
   }
 `;
 

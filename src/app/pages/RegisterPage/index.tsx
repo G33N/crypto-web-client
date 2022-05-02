@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { NavBar } from 'app/components/NavBar';
 import { CardInfo } from 'app/components/CardInfo';
-import { Formulario } from 'app/components/Formulario';
+import { Formulario } from 'app/components/Formulario/index';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
