@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from '../CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
@@ -69,7 +69,7 @@ export function Formulario() {
       />
       {errors.mail && <Validator>{errors.mail.message}</Validator>}
 
-      {/* <Label htmlFor="phone">Numero telefonico</Label>
+      <Label htmlFor="phone">Numero telefonico</Label>
       <Input
         placeholder=" +506 "
         {...register('phone', {
@@ -88,7 +88,7 @@ export function Formulario() {
           },
         })}
       />
-      {errors.phone && <Validator>{errors.phone.message}</Validator>} */}
+      {errors.phone && <Validator>{errors.phone.message}</Validator>}
 
       <Label htmlFor="passsword">Contrasena nueva</Label>
       <InputBoxPass>
@@ -145,7 +145,7 @@ const Form = styled.form`
 `;
 
 const BoxPass = styled.div`
-  text-align: left;
+  text-align: left;lack, white;
   margin-top: 10px;
 `;
 
@@ -194,6 +194,9 @@ const InputPass = styled.input`
   ::placeholder {
     color: ${p => p.theme.text};
   }
+  &:active {
+    color: ${p => p.theme.primary};
+  }
 `;
 
 const InputBoxPass = styled.div`
@@ -201,23 +204,20 @@ const InputBoxPass = styled.div`
   align-items: center;
   color: ${p => p.theme.primary};
   border: inset 2px ${p => p.theme.primary};
-
   opacity: 0.8;
   border-radius: 6px;
-  padding: 0;
+  padding: 4px;
   background-color: transparent;
   ::placeholder {
     color: ${p => p.theme.text};
   }
-  &:hover {
-    color: ${p => p.theme.primary};
-    border: solid 2px ${p => p.theme.primary};
-  }
 `;
+
 const Icon = styled.i`
   &:hover {
     color: ${p => p.theme.text};
     opacity: 0.8;
+    content: '\faEyeSlash';
   }
 `;
 
