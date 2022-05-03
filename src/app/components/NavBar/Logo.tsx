@@ -1,10 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
+import Omnicrypto from './assets/Omnicrypto.png';
 
 export function Logo() {
   return (
     <Wrapper>
-      <Title>OMNIcrypto</Title>
+      <Img src={Omnicrypto} />
     </Wrapper>
   );
 }
@@ -14,9 +15,9 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Title = styled.div`
-  font-size: 2rem;
-  color: ${p => p.theme.primary};
-  font-weight: bold;
-  margin-right: 1rem;
+const Img = styled.img`
+  width: 90px;
+  left: 24px;
+  top: 38px;
+  border-radius: 0px;
 `;
