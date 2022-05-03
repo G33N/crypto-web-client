@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const eye = <FontAwesomeIcon icon={faEye} />;
+const eyeslash = <FontAwesomeIcon icon={faEyeSlash} />;
 
 const messages = {
   required: 'Este campo es obligatorio',
@@ -18,7 +19,7 @@ const messageConfirmPass = 'Las contrasenas deben ser iguales';
 
 const patterns = {
   fullname: /^[A-Za-z]+$/i,
-  mail: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+  mail: /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
   phone: /^ \d{4}\-\d{4}\$/,
   password: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
 };
@@ -37,6 +38,7 @@ export function Formulario() {
   };
 
   const [passwordShown, setPasswordShown] = useState(false);
+
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
@@ -104,6 +106,7 @@ export function Formulario() {
             },
           })}
         />
+
         <Icon onClick={togglePasswordVisiblity}>{eye}</Icon>
       </InputBoxPass>
       {errors.password && (
@@ -191,6 +194,7 @@ const InputPass = styled.input`
   font-weight: normal;
   padding: 10px;
   border: transparent;
+  outline: none;
   ::placeholder {
     color: ${p => p.theme.text};
   }
@@ -206,7 +210,7 @@ const InputBoxPass = styled.div`
   border: inset 2px ${p => p.theme.primary};
   opacity: 0.8;
   border-radius: 6px;
-  padding: 4px;
+  padding: 6px;
   background-color: transparent;
   ::placeholder {
     color: ${p => p.theme.text};
@@ -217,7 +221,6 @@ const Icon = styled.i`
   &:hover {
     color: ${p => p.theme.text};
     opacity: 0.8;
-    content: '\faEyeSlash';
   }
 `;
 
