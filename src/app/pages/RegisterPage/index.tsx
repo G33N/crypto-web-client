@@ -1,6 +1,5 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { NavBar } from 'app/components/NavBar';
 import { CardInfo } from 'app/components/CardInfo';
 import { Formulario } from 'app/components/Formulario/index';
 import { StyleConstants } from 'styles/StyleConstants';
@@ -14,7 +13,7 @@ export function RegisterPage() {
         <title>RegisterPage</title>
         <meta name="description" content="Omni wallet application Loginpage" />
       </Helmet>
-      <NavBar />
+
       <Conteiner>
         <Title>Crear una cuenta</Title>
         <CardInfo />

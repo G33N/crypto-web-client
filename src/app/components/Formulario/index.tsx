@@ -5,9 +5,6 @@ import { CardValidationPass } from '../CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-const eye = <FontAwesomeIcon icon={faEye} />;
-const eyeslash = <FontAwesomeIcon icon={faEyeSlash} />;
-
 const messages = {
   required: 'Este campo es obligatorio',
   fullname: 'El formato introducido no es el correcto',
@@ -93,6 +90,7 @@ export function Formulario() {
       {errors.phone && <Validator>{errors.phone.message}</Validator>}
 
       <Label htmlFor="passsword">Contrasena nueva</Label>
+
       <InputBoxPass>
         <InputPass
           id="pass"
@@ -107,8 +105,15 @@ export function Formulario() {
           })}
         />
 
-        <Icon onClick={togglePasswordVisiblity}>{eye}</Icon>
+        <Icon onClick={togglePasswordVisiblity}>
+          {passwordShown ? (
+            <FontAwesomeIcon icon={faEyeSlash} />
+          ) : (
+            <FontAwesomeIcon icon={faEye} />
+          )}
+        </Icon>
       </InputBoxPass>
+
       {errors.password && (
         <>
           <Validator>{errors.password.message}</Validator>
@@ -117,15 +122,28 @@ export function Formulario() {
           </BoxPass>
         </>
       )}
+
       <Label htmlFor="passwordConfirm">Confirmacion de nueva contrasena</Label>
-      <Input
-        id="passConfirm"
-        placeholder="Ingrese nuevamente su contrasena"
-        type="text"
-        {...register('passwordConfirm', {
-          required: messages.required,
-        })}
-      />
+
+      <InputBoxPass>
+        <InputPass
+          id="passConfirm"
+          placeholder="Ingrese nuevamente su contrasena"
+          type={passwordShown ? 'text' : 'password'}
+          {...register('passwordConfirm', {
+            required: messages.required,
+          })}
+        />
+
+        <Icon onClick={togglePasswordVisiblity}>
+          {passwordShown ? (
+            <FontAwesomeIcon icon={faEyeSlash} />
+          ) : (
+            <FontAwesomeIcon icon={faEye} />
+          )}
+        </Icon>
+      </InputBoxPass>
+
       {document.getElementById('passConfirm') !==
       document.getElementById('pass') ? (
         <Validator>{messageConfirmPass}</Validator>
