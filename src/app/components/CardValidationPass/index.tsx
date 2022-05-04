@@ -6,20 +6,21 @@ import { faCheck, faCircle } from '@fortawesome/free-solid-svg-icons';
 const check = <FontAwesomeIcon icon={faCheck} />;
 const dot = <FontAwesomeIcon icon={faCircle} />;
 
-export function CardValidationPass() {
+export function CardValidationPass(prop: any) {
+  //TODO: modificar los types any a a cada tipo correcto, ver bottom link
   return (
     <Wrapper>
       <Title> La contrasena debe tener al menos:</Title>
-
       <Description>
-        <Icon> {check} </Icon>Una mayuscula.
+        <Icon> {check} </Icon>Una mayuscula. //TODO: sumar el chequeo de cada
+        validacion y cambiar a check verde o dot.
       </Description>
-
       <Description>
         <Icon> {dot} </Icon>Una minuscula.
       </Description>
       <Description> • Un numero.</Description>
-      <Description> • 8 caracteres.</Description>
+      <Description> {prop.minpass}</Description> //TODO: Verificar si se paso
+      bien el componente
     </Wrapper>
   );
 }

@@ -11,6 +11,7 @@ const messages = {
   mail: 'Debes introducir una dirección de correo electronico correcta',
   phone: 'Debes introducir un número correcto, con formato 0000-0000',
   password: 'La contrasena es obligatoria',
+  minpass: 'La contrasena debe tener 8 caracteres como minimo',
 };
 const messageConfirmPass = 'Las contrasenas deben ser iguales';
 
@@ -19,6 +20,7 @@ const patterns = {
   mail: /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
   phone: /^ \d{4}\-\d{4}\$/,
   password: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
+  // TODO: sumar validaciones por separado del password y tomar el prop en el cardpass
 };
 
 export function Formulario() {
@@ -108,7 +110,7 @@ export function Formulario() {
             required: messages.required,
             minLength: {
               value: 8,
-              message: messages.password,
+              message: messages.minpass,
             },
           })}
         />
@@ -126,7 +128,7 @@ export function Formulario() {
         <>
           <Validator>{errors.password.message}</Validator>
           <BoxPass>
-            <CardValidationPass />
+            <CardValidationPass minpass={errors.message.minpass} />
           </BoxPass>
         </>
       )}
