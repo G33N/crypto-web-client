@@ -107,9 +107,9 @@ export function Formulario() {
 
         <Icon onClick={togglePasswordVisiblity}>
           {passwordShown ? (
-            <FontAwesomeIcon icon={faEyeSlash} />
-          ) : (
             <FontAwesomeIcon icon={faEye} />
+          ) : (
+            <FontAwesomeIcon icon={faEyeSlash} />
           )}
         </Icon>
       </InputBoxPass>
@@ -137,9 +137,9 @@ export function Formulario() {
 
         <Icon onClick={togglePasswordVisiblity}>
           {passwordShown ? (
-            <FontAwesomeIcon icon={faEyeSlash} />
-          ) : (
             <FontAwesomeIcon icon={faEye} />
+          ) : (
+            <FontAwesomeIcon icon={faEyeSlash} />
           )}
         </Icon>
       </InputBoxPass>
