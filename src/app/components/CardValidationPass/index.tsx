@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faDotCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 const check = <FontAwesomeIcon icon={faCheck} />;
-const dot = <FontAwesomeIcon icon={faDotCircle} />;
+const dot = <FontAwesomeIcon icon={faCircle} />;
 
 export function CardValidationPass() {
   return (
@@ -49,7 +49,7 @@ const Description = styled.div`
 
 const Icon = styled.i`
   &:hover {
-    color: #4caf50;
+    color: ${p => p.theme.text};
     opacity: 0.8;
   }
 

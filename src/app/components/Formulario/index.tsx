@@ -15,7 +15,7 @@ const messages = {
 const messageConfirmPass = 'Las contrasenas deben ser iguales';
 
 const patterns = {
-  fullname: /^[A-Za-z]+$/i,
+  fullname: /^[^-\s][a-zA-Z0-9_\s-]+$/,
   mail: /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
   phone: /^ \d{4}\-\d{4}\$/,
   password: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
@@ -62,6 +62,14 @@ export function Formulario() {
           required: messages.required,
           pattern: {
             value: patterns.mail,
+            message: messages.mail,
+          },
+          minLength: {
+            value: 5,
+            message: messages.mail,
+          },
+          maxLength: {
+            value: 50,
             message: messages.mail,
           },
         })}
