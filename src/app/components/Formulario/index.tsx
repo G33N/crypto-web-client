@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import { CardValidationPass } from '../CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 const messages = {
   required: 'Este campo es obligatorio',
@@ -18,7 +20,7 @@ const messageConfirmPass = 'Las contrasenas deben ser iguales';
 const patterns = {
   fullname: /^[^-\s][a-zA-Z0-9_\s-]+$/,
   mail: /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-  phone: /^ \d{4}\-\d{4}\$/,
+  phone: /[a-z]/,
   password: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
 };
 
@@ -27,12 +29,24 @@ export function Formulario() {
     register,
     formState: { errors },
     handleSubmit,
+    control,
   } = useForm({
     mode: 'onChange',
   });
 
-  const onSubmit = data => {
-    console.log(JSON.stringify(data));
+  const [userInfo, setUserInfo] = useState({
+    fullname: '',
+    mail: '',
+    password: '',
+    phone: '',
+  });
+
+  const onSubmit = userInfo => {
+    console.log('userInfo: ', JSON.stringify(userInfo));
+  };
+  const handleOnChange = value => {
+    console.log(value);
+    setUserInfo(value);
   };
 
   const [passwordShown, setPasswordShown] = useState(false);
@@ -67,6 +81,7 @@ export function Formulario() {
     <Form>
       <Label htmlFor="fullname">Nombre completo</Label>
       <Input
+        type="text"
         placeholder="Ingrese su nombre completo"
         {...register('fullname', {
           required: messages.required,
@@ -75,11 +90,13 @@ export function Formulario() {
             message: messages.fullname,
           },
         })}
+        name="fullname"
       />
       {errors.fullname && <Validator>{errors.fullname.message}</Validator>}
 
       <Label htmlFor="mail">Correo electronico</Label>
       <Input
+        type="email"
         placeholder="Ingrese su correo electronico"
         {...register('mail', {
           required: messages.required,
@@ -96,27 +113,28 @@ export function Formulario() {
             message: messages.mail,
           },
         })}
+        name="mail"
       />
       {errors.mail && <Validator>{errors.mail.message}</Validator>}
 
       <Label htmlFor="phone">Numero telefonico</Label>
-      <Input
-        placeholder=" +506 "
+      <PhoneInput
+        value={userInfo.phone}
+        placeholder="Ingrese su nombre completo"
         {...register('phone', {
           required: messages.required,
-          minLength: {
-            value: 9,
-            message: messages.phone,
-          },
-          maxLength: {
-            value: 9,
-            message: messages.phone,
-          },
-          pattern: {
-            value: patterns.phone,
-            message: messages.phone,
-          },
         })}
+        onChange={handleOnChange}
+        inputStyle={{
+          borderColor: 'black',
+          width: '100%',
+          height: '60px',
+        }}
+        buttonStyle={{
+          borderColor: 'black',
+          height: '60px',
+          background: 'white',
+        }}
       />
       {errors.phone && <Validator>{errors.phone.message}</Validator>}
 
@@ -124,7 +142,6 @@ export function Formulario() {
 
       <InputBoxPass>
         <InputPass
-          id="pass"
           placeholder="Ingrese su contrasena"
           type={passwordShown ? 'text' : 'password'}
           {...register('password', {
@@ -134,6 +151,7 @@ export function Formulario() {
               message: messages.minpass,
             },
           })}
+          name="password"
         />
 
         <Icon onClick={togglePasswordVisiblity}>
@@ -206,8 +224,12 @@ const Form = styled.form`
 `;
 
 const BoxPass = styled.div`
-  text-align: left;lack, white;
+  text-align: left;
   margin-top: 10px;
+`;
+const Drop = styled.div`
+  width: 80px;
+  background-color: 'red';
 `;
 
 const Label = styled.label`
