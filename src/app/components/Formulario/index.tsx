@@ -20,7 +20,6 @@ const patterns = {
   mail: /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
   phone: /^ \d{4}\-\d{4}\$/,
   password: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
-  // TODO: sumar validaciones por separado del password y tomar el prop en el cardpass
 };
 
 export function Formulario() {
@@ -40,6 +39,28 @@ export function Formulario() {
 
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
+  };
+
+  const [checks, setChecks] = useState({
+    uppCapsLetterCheck: false,
+    lowCapsLetterCheck: false,
+    numberCheck: false,
+    pwdLengthCheck: false,
+  });
+
+  const handleOnKeyUp = e => {
+    const { value } = e.target;
+    const uppCapsLetterCheck = /[A-Z]/.test(value);
+    const lowCapsLetterCheck = /[a-z]/.test(value);
+    const numberCheck = /[0-9]/.test(value);
+    const pwdLengthCheck = value.length >= 8;
+
+    setChecks({
+      uppCapsLetterCheck,
+      lowCapsLetterCheck,
+      numberCheck,
+      pwdLengthCheck,
+    });
   };
 
   return (
@@ -128,7 +149,16 @@ export function Formulario() {
         <>
           <Validator>{errors.password.message}</Validator>
           <BoxPass>
-            <CardValidationPass minpass={errors.message.minpass} />
+            <CardValidationPass
+              uppCapsLetterFlag={
+                checks.uppCapsLetterCheck ? 'valid' : 'invalid'
+              }
+              lowCapsLetterFlag={
+                checks.lowCapsLetterCheck ? 'valid' : 'invalid'
+              }
+              numberFlag={checks.numberCheck ? 'valid' : 'invalid'}
+              pwdLengthFlag={checks.pwdLengthCheck ? 'valid' : 'invalid'}
+            />
           </BoxPass>
         </>
       )}
