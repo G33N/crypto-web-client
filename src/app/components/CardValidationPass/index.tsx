@@ -6,46 +6,17 @@ import { faCheck, faCircle } from '@fortawesome/free-solid-svg-icons';
 const check = <FontAwesomeIcon icon={faCheck} />;
 const dot = <FontAwesomeIcon icon={faCircle} />;
 
-export function CardValidationPass({
-  uppCapsLetterFlag,
-  lowCapsLetterFlag,
-  numberFlag,
-  pwdLengthFlag,
-}) {
+export function CardValidationPass({}) {
   return (
     <Wrapper>
       <Title> La contrasena debe tener al menos:</Title>
-      <Icon className={uppCapsLetterFlag}>
-        {'valid' ? (
-          <FontAwesomeIcon icon={faCheck} />
-        ) : (
-          <FontAwesomeIcon icon={faCircle} />
-        )}
-      </Icon>
+
       <Description>Una mayuscula.</Description>
-      <Icon className={lowCapsLetterFlag}>
-        {'valid' ? (
-          <FontAwesomeIcon icon={faCheck} />
-        ) : (
-          <FontAwesomeIcon icon={faCircle} />
-        )}
-      </Icon>
+
       <Description>Una minuscula.</Description>
-      <Icon className={numberFlag}>
-        {'valid' ? (
-          <FontAwesomeIcon icon={faCheck} />
-        ) : (
-          <FontAwesomeIcon icon={faCircle} />
-        )}
-      </Icon>
+
       <Description>Al menos un numero</Description>
-      <Icon className={pwdLengthFlag}>
-        {'valid' ? (
-          <FontAwesomeIcon icon={faCheck} />
-        ) : (
-          <FontAwesomeIcon icon={faCircle} />
-        )}
-      </Icon>
+
       <Description>bien el componente</Description>
     </Wrapper>
   );

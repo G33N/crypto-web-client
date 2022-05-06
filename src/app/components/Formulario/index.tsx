@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from '../CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+
+import {
+  faEye,
+  faEyeSlash,
+  //faCheck,
+  //faCircle,
+} from '@fortawesome/free-solid-svg-icons';
 
 const messages = {
   required: 'Este campo es obligatorio',
@@ -13,7 +20,11 @@ const messages = {
   mail: 'Debes introducir una dirección de correo electronico correcta',
   phone: 'Debes introducir un número correcto, con formato 0000-0000',
   password: 'La contrasena es obligatoria',
-  minpass: 'La contrasena debe tener 8 caracteres como minimo',
+  reglaspass: 'La contrasena debe tener:',
+  minpass: '8 caracteres como minimo',
+  oneLowerCase: 'al menos 1 minuscula',
+  oneUpperCase: 'al menos 1 mayuscula',
+  isNumberRegex: 'al menos 1 numero',
 };
 const messageConfirmPass = 'Las contrasenas deben ser iguales';
 
@@ -22,15 +33,30 @@ const patterns = {
   mail: /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
   phone: /[a-z]/,
   password: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
+  oneLowerCase: /^(?=.*?[a-z])/,
+  oneUpperCase: /^(?=.*?[A-Z])/,
+  isNumberRegex: /\d/,
 };
+
+// const DefaultValuesForForm = {
+//   registration: {
+//     password: '',
+//     passConfirm: '',
+//     fullname: '',
+//     mail: '',
+//     phone: '',
+//   },
+// };
 
 export function Formulario() {
   const {
     register,
+    getValues,
     formState: { errors },
     handleSubmit,
     control,
   } = useForm({
+    //defaultValues: DefaultValuesForForm.registration
     mode: 'onChange',
   });
 
@@ -54,29 +80,6 @@ export function Formulario() {
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
-
-  const [checks, setChecks] = useState({
-    uppCapsLetterCheck: false,
-    lowCapsLetterCheck: false,
-    numberCheck: false,
-    pwdLengthCheck: false,
-  });
-
-  const handleOnKeyUp = e => {
-    const { value } = e.target;
-    const uppCapsLetterCheck = /[A-Z]/.test(value);
-    const lowCapsLetterCheck = /[a-z]/.test(value);
-    const numberCheck = /[0-9]/.test(value);
-    const pwdLengthCheck = value.length >= 8;
-
-    setChecks({
-      uppCapsLetterCheck,
-      lowCapsLetterCheck,
-      numberCheck,
-      pwdLengthCheck,
-    });
-  };
-
   return (
     <Form>
       <Label htmlFor="fullname">Nombre completo</Label>
@@ -148,7 +151,7 @@ export function Formulario() {
             required: messages.required,
             minLength: {
               value: 8,
-              message: messages.minpass,
+              message: messages.reglaspass,
             },
           })}
           name="password"
@@ -162,34 +165,26 @@ export function Formulario() {
           )}
         </Icon>
       </InputBoxPass>
+      {errors.password && <p>{errors.password.message}</p>}
+      <PasswordComplexity
+        valueOfNewPassword={getValues().password?.toString()}
+      />
 
-      {errors.password && (
-        <>
-          <Validator>{errors.password.message}</Validator>
-          <BoxPass>
-            <CardValidationPass
-              uppCapsLetterFlag={
-                checks.uppCapsLetterCheck ? 'valid' : 'invalid'
-              }
-              lowCapsLetterFlag={
-                checks.lowCapsLetterCheck ? 'valid' : 'invalid'
-              }
-              numberFlag={checks.numberCheck ? 'valid' : 'invalid'}
-              pwdLengthFlag={checks.pwdLengthCheck ? 'valid' : 'invalid'}
-            />
-          </BoxPass>
-        </>
-      )}
+      <BoxPass>
+        <CardValidationPass />
+      </BoxPass>
 
-      <Label htmlFor="passwordConfirm">Confirmacion de nueva contrasena</Label>
+      <Label htmlFor="passConfirm">Confirmacion de nueva contrasena</Label>
 
       <InputBoxPass>
         <InputPass
           id="passConfirm"
           placeholder="Ingrese nuevamente su contrasena"
           type={passwordShown ? 'text' : 'password'}
-          {...register('passwordConfirm', {
+          {...register('passConfirm', {
             required: messages.required,
+            validate: value =>
+              value === getValues().password || messageConfirmPass,
           })}
         />
 
@@ -202,13 +197,7 @@ export function Formulario() {
         </Icon>
       </InputBoxPass>
 
-      {document.getElementById('passConfirm') !==
-      document.getElementById('pass') ? (
-        <Validator>{messageConfirmPass}</Validator>
-      ) : (
-        ''
-      )}
-
+      {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
       <Button type="submit" onClick={handleSubmit(onSubmit)}>
         Crear cuenta
       </Button>
@@ -216,6 +205,55 @@ export function Formulario() {
     </Form>
   );
 }
+
+export const PasswordComplexity = ({ valueOfNewPassword }) => {
+  const [passwordValidity, setPasswordValidity] = useState({
+    minLength: false,
+    minLowerCase: false,
+    minUpperCase: false,
+    nimNumber: false,
+  });
+
+  const oneLowerCase = /^(?=.*?[a-z])/;
+  const oneUpperCase = /^(?=.*?[A-Z])/;
+  const isNumberRegex = /\d/;
+
+  useEffect(() => {
+    setPasswordValidity({
+      minLength: valueOfNewPassword?.length >= 8,
+      minLowerCase: oneLowerCase.test(valueOfNewPassword),
+      minUpperCase: oneUpperCase.test(valueOfNewPassword),
+      nimNumber: isNumberRegex.test(valueOfNewPassword),
+    });
+  }, [valueOfNewPassword]);
+
+  const PasswordStrengthIndicatorItem = ({ isValid, text }) => {
+    return <div style={{ color: isValid ? 'green' : 'grey' }}>{text}</div>;
+  };
+
+  return (
+    <>
+      <ul>
+        <PasswordStrengthIndicatorItem
+          text="al menos 8 caracteres"
+          isValid={passwordValidity?.minLength}
+        />
+        <PasswordStrengthIndicatorItem
+          text="al menos 1 minuscula"
+          isValid={passwordValidity?.minLowerCase}
+        />
+        <PasswordStrengthIndicatorItem
+          text="al menos 1 mayuscula"
+          isValid={passwordValidity?.minUpperCase}
+        />
+        <PasswordStrengthIndicatorItem
+          text="al menos 1 numero"
+          isValid={passwordValidity?.nimNumber}
+        />
+      </ul>
+    </>
+  );
+};
 
 // ----- Styles ------ //
 
