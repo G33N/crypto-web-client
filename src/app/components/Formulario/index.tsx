@@ -39,6 +39,8 @@ export function Formulario() {
   });
 
   const onSubmit = userInfo => {
+    //llamada axios mock
+
     console.log('userInfo: ', JSON.stringify(userInfo));
   };
   const handleOnChange = value => {
@@ -124,7 +126,7 @@ export function Formulario() {
               oneLowercase: value => value && /^(?=.*?[a-z])/.test(value),
               oneUppercase: value => value && /^(?=.*?[A-Z])/.test(value),
               oneNumber: value => value && /\d/.test(value),
-              minLenght: value => value && value.length < 7,
+              minLenght: value => value && value.length < 8,
             },
           })}
           name="password"
@@ -139,7 +141,7 @@ export function Formulario() {
         </Icon>
       </InputBoxPass>
 
-      {errors.password && (
+      {errors.password && errors.password.type && (
         <>
           <BoxPass>
             <CardValidationPass type={errors.password.type} />
@@ -151,7 +153,6 @@ export function Formulario() {
 
       <InputBoxPass>
         <InputPass
-          id="passConfirm"
           placeholder="Ingrese nuevamente su contrasena"
           type={passwordShown ? 'text' : 'password'}
           {...register('passConfirm', {
@@ -170,7 +171,10 @@ export function Formulario() {
         </Icon>
       </InputBoxPass>
 
-      {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+      {errors.passConfirm && (
+        <Validator>{errors.passConfirm.message}</Validator>
+      )}
+
       <Button type="submit" onClick={handleSubmit(onSubmit)}>
         Crear cuenta
       </Button>
