@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from '../CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const messages = {
   required: 'Este campo es obligatorio',
@@ -23,12 +25,24 @@ const patterns = {
   oneNumber: /.*\\d.*/,
 };
 
+// const DefaultValuesForForm = {
+//   registration: {
+//     password: '',
+//     passConfirm: '',
+//     fullname: '',
+//     mail: '',
+//     phone: '',
+//   },
+// };
+
 export function Formulario() {
   const {
     register,
+    getValues,
     formState: { errors },
     handleSubmit,
   } = useForm({
+    //defaultValues: DefaultValuesForForm.registration
     mode: 'onChange',
   });
 
@@ -52,7 +66,6 @@ export function Formulario() {
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
-
   return (
     <Form>
       <Label htmlFor="fullname">Nombre completo</Label>
@@ -143,6 +156,14 @@ export function Formulario() {
           )}
         </Icon>
       </InputBoxPass>
+      {errors.password && <p>{errors.password.message}</p>}
+      <PasswordComplexity
+        valueOfNewPassword={getValues().password?.toString()}
+      />
+
+      <BoxPass>
+        <CardValidationPass />
+      </BoxPass>
 
       {errors.password && (
         <>
@@ -159,8 +180,10 @@ export function Formulario() {
           id="passConfirm"
           placeholder="Ingrese nuevamente su contrasena"
           type={passwordShown ? 'text' : 'password'}
-          {...register('passwordConfirm', {
+          {...register('passConfirm', {
             required: messages.required,
+            validate: value =>
+              value === getValues().password || messageConfirmPass,
           })}
         />
 
@@ -173,13 +196,7 @@ export function Formulario() {
         </Icon>
       </InputBoxPass>
 
-      {document.getElementById('passConfirm') !==
-      document.getElementById('pass') ? (
-        <Validator>{messageConfirmPass}</Validator>
-      ) : (
-        ''
-      )}
-
+      {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
       <Button type="submit" onClick={handleSubmit(onSubmit)}>
         Crear cuenta
       </Button>
@@ -187,6 +204,55 @@ export function Formulario() {
     </Form>
   );
 }
+
+export const PasswordComplexity = ({ valueOfNewPassword }) => {
+  const [passwordValidity, setPasswordValidity] = useState({
+    minLength: false,
+    minLowerCase: false,
+    minUpperCase: false,
+    nimNumber: false,
+  });
+
+  const oneLowerCase = /^(?=.*?[a-z])/;
+  const oneUpperCase = /^(?=.*?[A-Z])/;
+  const isNumberRegex = /\d/;
+
+  useEffect(() => {
+    setPasswordValidity({
+      minLength: valueOfNewPassword?.length >= 8,
+      minLowerCase: oneLowerCase.test(valueOfNewPassword),
+      minUpperCase: oneUpperCase.test(valueOfNewPassword),
+      nimNumber: isNumberRegex.test(valueOfNewPassword),
+    });
+  }, [valueOfNewPassword]);
+
+  const PasswordStrengthIndicatorItem = ({ isValid, text }) => {
+    return <div style={{ color: isValid ? 'green' : 'grey' }}>{text}</div>;
+  };
+
+  return (
+    <>
+      <ul>
+        <PasswordStrengthIndicatorItem
+          text="al menos 8 caracteres"
+          isValid={passwordValidity?.minLength}
+        />
+        <PasswordStrengthIndicatorItem
+          text="al menos 1 minuscula"
+          isValid={passwordValidity?.minLowerCase}
+        />
+        <PasswordStrengthIndicatorItem
+          text="al menos 1 mayuscula"
+          isValid={passwordValidity?.minUpperCase}
+        />
+        <PasswordStrengthIndicatorItem
+          text="al menos 1 numero"
+          isValid={passwordValidity?.nimNumber}
+        />
+      </ul>
+    </>
+  );
+};
 
 // ----- Styles ------ //
 
