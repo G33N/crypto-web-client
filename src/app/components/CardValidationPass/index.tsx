@@ -9,44 +9,54 @@ export const CardValidationPass = (props?: any) => {
     <Wrapper>
       <Title> La contrasena debe tener al menos:</Title>
       <Row>
-        <Icon>
-          {props.type === 'oneUppercase' ? (
+        {props.type === 'oneUppercase' ? (
+          <Circle>
             <FontAwesomeIcon icon={faCircle} />
-          ) : (
+          </Circle>
+        ) : (
+          <Icon>
             <FontAwesomeIcon icon={faCheck} />
-          )}
-        </Icon>
+          </Icon>
+        )}
 
         <Description>Una mayuscula.</Description>
       </Row>
       <Row>
-        <Icon>
-          {props.type === 'oneLowercase' ? (
+        {props.type === 'oneLowercase' ? (
+          <Circle>
             <FontAwesomeIcon icon={faCircle} />
-          ) : (
+          </Circle>
+        ) : (
+          <Icon>
             <FontAwesomeIcon icon={faCheck} />
-          )}
-        </Icon>
+          </Icon>
+        )}
+
         <Description>Una minuscula.</Description>
       </Row>
       <Row>
-        <Icon>
-          {props.type === 'oneNumber' ? (
+        {props.type === 'oneNumber' ? (
+          <Circle>
             <FontAwesomeIcon icon={faCircle} />
-          ) : (
+          </Circle>
+        ) : (
+          <Icon>
             <FontAwesomeIcon icon={faCheck} />
-          )}
-        </Icon>
+          </Icon>
+        )}
+
         <Description>Al menos un numero.</Description>
       </Row>
       <Row>
-        <Icon>
-          {props.type === 'minLenght' ? (
+        {props.type === 'minLenght' ? (
+          <Icon>
             <FontAwesomeIcon icon={faCheck} />
-          ) : (
+          </Icon>
+        ) : (
+          <Circle>
             <FontAwesomeIcon icon={faCircle} />
-          )}
-        </Icon>
+          </Circle>
+        )}
         <Description>8 digitos.</Description>
       </Row>
     </Wrapper>
@@ -66,7 +76,7 @@ const Row = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 13px;
+  font-size: 12px;
   width: 216px;
   font-weight: 400;
   color: ${p => p.theme.text};
@@ -88,4 +98,9 @@ const Icon = styled.i`
   &:active {
     color: #4caf50;
   }
+`;
+const Circle = styled.i`
+  font-size: 12px;
+  color: ${p => p.theme.text};
+  padding-right: 15px;
 `;
