@@ -66,7 +66,7 @@ const Row = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 12px;
+  font-size: 13px;
   width: 216px;
   font-weight: 400;
   color: ${p => p.theme.text};
@@ -76,20 +76,16 @@ const Title = styled.div`
 const Description = styled.div`
   color: ${p => p.theme.text};
   font-weight: 400;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 16px;
-  margin-right: 10px;
 `;
 
 const Icon = styled.i`
+  font-size: 15px;
+  color: #4caf50;
+  padding-right: 15px;
+
   &:active {
     color: #4caf50;
-  }
-  .valid {
-    color: green;
-  }
-
-  .invalid {
-    color: red;
   }
 `;

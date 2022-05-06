@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from '../CardValidationPass';
@@ -13,27 +13,13 @@ const messages = {
   required: 'Este campo es obligatorio',
   fullname: 'El formato introducido no es el correcto',
   mail: 'Debes introducir una dirección de correo electronico correcta',
-  minCaracterpass: 'La contrasena debe tener 8 caracteres como minimo',
 };
 const messageConfirmPass = 'Las contrasenas deben ser iguales';
 
 const patterns = {
   fullname: /^[^-\s][a-zA-Z0-9_\s-]+$/,
   mail: /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-  oneLowercase: /.*[a-z].*/,
-  oneUppercase: /.*[A-Z].*/,
-  oneNumber: /.*\\d.*/,
 };
-
-// const DefaultValuesForForm = {
-//   registration: {
-//     password: '',
-//     passConfirm: '',
-//     fullname: '',
-//     mail: '',
-//     phone: '',
-//   },
-// };
 
 export function Formulario() {
   const {
@@ -42,7 +28,6 @@ export function Formulario() {
     formState: { errors },
     handleSubmit,
   } = useForm({
-    //defaultValues: DefaultValuesForForm.registration
     mode: 'onChange',
   });
 
@@ -134,15 +119,12 @@ export function Formulario() {
           placeholder="Ingrese su contrasena"
           type={passwordShown ? 'text' : 'password'}
           {...register('password', {
-            required: messages.minCaracterpass,
-            minLength: {
-              value: 8,
-              message: messages.minCaracterpass,
-            },
+            required: messages.required,
             validate: {
-              oneLowercase: value => value && /(?:.*[a-z]){1}/.test(value),
-              oneUppercase: value => value && /(?:.*[A-Z]){1}/.test(value),
-              oneNumber: value => value && /(?:.*[0-9]){1}/.test(value),
+              oneLowercase: value => value && /^(?=.*?[a-z])/.test(value),
+              oneUppercase: value => value && /^(?=.*?[A-Z])/.test(value),
+              oneNumber: value => value && /\d/.test(value),
+              minLenght: value => value && value.length < 7,
             },
           })}
           name="password"
@@ -156,14 +138,6 @@ export function Formulario() {
           )}
         </Icon>
       </InputBoxPass>
-      {errors.password && <p>{errors.password.message}</p>}
-      <PasswordComplexity
-        valueOfNewPassword={getValues().password?.toString()}
-      />
-
-      <BoxPass>
-        <CardValidationPass />
-      </BoxPass>
 
       {errors.password && (
         <>
@@ -204,55 +178,6 @@ export function Formulario() {
     </Form>
   );
 }
-
-export const PasswordComplexity = ({ valueOfNewPassword }) => {
-  const [passwordValidity, setPasswordValidity] = useState({
-    minLength: false,
-    minLowerCase: false,
-    minUpperCase: false,
-    nimNumber: false,
-  });
-
-  const oneLowerCase = /^(?=.*?[a-z])/;
-  const oneUpperCase = /^(?=.*?[A-Z])/;
-  const isNumberRegex = /\d/;
-
-  useEffect(() => {
-    setPasswordValidity({
-      minLength: valueOfNewPassword?.length >= 8,
-      minLowerCase: oneLowerCase.test(valueOfNewPassword),
-      minUpperCase: oneUpperCase.test(valueOfNewPassword),
-      nimNumber: isNumberRegex.test(valueOfNewPassword),
-    });
-  }, [valueOfNewPassword]);
-
-  const PasswordStrengthIndicatorItem = ({ isValid, text }) => {
-    return <div style={{ color: isValid ? 'green' : 'grey' }}>{text}</div>;
-  };
-
-  return (
-    <>
-      <ul>
-        <PasswordStrengthIndicatorItem
-          text="al menos 8 caracteres"
-          isValid={passwordValidity?.minLength}
-        />
-        <PasswordStrengthIndicatorItem
-          text="al menos 1 minuscula"
-          isValid={passwordValidity?.minLowerCase}
-        />
-        <PasswordStrengthIndicatorItem
-          text="al menos 1 mayuscula"
-          isValid={passwordValidity?.minUpperCase}
-        />
-        <PasswordStrengthIndicatorItem
-          text="al menos 1 numero"
-          isValid={passwordValidity?.nimNumber}
-        />
-      </ul>
-    </>
-  );
-};
 
 // ----- Styles ------ //
 
