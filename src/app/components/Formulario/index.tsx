@@ -11,17 +11,16 @@ const messages = {
   required: 'Este campo es obligatorio',
   fullname: 'El formato introducido no es el correcto',
   mail: 'Debes introducir una dirección de correo electronico correcta',
-  phone: 'Debes introducir un número correcto, con formato 0000-0000',
-  password: 'La contrasena es obligatoria',
-  minpass: 'La contrasena debe tener 8 caracteres como minimo',
+  minCaracterpass: 'La contrasena debe tener 8 caracteres como minimo',
 };
 const messageConfirmPass = 'Las contrasenas deben ser iguales';
 
 const patterns = {
   fullname: /^[^-\s][a-zA-Z0-9_\s-]+$/,
   mail: /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-  phone: /[a-z]/,
-  password: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
+  oneLowercase: /.*[a-z].*/,
+  oneUppercase: /.*[A-Z].*/,
+  oneNumber: /.*\\d.*/,
 };
 
 export function Formulario() {
@@ -29,7 +28,6 @@ export function Formulario() {
     register,
     formState: { errors },
     handleSubmit,
-    control,
   } = useForm({
     mode: 'onChange',
   });
@@ -53,28 +51,6 @@ export function Formulario() {
 
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
-  };
-
-  const [checks, setChecks] = useState({
-    uppCapsLetterCheck: false,
-    lowCapsLetterCheck: false,
-    numberCheck: false,
-    pwdLengthCheck: false,
-  });
-
-  const handleOnKeyUp = e => {
-    const { value } = e.target;
-    const uppCapsLetterCheck = /[A-Z]/.test(value);
-    const lowCapsLetterCheck = /[a-z]/.test(value);
-    const numberCheck = /[0-9]/.test(value);
-    const pwdLengthCheck = value.length >= 8;
-
-    setChecks({
-      uppCapsLetterCheck,
-      lowCapsLetterCheck,
-      numberCheck,
-      pwdLengthCheck,
-    });
   };
 
   return (
@@ -145,10 +121,15 @@ export function Formulario() {
           placeholder="Ingrese su contrasena"
           type={passwordShown ? 'text' : 'password'}
           {...register('password', {
-            required: messages.required,
+            required: messages.minCaracterpass,
             minLength: {
               value: 8,
-              message: messages.minpass,
+              message: messages.minCaracterpass,
+            },
+            validate: {
+              oneLowercase: value => value && /(?:.*[a-z]){1}/.test(value),
+              oneUppercase: value => value && /(?:.*[A-Z]){1}/.test(value),
+              oneNumber: value => value && /(?:.*[0-9]){1}/.test(value),
             },
           })}
           name="password"
@@ -165,18 +146,8 @@ export function Formulario() {
 
       {errors.password && (
         <>
-          <Validator>{errors.password.message}</Validator>
           <BoxPass>
-            <CardValidationPass
-              uppCapsLetterFlag={
-                checks.uppCapsLetterCheck ? 'valid' : 'invalid'
-              }
-              lowCapsLetterFlag={
-                checks.lowCapsLetterCheck ? 'valid' : 'invalid'
-              }
-              numberFlag={checks.numberCheck ? 'valid' : 'invalid'}
-              pwdLengthFlag={checks.pwdLengthCheck ? 'valid' : 'invalid'}
-            />
+            <CardValidationPass type={errors.password.type} />
           </BoxPass>
         </>
       )}
@@ -226,10 +197,6 @@ const Form = styled.form`
 const BoxPass = styled.div`
   text-align: left;
   margin-top: 10px;
-`;
-const Drop = styled.div`
-  width: 80px;
-  background-color: 'red';
 `;
 
 const Label = styled.label`

@@ -10,8 +10,6 @@ export const ButtonLink = (props: any) => {
   );
 };
 
-const setTransitionTime = time => `all ${time}ease-in-out`;
-
 const LinkButton = styled(Link)`
   text-decoration: none;
   color: ${p => p.theme.background};
