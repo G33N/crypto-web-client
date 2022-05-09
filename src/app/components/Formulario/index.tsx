@@ -20,7 +20,7 @@ const messages = {
 const messageConfirmPass = 'Las contrasenas deben ser iguales';
 
 const patterns = {
-  fullname: /^[^-\s][a-zA-Z0-9_\s-]+$/,
+  fullname: /^[^-\s][a-zA-Z_\s-]+$/,
   mail: /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
 };
 
@@ -127,14 +127,16 @@ export function Formulario() {
           type={passwordShown ? 'text' : 'password'}
           {...register('password', {
             required: messages.required,
-            minLength: {
-              value: 8,
-              message: errors.password,
-            },
+            // minLength: {
+            //   value: 8,
+            //   message: errors.password,
+            //
+            minLength: 8,
             validate: {
-              oneLowercase: value => value && /^(?=.*?[a-z])/.test(value),
               oneUppercase: value => value && /^(?=.*?[A-Z])/.test(value),
+              oneLowercase: value => value && /^(?=.*?[a-z])/.test(value),
               oneNumber: value => value && /\d/.test(value),
+              // minLength: value => value < 8,
             },
           })}
           name="password"
@@ -149,7 +151,7 @@ export function Formulario() {
         </Icon>
       </InputBoxPass>
 
-      {errors.password && touchedFields.password && (
+      {errors.password && touchedFields.password && errors.password.type && (
         <>
           <BoxPass>
             <CardValidationPass type={errors.password.type} />
