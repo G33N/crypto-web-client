@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from '../CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,10 +9,15 @@ import 'react-phone-input-2/lib/style.css';
 
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
+interface Props {
+  success?: string;
+}
+
 const messages = {
   required: 'Este campo es obligatorio',
   fullname: 'El formato introducido no es el correcto',
   mail: 'Debes introducir una dirección de correo electronico correcta',
+  passConfirm: 'Las contrasenas deben ser iguales',
 };
 const messageConfirmPass = 'Las contrasenas deben ser iguales';
 
@@ -22,15 +27,10 @@ const patterns = {
 };
 
 export function Formulario() {
-  const {
-    register,
-    getValues,
-    formState: { errors },
-    handleSubmit,
-  } = useForm({
+  const { register, getValues, formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
-
+  const { isValid, touchedFields, errors } = formState;
   const [userInfo, setUserInfo] = useState({
     fullname: '',
     mail: '',
@@ -38,11 +38,10 @@ export function Formulario() {
     phone: '',
   });
 
-  const onSubmit = userInfo => {
-    //llamada axios mock
-
-    console.log('userInfo: ', JSON.stringify(userInfo));
+  const onSubmit = data => {
+    alert(JSON.stringify(data));
   };
+
   const handleOnChange = value => {
     console.log(value);
     setUserInfo(value);
@@ -68,7 +67,9 @@ export function Formulario() {
         })}
         name="fullname"
       />
-      {errors.fullname && <Validator>{errors.fullname.message}</Validator>}
+      {errors.fullname && touchedFields.fullname && (
+        <Validator>{errors.fullname.message}</Validator>
+      )}
 
       <Label htmlFor="mail">Correo electronico</Label>
       <Input
@@ -91,12 +92,13 @@ export function Formulario() {
         })}
         name="mail"
       />
-      {errors.mail && <Validator>{errors.mail.message}</Validator>}
+      {errors.mail && touchedFields.mail && (
+        <Validator>{errors.mail.message}</Validator>
+      )}
 
       <Label htmlFor="phone">Numero telefonico</Label>
       <PhoneInput
-        value={userInfo.phone}
-        placeholder="Ingrese su nombre completo"
+        placeholder="Ingrese su numero telefonico"
         {...register('phone', {
           required: messages.required,
         })}
@@ -111,22 +113,28 @@ export function Formulario() {
           height: '60px',
           background: 'white',
         }}
+        value="phone"
       />
-      {errors.phone && <Validator>{errors.phone.message}</Validator>}
+      {errors.phone && touchedFields.phone && (
+        <Validator>{errors.phone.message}</Validator>
+      )}
 
       <Label htmlFor="passsword">Contrasena nueva</Label>
 
-      <InputBoxPass>
+      <InputBoxPass success={touchedFields.password ? 'red' : 'green'}>
         <InputPass
           placeholder="Ingrese su contrasena"
           type={passwordShown ? 'text' : 'password'}
           {...register('password', {
             required: messages.required,
+            minLength: {
+              value: 8,
+              message: errors.password,
+            },
             validate: {
               oneLowercase: value => value && /^(?=.*?[a-z])/.test(value),
               oneUppercase: value => value && /^(?=.*?[A-Z])/.test(value),
               oneNumber: value => value && /\d/.test(value),
-              minLenght: value => value && value.length < 8,
             },
           })}
           name="password"
@@ -141,7 +149,7 @@ export function Formulario() {
         </Icon>
       </InputBoxPass>
 
-      {errors.password && errors.password.type && (
+      {errors.password && touchedFields.password && (
         <>
           <BoxPass>
             <CardValidationPass type={errors.password.type} />
@@ -151,7 +159,7 @@ export function Formulario() {
 
       <Label htmlFor="passwordConfirm">Confirmacion de nueva contrasena</Label>
 
-      <InputBoxPass>
+      <InputBoxPass success={touchedFields.passConfirm ? 'red' : 'green'}>
         <InputPass
           placeholder="Ingrese nuevamente su contrasena"
           type={passwordShown ? 'text' : 'password'}
@@ -160,6 +168,7 @@ export function Formulario() {
             validate: value =>
               value === getValues().password || messageConfirmPass,
           })}
+          name="passConfirm"
         />
 
         <Icon onClick={togglePasswordVisiblity}>
@@ -171,11 +180,11 @@ export function Formulario() {
         </Icon>
       </InputBoxPass>
 
-      {errors.passConfirm && (
+      {errors.passConfirm && touchedFields.passConfirm && (
         <Validator>{errors.passConfirm.message}</Validator>
       )}
 
-      <Button type="submit" onClick={handleSubmit(onSubmit)}>
+      <Button type="submit" disabled={isValid} onClick={handleSubmit(onSubmit)}>
         Crear cuenta
       </Button>
       <div></div>
@@ -231,7 +240,7 @@ const Input = styled.input`
 
 const InputPass = styled.input`
   width: 100%;
-  height: 60px;
+
   font-size: 0.875rem;
   font-weight: normal;
   padding: 10px;
@@ -245,11 +254,11 @@ const InputPass = styled.input`
   }
 `;
 
-const InputBoxPass = styled.div`
+const InputBoxPass = styled.div<Props>`
+  height: 60px;
   display: flex;
   align-items: center;
-  color: ${p => p.theme.primary};
-  border: inset 2px ${p => p.theme.primary};
+  border: inset 2px ${props => props.success};
   opacity: 0.8;
   border-radius: 6px;
   padding: 6px;
@@ -258,8 +267,20 @@ const InputBoxPass = styled.div`
     color: ${p => p.theme.text};
   }
 `;
+// ${props => {
+//   if (props.borderColor === 'default') {
+//     return 'black';
+//   } else if (props.borderColor === 'verify') {
+//     if (props.success) {
+//       return 'red';
+//     } else {
+//       return 'green';
+//     }
+//   }
+// }};
 
 const Icon = styled.i`
+  padding-right: 10px;
   &:hover {
     color: ${p => p.theme.text};
     opacity: 0.8;
@@ -279,4 +300,9 @@ const Button = styled.button`
     color: ${p => p.theme.primary};
     text-align: center;
   }
+  ${props =>
+    props.disabled &&
+    css`
+      background: ${p => p.theme.text};
+    `}
 `;
