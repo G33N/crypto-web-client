@@ -121,7 +121,9 @@ export function Formulario() {
 
       <Label htmlFor="passsword">Contrasena nueva</Label>
 
-      <InputBoxPass success={touchedFields.password ? 'red' : 'green'}>
+      <InputBoxPass
+        success={errors.password && touchedFields.password ? 'red' : 'green'}
+      >
         <InputPass
           placeholder="Ingrese su contrasena"
           type={passwordShown ? 'text' : 'password'}
@@ -159,7 +161,11 @@ export function Formulario() {
 
       <Label htmlFor="passwordConfirm">Confirmacion de nueva contrasena</Label>
 
-      <InputBoxPass success={touchedFields.passConfirm ? 'red' : 'green'}>
+      <InputBoxPass
+        success={
+          errors.passConfirm && touchedFields.passConfirm ? 'red' : 'green'
+        }
+      >
         <InputPass
           placeholder="Ingrese nuevamente su contrasena"
           type={passwordShown ? 'text' : 'password'}
