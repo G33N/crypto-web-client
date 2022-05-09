@@ -3,10 +3,8 @@ import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from '../CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {

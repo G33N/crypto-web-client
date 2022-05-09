@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import create from 'zustand';
 
 interface UserState {
@@ -22,7 +21,6 @@ export const useStore = create<UserState>(set => ({
       users: [
         ...state.users,
         {
-          id: uuidv4(),
           fullname: '',
           mail: '',
         } as User,
