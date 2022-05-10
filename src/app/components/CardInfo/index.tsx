@@ -14,20 +14,25 @@ export function CardInfo() {
 }
 
 const Wrapper = styled.div`
-  // display: flex;
-  align-items: center;
+  display: flex-center;
+  align-items: left;
+  position: relative;
 `;
 
 const Title = styled.div`
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: bold;
+  font-style: normal;
   color: ${p => p.theme.primary};
-  font-weight: bold;
+  font-weight: 700;
   margin-right: 1rem;
+  line-height: 2rem;
 `;
 
 const Description = styled.div`
   font-size: 0.875rem;
   color: ${p => p.theme.primary};
-  font-weight: normal;
+  font-weight: 400;
+  font-style: regular;
+  line-height: 1.375rem;
 `;

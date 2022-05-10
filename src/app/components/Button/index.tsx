@@ -4,7 +4,7 @@ import styled from 'styled-components/macro';
 export const Button = (props: any) => {
   return (
     <Wrap>
-      <Input type={props.type}>{props.label}</Input>
+      <Input type={props.type}>{props.label}</Input>min.pass
     </Wrap>
   );
 };
