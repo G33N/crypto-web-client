@@ -104,11 +104,12 @@ export function Formulario() {
         inputStyle={{
           borderColor: 'cdcbcb',
           width: '100%',
-          height: '60px',
+          height: '48px',
+          borderRadius: '9px',
         }}
         buttonStyle={{
           borderColor: 'cdcbcb',
-          height: '60px',
+          height: '48px',
           background: 'white',
         }}
         value="phone"
@@ -233,12 +234,12 @@ const Validator = styled.p`
 
 const Input = styled.input`
   width: 100%;
-  height: 60px;
+  height: 48px;
   font-size: 0.875rem;
   color: ${p => p.theme.primary};
   font-weight: normal;
   padding: 10px;
-  border-radius: 6px;
+  border-radius: 9px;
   border-color: #cdcbcb;
   border: inset 1px;
   ::placeholder {
@@ -248,10 +249,10 @@ const Input = styled.input`
 
 const InputPass = styled.input`
   width: 100%;
-
   font-size: 0.875rem;
   font-weight: normal;
-  padding: 10px;
+  height: 44px;
+  padding: none;
   border: transparent;
   outline: none;
   ::placeholder {
@@ -263,12 +264,12 @@ const InputPass = styled.input`
 `;
 
 const InputBoxPass = styled.div<Props>`
-  height: 60px;
+  height: 48px;
   display: flex;
   align-items: center;
   border: inset 2px ${props => props.success};
   opacity: 0.8;
-  border-radius: 6px;
+  border-radius: 9px;
   padding: 6px;
   background-color: transparent;
   ::placeholder {
@@ -298,11 +299,11 @@ const Icon = styled.i`
 const Button = styled.button`
   margin-top: 40px;
   width: 100%;
-  height: 70px;
+  height: 56px;
   font-size: 18px;
   padding: 10px;
   background-color: ${p => p.theme.primary};
-  border-radius: 6px;
+  border-radius: 9px;
   color: ${p => p.theme.background};
   ::placeholder {
     color: ${p => p.theme.primary};
