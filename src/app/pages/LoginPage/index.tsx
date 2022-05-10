@@ -1,10 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled from 'styled-components/macro';
-import { Link } from 'react-router-dom';
-import { Formulario } from 'app/components/Formulario/index';
 
 export const LoginPage = ({ useAuth }) => {
   let navigate = useNavigate();
@@ -36,20 +34,15 @@ export const LoginPage = ({ useAuth }) => {
       </Helmet>
 
       <Conteiner>
-        <Text>Pagina Login </Text>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Username: <input name="username" type="text" />
-          </label>{' '}
-          <button type="submit">Login</button>
-        </form>
-        (ingresar un nombre)
-      </Conteiner>
-
-      <Conteiner>
         <Title>Iniciar Sesión</Title>
 
-        <Formulario />
+        {/* <form onSubmit={handleSubmit}>          
+          <label>
+            Username
+            <input name="email" type="email" />
+          </label>{' '}
+          <button type="submit">Login</button>
+        </form> */}
 
         <BoxNavigation>
           <Label> No tenes cuenta ? </Label>
@@ -87,6 +80,7 @@ const Text = styled.p`
   margin-bottom: 13px;
   margin-top: 20px;
 `;
+
 const Title = styled.div`
   font-style: normal;
   font-weight: 700;

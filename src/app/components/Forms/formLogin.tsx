@@ -251,7 +251,7 @@ const InputPass = styled.input`
   width: 100%;
   font-size: 0.875rem;
   font-weight: normal;
-  height: 44px;
+  height: 4px;
   padding: none;
   border: transparent;
   outline: none;
@@ -299,7 +299,7 @@ const Icon = styled.i`
 const Button = styled.button`
   margin-top: 40px;
   width: 100%;
-  height: 56px;
+  height: 48px;
   font-size: 18px;
   padding: 10px;
   background-color: ${p => p.theme.primary};

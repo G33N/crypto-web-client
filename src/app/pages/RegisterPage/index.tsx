@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { CardInfo } from 'app/components/CardInfo';
-import { Formulario } from 'app/components/Formulario/index';
+import { FormRegister } from 'app/components/Forms/formRegister';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
@@ -17,7 +17,7 @@ export function RegisterPage() {
       <Conteiner>
         <Title>Crear una cuenta</Title>
         <CardInfo />
-        <Formulario />
+        <FormRegister />
 
         <BoxNavigation>
           <Label> ya estas registrado ? </Label>
@@ -40,8 +40,8 @@ const Conteiner = styled.div`
     padding-right: 35%;
   }
   @media (min-width: 1040px) {
-    padding-left: 35%;
-    padding-right: 40%;
+    padding-left: 20%;
+    padding-right: 20%;
   }
 `;
 
@@ -53,6 +53,7 @@ const Title = styled.div`
   letter-spacing: 0.0022em;
   color: ${p => p.theme.primary};
   margin-right: 1rem;
+  margin-bottom: 24px;
 `;
 const Label = styled.div`
   font-style: normal;
