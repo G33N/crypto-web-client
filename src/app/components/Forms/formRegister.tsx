@@ -35,7 +35,8 @@ export function FormRegister() {
     password: '',
     phone: '',
   });
-
+  console.log('user info', userInfo);
+  console.log('error: ', errors);
   const onSubmit = data => {
     alert(JSON.stringify(data));
   };
@@ -97,9 +98,7 @@ export function FormRegister() {
       <Label htmlFor="phone">Numero telefonico</Label>
       <PhoneInput
         placeholder="Ingrese su numero telefonico"
-        {...register('phone', {
-          required: messages.required,
-        })}
+        {...register('phone', {})}
         onChange={handleOnChange}
         inputStyle={{
           borderColor: 'cdcbcb',
@@ -128,16 +127,12 @@ export function FormRegister() {
           type={passwordShown ? 'text' : 'password'}
           {...register('password', {
             required: messages.required,
-            // minLength: {
-            //   value: 8,
-            //   message: errors.password,
-            //
             minLength: 8,
             validate: {
               oneUppercase: value => value && /^(?=.*?[A-Z])/.test(value),
               oneLowercase: value => value && /^(?=.*?[a-z])/.test(value),
               oneNumber: value => value && /\d/.test(value),
-              // minLength: value => value < 8,
+              minLength: value => value && /.{8,}/.test(value),
             },
           })}
           name="password"
@@ -191,7 +186,11 @@ export function FormRegister() {
         <Validator>{errors.passConfirm.message}</Validator>
       )}
 
-      <Button type="submit" disabled={isValid} onClick={handleSubmit(onSubmit)}>
+      <Button
+        type="submit"
+        disabled={!isValid}
+        onClick={handleSubmit(onSubmit)}
+      >
         Crear cuenta
       </Button>
       <div></div>
@@ -251,8 +250,7 @@ const InputPass = styled.input`
   width: 100%;
   font-size: 0.875rem;
   font-weight: normal;
-  height: 4px;
-  padding: none;
+  padding-left: 10px;
   border: transparent;
   outline: none;
   ::placeholder {
@@ -270,7 +268,6 @@ const InputBoxPass = styled.div<Props>`
   border: inset 2px ${props => props.success};
   opacity: 0.8;
   border-radius: 9px;
-  padding: 6px;
   background-color: transparent;
   ::placeholder {
     color: ${p => p.theme.text};
