@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled from 'styled-components/macro';
+import { Link } from 'react-router-dom';
+import { Formulario } from 'app/components/Formulario/index';
 
 export const LoginPage = ({ useAuth }) => {
   let navigate = useNavigate();
@@ -43,6 +45,17 @@ export const LoginPage = ({ useAuth }) => {
         </form>
         (ingresar un nombre)
       </Conteiner>
+
+      <Conteiner>
+        <Title>Iniciar Sesión</Title>
+
+        <Formulario />
+
+        <BoxNavigation>
+          <Label> No tenes cuenta ? </Label>
+          <Links to="">Crear cuenta</Links>
+        </BoxNavigation>
+      </Conteiner>
     </>
   );
 };
@@ -50,7 +63,19 @@ export const LoginPage = ({ useAuth }) => {
 const Conteiner = styled.div`
   margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
   padding: 4em;
-  background: papayawhip;
+  background: white;
+  @media (min-width: 480px) {
+    padding-left: 20%;
+    padding-right: 25%;
+  }
+  @media (min-width: 720px) {
+    padding-left: 30%;
+    padding-right: 35%;
+  }
+  @media (min-width: 1040px) {
+    padding-left: 35%;
+    padding-right: 40%;
+  }
 `;
 const Text = styled.p`
   font-size: 2rem;
@@ -61,4 +86,40 @@ const Text = styled.p`
   display: block;
   margin-bottom: 13px;
   margin-top: 20px;
+`;
+const Title = styled.div`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 32px;
+  letter-spacing: 0.0022em;
+  color: ${p => p.theme.primary};
+  margin-right: 1rem;
+`;
+const Label = styled.div`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  text-align: center;
+  color: ${p => p.theme.primary};
+  margin-bottom: 13px;
+  margin-top: 50px;
+`;
+const BoxNavigation = styled.div`
+  text-align: center;
+`;
+const Links = styled(Link)`
+  color: ${p => p.theme.primary};
+  text-decoration: none;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+  &:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+  }
+  &:active {
+    opacity: 0.4;
+  }
 `;

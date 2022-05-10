@@ -14,8 +14,9 @@ export function CardInfo() {
 }
 
 const Wrapper = styled.div`
-  // display: flex;
-  align-items: center;
+  display: flex-center;
+  align-items: left;
+  position: relative;
 `;
 
 const Title = styled.div`

@@ -102,12 +102,12 @@ export function Formulario() {
         })}
         onChange={handleOnChange}
         inputStyle={{
-          borderColor: 'black',
+          borderColor: 'cdcbcb',
           width: '100%',
           height: '60px',
         }}
         buttonStyle={{
-          borderColor: 'black',
+          borderColor: 'cdcbcb',
           height: '60px',
           background: 'white',
         }}
@@ -239,6 +239,8 @@ const Input = styled.input`
   font-weight: normal;
   padding: 10px;
   border-radius: 6px;
+  border-color: #cdcbcb;
+  border: inset 1px;
   ::placeholder {
     color: ${p => p.theme.text};
   }
