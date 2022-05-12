@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from '../CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,27 +12,23 @@ interface Props {
 
 const messages = {
   required: 'Este campo es obligatorio',
-  fullname: 'El formato introducido no es el correcto',
   mail: 'Debes introducir una dirección de correo electronico correcta',
   passConfirm: 'Las contrasenas deben ser iguales',
 };
-const messageConfirmPass = 'Las contrasenas deben ser iguales';
 
 const patterns = {
   fullname: /^[^-\s][a-zA-Z_\s-]+$/,
   mail: /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
 };
 
-export function Formulario() {
-  const { register, getValues, formState, handleSubmit } = useForm({
+export function FormLogin() {
+  const { register, formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
   const { isValid, touchedFields, errors } = formState;
   const [userInfo, setUserInfo] = useState({
-    fullname: '',
     mail: '',
     password: '',
-    phone: '',
   });
 
   const onSubmit = data => {
@@ -52,23 +47,6 @@ export function Formulario() {
   };
   return (
     <Form>
-      <Label htmlFor="fullname">Nombre completo</Label>
-      <Input
-        type="text"
-        placeholder="Ingrese su nombre completo"
-        {...register('fullname', {
-          required: messages.required,
-          pattern: {
-            value: patterns.fullname,
-            message: messages.fullname,
-          },
-        })}
-        name="fullname"
-      />
-      {errors.fullname && touchedFields.fullname && (
-        <Validator>{errors.fullname.message}</Validator>
-      )}
-
       <Label htmlFor="mail">Correo electronico</Label>
       <Input
         type="email"
@@ -94,31 +72,7 @@ export function Formulario() {
         <Validator>{errors.mail.message}</Validator>
       )}
 
-      <Label htmlFor="phone">Numero telefonico</Label>
-      <PhoneInput
-        placeholder="Ingrese su numero telefonico"
-        {...register('phone', {
-          required: messages.required,
-        })}
-        onChange={handleOnChange}
-        inputStyle={{
-          borderColor: 'cdcbcb',
-          width: '100%',
-          height: '48px',
-          borderRadius: '9px',
-        }}
-        buttonStyle={{
-          borderColor: 'cdcbcb',
-          height: '48px',
-          background: 'white',
-        }}
-        value="phone"
-      />
-      {errors.phone && touchedFields.phone && (
-        <Validator>{errors.phone.message}</Validator>
-      )}
-
-      <Label htmlFor="passsword">Contrasena nueva</Label>
+      <Label htmlFor="passsword">Contrasena </Label>
 
       <InputBoxPass
         success={errors.password && touchedFields.password ? 'red' : 'green'}
@@ -128,16 +82,11 @@ export function Formulario() {
           type={passwordShown ? 'text' : 'password'}
           {...register('password', {
             required: messages.required,
-            // minLength: {
-            //   value: 8,
-            //   message: errors.password,
-            //
-            minLength: 8,
             validate: {
               oneUppercase: value => value && /^(?=.*?[A-Z])/.test(value),
               oneLowercase: value => value && /^(?=.*?[a-z])/.test(value),
-              oneNumber: value => value && /\d/.test(value),
-              // minLength: value => value < 8,
+              oneNumber: value => value && /^(?=.*?[0-9])/.test(value),
+              minLength: value => value && /.{8,}/.test(value),
             },
           })}
           name="password"
@@ -160,38 +109,11 @@ export function Formulario() {
         </>
       )}
 
-      <Label htmlFor="passwordConfirm">Confirmacion de nueva contrasena</Label>
-
-      <InputBoxPass
-        success={
-          errors.passConfirm && touchedFields.passConfirm ? 'red' : 'green'
-        }
+      <Button
+        type="submit"
+        disabled={!isValid}
+        onClick={handleSubmit(onSubmit)}
       >
-        <InputPass
-          placeholder="Ingrese nuevamente su contrasena"
-          type={passwordShown ? 'text' : 'password'}
-          {...register('passConfirm', {
-            required: messages.required,
-            validate: value =>
-              value === getValues().password || messageConfirmPass,
-          })}
-          name="passConfirm"
-        />
-
-        <Icon onClick={togglePasswordVisiblity}>
-          {passwordShown ? (
-            <FontAwesomeIcon icon={faEye} />
-          ) : (
-            <FontAwesomeIcon icon={faEyeSlash} />
-          )}
-        </Icon>
-      </InputBoxPass>
-
-      {errors.passConfirm && touchedFields.passConfirm && (
-        <Validator>{errors.passConfirm.message}</Validator>
-      )}
-
-      <Button type="submit" disabled={isValid} onClick={handleSubmit(onSubmit)}>
         Crear cuenta
       </Button>
       <div></div>
@@ -252,7 +174,7 @@ const InputPass = styled.input`
   font-size: 0.875rem;
   font-weight: normal;
   height: 4px;
-  padding: none;
+  padding: 10px;
   border: transparent;
   outline: none;
   ::placeholder {

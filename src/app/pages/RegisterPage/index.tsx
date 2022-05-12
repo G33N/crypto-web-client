@@ -21,7 +21,7 @@ export function RegisterPage() {
 
         <BoxNavigation>
           <Label> ya estas registrado ? </Label>
-          <Links to="">Iniciar Sesion</Links>
+          <Links to="/login">Iniciar Sesion</Links>
         </BoxNavigation>
       </Conteiner>
     </>
@@ -40,8 +40,8 @@ const Conteiner = styled.div`
     padding-right: 35%;
   }
   @media (min-width: 1040px) {
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 35%;
+    padding-right: 40%;
   }
 `;
 

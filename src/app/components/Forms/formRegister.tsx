@@ -127,11 +127,10 @@ export function FormRegister() {
           type={passwordShown ? 'text' : 'password'}
           {...register('password', {
             required: messages.required,
-            minLength: 8,
             validate: {
               oneUppercase: value => value && /^(?=.*?[A-Z])/.test(value),
               oneLowercase: value => value && /^(?=.*?[a-z])/.test(value),
-              oneNumber: value => value && /\d/.test(value),
+              oneNumber: value => value && /^(?=.*?[0-9])/.test(value),
               minLength: value => value && /.{8,}/.test(value),
             },
           })}
@@ -273,17 +272,6 @@ const InputBoxPass = styled.div<Props>`
     color: ${p => p.theme.text};
   }
 `;
-// ${props => {
-//   if (props.borderColor === 'default') {
-//     return 'black';
-//   } else if (props.borderColor === 'verify') {
-//     if (props.success) {
-//       return 'red';
-//     } else {
-//       return 'green';
-//     }
-//   }
-// }};
 
 const Icon = styled.i`
   padding-right: 10px;

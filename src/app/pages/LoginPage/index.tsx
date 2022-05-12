@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled from 'styled-components/macro';
+import { FormLogin } from 'app/components/Forms/formLogin';
 
 export const LoginPage = ({ useAuth }) => {
   let navigate = useNavigate();
@@ -36,17 +37,11 @@ export const LoginPage = ({ useAuth }) => {
       <Conteiner>
         <Title>Iniciar Sesión</Title>
 
-        {/* <form onSubmit={handleSubmit}>          
-          <label>
-            Username
-            <input name="email" type="email" />
-          </label>{' '}
-          <button type="submit">Login</button>
-        </form> */}
+        <FormLogin />
 
         <BoxNavigation>
           <Label> No tenes cuenta ? </Label>
-          <Links to="">Crear cuenta</Links>
+          <Links to="/register">Crear cuenta</Links>
         </BoxNavigation>
       </Conteiner>
     </>
