@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { CardInfo } from 'app/components/CardInfo';
+import { CardInfo } from 'app/components/Forms/components/CardInfo';
 import { FormRegister } from 'app/components/Forms/formRegister';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled from 'styled-components/macro';

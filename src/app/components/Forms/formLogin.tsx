@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
-import { CardValidationPass } from '../CardValidationPass';
+import { CardValidationPass } from './components/CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import 'react-phone-input-2/lib/style.css';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { ModalResetPassword } from './components/ModalResetPassword';
 
 interface Props {
   success?: string;
@@ -30,6 +30,18 @@ export function FormLogin() {
     mail: '',
     password: '',
   });
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+    console.log(isOpen);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+    console.log(isOpen);
+  };
 
   const onSubmit = data => {
     alert(JSON.stringify(data));
@@ -71,9 +83,7 @@ export function FormLogin() {
       {errors.mail && touchedFields.mail && (
         <Validator>{errors.mail.message}</Validator>
       )}
-
       <Label htmlFor="passsword">Contrasena </Label>
-
       <InputBoxPass
         success={errors.password && touchedFields.password ? 'red' : 'green'}
       >
@@ -100,7 +110,6 @@ export function FormLogin() {
           )}
         </Icon>
       </InputBoxPass>
-
       {errors.password && touchedFields.password && errors.password.type && (
         <>
           <BoxPass>
@@ -108,7 +117,6 @@ export function FormLogin() {
           </BoxPass>
         </>
       )}
-
       <Button
         type="submit"
         disabled={!isValid}
@@ -116,12 +124,29 @@ export function FormLogin() {
       >
         Crear cuenta
       </Button>
-      <div></div>
+
+      <ModalResetPassword open={openModal()} closed={closeModal()} />
+      <DivButtonStyle>
+        {' '}
+        <button onClick={() => setIsOpen(true)}>me falta contrasena</button>
+      </DivButtonStyle>
     </Form>
   );
 }
 
 // ----- Styles ------ //
+
+const DivButtonStyle = styled.div`
+  position: 'relative';
+  zindex: 1;
+`;
+
+const DivContentStyle = styled.div`
+  position: 'relative';
+  background: 'red';
+  padding: '20px';
+  zindex: 2;
+`;
 
 const Form = styled.form`
   text-align: center;
