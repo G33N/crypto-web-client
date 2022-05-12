@@ -16,7 +16,11 @@ export function RegisterPage() {
 
       <Conteiner>
         <Title>Crear una cuenta</Title>
-        <CardInfo />
+        <CardInfo
+          title="Informacion de usuario"
+          description="Ingresa tu nombre, numero telefonico y correo electronico para comenzar
+        tu proceso de registro."
+        />
         <FormRegister />
 
         <BoxNavigation>

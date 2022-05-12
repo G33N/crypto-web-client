@@ -1,14 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
 
-export function CardInfo() {
+export function CardInfo(props: any) {
   return (
     <Wrapper>
-      <Title>Informacion de usuario</Title>
-      <Description>
-        Ingresa tu nombre, numero telefonico y correo electronico para comenzar
-        tu proceso de registro.
-      </Description>
+      <Title>{props.title}</Title>
+      <Description>{props.description}</Description>
     </Wrapper>
   );
 }
