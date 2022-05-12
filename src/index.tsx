@@ -14,8 +14,6 @@ import App from 'app';
 import { HelmetProvider } from 'react-helmet-async';
 
 import { configureAppStore } from 'store/configureStore';
-// import { PersistGate } from 'zustand-persist';
-// import { purge } from './utils/persist';
 
 import { ThemeProvider } from 'styles/theme/ThemeProvider';
 

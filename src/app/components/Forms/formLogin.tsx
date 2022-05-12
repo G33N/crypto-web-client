@@ -27,100 +27,92 @@ export function FormLogin() {
     mode: 'onChange',
   });
   const { isValid, touchedFields, errors } = formState;
-  const [userInfo, setUserInfo] = useState({
-    mail: '',
-    password: '',
-  });
-
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const onSubmit = data => {
     alert(JSON.stringify(data));
   };
 
-  const handleOnChange = value => {
-    console.log(value);
-    setUserInfo(value);
-  };
-
   const [passwordShown, setPasswordShown] = useState(false);
-
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
+
   return (
-    <Form>
-      <Label htmlFor="mail">Correo electronico</Label>
-      <Input
-        type="email"
-        placeholder="Ingrese su correo electronico"
-        {...register('mail', {
-          required: messages.required,
-          pattern: {
-            value: patterns.mail,
-            message: messages.mail,
-          },
-          minLength: {
-            value: 5,
-            message: messages.mail,
-          },
-          maxLength: {
-            value: 50,
-            message: messages.mail,
-          },
-        })}
-        name="mail"
-      />
-      {errors.mail && touchedFields.mail && (
-        <Validator>{errors.mail.message}</Validator>
-      )}
-      <Label htmlFor="passsword">Contrasena </Label>
-      <InputBoxPass
-        success={errors.password && touchedFields.password ? 'red' : 'green'}
-      >
-        <InputPass
-          placeholder="Ingrese su contrasena"
-          type={passwordShown ? 'text' : 'password'}
-          {...register('password', {
+    <>
+      <Form>
+        <Label htmlFor="mail">Correo electronico</Label>
+        <Input
+          type="email"
+          placeholder="Ingrese su correo electronico"
+          {...register('mail', {
             required: messages.required,
-            validate: {
-              oneUppercase: value => value && /^(?=.*?[A-Z])/.test(value),
-              oneLowercase: value => value && /^(?=.*?[a-z])/.test(value),
-              oneNumber: value => value && /^(?=.*?[0-9])/.test(value),
-              minLength: value => value && /.{8,}/.test(value),
+            pattern: {
+              value: patterns.mail,
+              message: messages.mail,
+            },
+            minLength: {
+              value: 5,
+              message: messages.mail,
+            },
+            maxLength: {
+              value: 50,
+              message: messages.mail,
             },
           })}
-          name="password"
+          name="mail"
         />
+        {errors.mail && touchedFields.mail && (
+          <Validator>{errors.mail.message}</Validator>
+        )}
+        <Label htmlFor="passsword">Contrasena </Label>
+        <InputBoxPass
+          success={errors.password && touchedFields.password ? 'red' : 'green'}
+        >
+          <InputPass
+            placeholder="Ingrese su contrasena"
+            type={passwordShown ? 'text' : 'password'}
+            {...register('password', {
+              required: messages.required,
+              validate: {
+                oneUppercase: value => value && /^(?=.*?[A-Z])/.test(value),
+                oneLowercase: value => value && /^(?=.*?[a-z])/.test(value),
+                oneNumber: value => value && /^(?=.*?[0-9])/.test(value),
+                minLength: value => value && /.{8,}/.test(value),
+              },
+            })}
+            name="password"
+          />
 
-        <Icon onClick={togglePasswordVisiblity}>
-          {passwordShown ? (
-            <FontAwesomeIcon icon={faEye} />
-          ) : (
-            <FontAwesomeIcon icon={faEyeSlash} />
-          )}
-        </Icon>
-      </InputBoxPass>
-      {errors.password && touchedFields.password && errors.password.type && (
-        <>
-          <BoxPass>
-            <CardValidationPass type={errors.password.type} />
-          </BoxPass>
-        </>
-      )}
-      <Button
-        type="submit"
-        disabled={!isValid}
-        onClick={handleSubmit(onSubmit)}
-      >
-        Crear cuenta
-      </Button>
+          <Icon onClick={togglePasswordVisiblity}>
+            {passwordShown ? (
+              <FontAwesomeIcon icon={faEye} />
+            ) : (
+              <FontAwesomeIcon icon={faEyeSlash} />
+            )}
+          </Icon>
+        </InputBoxPass>
+        {errors.password && touchedFields.password && errors.password.type && (
+          <>
+            <BoxPass>
+              <CardValidationPass type={errors.password.type} />
+            </BoxPass>
+          </>
+        )}
+        <Button
+          type="submit"
+          disabled={!isValid}
+          onClick={handleSubmit(onSubmit)}
+        >
+          Crear cuenta
+        </Button>
+      </Form>
 
       <button onClick={() => setIsOpen(!isOpen)}>olvide contrasena</button>
-      <Modal open={isOpen} closed={setIsOpen}>
-        soy el modal abiertooo
+      <Modal openModal={isOpen} closeModal={setIsOpen}>
+        <ModalResetPassword />
       </Modal>
-    </Form>
+    </>
   );
 }
 
