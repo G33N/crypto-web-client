@@ -27,10 +27,11 @@ export function FormLogin() {
     mode: 'onChange',
   });
   const { isValid, touchedFields, errors } = formState;
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const onSubmit = data => {
     alert(JSON.stringify(data));
+    //navegar a dashboard
   };
 
   const [passwordShown, setPasswordShown] = useState(false);
