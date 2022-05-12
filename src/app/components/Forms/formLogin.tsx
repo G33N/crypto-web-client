@@ -5,6 +5,7 @@ import { CardValidationPass } from './components/CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { ModalResetPassword } from './components/ModalResetPassword';
+import { Modal } from './components/Modal';
 
 interface Props {
   success?: string;
@@ -32,16 +33,6 @@ export function FormLogin() {
   });
 
   const [isOpen, setIsOpen] = useState(false);
-
-  const openModal = () => {
-    setIsOpen(true);
-    console.log(isOpen);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-    console.log(isOpen);
-  };
 
   const onSubmit = data => {
     alert(JSON.stringify(data));
@@ -125,28 +116,15 @@ export function FormLogin() {
         Crear cuenta
       </Button>
 
-      <ModalResetPassword open={openModal()} closed={closeModal()} />
-      <DivButtonStyle>
-        {' '}
-        <button onClick={() => setIsOpen(true)}>me falta contrasena</button>
-      </DivButtonStyle>
+      <button onClick={() => setIsOpen(!isOpen)}>olvide contrasena</button>
+      <Modal open={isOpen} closed={setIsOpen}>
+        soy el modal abiertooo
+      </Modal>
     </Form>
   );
 }
 
 // ----- Styles ------ //
-
-const DivButtonStyle = styled.div`
-  position: 'relative';
-  zindex: 1;
-`;
-
-const DivContentStyle = styled.div`
-  position: 'relative';
-  background: 'red';
-  padding: '20px';
-  zindex: 2;
-`;
 
 const Form = styled.form`
   text-align: center;
