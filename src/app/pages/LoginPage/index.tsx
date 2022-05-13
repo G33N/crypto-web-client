@@ -40,7 +40,7 @@ export const LoginPage = ({ useAuth }) => {
         <FormLogin />
 
         <BoxNavigation>
-          <Label> No tenes cuenta ? </Label>
+          <Label> ¿No tenes cuenta? </Label>
           <Links to="/register">Crear cuenta</Links>
         </BoxNavigation>
       </Conteiner>
@@ -82,15 +82,15 @@ const Title = styled.div`
   font-size: 1.5rem;
   line-height: 32px;
   letter-spacing: 0.0022em;
-  color: ${p => p.theme.primary};
+  color: ${p => p.theme.text};
   margin-right: 1rem;
 `;
 const Label = styled.div`
   font-style: normal;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 0.75rem;
   text-align: center;
-  color: ${p => p.theme.primary};
+  color: ${p => p.theme.text};
   margin-bottom: 13px;
   margin-top: 50px;
 `;
@@ -98,9 +98,9 @@ const BoxNavigation = styled.div`
   text-align: center;
 `;
 const Links = styled(Link)`
-  color: ${p => p.theme.primary};
+  color: ${p => p.theme.text};
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
   font-style: normal;
   font-size: 0.875rem;
   line-height: 1.375rem;

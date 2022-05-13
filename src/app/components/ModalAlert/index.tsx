@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Arrow from './assets/Back.png';
 
 export const Modal = ({ children, openModal, closeModal }) => {
   return (
@@ -8,9 +9,16 @@ export const Modal = ({ children, openModal, closeModal }) => {
         <Overlay>
           <ConteinerModal>
             <HeadModal>
-              <h3>Titulo de mi modal</h3>
+              <h3>
+                {' '}
+                <Img src={Arrow} />
+              </h3>
             </HeadModal>
-            <ButonClose onClick={() => closeModal(false)}> X </ButonClose>
+            <ButonClose onClick={() => closeModal(false)}>
+              {' '}
+              <Img src={Arrow} />{' '}
+            </ButonClose>
+            <h3>Reestablecer contraseña</h3>
             {children}
           </ConteinerModal>
         </Overlay>
@@ -51,9 +59,12 @@ const HeadModal = styled.div`
   border-bottom: 1px solid ${p => p.theme.text};
 
   h3 {
-    font-weight: 500;
-    font-size: 16px;
-    color: ${p => p.theme.textSecondary};
+    font-weight: 700;
+    font-size: 24px;
+    color: ${p => p.theme.primary};
+    letter-spacing: 0.0022em;
+    line-height: 32px;
+    font-style: normal;
   }
 `;
 
@@ -69,5 +80,33 @@ const ButonClose = styled.button`
   color: ${p => p.theme.primary};
   &:hover {
     background: ${p => p.theme.textSecondary};
+  }
+`;
+
+const Img = styled.img`
+  width: 24px;
+  height: 24px;
+  left: 24px;
+  top: 38px;
+  border-radius: 0px;
+`;
+
+const Contenido = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  img {
+    width: 100%;
+    vertical-align: top;
+    border-radius: 3px;
   }
 `;

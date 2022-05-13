@@ -4,8 +4,7 @@ import { useForm } from 'react-hook-form';
 import { CardValidationPass } from './components/CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { ModalResetPassword } from './components/ModalResetPassword';
-import { Modal } from './components/Modal';
+import { ModalPassRecover } from './components/ModalPassRecover';
 
 interface Props {
   success?: string;
@@ -42,10 +41,10 @@ export function FormLogin() {
   return (
     <>
       <Form>
-        <Label htmlFor="mail">Correo electronico</Label>
+        <Label htmlFor="mail">Correo electrónico</Label>
         <Input
           type="email"
-          placeholder="Ingrese su correo electronico"
+          placeholder="Ingrese su correo electrónico"
           {...register('mail', {
             required: messages.required,
             pattern: {
@@ -66,12 +65,12 @@ export function FormLogin() {
         {errors.mail && touchedFields.mail && (
           <Validator>{errors.mail.message}</Validator>
         )}
-        <Label htmlFor="passsword">Contrasena </Label>
+        <Label htmlFor="passsword">Contraseña </Label>
         <InputBoxPass
           success={errors.password && touchedFields.password ? 'red' : 'green'}
         >
           <InputPass
-            placeholder="Ingrese su contrasena"
+            placeholder="Ingrese su contraseña"
             type={passwordShown ? 'text' : 'password'}
             {...register('password', {
               required: messages.required,
@@ -93,6 +92,7 @@ export function FormLogin() {
             )}
           </Icon>
         </InputBoxPass>
+
         {errors.password && touchedFields.password && errors.password.type && (
           <>
             <BoxPass>
@@ -100,6 +100,7 @@ export function FormLogin() {
             </BoxPass>
           </>
         )}
+
         <Button
           type="submit"
           disabled={!isValid}
@@ -109,10 +110,10 @@ export function FormLogin() {
         </Button>
       </Form>
 
-      <button onClick={() => setIsOpen(!isOpen)}>olvide contrasena</button>
-      <Modal openModal={isOpen} closeModal={setIsOpen}>
-        <ModalResetPassword />
-      </Modal>
+      <ButtonRecover onClick={() => setIsOpen(!isOpen)}>
+        ¿Olvidaste la contraseña?
+      </ButtonRecover>
+      <ModalPassRecover openModal={isOpen} closeModal={setIsOpen} />
     </>
   );
 }
@@ -130,7 +131,7 @@ const BoxPass = styled.div`
 
 const Label = styled.label`
   font-size: 0.875rem;
-  color: ${p => p.theme.primary};
+  color: ${p => p.theme.text};
   font-weight: bold;
   width: 100%;
   line-height: 2;
@@ -154,7 +155,7 @@ const Input = styled.input`
   width: 100%;
   height: 48px;
   font-size: 0.875rem;
-  color: ${p => p.theme.primary};
+  color: ${p => p.theme.text};
   font-weight: normal;
   padding: 10px;
   border-radius: 9px;
@@ -177,7 +178,7 @@ const InputPass = styled.input`
     color: ${p => p.theme.text};
   }
   &:active {
-    color: ${p => p.theme.primary};
+    color: ${p => p.theme.text};
   }
 `;
 
@@ -194,17 +195,6 @@ const InputBoxPass = styled.div<Props>`
     color: ${p => p.theme.text};
   }
 `;
-// ${props => {
-//   if (props.borderColor === 'default') {
-//     return 'black';
-//   } else if (props.borderColor === 'verify') {
-//     if (props.success) {
-//       return 'red';
-//     } else {
-//       return 'green';
-//     }
-//   }
-// }};
 
 const Icon = styled.i`
   padding-right: 10px;
@@ -222,14 +212,30 @@ const Button = styled.button`
   padding: 10px;
   background-color: ${p => p.theme.primary};
   border-radius: 9px;
+  border-color: transparent;
   color: ${p => p.theme.background};
   ::placeholder {
-    color: ${p => p.theme.primary};
+    color: ${p => p.theme.textSecondary};
     text-align: center;
   }
   ${props =>
     props.disabled &&
     css`
-      background: ${p => p.theme.text};
+      background: ${p => p.theme.secondary};
     `}
+`;
+
+const ButtonRecover = styled.button`
+  margin-top: 40px;
+  width: 189px;
+  height: 22px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: 0.003em;
+  color: ${p => p.theme.text};
+  border: none;
+  background-color: transparent;
 `;

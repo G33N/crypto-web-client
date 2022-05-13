@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
-import Omnicrypto from './assets/Omnicrypto.png';
+import Omnicrypto from './assets/moniflowcrypto.png';
 
 export function Logo() {
   return (
@@ -16,7 +16,8 @@ const Wrapper = styled.div`
 `;
 
 const Img = styled.img`
-  width: 90px;
+  width: 265.26px;
+  height: 30px;
   left: 24px;
   top: 38px;
   border-radius: 0px;

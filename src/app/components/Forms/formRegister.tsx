@@ -101,15 +101,20 @@ export function FormRegister() {
         {...register('phone', {})}
         onChange={handleOnChange}
         inputStyle={{
-          borderColor: 'cdcbcb',
+          borderColor: '#cdcbcb',
           width: '100%',
           height: '48px',
-          borderRadius: '9px',
+          borderRadius: '12px',
+          paddingLeft: '18%',
+          color: '#9b9b9b',
         }}
         buttonStyle={{
           borderColor: 'cdcbcb',
           height: '48px',
+          width: '15%',
           background: 'white',
+          borderStartStartRadius: '12px',
+          borderEndStartRadius: '12px',
         }}
         value="phone"
       />
@@ -117,13 +122,13 @@ export function FormRegister() {
         <Validator>{errors.phone.message}</Validator>
       )}
 
-      <Label htmlFor="passsword">Contrasena nueva</Label>
+      <Label htmlFor="passsword">Contraseña nueva</Label>
 
       <InputBoxPass
         success={errors.password && touchedFields.password ? 'red' : 'green'}
       >
         <InputPass
-          placeholder="Ingrese su contrasena"
+          placeholder="Ingrese su contraseña"
           type={passwordShown ? 'text' : 'password'}
           {...register('password', {
             required: messages.required,
@@ -154,7 +159,7 @@ export function FormRegister() {
         </>
       )}
 
-      <Label htmlFor="passwordConfirm">Confirmacion de nueva contrasena</Label>
+      <Label htmlFor="passwordConfirm">Confirmación de nueva contraseña</Label>
 
       <InputBoxPass
         success={
@@ -162,7 +167,7 @@ export function FormRegister() {
         }
       >
         <InputPass
-          placeholder="Ingrese nuevamente su contrasena"
+          placeholder="Ingrese nuevamente su contraseña"
           type={passwordShown ? 'text' : 'password'}
           {...register('passConfirm', {
             required: messages.required,
@@ -210,7 +215,7 @@ const BoxPass = styled.div`
 
 const Label = styled.label`
   font-size: 0.875rem;
-  color: ${p => p.theme.primary};
+  color: ${p => p.theme.text};
   font-weight: bold;
   width: 100%;
   line-height: 2;
@@ -234,10 +239,10 @@ const Input = styled.input`
   width: 100%;
   height: 48px;
   font-size: 0.875rem;
-  color: ${p => p.theme.primary};
+  color: ${p => p.theme.text};
   font-weight: normal;
   padding: 10px;
-  border-radius: 9px;
+  border-radius: 12px;
   border-color: #cdcbcb;
   border: inset 1px;
   ::placeholder {
@@ -256,7 +261,7 @@ const InputPass = styled.input`
     color: ${p => p.theme.text};
   }
   &:active {
-    color: ${p => p.theme.primary};
+    color: ${p => p.theme.text};
   }
 `;
 
@@ -266,7 +271,7 @@ const InputBoxPass = styled.div<Props>`
   align-items: center;
   border: inset 2px ${props => props.success};
   opacity: 0.8;
-  border-radius: 9px;
+  border-radius: 12px;
   background-color: transparent;
   ::placeholder {
     color: ${p => p.theme.text};
@@ -287,16 +292,17 @@ const Button = styled.button`
   height: 48px;
   font-size: 18px;
   padding: 10px;
-  background-color: ${p => p.theme.primary};
-  border-radius: 9px;
+  border-color: transparent;
+  background-color: ${p => p.theme.backgroundVariant};
+  border-radius: 12px;
   color: ${p => p.theme.background};
   ::placeholder {
-    color: ${p => p.theme.primary};
+    color: ${p => p.theme.text};
     text-align: center;
   }
   ${props =>
     props.disabled &&
     css`
-      background: ${p => p.theme.text};
+      background: ${p => p.theme.secondary};
     `}
 `;
