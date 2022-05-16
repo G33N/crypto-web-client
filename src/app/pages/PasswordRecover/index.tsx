@@ -34,10 +34,10 @@ export const PasswordRecover = () => {
         <Title>Iniciar Sesión</Title>
         <ConteinerModal>
           <HeadModal>
-            <ButonClose>
-              {' '}
+            <ButonBack to={'/login'}>
+              {''}
               <Img src={Arrow} />
-            </ButonClose>
+            </ButonBack>
             <h3>Restablecer contraseña</h3>
           </HeadModal>
 
@@ -182,7 +182,7 @@ const HeadModal = styled.div`
   }
 `;
 
-const ButonClose = styled.button`
+const ButonBack = styled(Link)`
   position: relative;
   top: 20px;
   right: 20px;

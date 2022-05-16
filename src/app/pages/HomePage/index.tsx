@@ -1,9 +1,12 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components/macro';
 import { StyleConstants } from 'styles/StyleConstants';
+import { ModalAlert } from '../../components/ModalAlert';
 
 export function HomePage() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       <Helmet>
@@ -14,6 +17,8 @@ export function HomePage() {
       <Conteiner>
         <Text> HOME PAGE</Text>
         <Text>- Se ve sin estar logeado -</Text>
+        <button onClick={() => setIsOpen(!isOpen)}>ver errores test</button>
+        <ModalAlert openModal={isOpen} closeModal={setIsOpen} />
       </Conteiner>
     </>
   );
