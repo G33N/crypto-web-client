@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { AppwriteService } from '../../../services/appwrite';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
+import { useFormContext } from './FormContext';
 import { CardValidationPass } from './components/CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PhoneInput from 'react-phone-input-2';
@@ -25,25 +27,14 @@ const patterns = {
 };
 
 export function FormRegister() {
-  const { register, getValues, formState, handleSubmit } = useForm({
-    mode: 'onChange',
-  });
+  const { state, handleChange } = useFormContext();
+  const { register, getValues, formState, handleSubmit } = useForm();
   const { isValid, touchedFields, errors } = formState;
-  const [userInfo, setUserInfo] = useState({
-    fullname: '',
-    mail: '',
-    password: '',
-    phone: '',
-  });
-  console.log('user info', userInfo);
-  console.log('error: ', errors);
-  const onSubmit = data => {
-    alert(JSON.stringify(data));
-  };
 
-  const handleOnChange = value => {
-    console.log(value);
-    setUserInfo(value);
+  const onSubmit = data => {
+    const { fullname, mail, password } = data;
+    AppwriteService.createUser(fullname, mail, password);
+    alert(JSON.stringify(data));
   };
 
   const [passwordShown, setPasswordShown] = useState(false);
@@ -99,7 +90,7 @@ export function FormRegister() {
       <PhoneInput
         placeholder="Ingrese su numero telefonico"
         {...register('phone', {})}
-        onChange={handleOnChange}
+        onChange={handleChange}
         inputStyle={{
           borderColor: '#cdcbcb',
           width: '100%',
