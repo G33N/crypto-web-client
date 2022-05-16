@@ -127,5 +127,8 @@
         "statements": 90
       }
     }
+  },
+  "devDependencies": {
+    "dotenv": "16.0.1"
   }
 }
