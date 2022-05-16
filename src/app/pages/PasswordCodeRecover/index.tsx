@@ -1,21 +1,13 @@
 import * as React from 'react';
-import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components/macro';
 import { StyleConstants } from 'styles/StyleConstants';
 
-export function HomePage() {
+export function PasswordCodeRecover() {
   return (
-    <>
-      <Helmet>
-        <title>HomePage</title>
-        <meta name="description" content="Omni wallet application homepage" />
-      </Helmet>
-
-      <Conteiner>
-        <Text> HOME PAGE</Text>
-        <Text>- Se ve sin estar logeado -</Text>
-      </Conteiner>
-    </>
+    <Conteiner>
+      <Text>componente </Text>
+      <Text>RECUPERAR CONTRASENA CON CODIGO</Text>
+    </Conteiner>
   );
 }
 const Conteiner = styled.div`
@@ -24,7 +16,7 @@ const Conteiner = styled.div`
   background: papayawhip;
 `;
 const Text = styled.p`
-  font-size: 18px;
+  font-size: 2rem;
   color: ${p => p.theme.textSecondary};
   font-weight: bold;
   width: 100%;

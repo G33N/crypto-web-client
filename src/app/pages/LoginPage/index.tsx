@@ -10,13 +10,27 @@ export const LoginPage = ({ useAuth }) => {
 
   let auth = useAuth();
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  function handleLogin() {
+    //   axios
+    //     .post('https://www.somePlace.com/auth/login', {
+    //       userName,
+    //       password,
+    //     })
+    //     .then(result => {
+    //       if (result.status === 200) {
+    //         setAuthTokens(result.data);
+    //         setLoggedIn(true);
+    //       } else {
+    //         setIsError(true);
+    //       }
+    //     })
+    //     .catch(e => {
+    //       setIsError(true);
+    //     });
+  }
 
-    let formData = new FormData(event.currentTarget);
-    let username = formData.get('username') as string;
-
-    auth.signin(username, () => {
+  if (auth) {
+    auth.signin(() => {
       // Send them back to the page they tried to visit when they were
       // redirected to the login page. Use { replace: true } so we don't create
       // another entry in the history stack for the login page.  This means that
