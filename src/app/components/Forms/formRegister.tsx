@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { AppwriteService } from '../../../services/appwrite';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
-import { useFormContext } from './FormContext';
 import { CardValidationPass } from './components/CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PhoneInput from 'react-phone-input-2';
@@ -27,8 +26,9 @@ const patterns = {
 };
 
 export function FormRegister() {
-  const { state, handleChange } = useFormContext();
-  const { register, getValues, formState, handleSubmit } = useForm();
+  const { register, getValues, formState, handleSubmit } = useForm({
+    mode: 'onChange',
+  });
   const { isValid, touchedFields, errors } = formState;
 
   const onSubmit = data => {
@@ -36,9 +36,11 @@ export function FormRegister() {
     AppwriteService.createUser(fullname, mail, password);
     alert(JSON.stringify(data));
   };
+  const handleOnChange = value => {
+    console.log(value);
+  };
 
   const [passwordShown, setPasswordShown] = useState(false);
-
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
@@ -90,7 +92,7 @@ export function FormRegister() {
       <PhoneInput
         placeholder="Ingrese su numero telefonico"
         {...register('phone', {})}
-        onChange={handleChange}
+        onChange={handleOnChange}
         inputStyle={{
           borderColor: '#cdcbcb',
           width: '100%',
@@ -286,7 +288,7 @@ const Button = styled.button`
   font-size: 18px;
   padding: 10px;
   border-color: transparent;
-  background-color: ${p => p.theme.backgroundVariant};
+  background-color: ${p => p.theme.primary};
   border-radius: 12px;
   color: ${p => p.theme.background};
   ::placeholder {
