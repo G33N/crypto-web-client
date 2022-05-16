@@ -18,7 +18,14 @@ export function HomePage() {
         <Text> HOME PAGE</Text>
         <Text>- Se ve sin estar logeado -</Text>
         <button onClick={() => setIsOpen(!isOpen)}>ver errores test</button>
-        <ModalAlert openModal={isOpen} closeModal={setIsOpen} />
+        <ModalAlert
+          openModal={isOpen}
+          closeModal={setIsOpen}
+          titleAlert={'soy el titulo'}
+          descriptionAlert={'Soy una descripcion mas detallada del error'}
+          labelButton={'Regresar'}
+          isVisibleButonSuport
+        />
       </Conteiner>
     </>
   );
