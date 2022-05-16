@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from './components/CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { ModalPassRecover } from './components/ModalPassRecover';
 
 interface Props {
   success?: string;
@@ -26,7 +26,6 @@ export function FormLogin() {
     mode: 'onChange',
   });
   const { isValid, touchedFields, errors } = formState;
-  const [isOpen, setIsOpen] = useState(false);
 
   const onSubmit = data => {
     alert(JSON.stringify(data));
@@ -110,10 +109,9 @@ export function FormLogin() {
         </Button>
       </Form>
 
-      <ButtonRecover onClick={() => setIsOpen(!isOpen)}>
+      <ButtonRecover to={'/passRecover'}>
         ¿Olvidaste la contraseña?
       </ButtonRecover>
-      <ModalPassRecover openModal={isOpen} closeModal={setIsOpen} />
     </>
   );
 }
@@ -225,7 +223,7 @@ const Button = styled.button`
     `}
 `;
 
-const ButtonRecover = styled.button`
+const ButtonRecover = styled(Link)`
   margin-top: 40px;
   width: 189px;
   height: 22px;
