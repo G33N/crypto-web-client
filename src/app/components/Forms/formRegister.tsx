@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AppwriteService } from '../../../services/appwrite';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from '../CardValidationPass';
@@ -25,25 +26,17 @@ const patterns = {
 };
 
 export function FormRegister() {
-  const { register, getValues, formState, handleSubmit } = useForm({
-    mode: 'onChange',
-  });
+  const { register, getValues, formState, handleSubmit } = useForm();
   const { isValid, touchedFields, errors } = formState;
-  const [userInfo, setUserInfo] = useState({
-    fullname: '',
-    mail: '',
-    password: '',
-    phone: '',
-  });
-  console.log('user info', userInfo);
-  console.log('error: ', errors);
+
   const onSubmit = data => {
+    const { fullname, mail, password } = data;
+    AppwriteService.createUser(fullname, mail, password);
     alert(JSON.stringify(data));
   };
 
   const handleOnChange = value => {
-    console.log(value);
-    setUserInfo(value);
+    console.log('handleon', value);
   };
 
   const [passwordShown, setPasswordShown] = useState(false);
