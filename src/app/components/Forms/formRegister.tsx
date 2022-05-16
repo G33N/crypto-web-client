@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { AppwriteService } from '../../../services/appwrite';
 
 interface Props {
   success?: string;
@@ -38,6 +39,8 @@ export function FormRegister() {
   console.log('user info', userInfo);
   console.log('error: ', errors);
   const onSubmit = data => {
+    const { fullname, mail, password } = data;
+    AppwriteService.createUser(fullname, mail, password);
     alert(JSON.stringify(data));
   };
 
