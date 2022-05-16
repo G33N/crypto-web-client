@@ -106,7 +106,7 @@ export function FormRegister() {
           height: '48px',
           borderRadius: '12px',
           paddingLeft: '18%',
-          color: '#9b9b9b',
+          color: '#787878',
         }}
         buttonStyle={{
           borderColor: 'cdcbcb',
@@ -244,9 +244,9 @@ const Input = styled.input`
   padding: 10px;
   border-radius: 12px;
   border-color: #cdcbcb;
-  border: inset 1px;
+  border: 1px solid #cecece;
   ::placeholder {
-    color: ${p => p.theme.text};
+    color: '#787878';
   }
 `;
 
@@ -258,7 +258,7 @@ const InputPass = styled.input`
   border: transparent;
   outline: none;
   ::placeholder {
-    color: ${p => p.theme.text};
+    color: '#787878';
   }
   &:active {
     color: ${p => p.theme.text};
@@ -269,17 +269,19 @@ const InputBoxPass = styled.div<Props>`
   height: 48px;
   display: flex;
   align-items: center;
-  border: inset 2px ${props => props.success};
+  border: solid 2px ${props => props.success};
   opacity: 0.8;
   border-radius: 12px;
   background-color: transparent;
+
   ::placeholder {
-    color: ${p => p.theme.text};
+    color: '#787878';
   }
 `;
 
 const Icon = styled.i`
   padding-right: 10px;
+  color: ${p => p.theme.successColor};
   &:hover {
     color: ${p => p.theme.text};
     opacity: 0.8;

@@ -158,7 +158,7 @@ const Input = styled.input`
   padding: 10px;
   border-radius: 9px;
   border-color: #cdcbcb;
-  border: inset 1px;
+  border: 1px solid #cecece;
   ::placeholder {
     color: ${p => p.theme.text};
   }
@@ -184,7 +184,7 @@ const InputBoxPass = styled.div<Props>`
   height: 48px;
   display: flex;
   align-items: center;
-  border: inset 2px ${props => props.success};
+  border: solid 2px ${props => props.success};
   opacity: 0.8;
   border-radius: 9px;
   padding: 6px;
@@ -196,8 +196,9 @@ const InputBoxPass = styled.div<Props>`
 
 const Icon = styled.i`
   padding-right: 10px;
+  color: ${p => p.theme.successColor};
   &:hover {
-    color: ${p => p.theme.text};
+    color: ${p => p.theme.successColor};
     opacity: 0.8;
   }
 `;
