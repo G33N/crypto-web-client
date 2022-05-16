@@ -29,7 +29,9 @@ export function FormLogin() {
 
   const onSubmit = data => {
     alert(JSON.stringify(data));
-    //navegar a dashboard
+    // auth.signin(username, () => {
+    //   navigate('/dashboard');
+    // });
   };
 
   const [passwordShown, setPasswordShown] = useState(false);

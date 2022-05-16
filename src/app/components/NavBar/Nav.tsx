@@ -10,7 +10,9 @@ export function Nav() {
       {location.pathname !== '/register' && (
         <ButtonLink path="/register" label="Register" />
       )}
-      <h3> | </h3>
+      {location.pathname !== '/register' && location.pathname !== '/login' && (
+        <h3> | </h3>
+      )}
       {location.pathname !== '/login' && (
         <ButtonLink path="/login" label="Login" />
       )}

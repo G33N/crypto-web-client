@@ -1,49 +1,11 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled from 'styled-components/macro';
 import { FormLogin } from 'app/components/Forms/formLogin';
 
-export const LoginPage = ({ useAuth }) => {
-  let navigate = useNavigate();
-
-  let auth = useAuth();
-  // function handleLogin() {
-  // //   axios
-  // //     .post('https://www.somePlace.com/auth/login', {
-  // //       userName,
-  // //       password,
-  // //     })
-  // //     .then(result => {
-  // //       if (result.status === 200) {
-  // //         setAuthTokens(result.data);
-  // //         setLoggedIn(true);
-  // //       } else {
-  // //         setIsError(true);
-  // //       }
-  // //     })
-  // //     .catch(e => {
-  // //       setIsError(true);
-  // //     });
-  // // }
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    let formData = new FormData(event.currentTarget);
-    let username = formData.get('username') as string;
-
-    auth.signin(username, () => {
-      // Send them back to the page they tried to visit when they were
-      // redirected to the login page. Use { replace: true } so we don't create
-      // another entry in the history stack for the login page.  This means that
-      // when they get to the protected page and click the back button, they
-      // won't end up back on the login page, which is also really nice for the
-      // user experience.
-      navigate('/dashboard');
-    });
-  }
-
+export const LoginPage = () => {
   return (
     <>
       <Helmet>
@@ -81,16 +43,6 @@ const Conteiner = styled.div`
     padding-left: 35%;
     padding-right: 40%;
   }
-`;
-const Text = styled.p`
-  font-size: 2rem;
-  color: ${p => p.theme.textSecondary};
-  font-weight: bold;
-  width: 100%;
-  text-align: left;
-  display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
 `;
 
 const Title = styled.div`
