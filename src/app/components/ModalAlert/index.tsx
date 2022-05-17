@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import Alert from '../ModalAlert/assets/alert.png';
 
 export const ModalAlert = ({
   openModal,
@@ -17,10 +18,11 @@ export const ModalAlert = ({
         <Overlay>
           <ConteinerModal>
             <Contenido>
-              <FontAwesomeIcon fontSize={60} icon={faTriangleExclamation} />
+              <Img src={Alert} />
               <Title>{titleAlert}</Title>
               <Description>{descriptionAlert}</Description>
               <Button onClick={() => closeModal(false)}>{labelButton}</Button>
+              <ButtonTwo type="submit">Contactar a soporte</ButtonTwo>
               {isVisibleButonSuport && (
                 <ButtonTwo type="submit">Contactar a soporte</ButtonTwo>
               )}
@@ -47,13 +49,13 @@ const Overlay = styled.div`
 `;
 
 const ConteinerModal = styled.div`
-  width: 300px;
+  width: 312px;
   min-height: 400px;
   background: #fff;
   position: relative;
-  border-radius: 5px;
+  border-radius: 12px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding: 50px;
+  padding: 16px;
 `;
 
 const Contenido = styled.div`
@@ -75,24 +77,27 @@ const Contenido = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 1rem;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 700;
   font-style: normal;
   color: ${p => p.theme.text};
-  font-weight: 700;
-  margin-right: 1rem;
-  line-height: 2rem;
+  text-align: center;
+  line-height: 28px;
   padding: 10px;
+  letter-spacing: 0.0022em;
+  margin-bottom: 16px;
 `;
 
 const Description = styled.div`
   font-size: 0.875rem;
   color: ${p => p.theme.text};
   font-weight: 400;
-  font-style: regular;
-  line-height: 1.375rem;
+  font-style: normal;
+  line-height: 20px;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  margin-bottom: 48px;
 `;
 
 const Button = styled.button`
@@ -122,8 +127,9 @@ const ButtonTwo = styled.button`
   font-size: 18px;
   padding: 10px;
   background-color: ${p => p.theme.background};
-  border-color: ${p => p.theme.primary};
+  border: 2px solid ${p => p.theme.primary};
   border-radius: 12px;
+  margin-bottom: 32px;
   color: ${p => p.theme.primary};
   ::placeholder {
     color: ${p => p.theme.textSecondary};
@@ -134,4 +140,12 @@ const ButtonTwo = styled.button`
     css`
       background: ${p => p.theme.secondary};
     `}
+`;
+
+const Img = styled.img`
+  width: 60px;
+  height: 60px;
+  top: 38px;
+  display: flex;
+  margin-bottom: 38px;
 `;

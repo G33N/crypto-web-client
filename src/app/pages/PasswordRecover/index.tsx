@@ -31,59 +31,48 @@ export const PasswordRecover = () => {
   return (
     <>
       <Conteiner>
-        <Title>Iniciar Sesión</Title>
-        <ConteinerModal>
-          <HeadModal>
-            <ButonBack to={'/login'}>
-              {''}
-              <Img src={Arrow} />
-            </ButonBack>
-            <h3>Restablecer contraseña</h3>
-          </HeadModal>
-
-          <Contenido>
-            <p>
-              Ingresá el correo electrónico con el que estás registrado en la
-              aplicación.
-            </p>
-            <Label>Correo electrónico</Label>
-            <Input
-              type="email"
-              placeholder="Ingrese su correo electrónico"
-              {...register('mail', {
-                required: messages.required,
-                pattern: {
-                  value: patterns.mail,
-                  message: messages.mail,
-                },
-                minLength: {
-                  value: 5,
-                  message: messages.mail,
-                },
-                maxLength: {
-                  value: 50,
-                  message: messages.mail,
-                },
-              })}
-              name="mail"
-            />
-            {errors.mail && touchedFields.mail && (
-              <Validator>{errors.mail.message}</Validator>
-            )}
-            <Button
-              type="submit"
-              disabled={!isValid}
-              onClick={handleSubmit(onSubmit)}
-            >
-              Continuar
-            </Button>
-          </Contenido>
-        </ConteinerModal>
-
-        <BoxNavigation>
-          <Label> ¿No tenes cuenta? </Label>
-          <Links to="/register">Crear cuenta</Links>
-        </BoxNavigation>
+        <Contenido>
+          <ButonBack to={'/login'}>
+            {''}
+            <Img src={Arrow} />
+          </ButonBack>
+          <h3>Restablecer contraseña</h3>
+          <p>
+            Ingresá el correo electrónico con el que estás registrado en la
+            aplicación.
+          </p>
+          <Label>Correo electrónico</Label>
+          <Input
+            type="email"
+            placeholder="Ingrese su correo electrónico"
+            {...register('mail', {
+              required: messages.required,
+              pattern: {
+                value: patterns.mail,
+                message: messages.mail,
+              },
+              minLength: {
+                value: 5,
+                message: messages.mail,
+              },
+              maxLength: {
+                value: 50,
+                message: messages.mail,
+              },
+            })}
+            name="mail"
+          />
+          {errors.mail && touchedFields.mail && (
+            <Validator>{errors.mail.message}</Validator>
+          )}
+          <Button
+            type="submit"
+            disabled={!isValid}
+            onClick={handleSubmit(onSubmit)}
+          >
+            Continuar
+          </Button>
+        </Contenido>
       </Conteiner>
     </>
   );
@@ -112,32 +101,22 @@ const Text = styled.p`
   font-weight: bold;
   width: 100%;
   text-align: left;
-  display: block;
   margin-bottom: 13px;
   margin-top: 20px;
 `;
 
-const Title = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 32px;
-  letter-spacing: 0.0022em;
-  color: ${p => p.theme.text};
-  margin-right: 1rem;
-`;
 const Label = styled.div`
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 0.75rem;
-  text-align: center;
+  font-size: 14px;
+  text-align: left;
+  line-height: 20px;
   color: ${p => p.theme.text};
-  margin-bottom: 13px;
-  margin-top: 50px;
+  margin-bottom: 8px;
+  margin-top: 32px;
 `;
-const BoxNavigation = styled.div`
-  text-align: center;
-`;
+
 const Links = styled(Link)`
   color: ${p => p.theme.text};
   text-decoration: none;
@@ -153,39 +132,10 @@ const Links = styled(Link)`
     opacity: 0.4;
   }
 `;
-const ConteinerModal = styled.div`
-  width: 600px;
-  min-height: 400px;
-  background: #fff;
-  position: relative;
-  border-radius: 5px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding: 20px;
-`;
-
-const HeadModal = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  h3 {
-    font-weight: 700;
-    position: absolute;
-    font-size: 24px;
-    color: ${p => p.theme.text};
-    letter-spacing: 0.0022em;
-    line-height: 32px;
-    font-style: normal;
-    left: 16.67%;
-    right: 16.68%;
-    top: 20px;
-  }
-`;
 
 const ButonBack = styled(Link)`
-  position: relative;
-  top: 20px;
-  right: 20px;
+  width: 24px;
+  height: 24px;
   border: none;
   background: none;
   cursor: pointer;
@@ -200,25 +150,31 @@ const ButonBack = styled(Link)`
 const Img = styled.img`
   width: 24px;
   height: 24px;
-  top: 38px;
-  display: flex;
 `;
 
 const Contenido = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   p {
+    width: 448px;
     font-weight: 400;
     font-style: normal;
     font-size: 14px;
     margin-top: 24px;
+    margin-bottom: 32px;
     line-height: 20px;
-    display: flex;
-    align-items: center;
     color: ${p => p.theme.text};
-    float: right;
+  }
+
+  h3 {
+    margin-top: 64px;
+    margin-left: 20px;
+    margin-bottom: 24px;
+    height: 32px;
+    font-weight: bold;
+    font-size: 24px;
+    color: ${p => p.theme.text};
+    letter-spacing: 0.0022em;
+    line-height: 32px;
+    font-style: normal;
   }
 `;
 const Validator = styled.p`
@@ -233,15 +189,15 @@ const Validator = styled.p`
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 448px;
   height: 48px;
   font-size: 0.875rem;
   color: ${p => p.theme.text};
   font-weight: normal;
   padding: 10px;
   border-radius: 12px;
-  border-color: #cdcbcb;
-  border: inset 1px;
+  padding: 14px 16px;
+  border: 1px solid #cecece;
   ::placeholder {
     color: ${p => p.theme.text};
   }
@@ -249,7 +205,7 @@ const Input = styled.input`
 
 const Button = styled.button`
   margin-top: 40px;
-  width: 100%;
+  width: 448px;
   height: 48px;
   font-size: 18px;
   padding: 10px;
