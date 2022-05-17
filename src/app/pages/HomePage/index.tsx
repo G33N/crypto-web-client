@@ -24,7 +24,7 @@ export function HomePage() {
           titleAlert={'soy el titulo'}
           descriptionAlert={'Soy una descripcion mas detallada del error'}
           labelButton={'Regresar'}
-          isVisibleButonSuport
+          isVisibleButonSuport={false}
         />
       </Conteiner>
     </>

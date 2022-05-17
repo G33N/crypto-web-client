@@ -5693,6 +5693,11 @@
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
 
+"fsevents@^2.3.2", "fsevents@~2.3.2":
+  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
+  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
+  "version" "2.3.2"
+
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
   "resolved" "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
@@ -6325,15 +6330,22 @@
   "resolved" "https://registry.npmjs.org/ignore/-/ignore-5.2.0.tgz"
   "version" "5.2.0"
 
+"immer-reducer@0.7.13":
+  "integrity" "sha512-zEnDPMaLxd+iOnTX/D06DHp6Vhw4ky28PjA4qC0ETzDzLu6SBp6asR4pkqZ28PB3rZ29BY6iRUrcqBfrbaLYeA=="
+  "resolved" "https://registry.npmjs.org/immer-reducer/-/immer-reducer-0.7.13.tgz"
+  "version" "0.7.13"
+  dependencies:
+    "immer" "^1.4.0 || ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^8.0.0 || ^9.0.0"
+
+"immer@^1.4.0 || ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^8.0.0 || ^9.0.0", "immer@>=2.0.0", "immer@>=9.0":
+  "integrity" "sha512-jm87NNBAIG4fHwouilCHIecFXp5rMGkiFrAuhVO685UnMAlOneEAnOyzPt8OnP47TC11q/E7vpzZe0WvwepFTg=="
+  "resolved" "https://registry.npmjs.org/immer/-/immer-8.0.0.tgz"
+  "version" "8.0.0"
+
 "immer@^9.0.7":
   "integrity" "sha512-ubBeqQutOSLIFCUBN03jGeOS6a3DoYlSYwYJTa+gSKEZKU5redJIqkIdZ3JVv/4RZpfcXdAWH5zCNLWPRv2WDw=="
   "resolved" "https://registry.npmjs.org/immer/-/immer-9.0.14.tgz"
   "version" "9.0.14"
-
-"immer@>=2.0.0", "immer@>=9.0", "immer@8.0.0":
-  "integrity" "sha512-jm87NNBAIG4fHwouilCHIecFXp5rMGkiFrAuhVO685UnMAlOneEAnOyzPt8OnP47TC11q/E7vpzZe0WvwepFTg=="
-  "resolved" "https://registry.npmjs.org/immer/-/immer-8.0.0.tgz"
-  "version" "8.0.0"
 
 "import-fresh@^3.0.0", "import-fresh@^3.1.0", "import-fresh@^3.2.1":
   "integrity" "sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw=="

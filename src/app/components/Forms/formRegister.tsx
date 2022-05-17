@@ -48,6 +48,7 @@ export function FormRegister() {
     <Form>
       <Label htmlFor="fullname">Nombre completo</Label>
       <Input
+        autoComplete="off"
         type="text"
         placeholder="Ingrese su nombre completo"
         {...register('fullname', {
@@ -65,6 +66,7 @@ export function FormRegister() {
 
       <Label htmlFor="mail">Correo electronico</Label>
       <Input
+        autoComplete="off"
         type="email"
         placeholder="Ingrese su correo electronico"
         {...register('mail', {
