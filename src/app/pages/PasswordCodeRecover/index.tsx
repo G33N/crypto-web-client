@@ -32,15 +32,13 @@ export const PasswordCodeRecover = () => {
   return (
     <Container>
       <Head>
-        <ButonBack to={'/login'}>
-          {''}
-          <Img src={Arrow} />
-        </ButonBack>
         <Title>Verificación de seguridad</Title>
       </Head>
       <Body>
         <TitleSecond>Confirmacion de Contacto</TitleSecond>
-        <p>Se ha enviado un código OTP a tu correo electrónico:</p>
+        <Subtitle>
+          Se ha enviado un código OTP a tu correo electrónico:
+        </Subtitle>
         <TextMail>ser*****@gmail.com</TextMail>
         <TextIn>Ingresalo en el espacio a continuación.</TextIn>
         <Label>Código de verificación de correo electrónico</Label>
@@ -74,66 +72,32 @@ export const PasswordCodeRecover = () => {
 
 const Container = styled.div`
   margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
+  text-align: center;
 
   @media (min-width: 480px) {
     padding-left: 20%;
-
     padding-right: 25%;
-  }
-  @media (min-width: 720px) {
-    padding-left: 30%;
-    padding-right: 35%;
-  }
-  @media (min-width: 1040px) {
-    padding-left: 35%;
-    padding-right: 40%;
   }
 `;
 const Head = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
-`;
-
-const Img = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const ButonBack = styled(Link)`
-  cursor: pointer;
-  transition: 0.3s easy all;
-  border-radius: 5px;
-  color: ${p => p.theme.primary};
-  &:hover {
-    background: ${p => p.theme.textSecondary};
-  }
+  text-align: left;
 `;
 
 const Title = styled.h3`
-  padding-left: 16px;
-  width: 448px;
+  width: 100%;
   height: 32px;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 24px;
   color: ${p => p.theme.text};
   letter-spacing: 0.0022em;
   line-height: 32px;
-  font-style: normal;
+  margin-bottom: 20px;
 `;
 
-const Body = styled.div``;
-
-const Label = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 0.75rem;
-  width: 448px;
+const Body = styled.div`
   text-align: left;
-  line-height: 20px;
-  color: ${p => p.theme.text};
-  margin-bottom: 8px;
-  margin-top: 32px;
 `;
 
 const TitleSecond = styled.div`
@@ -143,7 +107,15 @@ const TitleSecond = styled.div`
   line-height: 22px;
   color: ${p => p.theme.text};
   margin-bottom: 16px;
-  margin-top: 24px;
+`;
+
+const Subtitle = styled.div`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: ${p => p.theme.text};
+  margin-bottom: 16px;
 `;
 
 const TextMail = styled.div`
@@ -152,7 +124,6 @@ const TextMail = styled.div`
   font-size: 14px;
   line-height: 20px;
   color: ${p => p.theme.text};
-  margin-top: 24px;
   margin-bottom: 8px;
 `;
 const TextIn = styled.div`
@@ -161,36 +132,18 @@ const TextIn = styled.div`
   font-size: 14px;
   line-height: 20px;
   color: ${p => p.theme.text};
-  margin-top: 8px;
   margin-bottom: 24px;
 `;
-const WrapperCounter = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  color: #92c1fd;
+
+const Label = styled.div`
   font-style: normal;
   font-weight: 700;
-  font-size: 14px;
-`;
-
-const TextCounter = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 22px;
-  padding-right: 5px;
-`;
-
-const Validator = styled.p`
-  font-size: 0.6rem;
-  color: ${p => p.theme.textSecondary};
-  font-weight: bold;
+  font-size: 0.75rem;
   width: 100%;
   text-align: left;
-  display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
+  line-height: 20px;
+  color: ${p => p.theme.text};
+  margin-bottom: 8px;
 `;
 
 const Wrapper = styled.div`
@@ -209,9 +162,37 @@ const InputNum = styled.input`
   }
 `;
 
+const Validator = styled.p`
+  font-size: 0.6rem;
+  color: ${p => p.theme.textSecondary};
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+  display: block;
+  margin-bottom: 13px;
+`;
+
+const WrapperCounter = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #92c1fd;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 45px;
+`;
+
+const TextCounter = styled.div`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 22px;
+  padding-right: 5px;
+`;
+
 const Button = styled.button`
-  margin-top: 40px;
-  width: 448px;
+  width: 80%;
   height: 48px;
   font-size: 18px;
   padding: 10px;

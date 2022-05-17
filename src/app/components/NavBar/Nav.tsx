@@ -23,4 +23,8 @@ export function Nav() {
 const Wrapper = styled.nav`
   display: flex;
   margin-right: -1rem;
+
+  @media (min-width: 480px) {
+    .ButtonLink {display: none;
+  }
 `;

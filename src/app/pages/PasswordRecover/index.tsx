@@ -30,15 +30,15 @@ export const PasswordRecover = () => {
 
   return (
     <>
-      <Conteiner>
-        <Row>
+      <Container>
+        <Head>
           <ButonBack to={'/login'}>
             {''}
             <Img src={Arrow} />
           </ButonBack>
-          <Title>Restablecer contraseña</Title>
-        </Row>
-        <Contenido>
+          <Title>Verificación de seguridad</Title>
+        </Head>
+        <Body>
           Ingresá el correo electrónico con el que estás registrado en la
           aplicación.
           <Label>Correo electrónico</Label>
@@ -72,90 +72,69 @@ export const PasswordRecover = () => {
           >
             Continuar
           </Button>
-        </Contenido>
-      </Conteiner>
+        </Body>
+      </Container>
     </>
   );
 };
 
-const Conteiner = styled.div`
+const Container = styled.div`
   margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
-  padding: 4em;
-  background: white;
+  text-align: center;
+
   @media (min-width: 480px) {
     padding-left: 20%;
     padding-right: 25%;
   }
-  @media (min-width: 720px) {
-    padding-left: 30%;
-    padding-right: 35%;
-  }
-  @media (min-width: 1040px) {
-    padding-left: 35%;
-    padding-right: 40%;
-  }
+`;
+const Head = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
-const Label = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 0.75rem;
-  font-size: 14px;
-  text-align: left;
-  line-height: 20px;
-  color: ${p => p.theme.text};
-  margin-bottom: 8px;
-  margin-top: 32px;
+const Img = styled.img`
+  width: 24px;
+  height: 24px;
 `;
 
 const ButonBack = styled(Link)`
   cursor: pointer;
   transition: 0.3s easy all;
   border-radius: 5px;
-  padding-bottom: 10px;
   color: ${p => p.theme.primary};
   &:hover {
     background: ${p => p.theme.textSecondary};
   }
 `;
 
-const Img = styled.img``;
-
-const Row = styled.div`
-  display: flex;
-  margin-right: -1rem;
-  padding: 5px;
-  align-items: left;
-`;
-const Title = styled.div`
+const Title = styled.h3`
+  padding-left: 16px;
+  width: 448px;
+  height: 32px;
   font-weight: bold;
   font-size: 24px;
-  padding-right: 10px;
   color: ${p => p.theme.text};
   letter-spacing: 0.0022em;
   line-height: 32px;
+  font-style: normal;
+  margin-bottom: 24px;
 `;
 
-const Contenido = styled.p`
-  width: 448px;
-  font-weight: 400;
+const Body = styled.div`
+  text-align: left;
+`;
+
+const Label = styled.div`
   font-style: normal;
-  font-size: 14px;
-  margin-top: 24px;
-  margin-bottom: 32px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  width: 448px;
+  text-align: left;
   line-height: 20px;
   color: ${p => p.theme.text};
-`;
-
-const Validator = styled.p`
-  font-size: 0.6rem;
-  color: ${p => p.theme.textSecondary};
-  font-weight: bold;
-  width: 100%;
-  text-align: left;
-  display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
+  margin-bottom: 8px;
+  margin-top: 32px;
 `;
 
 const Input = styled.input`
@@ -173,9 +152,82 @@ const Input = styled.input`
   }
 `;
 
+const TitleSecond = styled.div`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: ${p => p.theme.text};
+  margin-bottom: 16px;
+  margin-top: 24px;
+`;
+
+const TextMail = styled.div`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: ${p => p.theme.text};
+  margin-top: 24px;
+  margin-bottom: 8px;
+`;
+const TextIn = styled.div`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: ${p => p.theme.text};
+  margin-top: 8px;
+  margin-bottom: 24px;
+`;
+const WrapperCounter = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #92c1fd;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+`;
+
+const TextCounter = styled.div`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 22px;
+  padding-right: 5px;
+`;
+
+const Validator = styled.p`
+  font-size: 0.6rem;
+  color: ${p => p.theme.textSecondary};
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+  display: block;
+  margin-bottom: 13px;
+  margin-top: 20px;
+`;
+
+const Wrapper = styled.div`
+  padding: 20px;
+`;
+
+const InputNum = styled.input`
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  margin-left: 14px;
+  border: 1px solid #cecece;
+  border-radius: 8.64px;
+  ::placeholder {
+    color: ${p => p.theme.text};
+  }
+`;
+
 const Button = styled.button`
   margin-top: 40px;
-  width: 448px;
+  width: 80%;
   height: 48px;
   font-size: 18px;
   padding: 10px;

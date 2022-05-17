@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
-import { CardValidationPass } from './components/CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,8 +11,8 @@ interface Props {
 
 const messages = {
   required: 'Este campo es obligatorio',
-  mail: 'Debes introducir una dirección de correo electronico correcta',
-  passConfirm: 'Las contrasenas deben ser iguales',
+  mail: 'Formato de correo inválido',
+  password: 'Las contrasenas no tiene un formato correcto',
 };
 
 const patterns = {
@@ -67,9 +66,7 @@ export function FormLogin() {
           <Validator>{errors.mail.message}</Validator>
         )}
         <Label htmlFor="passsword">Contraseña </Label>
-        <InputBoxPass
-          success={errors.password && touchedFields.password ? 'red' : 'green'}
-        >
+        <InputBoxPass>
           <InputPass
             placeholder="Ingrese su contraseña"
             type={passwordShown ? 'text' : 'password'}
@@ -95,11 +92,7 @@ export function FormLogin() {
         </InputBoxPass>
 
         {errors.password && touchedFields.password && errors.password.type && (
-          <>
-            <BoxPass>
-              <CardValidationPass type={errors.password.type} />
-            </BoxPass>
-          </>
+          <Validator>{errors.password.message}</Validator>
         )}
 
         <Button
@@ -142,7 +135,7 @@ const Label = styled.label`
 `;
 const Validator = styled.p`
   font-size: 0.6rem;
-  color: ${p => p.theme.textSecondary};
+  color: ${p => p.theme.errorColor};
   font-weight: bold;
   width: 100%;
   text-align: left;
@@ -182,11 +175,11 @@ const InputPass = styled.input`
   }
 `;
 
-const InputBoxPass = styled.div<Props>`
+const InputBoxPass = styled.div`
   height: 48px;
   display: flex;
   align-items: center;
-  border: solid 2px ${props => props.success};
+  border: solid 1px #cdcbcb;
   opacity: 0.8;
   border-radius: 9px;
   padding: 6px;
@@ -198,9 +191,9 @@ const InputBoxPass = styled.div<Props>`
 
 const Icon = styled.i`
   padding-right: 10px;
-  color: ${p => p.theme.successColor};
+  color: ${p => p.theme.text};
   &:hover {
-    color: ${p => p.theme.successColor};
+    color: ${p => p.theme.text};
     opacity: 0.8;
   }
 `;
