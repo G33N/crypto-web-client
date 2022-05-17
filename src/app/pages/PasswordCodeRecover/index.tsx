@@ -4,6 +4,7 @@ import { StyleConstants } from 'styles/StyleConstants';
 import styled, { css } from 'styled-components/macro';
 import Arrow from './assets/Back.png';
 import { useForm } from 'react-hook-form';
+import CountDownTimer from './CountDownTimer';
 
 const messages = {
   required: 'Este campo es obligatorio',
@@ -29,62 +30,54 @@ export const PasswordCodeRecover = () => {
   const { isValid, touchedFields, errors } = formState;
 
   return (
-    <>
-      <Conteiner>
-        <Contenido>
-          <ButonBack to={'/login'}>
-            {''}
-            <Img src={Arrow} />
-          </ButonBack>
-          <h3>Verificación de seguridad</h3>
-          <p>
-            Ingresá el correo electrónico con el que estás registrado en la
-            aplicación.
-          </p>
+    <Container>
+      <Head>
+        <ButonBack to={'/login'}>
+          {''}
+          <Img src={Arrow} />
+        </ButonBack>
+        <Title>Verificación de seguridad</Title>
+      </Head>
+      <Body>
+        <TitleSecond>Confirmacion de Contacto</TitleSecond>
+        <p>Se ha enviado un código OTP a tu correo electrónico:</p>
+        <TextMail>ser*****@gmail.com</TextMail>
+        <TextIn>Ingresalo en el espacio a continuación.</TextIn>
+        <Label>Código de verificación de correo electrónico</Label>
+        <Wrapper>
+          <InputNum />
+          <InputNum />
+          <InputNum />
+          <InputNum />
+          <InputNum />
+        </Wrapper>
 
-          <Label>Correo electrónico</Label>
-          <Input
-            type="email"
-            placeholder="Ingrese su correo electrónico"
-            {...register('mail', {
-              required: messages.required,
-              pattern: {
-                value: patterns.mail,
-                message: messages.mail,
-              },
-              minLength: {
-                value: 5,
-                message: messages.mail,
-              },
-              maxLength: {
-                value: 50,
-                message: messages.mail,
-              },
-            })}
-            name="mail"
-          />
-          {errors.mail && touchedFields.mail && (
-            <Validator>{errors.mail.message}</Validator>
-          )}
-          <Button
-            type="submit"
-            disabled={!isValid}
-            onClick={handleSubmit(onSubmit)}
-          >
-            Continuar
-          </Button>
-        </Contenido>
-      </Conteiner>
-    </>
+        {errors.mail && touchedFields.mail && (
+          <Validator>{errors.mail.message}</Validator>
+        )}
+
+        <WrapperCounter>
+          <TextCounter>Reenviar código: </TextCounter>{' '}
+          <CountDownTimer minutes={3} seconds={0} />
+        </WrapperCounter>
+        <Button
+          type="submit"
+          disabled={!isValid}
+          onClick={handleSubmit(onSubmit)}
+        >
+          Verificar
+        </Button>
+      </Body>
+    </Container>
   );
 };
 
-const Conteiner = styled.div`
+const Container = styled.div`
   margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
-  padding: 4em;
-  background: white;
+
   @media (min-width: 480px) {
     padding-left: 20%;
+
     padding-right: 25%;
   }
   @media (min-width: 720px) {
@@ -96,49 +89,18 @@ const Conteiner = styled.div`
     padding-right: 40%;
   }
 `;
-const Text = styled.p`
-  font-size: 2rem;
-  color: ${p => p.theme.textSecondary};
-  font-weight: bold;
-  width: 100%;
-  text-align: left;
-  margin-bottom: 13px;
-  margin-top: 20px;
+const Head = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
-const Label = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 0.75rem;
-  font-size: 14px;
-  text-align: left;
-  line-height: 20px;
-  color: ${p => p.theme.text};
-  margin-bottom: 8px;
-  margin-top: 32px;
-`;
-
-const Links = styled(Link)`
-  color: ${p => p.theme.text};
-  text-decoration: none;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 0.875rem;
-  line-height: 1.375rem;
-  &:hover {
-    text-decoration: underline;
-    opacity: 0.8;
-  }
-  &:active {
-    opacity: 0.4;
-  }
+const Img = styled.img`
+  width: 24px;
+  height: 24px;
 `;
 
 const ButonBack = styled(Link)`
-  width: 24px;
-  height: 24px;
-  border: none;
-  background: none;
   cursor: pointer;
   transition: 0.3s easy all;
   border-radius: 5px;
@@ -148,37 +110,78 @@ const ButonBack = styled(Link)`
   }
 `;
 
-const Img = styled.img`
-  width: 24px;
-  height: 24px;
+const Title = styled.h3`
+  padding-left: 16px;
+  width: 448px;
+  height: 32px;
+  font-weight: bold;
+  font-size: 24px;
+  color: ${p => p.theme.text};
+  letter-spacing: 0.0022em;
+  line-height: 32px;
+  font-style: normal;
 `;
 
-const Contenido = styled.div`
-  p {
-    width: 448px;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 14px;
-    margin-top: 24px;
-    margin-bottom: 32px;
-    line-height: 20px;
-    color: ${p => p.theme.text};
-  }
+const Body = styled.div``;
 
-  h3 {
-    margin-top: 64px;
-    margin-left: 20px;
-    margin-bottom: 24px;
-    width: 448px;
-    height: 32px;
-    font-weight: bold;
-    font-size: 24px;
-    color: ${p => p.theme.text};
-    letter-spacing: 0.0022em;
-    line-height: 32px;
-    font-style: normal;
-  }
+const Label = styled.div`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.75rem;
+  width: 448px;
+  text-align: left;
+  line-height: 20px;
+  color: ${p => p.theme.text};
+  margin-bottom: 8px;
+  margin-top: 32px;
 `;
+
+const TitleSecond = styled.div`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: ${p => p.theme.text};
+  margin-bottom: 16px;
+  margin-top: 24px;
+`;
+
+const TextMail = styled.div`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: ${p => p.theme.text};
+  margin-top: 24px;
+  margin-bottom: 8px;
+`;
+const TextIn = styled.div`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: ${p => p.theme.text};
+  margin-top: 8px;
+  margin-bottom: 24px;
+`;
+const WrapperCounter = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #92c1fd;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+`;
+
+const TextCounter = styled.div`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 22px;
+  padding-right: 5px;
+`;
+
 const Validator = styled.p`
   font-size: 0.6rem;
   color: ${p => p.theme.textSecondary};
@@ -190,16 +193,17 @@ const Validator = styled.p`
   margin-top: 20px;
 `;
 
-const Input = styled.input`
-  width: 448px;
-  height: 48px;
-  font-size: 0.875rem;
-  color: ${p => p.theme.text};
-  font-weight: normal;
-  padding: 10px;
-  border-radius: 12px;
-  padding: 14px 16px;
+const Wrapper = styled.div`
+  padding: 20px;
+`;
+
+const InputNum = styled.input`
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  margin-left: 14px;
   border: 1px solid #cecece;
+  border-radius: 8.64px;
   ::placeholder {
     color: ${p => p.theme.text};
   }

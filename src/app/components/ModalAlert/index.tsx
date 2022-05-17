@@ -1,7 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import Alert from '../ModalAlert/assets/alert.png';
 
 export const ModalAlert = ({
@@ -22,7 +20,7 @@ export const ModalAlert = ({
               <Title>{titleAlert}</Title>
               <Description>{descriptionAlert}</Description>
               <Button onClick={() => closeModal(false)}>{labelButton}</Button>
-              <ButtonTwo type="submit">Contactar a soporte</ButtonTwo>
+
               {isVisibleButonSuport && (
                 <ButtonTwo type="submit">Contactar a soporte</ButtonTwo>
               )}
@@ -83,7 +81,6 @@ const Title = styled.div`
   color: ${p => p.theme.text};
   text-align: center;
   line-height: 28px;
-  padding: 10px;
   letter-spacing: 0.0022em;
   margin-bottom: 16px;
 `;
@@ -101,14 +98,13 @@ const Description = styled.div`
 `;
 
 const Button = styled.button`
-  margin-top: 40px;
   width: 100%;
-  height: 48px;
+  height: 56px;
   font-size: 18px;
-  padding: 10px;
   background-color: ${p => p.theme.primary};
   border-color: transparent;
   border-radius: 12px;
+  margin-bottom: 16px;
   color: ${p => p.theme.background};
   ::placeholder {
     color: ${p => p.theme.textSecondary};
@@ -121,15 +117,13 @@ const Button = styled.button`
     `}
 `;
 const ButtonTwo = styled.button`
-  margin-top: 20px;
   width: 100%;
-  height: 48px;
+  height: 56px;
   font-size: 18px;
-  padding: 10px;
   background-color: ${p => p.theme.background};
   border: 2px solid ${p => p.theme.primary};
   border-radius: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
   color: ${p => p.theme.primary};
   ::placeholder {
     color: ${p => p.theme.textSecondary};
@@ -145,7 +139,7 @@ const ButtonTwo = styled.button`
 const Img = styled.img`
   width: 60px;
   height: 60px;
-  top: 38px;
   display: flex;
   margin-bottom: 38px;
+  margin-top: 38px;
 `;

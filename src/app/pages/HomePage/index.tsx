@@ -26,7 +26,7 @@ export function HomePage() {
             'Por seguridad, hemos bloqueado tu usuario temporalmente debido a que ingresaste de forma errónea tu contraseña muchas veces. Podés intentarlo de nuevo más tarde.'
           }
           labelButton={'Regresar'}
-          isVisibleButonSuport={false}
+          isVisibleButonSuport
         />
       </Conteiner>
     </>

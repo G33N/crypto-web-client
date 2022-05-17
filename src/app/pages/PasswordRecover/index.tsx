@@ -31,16 +31,16 @@ export const PasswordRecover = () => {
   return (
     <>
       <Conteiner>
-        <Contenido>
+        <Row>
           <ButonBack to={'/login'}>
             {''}
             <Img src={Arrow} />
           </ButonBack>
-          <h3>Restablecer contraseña</h3>
-          <p>
-            Ingresá el correo electrónico con el que estás registrado en la
-            aplicación.
-          </p>
+          <Title>Restablecer contraseña</Title>
+        </Row>
+        <Contenido>
+          Ingresá el correo electrónico con el que estás registrado en la
+          aplicación.
           <Label>Correo electrónico</Label>
           <Input
             type="email"
@@ -95,15 +95,6 @@ const Conteiner = styled.div`
     padding-right: 40%;
   }
 `;
-const Text = styled.p`
-  font-size: 2rem;
-  color: ${p => p.theme.textSecondary};
-  font-weight: bold;
-  width: 100%;
-  text-align: left;
-  margin-bottom: 13px;
-  margin-top: 20px;
-`;
 
 const Label = styled.div`
   font-style: normal;
@@ -117,66 +108,45 @@ const Label = styled.div`
   margin-top: 32px;
 `;
 
-const Links = styled(Link)`
-  color: ${p => p.theme.text};
-  text-decoration: none;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 0.875rem;
-  line-height: 1.375rem;
-  &:hover {
-    text-decoration: underline;
-    opacity: 0.8;
-  }
-  &:active {
-    opacity: 0.4;
-  }
-`;
-
 const ButonBack = styled(Link)`
-  width: 24px;
-  height: 24px;
-  border: none;
-  background: none;
   cursor: pointer;
   transition: 0.3s easy all;
   border-radius: 5px;
+  padding-bottom: 10px;
   color: ${p => p.theme.primary};
   &:hover {
     background: ${p => p.theme.textSecondary};
   }
 `;
 
-const Img = styled.img`
-  width: 24px;
-  height: 24px;
+const Img = styled.img``;
+
+const Row = styled.div`
+  display: flex;
+  margin-right: -1rem;
+  padding: 5px;
+  align-items: left;
+`;
+const Title = styled.div`
+  font-weight: bold;
+  font-size: 24px;
+  padding-right: 10px;
+  color: ${p => p.theme.text};
+  letter-spacing: 0.0022em;
+  line-height: 32px;
 `;
 
-const Contenido = styled.div`
-  p {
-    width: 448px;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 14px;
-    margin-top: 24px;
-    margin-bottom: 32px;
-    line-height: 20px;
-    color: ${p => p.theme.text};
-  }
-
-  h3 {
-    margin-top: 64px;
-    margin-left: 20px;
-    margin-bottom: 24px;
-    height: 32px;
-    font-weight: bold;
-    font-size: 24px;
-    color: ${p => p.theme.text};
-    letter-spacing: 0.0022em;
-    line-height: 32px;
-    font-style: normal;
-  }
+const Contenido = styled.p`
+  width: 448px;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  margin-top: 24px;
+  margin-bottom: 32px;
+  line-height: 20px;
+  color: ${p => p.theme.text};
 `;
+
 const Validator = styled.p`
   font-size: 0.6rem;
   color: ${p => p.theme.textSecondary};
