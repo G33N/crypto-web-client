@@ -30,9 +30,9 @@ export function PasswordChange() {
   const [isOpen, setIsOpen] = useState(false);
 
   const onSubmit = (data, e) => {
-    const { fullname, mail, password } = data;
+    const { passConfirm } = data;
     e.preventDefault();
-    AppwriteService.createUser(fullname, mail, password)
+    AppwriteService.updatePasssword(passConfirm)
       .then(res => {
         console.log('Success', res);
         navigate('/login');
@@ -53,9 +53,9 @@ export function PasswordChange() {
       <ModalAlert
         openModal={isOpen}
         closeModal={setIsOpen}
-        titleAlert={'Usuario y/o contraseña incorrectos'}
+        titleAlert={'Hubo un error'}
         descriptionAlert={
-          'El usuario y contraseña que ingresaste no coinciden.  Revisá los datos e intentá de nuevo.'
+          'Ocurrió un error en el proceso de recuperación de contraseña. Por favor intentá de nuevo.'
         }
         labelButton={'Regresar'}
         isVisibleButonSuport={false}

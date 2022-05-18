@@ -77,6 +77,15 @@ export const AppwriteService = {
       return false;
     }
   },
+  async updatePasssword(password): Promise<boolean> {
+    try {
+      await sdk.account.updatePassword(password);
+      return true;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  },
 
   async buyPack(packId: string): Promise<boolean> {
     try {

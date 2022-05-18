@@ -33,7 +33,7 @@ export const PasswordRecover = () => {
     AppwriteService.recoverPasssword(mail, url)
       .then(res => {
         console.log('Success', res);
-        navigate('/dashboard');
+        navigate('/home');
       })
       .catch(error => {
         console.log('Error', error);
