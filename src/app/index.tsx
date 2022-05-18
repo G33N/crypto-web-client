@@ -17,6 +17,7 @@ import { LoginPage } from './pages/LoginPage/Loadable';
 import { RegisterPage } from './pages/RegisterPage/Loadable';
 import { PasswordCodeRecover } from './pages/PasswordCodeRecover';
 import { PasswordRecover } from './pages/PasswordRecover';
+import { PasswordChange } from './pages/PasswordChange';
 import { useTranslation } from 'react-i18next';
 
 import { fakeAuthProvider } from './auth';
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/passCodeRecover" element={<PasswordCodeRecover />} />
           <Route path="/passRecover" element={<PasswordRecover />} />
+          <Route path="/passChange" element={<PasswordChange />} />
           <Route
             path="/dashboard"
             element={
