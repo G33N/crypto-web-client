@@ -12,9 +12,9 @@ interface Props {
 }
 
 const messages = {
-  required: 'Este campo es obligatorio',
-  mail: 'Formato de correo inválido',
-  password: 'Las contrasenas no tiene un formato correcto',
+  required: '* Este campo es obligatorio',
+  mail: '* El formato introducido no es el correcto',
+  password: '* Las contrasenas no tiene un formato correcto',
 };
 
 const patterns = {
