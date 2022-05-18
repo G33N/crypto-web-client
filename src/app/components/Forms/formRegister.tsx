@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppwriteService } from '../../../services/appwrite';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
@@ -7,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { ModalAlert } from '../../components/ModalAlert';
 
 interface Props {
   success?: string;
@@ -26,16 +28,28 @@ const patterns = {
 };
 
 export function FormRegister() {
+  const navigate = useNavigate();
+
   const { register, getValues, formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
   const { isValid, touchedFields, errors } = formState;
+  const [isOpen, setIsOpen] = useState(false);
 
-  const onSubmit = data => {
+  const onSubmit = (data, e) => {
     const { fullname, mail, password } = data;
-    AppwriteService.createUser(fullname, mail, password);
-    alert(JSON.stringify(data));
+    e.preventDefault();
+    AppwriteService.createUser(fullname, mail, password)
+      .then(res => {
+        console.log('Success', res);
+        navigate('/login');
+      })
+      .catch(error => {
+        console.log('Error', error);
+        setIsOpen(true);
+      });
   };
+
   const handleOnChange = value => {
     console.log(value);
   };
@@ -44,156 +58,186 @@ export function FormRegister() {
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
+
   return (
-    <Form>
-      <Label htmlFor="fullname">Nombre completo</Label>
-      <Input
-        autoComplete="off"
-        type="text"
-        placeholder="Ingrese su nombre completo"
-        {...register('fullname', {
-          required: messages.required,
-          pattern: {
-            value: patterns.fullname,
-            message: messages.fullname,
-          },
-        })}
-        name="fullname"
+    <>
+      <ModalAlert
+        openModal={isOpen}
+        closeModal={setIsOpen}
+        titleAlert={'Usuario y/o contraseña incorrectos'}
+        descriptionAlert={
+          'El usuario y contraseña que ingresaste no coinciden.  Revisá los datos e intentá de nuevo.'
+        }
+        labelButton={'Regresar'}
+        isVisibleButonSuport={false}
       />
-      {errors.fullname && touchedFields.fullname && (
-        <Validator>{errors.fullname.message}</Validator>
-      )}
-
-      <Label htmlFor="mail">Correo electronico</Label>
-      <Input
-        autoComplete="off"
-        type="email"
-        placeholder="Ingrese su correo electronico"
-        {...register('mail', {
-          required: messages.required,
-          pattern: {
-            value: patterns.mail,
-            message: messages.mail,
-          },
-          minLength: {
-            value: 5,
-            message: messages.mail,
-          },
-          maxLength: {
-            value: 50,
-            message: messages.mail,
-          },
-        })}
-        name="mail"
-      />
-      {errors.mail && touchedFields.mail && (
-        <Validator>{errors.mail.message}</Validator>
-      )}
-
-      <Label htmlFor="phone">Numero telefonico</Label>
-      <PhoneInput
-        placeholder="Ingrese su numero telefonico"
-        {...register('phone', {})}
-        onChange={handleOnChange}
-        inputStyle={{
-          borderColor: '#cdcbcb',
-          width: '100%',
-          height: '48px',
-          borderRadius: '12px',
-          paddingLeft: '18%',
-          color: '#787878',
-        }}
-        buttonStyle={{
-          borderColor: 'cdcbcb',
-          height: '48px',
-          width: '15%',
-          background: 'white',
-          borderStartStartRadius: '12px',
-          borderEndStartRadius: '12px',
-        }}
-        value="phone"
-      />
-      {errors.phone && touchedFields.phone && (
-        <Validator>{errors.phone.message}</Validator>
-      )}
-
-      <Label htmlFor="passsword">Contraseña nueva</Label>
-
-      <InputBoxPass
-        success={errors.password && touchedFields.password ? 'red' : 'green'}
-      >
-        <InputPass
-          placeholder="Ingrese su contraseña"
-          type={passwordShown ? 'text' : 'password'}
-          {...register('password', {
+      <Form>
+        <Label htmlFor="fullname">Nombre completo</Label>
+        <Input
+          autoComplete="off"
+          type="text"
+          placeholder="Ingrese su nombre completo"
+          {...register('fullname', {
             required: messages.required,
-            validate: {
-              oneUppercase: value => value && /^(?=.*?[A-Z])/.test(value),
-              oneLowercase: value => value && /^(?=.*?[a-z])/.test(value),
-              oneNumber: value => value && /^(?=.*?[0-9])/.test(value),
-              minLength: value => value && /.{8,}/.test(value),
+            pattern: {
+              value: patterns.fullname,
+              message: messages.fullname,
             },
           })}
-          name="password"
+          name="fullname"
         />
+        {errors.fullname && touchedFields.fullname && (
+          <Validator>{errors.fullname.message}</Validator>
+        )}
 
-        <Icon onClick={togglePasswordVisiblity}>
-          {passwordShown ? (
-            <FontAwesomeIcon icon={faEye} />
-          ) : (
-            <FontAwesomeIcon icon={faEyeSlash} />
-          )}
-        </Icon>
-      </InputBoxPass>
-
-      {errors.password && touchedFields.password && errors.password.type && (
-        <>
-          <BoxPass>
-            <CardValidationPass type={errors.password.type} />
-          </BoxPass>
-        </>
-      )}
-
-      <Label htmlFor="passwordConfirm">Confirmación de nueva contraseña</Label>
-
-      <InputBoxPass
-        success={
-          errors.passConfirm && touchedFields.passConfirm ? 'red' : 'green'
-        }
-      >
-        <InputPass
-          placeholder="Ingrese nuevamente su contraseña"
-          type={passwordShown ? 'text' : 'password'}
-          {...register('passConfirm', {
+        <Label htmlFor="mail">Correo electronico</Label>
+        <Input
+          autoComplete="off"
+          type="email"
+          placeholder="Ingrese su correo electronico"
+          {...register('mail', {
             required: messages.required,
-            validate: value =>
-              value === getValues().password || messageConfirmPass,
+            pattern: {
+              value: patterns.mail,
+              message: messages.mail,
+            },
+            minLength: {
+              value: 5,
+              message: messages.mail,
+            },
+            maxLength: {
+              value: 50,
+              message: messages.mail,
+            },
           })}
-          name="passConfirm"
+          name="mail"
         />
+        {errors.mail && touchedFields.mail && (
+          <Validator>{errors.mail.message}</Validator>
+        )}
 
-        <Icon onClick={togglePasswordVisiblity}>
-          {passwordShown ? (
-            <FontAwesomeIcon icon={faEye} />
-          ) : (
-            <FontAwesomeIcon icon={faEyeSlash} />
-          )}
-        </Icon>
-      </InputBoxPass>
+        <Label htmlFor="phone">Numero telefonico</Label>
+        <PhoneInput
+          placeholder="Ingrese su numero telefonico"
+          {...register('phone', {})}
+          onChange={handleOnChange}
+          inputStyle={{
+            borderColor: '#cdcbcb',
+            width: '100%',
+            height: '48px',
+            borderRadius: '12px',
+            paddingLeft: '18%',
+            color: '#787878',
+          }}
+          buttonStyle={{
+            borderColor: 'cdcbcb',
+            height: '48px',
+            width: '15%',
+            background: 'white',
+            borderStartStartRadius: '12px',
+            borderEndStartRadius: '12px',
+          }}
+          value="phone"
+        />
+        {errors.phone && touchedFields.phone && (
+          <Validator>{errors.phone.message}</Validator>
+        )}
 
-      {errors.passConfirm && touchedFields.passConfirm && (
-        <Validator>{errors.passConfirm.message}</Validator>
-      )}
+        <Label htmlFor="passsword">Contraseña nueva</Label>
 
-      <Button
-        type="submit"
-        disabled={!isValid}
-        onClick={handleSubmit(onSubmit)}
-      >
-        Crear cuenta
-      </Button>
-      <div></div>
-    </Form>
+        <InputBoxPass
+          success={
+            errors.password && touchedFields.password && errors.password.type
+              ? 'red'
+              : 'green'
+          }
+        >
+          <InputPass
+            placeholder="Ingrese su contraseña"
+            type={passwordShown ? 'text' : 'password'}
+            {...register('password', {
+              required: messages.required,
+              validate: {
+                oneUppercase: value => value && /^(?=.*?[A-Z])/.test(value),
+                oneLowercase: value => value && /^(?=.*?[a-z])/.test(value),
+                oneNumber: value => value && /^(?=.*?[0-9])/.test(value),
+                minLength: value => value && /.{8,}/.test(value),
+              },
+            })}
+            name="password"
+          />
+
+          <IconPass
+            onClick={togglePasswordVisiblity}
+            success={
+              errors.password && touchedFields.password && errors.password.type
+                ? 'red'
+                : 'green'
+            }
+          >
+            {passwordShown ? (
+              <FontAwesomeIcon icon={faEye} />
+            ) : (
+              <FontAwesomeIcon icon={faEyeSlash} />
+            )}
+          </IconPass>
+        </InputBoxPass>
+
+        {errors.password && touchedFields.password && errors.password.type && (
+          <>
+            <BoxPass>
+              <CardValidationPass type={errors.password.type} />
+            </BoxPass>
+          </>
+        )}
+
+        <Label htmlFor="passwordConfirm">
+          Confirmación de nueva contraseña
+        </Label>
+
+        <InputBoxPass
+          success={
+            !errors.passConfirm && touchedFields.passConfirm ? 'green' : 'red'
+          }
+        >
+          <InputPass
+            placeholder="Ingrese nuevamente su contraseña"
+            type={passwordShown ? 'text' : 'password'}
+            {...register('passConfirm', {
+              required: messages.required,
+              validate: value =>
+                value === getValues().password || messageConfirmPass,
+            })}
+            name="passConfirm"
+          />
+
+          <Icon
+            onClick={togglePasswordVisiblity}
+            success={
+              !errors.passConfirm && touchedFields.passConfirm ? 'green' : 'red'
+            }
+          >
+            {passwordShown ? (
+              <FontAwesomeIcon icon={faEye} />
+            ) : (
+              <FontAwesomeIcon icon={faEyeSlash} />
+            )}
+          </Icon>
+        </InputBoxPass>
+
+        {errors.passConfirm && touchedFields.passConfirm && (
+          <Validator>{errors.passConfirm.message}</Validator>
+        )}
+
+        <Button
+          type="submit"
+          disabled={!isValid}
+          onClick={handleSubmit(onSubmit)}
+        >
+          Crear cuenta
+        </Button>
+      </Form>
+    </>
   );
 }
 
@@ -273,10 +317,17 @@ const InputBoxPass = styled.div<Props>`
     color: '#787878';
   }
 `;
-
-const Icon = styled.i`
+const IconPass = styled.i<Props>`
   padding-right: 10px;
-  color: ${p => p.theme.successColor};
+  color: ${props => props.success};
+  &:hover {
+    color: ${p => p.theme.text};
+    opacity: 0.8;
+  }
+`;
+const Icon = styled.i<Props>`
+  padding-right: 10px;
+  color: ${props => props.success};
   &:hover {
     color: ${p => p.theme.text};
     opacity: 0.8;

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { AppwriteService } from '../../../services/appwrite';
+import { Link, useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { ModalAlert } from '../../components/ModalAlert';
 
 interface Props {
   success?: string;
@@ -21,16 +23,25 @@ const patterns = {
 };
 
 export function FormLogin() {
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
   const { register, formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
   const { isValid, touchedFields, errors } = formState;
 
-  const onSubmit = data => {
-    alert(JSON.stringify(data));
-    // auth.signin(username, () => {
-    //   navigate('/dashboard');
-    // });
+  const onSubmit = (data, e) => {
+    const { mail, password } = data;
+    e.preventDefault();
+    AppwriteService.loginUser(mail, password)
+      .then(res => {
+        console.log('Success', res);
+        navigate('/dashboard');
+      })
+      .catch(error => {
+        console.log('Error', error);
+        setIsOpen(true);
+      });
   };
 
   const [passwordShown, setPasswordShown] = useState(false);
@@ -40,6 +51,16 @@ export function FormLogin() {
 
   return (
     <>
+      <ModalAlert
+        openModal={isOpen}
+        closeModal={setIsOpen}
+        titleAlert={'Usuario y/o contraseña incorrectos'}
+        descriptionAlert={
+          'El usuario y contraseña que ingresaste no coinciden.  Revisá los datos e intentá de nuevo.'
+        }
+        labelButton={'Regresar'}
+        isVisibleButonSuport={false}
+      />
       <Form>
         <Label htmlFor="mail">Correo electrónico</Label>
         <Input
@@ -66,7 +87,13 @@ export function FormLogin() {
           <Validator>{errors.mail.message}</Validator>
         )}
         <Label htmlFor="passsword">Contraseña </Label>
-        <InputBoxPass>
+        <InputBoxPass
+          success={
+            errors.password && touchedFields.password && errors.password.type
+              ? 'red'
+              : 'green'
+          }
+        >
           <InputPass
             placeholder="Ingrese su contraseña"
             type={passwordShown ? 'text' : 'password'}
@@ -82,7 +109,12 @@ export function FormLogin() {
             name="password"
           />
 
-          <Icon onClick={togglePasswordVisiblity}>
+          <Icon
+            onClick={togglePasswordVisiblity}
+            success={
+              errors.password && touchedFields.password ? 'red' : 'green'
+            }
+          >
             {passwordShown ? (
               <FontAwesomeIcon icon={faEye} />
             ) : (
@@ -100,7 +132,7 @@ export function FormLogin() {
           disabled={!isValid}
           onClick={handleSubmit(onSubmit)}
         >
-          Crear cuenta
+          Iniciar sesión
         </Button>
       </Form>
 
@@ -115,11 +147,6 @@ export function FormLogin() {
 
 const Form = styled.form`
   text-align: center;
-`;
-
-const BoxPass = styled.div`
-  text-align: left;
-  margin-top: 10px;
 `;
 
 const Label = styled.label`
@@ -175,11 +202,11 @@ const InputPass = styled.input`
   }
 `;
 
-const InputBoxPass = styled.div`
+const InputBoxPass = styled.div<Props>`
   height: 48px;
   display: flex;
   align-items: center;
-  border: solid 1px #cdcbcb;
+  border: solid 1px ${props => props.success};
   opacity: 0.8;
   border-radius: 9px;
   padding: 6px;
@@ -189,9 +216,9 @@ const InputBoxPass = styled.div`
   }
 `;
 
-const Icon = styled.i`
+const Icon = styled.i<Props>`
   padding-right: 10px;
-  color: ${p => p.theme.text};
+  color: ${props => props.success};
   &:hover {
     color: ${p => p.theme.text};
     opacity: 0.8;

@@ -152,52 +152,6 @@ const Input = styled.input`
   }
 `;
 
-const TitleSecond = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 22px;
-  color: ${p => p.theme.text};
-  margin-bottom: 16px;
-  margin-top: 24px;
-`;
-
-const TextMail = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 20px;
-  color: ${p => p.theme.text};
-  margin-top: 24px;
-  margin-bottom: 8px;
-`;
-const TextIn = styled.div`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  color: ${p => p.theme.text};
-  margin-top: 8px;
-  margin-bottom: 24px;
-`;
-const WrapperCounter = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  color: #92c1fd;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-`;
-
-const TextCounter = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 22px;
-  padding-right: 5px;
-`;
-
 const Validator = styled.p`
   font-size: 0.6rem;
   color: ${p => p.theme.textSecondary};
@@ -207,22 +161,6 @@ const Validator = styled.p`
   display: block;
   margin-bottom: 13px;
   margin-top: 20px;
-`;
-
-const Wrapper = styled.div`
-  padding: 20px;
-`;
-
-const InputNum = styled.input`
-  box-sizing: border-box;
-  width: 32px;
-  height: 32px;
-  margin-left: 14px;
-  border: 1px solid #cecece;
-  border-radius: 8.64px;
-  ::placeholder {
-    color: ${p => p.theme.text};
-  }
 `;
 
 const Button = styled.button`

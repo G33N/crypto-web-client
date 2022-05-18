@@ -39,11 +39,12 @@ const Overlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 4, 0, 0.5);
   padding: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 `;
 
 const ConteinerModal = styled.div`

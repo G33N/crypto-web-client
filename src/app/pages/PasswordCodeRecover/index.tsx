@@ -1,24 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled, { css } from 'styled-components/macro';
-import Arrow from './assets/Back.png';
 import { useForm } from 'react-hook-form';
 import CountDownTimer from './CountDownTimer';
 
-const messages = {
-  required: 'Este campo es obligatorio',
-  mail: 'Debes introducir una dirección de correo electronico correcta',
-  passConfirm: 'Las contrasenas deben ser iguales',
-};
-
-const patterns = {
-  fullname: /^[^-\s][a-zA-Z_\s-]+$/,
-  mail: /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-};
-
 export const PasswordCodeRecover = () => {
-  const { register, formState, handleSubmit } = useForm({
+  const { formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
 

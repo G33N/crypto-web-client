@@ -10,7 +10,6 @@ export function HomePage() {
   return (
     <>
       <Helmet>
-        <title>HomePage</title>
         <meta name="description" content="Omni wallet application homepage" />
       </Helmet>
 
