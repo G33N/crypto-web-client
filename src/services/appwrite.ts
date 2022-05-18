@@ -68,6 +68,16 @@ export const AppwriteService = {
     }
   },
 
+  async recoverPasssword(mail, url): Promise<boolean> {
+    try {
+      await sdk.account.createRecovery(mail, url);
+      return true;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  },
+
   async buyPack(packId: string): Promise<boolean> {
     try {
       const executionResponse: any = await sdk.functions.createExecution(

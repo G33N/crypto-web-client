@@ -1,9 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppwriteService } from '../../../services/appwrite';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled, { css } from 'styled-components/macro';
 import Arrow from './assets/Back.png';
 import { useForm } from 'react-hook-form';
+import { ModalAlert } from '../../components/ModalAlert';
 
 const messages = {
   required: 'Este campo es obligatorio',
@@ -17,19 +19,40 @@ const patterns = {
 };
 
 export const PasswordRecover = () => {
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
   const { register, formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
-
-  const onSubmit = data => {
-    alert(JSON.stringify(data));
-    //navegar a dashboard
-  };
-
   const { isValid, touchedFields, errors } = formState;
+
+  const onSubmit = (data, e) => {
+    const { mail } = data;
+    const url = 'http://localhost:3000/passCodeRecover';
+    e.preventDefault();
+    AppwriteService.recoverPasssword(mail, url)
+      .then(res => {
+        console.log('Success', res);
+        navigate('/dashboard');
+      })
+      .catch(error => {
+        console.log('Error', error);
+        setIsOpen(true);
+      });
+  };
 
   return (
     <>
+      <ModalAlert
+        openModal={isOpen}
+        closeModal={setIsOpen}
+        titleAlert={'Usuario y/o contraseña incorrectos'}
+        descriptionAlert={
+          'El usuario y contraseña que ingresaste no coinciden.  Revisá los datos e intentá de nuevo.'
+        }
+        labelButton={'Regresar'}
+        isVisibleButonSuport={false}
+      />
       <Container>
         <Head>
           <ButonBack to={'/login'}>
