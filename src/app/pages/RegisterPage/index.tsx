@@ -10,7 +10,6 @@ export function RegisterPage() {
   return (
     <>
       <Helmet>
-        <title>RegisterPage</title>
         <meta name="description" content="Omni wallet application Loginpage" />
       </Helmet>
 

@@ -76,38 +76,40 @@ export const PasswordRecover = () => {
             aplicación.
           </Description>
           <Label>Correo electrónico</Label>
-          <Input
-            type="email"
-            placeholder="Ingrese su correo electrónico"
-            {...register('mail', {
-              required: messages.required,
-              pattern: {
-                value: patterns.mail,
-                message: messages.mail,
-              },
-              minLength: {
-                value: 5,
-                message: messages.mail,
-              },
-              maxLength: {
-                value: 50,
-                message: messages.mail,
-              },
-            })}
-            name="mail"
-            successMail={errors.mail ? 'red' : 'green'}
-          />
-
+          <BoxInput
+            successMail={errors.mail && touchedFields.mail ? 'red' : 'green'}
+          >
+            <Input
+              type="email"
+              placeholder="Ingrese su correo electrónico"
+              {...register('mail', {
+                required: messages.required,
+                pattern: {
+                  value: patterns.mail,
+                  message: messages.mail,
+                },
+                minLength: {
+                  value: 5,
+                  message: messages.mail,
+                },
+                maxLength: {
+                  value: 50,
+                  message: messages.mail,
+                },
+              })}
+              name="mail"
+            />
+            <Icon onClick={toggleIconVisiblity} hidden={!touchedFields.mail}>
+              {errors.mail && touchedFields.mail ? (
+                <Img src={Alert} />
+              ) : (
+                <Img src={Check} />
+              )}
+            </Icon>
+          </BoxInput>
           {errors.mail && touchedFields.mail && (
             <Validator>{errors.mail.message} </Validator>
           )}
-
-          <Icon
-            onClick={toggleIconVisiblity}
-            successMail={errors.mail && touchedFields.mail ? 'green' : 'red'}
-          >
-            {!isValid ? <Img src={Alert} /> : <Img src={Check} />}
-          </Icon>
 
           <Button
             type="submit"
@@ -124,16 +126,19 @@ export const PasswordRecover = () => {
 
 const Container = styled.div`
   margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
-  text-align: center;
-  padding: 10px;
-  padding: 14px 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 4em;
 
   @media (min-width: 480px) {
-    padding-left: 30%;
+    padding-left: 20%;
     padding-right: 25%;
+  }
+  @media (min-width: 720px) {
+    padding-left: 30%;
+    padding-right: 35%;
+  }
+  @media (min-width: 1040px) {
+    padding-left: 35%;
+    padding-right: 40%;
   }
 `;
 const Head = styled.div`
@@ -153,6 +158,7 @@ const ButonBack = styled(Link)`
   transition: 0.3s easy all;
   border-radius: 5px;
   color: ${p => p.theme.primary};
+  margin-right: 10px;
   &:hover {
     background: ${p => p.theme.textSecondary};
   }
@@ -193,17 +199,32 @@ const Label = styled.div`
   margin-top: 32px;
 `;
 
-const Input = styled.input<Props>`
-  width: 448px;
+const BoxInput = styled.div<Props>`
   height: 48px;
-  font-size: 0.875rem;
-  color: ${p => p.theme.text};
-  font-weight: normal;
+  width: 448px;
+  display: flex;
+  align-items: center;
+  border: solid 2px ${props => props.successMail};
+  opacity: 0.8;
   border-radius: 12px;
-  padding: 12px 14px;
-  border: 1px solid ${props => props.successMail};
+  background-color: transparent;
+
   ::placeholder {
-    color: ${p => p.theme.textlight};
+    color: '#787878';
+  }
+`;
+const Input = styled.input`
+  width: 100%;
+  font-size: 0.875rem;
+  font-weight: normal;
+  padding-left: 10px;
+  border: transparent;
+  outline: none;
+  ::placeholder {
+    color: '#787878';
+  }
+  &:active {
+    color: ${p => p.theme.text};
   }
 `;
 
