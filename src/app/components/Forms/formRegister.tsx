@@ -9,18 +9,20 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { ModalAlert } from '../../components/ModalAlert';
+import { Theme, themes } from '../../../styles/theme/themes';
 
 interface Props {
-  success?: string;
+  successPass?: string;
+  successMail?: string;
 }
 
 const messages = {
-  required: 'Este campo es obligatorio',
-  fullname: 'El formato introducido no es el correcto',
-  mail: 'Debes introducir una dirección de correo electronico correcta',
-  passConfirm: 'Las contrasenas deben ser iguales',
+  required: '* Este campo es obligatorio',
+  fullname: '* El formato introducido no es el correcto',
+  mail: '* Debes introducir una dirección de correo electronico correcta',
+  passConfirm: '* Las contrasenas deben ser iguales',
 };
-const messageConfirmPass = 'Las contrasenas deben ser iguales';
+const messageConfirmPass = '* Las contrasenas deben ser iguales';
 
 const patterns = {
   fullname: /^[^-\s][a-zA-Z_\s-]+$/,
@@ -122,6 +124,7 @@ export function FormRegister() {
             },
           })}
           name="mail"
+          successPass={errors.mail && touchedFields.mail ? 'red' : 'green'}
         />
         {errors.mail && touchedFields.mail && (
           <Validator>{errors.mail.message}</Validator>
@@ -133,15 +136,15 @@ export function FormRegister() {
           {...register('phone', {})}
           onChange={handleOnChange}
           inputStyle={{
-            borderColor: '#cdcbcb',
+            borderColor: `${themes.light.text}`,
             width: '100%',
             height: '48px',
             borderRadius: '12px',
             paddingLeft: '18%',
-            color: '#787878',
+            color: `${themes.light.text}`,
           }}
           buttonStyle={{
-            borderColor: 'cdcbcb',
+            borderColor: `${themes.light.text}`,
             height: '48px',
             width: '15%',
             background: 'white',
@@ -157,7 +160,7 @@ export function FormRegister() {
         <Label htmlFor="passsword">Contraseña nueva</Label>
 
         <InputBoxPass
-          success={
+          successPass={
             errors.password && touchedFields.password && errors.password.type
               ? 'red'
               : 'green'
@@ -180,7 +183,7 @@ export function FormRegister() {
 
           <IconPass
             onClick={togglePasswordVisiblity}
-            success={
+            successPass={
               errors.password && touchedFields.password && errors.password.type
                 ? 'red'
                 : 'green'
@@ -207,7 +210,7 @@ export function FormRegister() {
         </Label>
 
         <InputBoxPass
-          success={
+          successPass={
             !errors.passConfirm && touchedFields.passConfirm ? 'green' : 'red'
           }
         >
@@ -224,7 +227,7 @@ export function FormRegister() {
 
           <Icon
             onClick={togglePasswordVisiblity}
-            success={
+            successPass={
               !errors.passConfirm && touchedFields.passConfirm ? 'green' : 'red'
             }
           >
@@ -276,7 +279,7 @@ const Label = styled.label`
 `;
 const Validator = styled.p`
   font-size: 0.6rem;
-  color: ${p => p.theme.textSecondary};
+  color: ${p => p.theme.errorColor};
   font-weight: bold;
   width: 100%;
   text-align: left;
@@ -285,7 +288,9 @@ const Validator = styled.p`
   margin-top: 20px;
 `;
 
-const Input = styled.input`
+//revistar comportamiento en Active (azul)
+
+const Input = styled.input<Props>`
   width: 100%;
   height: 48px;
   font-size: 0.875rem;
@@ -293,10 +298,13 @@ const Input = styled.input`
   font-weight: normal;
   padding: 10px;
   border-radius: 12px;
-  border-color: #cdcbcb;
-  border: 1px solid #cecece;
+  border: 1px solid ${props => props.successMail};
   ::placeholder {
     color: '#787878';
+  }
+
+  &:active {
+    border-color: ${p => p.theme.primary};
   }
 `;
 
@@ -319,7 +327,7 @@ const InputBoxPass = styled.div<Props>`
   height: 48px;
   display: flex;
   align-items: center;
-  border: solid 2px ${props => props.success};
+  border: solid 2px ${props => props.successPass};
   opacity: 0.8;
   border-radius: 12px;
   background-color: transparent;
@@ -330,7 +338,7 @@ const InputBoxPass = styled.div<Props>`
 `;
 const IconPass = styled.i<Props>`
   padding-right: 10px;
-  color: ${props => props.success};
+  color: ${props => props.successPass};
   &:hover {
     color: ${p => p.theme.text};
     opacity: 0.8;
@@ -338,7 +346,7 @@ const IconPass = styled.i<Props>`
 `;
 const Icon = styled.i<Props>`
   padding-right: 10px;
-  color: ${props => props.success};
+  color: ${props => props.successPass};
   &:hover {
     color: ${p => p.theme.text};
     opacity: 0.8;

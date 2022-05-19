@@ -6,11 +6,15 @@ import styled, { css } from 'styled-components/macro';
 import Arrow from './assets/Back.png';
 import { useForm } from 'react-hook-form';
 import { ModalAlert } from '../../components/ModalAlert';
+import Alert from './assets/alert.png';
+import Check from './assets/Check.png';
 
+interface Props {
+  successMail?: string;
+}
 const messages = {
-  required: 'Este campo es obligatorio',
-  mail: 'Debes introducir una dirección de correo electronico correcta',
-  passConfirm: 'Las contrasenas deben ser iguales',
+  required: '* Este campo es obligatorio',
+  mail: '* Debes introducir una dirección de correo electronico correcta',
 };
 
 const patterns = {
@@ -41,6 +45,11 @@ export const PasswordRecover = () => {
       });
   };
 
+  const [iconShown, setIconShown] = useState(false);
+  const toggleIconVisiblity = () => {
+    setIconShown(iconShown ? false : true);
+  };
+
   return (
     <>
       <ModalAlert
@@ -59,11 +68,13 @@ export const PasswordRecover = () => {
             {''}
             <Img src={Arrow} />
           </ButonBack>
-          <Title>Verificación de seguridad</Title>
+          <Title>Reestablecer contraseña</Title>
         </Head>
         <Body>
-          Ingresá el correo electrónico con el que estás registrado en la
-          aplicación.
+          <Description>
+            Ingresá el correo electrónico con el que estás registrado en la
+            aplicación.
+          </Description>
           <Label>Correo electrónico</Label>
           <Input
             type="email"
@@ -84,10 +95,20 @@ export const PasswordRecover = () => {
               },
             })}
             name="mail"
+            successMail={errors.mail ? 'red' : 'green'}
           />
+
           {errors.mail && touchedFields.mail && (
-            <Validator>{errors.mail.message}</Validator>
+            <Validator>{errors.mail.message} </Validator>
           )}
+
+          <Icon
+            onClick={toggleIconVisiblity}
+            successMail={errors.mail && touchedFields.mail ? 'green' : 'red'}
+          >
+            {!isValid ? <Img src={Alert} /> : <Img src={Check} />}
+          </Icon>
+
           <Button
             type="submit"
             disabled={!isValid}
@@ -104,9 +125,14 @@ export const PasswordRecover = () => {
 const Container = styled.div`
   margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
   text-align: center;
+  padding: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   @media (min-width: 480px) {
-    padding-left: 20%;
+    padding-left: 30%;
     padding-right: 25%;
   }
 `;
@@ -114,6 +140,7 @@ const Head = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 24px;
 `;
 
 const Img = styled.img`
@@ -132,27 +159,33 @@ const ButonBack = styled(Link)`
 `;
 
 const Title = styled.h3`
-  padding-left: 16px;
-  width: 448px;
-  height: 32px;
   font-weight: bold;
   font-size: 24px;
   color: ${p => p.theme.text};
   letter-spacing: 0.0022em;
   line-height: 32px;
-  font-style: normal;
   margin-bottom: 24px;
 `;
 
 const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+`;
+
+const Description = styled.p`
   text-align: left;
+  width: 90%;
+  font-weight: 400;
+  line-height: 20px;
+  font-size: 14px;
 `;
 
 const Label = styled.div`
   font-style: normal;
   font-weight: 700;
-  font-size: 0.75rem;
-  width: 448px;
+  font-size: 0.875rem;
+  width: 80%;
   text-align: left;
   line-height: 20px;
   color: ${p => p.theme.text};
@@ -160,18 +193,17 @@ const Label = styled.div`
   margin-top: 32px;
 `;
 
-const Input = styled.input`
+const Input = styled.input<Props>`
   width: 448px;
   height: 48px;
   font-size: 0.875rem;
   color: ${p => p.theme.text};
   font-weight: normal;
-  padding: 10px;
   border-radius: 12px;
-  padding: 14px 16px;
-  border: 1px solid #cecece;
+  padding: 12px 14px;
+  border: 1px solid ${props => props.successMail};
   ::placeholder {
-    color: ${p => p.theme.text};
+    color: ${p => p.theme.textlight};
   }
 `;
 
@@ -186,9 +218,18 @@ const Validator = styled.p`
   margin-top: 20px;
 `;
 
+const Icon = styled.i<Props>`
+  padding-right: 10px;
+  color: ${props => props.successMail};
+  &:hover {
+    color: ${p => p.theme.text};
+    opacity: 0.8;
+  }
+`;
+
 const Button = styled.button`
   margin-top: 40px;
-  width: 80%;
+  width: 448px;
   height: 48px;
   font-size: 18px;
   padding: 10px;
