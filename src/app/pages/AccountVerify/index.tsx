@@ -18,8 +18,8 @@ const patterns = {
   mail: /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
 };
 
-export const PasswordRecover = () => {
-  const navigate = useNavigate();
+export const AccountVerify = () => {
+  // const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const { register, formState, handleSubmit } = useForm({
     mode: 'onChange',
@@ -28,12 +28,11 @@ export const PasswordRecover = () => {
 
   const onSubmit = (data, e) => {
     const { mail } = data;
-    const url = 'http://localhost:3000/passCodeRecover';
     e.preventDefault();
-    AppwriteService.recoverPasssword(mail, url)
+    AppwriteService.verificationUser(mail)
       .then(res => {
-        console.log('Success', res);
-        navigate('/home');
+        console.log('SuccessVerify', res);
+        //navigate('/login');
       })
       .catch(error => {
         console.log('Error', error);
@@ -46,9 +45,9 @@ export const PasswordRecover = () => {
       <ModalAlert
         openModal={isOpen}
         closeModal={setIsOpen}
-        titleAlert={'Usuario y/o contraseña incorrectos'}
+        titleAlert={'Hubo un error'}
         descriptionAlert={
-          'El usuario y contraseña que ingresaste no coinciden.  Revisá los datos e intentá de nuevo.'
+          'Ocurrió un error al cargar la información. Por favor intentá de nuevo.'
         }
         labelButton={'Regresar'}
         isVisibleButonSuport={false}
@@ -56,14 +55,16 @@ export const PasswordRecover = () => {
       <Container>
         <Head>
           <ButonBack to={'/login'}>
-            {''}
             <Img src={Arrow} />
           </ButonBack>
           <Title>Verificación de seguridad</Title>
         </Head>
         <Body>
-          Ingresá el correo electrónico con el que estás registrado en la
-          aplicación.
+          <p>
+            Ingresá el correo electrónico con el que estás registrado en la
+            aplicación.
+          </p>
+          <p>Te enviaremos un mail para validar tu cuenta.</p>
           <Label>Correo electrónico</Label>
           <Input
             type="email"

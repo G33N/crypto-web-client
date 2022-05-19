@@ -4,30 +4,21 @@ import { StyleConstants } from 'styles/StyleConstants';
 import styled from 'styled-components/macro';
 import { Helmet } from 'react-helmet-async';
 
-export const Dashboard = ({ useAuth }) => {
-  let auth = useAuth();
+export const Dashboard = () => {
   let navigate = useNavigate();
 
   return (
     <>
       <Helmet>
-        <title>LoginPage</title>
         <meta name="description" content="Omni wallet application Loginpage" />
       </Helmet>
 
       <Conteiner>
-        <span>RUTA SOLO CON LOGIN</span>
+        <p>RUTA SOLO CON LOGIN</p>
         <Text>SOY EL DASHBOARD</Text>
         <div></div>{' '}
         <p>
-          BIENVENIDO {auth.user}!{' '}
-          <Button
-            onClick={() => {
-              auth.signout(() => navigate('/'));
-            }}
-          >
-            CERRAR SESION
-          </Button>
+          BIENVENIDO ! <Button>CERRAR SESION</Button>
         </p>
       </Conteiner>
     </>

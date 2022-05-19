@@ -38,14 +38,25 @@ export function FormRegister() {
 
   const onSubmit = (data, e) => {
     const { fullname, mail, password } = data;
+    const urlVerify = 'http://localhost:3000/accountVerify';
+
     e.preventDefault();
     AppwriteService.createUser(fullname, mail, password)
       .then(res => {
-        console.log('Success', res);
+        console.log('SuccessRegister', res);
+
+        //------verifica cuenta mail-------//
+        AppwriteService.verificationUser(urlVerify)
+          .then(res => {
+            console.log('SuccessVerify', res);
+          })
+          .catch(error => {
+            console.log('ErrorVerify', error);
+          });
         navigate('/login');
       })
       .catch(error => {
-        console.log('Error', error);
+        console.log('ErrorRegister', error);
         setIsOpen(true);
       });
   };

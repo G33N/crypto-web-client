@@ -18,9 +18,8 @@ import { RegisterPage } from './pages/RegisterPage/Loadable';
 import { PasswordCodeRecover } from './pages/PasswordCodeRecover';
 import { PasswordRecover } from './pages/PasswordRecover';
 import { PasswordChange } from './pages/PasswordChange';
+import { AccountVerify } from './pages/AccountVerify';
 import { useTranslation } from 'react-i18next';
-
-import { fakeAuthProvider } from './auth';
 
 export default function App() {
   const { i18n } = useTranslation();
@@ -33,101 +32,90 @@ export default function App() {
       >
         <meta name="description" content="Omni Crypto Wallet" />
       </Helmet>
-      <AuthProvider>
-        <NavBar />
-        <AuthStatus />
 
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/passCodeRecover" element={<PasswordCodeRecover />} />
-          <Route path="/passRecover" element={<PasswordRecover />} />
-          <Route path="/passChange" element={<PasswordChange />} />
-          <Route
-            path="/dashboard"
-            element={
-              <RequireAuth>
-                <Dashboard useAuth={useAuth} />
-              </RequireAuth>
-            }
-          />
-          <Route path="*" element={<Navigate replace to="/" />} />
-        </Routes>
-      </AuthProvider>
+      <NavBar />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/passCodeRecover" element={<PasswordCodeRecover />} />
+        <Route path="/passRecover" element={<PasswordRecover />} />
+        <Route path="/passChange" element={<PasswordChange />} />
+        <Route path="/accountVerify" element={<AccountVerify />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="*" element={<Navigate replace to="/" />} />
+      </Routes>
+
       <GlobalStyle />
     </BrowserRouter>
   );
 }
 
-interface AuthContextType {
-  user: any;
-  signin: (user: string, callback: VoidFunction) => void;
-  signout: (callback: VoidFunction) => void;
-}
+// interface AuthContextType {
+//   user: any;
+//   signin: (user: string, callback: VoidFunction) => void;
+//   signout: (callback: VoidFunction) => void;
+// }
 
-let AuthContext = React.createContext<AuthContextType>(null!);
+// let AuthContext = React.createContext<AuthContextType>(null!);
 
-function AuthProvider({ children }: { children: React.ReactNode }) {
-  let [user, setUser] = React.useState<any>(null);
+// function AuthProvider({ children }: { children: React.ReactNode }) {
+//   let [user, setUser] = React.useState<any>(null);
 
-  let signin = (newUser: string, callback: VoidFunction) => {
-    return fakeAuthProvider.signin(() => {
-      setUser(newUser);
-      callback();
-    });
-  };
+//   let signin = (newUser: string, callback: VoidFunction) => {
+//     return fakeAuthProvider.signin(() => {
+//       setUser(newUser);
+//       callback();
+//     });
+//   };
 
-  let signout = (callback: VoidFunction) => {
-    return fakeAuthProvider.signout(() => {
-      setUser(null);
-      callback();
-    });
-  };
+//   let signout = (callback: VoidFunction) => {
+//     return fakeAuthProvider.signout(() => {
+//       setUser(null);
+//       callback();
+//     });
+//   };
 
-  let value = { user, signin, signout };
+//   let value = { user, signin, signout };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
+//   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+// }
 
-function useAuth() {
-  return React.useContext(AuthContext);
-}
+// function useAuth() {
+//   return React.useContext(AuthContext);
+// }
 
-function AuthStatus() {
-  let auth = useAuth();
-  let navigate = useNavigate();
+// function AuthStatus() {
+//   let auth = useAuth();
+//   let navigate = useNavigate();
 
-  if (!auth.user) {
-    return <p> Loggeate para poder ver la pantalla sigueiente</p>;
-  }
+//   if (!auth.user) {
+//     return <p> Loggeate para poder ver la pantalla sigueiente</p>;
+//   }
 
-  return (
-    <p>
-      Welcome {auth.user}!{' '}
-      <button
-        onClick={() => {
-          auth.signout(() => navigate('/'));
-        }}
-      >
-        Sign out
-      </button>
-    </p>
-  );
-}
+//   return (
+//     <p>
+//       Welcome {auth.user}!{' '}
+//       <button
+//         onClick={() => {
+//           auth.signout(() => navigate('/'));
+//         }}
+//       >
+//         Sign out
+//       </button>
+//     </p>
+//   );
+// }
 
-function RequireAuth({ children }: { children: JSX.Element }) {
-  let auth = useAuth();
-  let location = useLocation();
+// function RequireAuth({ children }: { children: JSX.Element }) {
+//   let auth = useAuth();
+//   let location = useLocation();
 
-  if (!auth.user) {
-    // Redirect them to the /login page, but save the current location they were
-    // trying to go to when they were redirected. This allows us to send them
-    // along to that page after they login, which is a nicer user experience
-    // than dropping them off on the home page.
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
+//   if (!auth.user) {
+//     return <Navigate to="/login" state={{ from: location }} replace />;
+//   }
 
-  return children;
-}
+//   return children;
+// }

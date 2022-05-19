@@ -9,7 +9,6 @@ export const LoginPage = () => {
   return (
     <>
       <Helmet>
-        <title>LoginPage</title>
         <meta name="description" content="Omni wallet application Loginpage" />
       </Helmet>
 
