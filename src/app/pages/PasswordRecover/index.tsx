@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components/macro';
 import Arrow from './assets/Back.png';
 import { useForm } from 'react-hook-form';
 import { ModalAlert } from '../../components/ModalAlert';
+import { ModalSuccess } from '../../components/ModalSuccess';
 import Alert from './assets/alert.png';
 import Check from './assets/Check.png';
 
@@ -24,6 +25,7 @@ const patterns = {
 
 export const PasswordRecover = () => {
   const navigate = useNavigate();
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const { register, formState, handleSubmit } = useForm({
     mode: 'onChange',
@@ -37,11 +39,11 @@ export const PasswordRecover = () => {
     AppwriteService.recoverPasssword(mail, url)
       .then(res => {
         console.log('Success', res);
-        navigate('/home');
+        setIsOpen(true);
       })
       .catch(error => {
         console.log('Error', error);
-        setIsOpen(true);
+        setIsOpenAlert(true);
       });
   };
 
@@ -60,6 +62,16 @@ export const PasswordRecover = () => {
           'El usuario y contraseña que ingresaste no coinciden.  Revisá los datos e intentá de nuevo.'
         }
         labelButton={'Regresar'}
+        isVisibleButonSuport={false}
+      />
+      <ModalSuccess
+        openModal={isOpen}
+        closeModal={setIsOpen}
+        title={'PERFECTO'}
+        description={
+          'Enviamos un mail a su correo electronico para que pueda recuperar su contrasena'
+        }
+        labelButton={'Continuar'}
         isVisibleButonSuport={false}
       />
       <Container>

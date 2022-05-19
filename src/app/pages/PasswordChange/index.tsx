@@ -9,7 +9,7 @@ import { CardValidationPass } from '../../components/Forms/components/CardValida
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { ModalAlert } from '../../components/ModalAlert';
-
+import { ModalSuccess } from '../../components/ModalSuccess';
 interface Props {
   success?: string;
 }
@@ -27,6 +27,7 @@ export function PasswordChange() {
     mode: 'onChange',
   });
   const { isValid, touchedFields, errors } = formState;
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const onSubmit = (data, e) => {
@@ -51,13 +52,21 @@ export function PasswordChange() {
   return (
     <>
       <ModalAlert
-        openModal={isOpen}
-        closeModal={setIsOpen}
+        openModal={isOpenAlert}
+        closeModal={setIsOpenAlert}
         titleAlert={'Hubo un error'}
         descriptionAlert={
           'Ocurrió un error en el proceso de recuperación de contraseña. Por favor intentá de nuevo.'
         }
         labelButton={'Regresar'}
+        isVisibleButonSuport={false}
+      />
+      <ModalSuccess
+        openModal={isOpen}
+        closeModal={setIsOpen}
+        title={'contrasena modificada corretamente'}
+        description={''}
+        labelButton={'Continuar'}
         isVisibleButonSuport={false}
       />
       <Container>
