@@ -12,6 +12,8 @@ import Check from './assets/Check.png';
 
 interface Props {
   successMail?: string;
+  failMail?: string;
+  Color?: any;
 }
 const messages = {
   required: '* Este campo es obligatorio',
@@ -27,10 +29,13 @@ export const PasswordRecover = () => {
   const navigate = useNavigate();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { register, formState, handleSubmit } = useForm({
-    mode: 'onChange',
-  });
-  const { isValid, touchedFields, errors } = formState;
+  const { register, formState, handleSubmit } = useForm({ mode: 'onChange' });
+  const { isValid, touchedFields, errors, isValidating, isDirty } = formState;
+
+  console.log('Error', errors);
+  console.log('TouchedFields', touchedFields);
+  console.log('isValid', isValid);
+  console.log('isValidating', isValidating);
 
   const onSubmit = (data, e) => {
     const { mail } = data;
@@ -55,8 +60,8 @@ export const PasswordRecover = () => {
   return (
     <>
       <ModalAlert
-        openModal={isOpen}
-        closeModal={setIsOpen}
+        openModal={isOpenAlert}
+        closeModal={setIsOpenAlert}
         titleAlert={'Usuario y/o contraseña incorrectos'}
         descriptionAlert={
           'El usuario y contraseña que ingresaste no coinciden.  Revisá los datos e intentá de nuevo.'
@@ -87,49 +92,65 @@ export const PasswordRecover = () => {
             Ingresá el correo electrónico con el que estás registrado en la
             aplicación.
           </Description>
-          <Label>Correo electrónico</Label>
-          <BoxInput
-            successMail={errors.mail && touchedFields.mail ? 'red' : 'green'}
-          >
-            <Input
-              type="email"
-              placeholder="Ingrese su correo electrónico"
-              {...register('mail', {
-                required: messages.required,
-                pattern: {
-                  value: patterns.mail,
-                  message: messages.mail,
-                },
-                minLength: {
-                  value: 5,
-                  message: messages.mail,
-                },
-                maxLength: {
-                  value: 50,
-                  message: messages.mail,
-                },
-              })}
-              name="mail"
-            />
-            <Icon onClick={toggleIconVisiblity} hidden={!touchedFields.mail}>
-              {errors.mail && touchedFields.mail ? (
-                <Img src={Alert} />
-              ) : (
-                <Img src={Check} />
-              )}
-            </Icon>
-          </BoxInput>
-          {errors.mail && touchedFields.mail && (
-            <Validator>{errors.mail.message} </Validator>
-          )}
+          <Form>
+            <Label
+              Color={
+                (isValidating && 'black') ||
+                (touchedFields.mail && !errors.mail && 'green') ||
+                (touchedFields.mail && errors.mail && 'red')
+              }
+            >
+              Correo electrónico
+            </Label>
 
-          <Button
-            type="submit"
-            disabled={!isValid}
-            onClick={handleSubmit(onSubmit)}
-          >
-            Continuar
-          </Button>
+            <BoxInput
+              Color={
+                (!isDirty && 'black') ||
+                (isDirty && !touchedFields.mail && 'blue') ||
+                (touchedFields.mail && !errors.mail && 'green') ||
+                'red'
+              }
+            >
+              <Input
+                type="email"
+                placeholder="Ingrese su correo electrónico"
+                {...register('mail', {
+                  required: messages.required,
+                  pattern: {
+                    value: patterns.mail,
+                    message: messages.mail,
+                  },
+                  minLength: {
+                    value: 5,
+                    message: messages.mail,
+                  },
+                  maxLength: {
+                    value: 50,
+                    message: messages.mail,
+                  },
+                })}
+                name="mail"
+              />
+              <Icon onClick={toggleIconVisiblity} hidden={!touchedFields.mail}>
+                {errors.mail && touchedFields.mail ? (
+                  <Img src={Alert} />
+                ) : (
+                  <Img src={Check} />
+                )}
+              </Icon>
+            </BoxInput>
+            {errors.mail && touchedFields.mail && (
+              <Validator>{errors.mail.message} </Validator>
+            )}
+
+            <Button
+              type="submit"
+              disabled={!isValid}
+              onClick={handleSubmit(onSubmit)}
+            >
+              Continuar
+            </Button>
+          </Form>
         </Body>
       </Container>
     </>
@@ -153,11 +174,11 @@ const Container = styled.div`
     padding-right: 40%;
   }
 `;
+
 const Head = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 24px;
 `;
 
 const Img = styled.img`
@@ -177,7 +198,7 @@ const ButonBack = styled(Link)`
 `;
 
 const Title = styled.h3`
-  font-weight: bold;
+  font-weight: 700;
   font-size: 24px;
   color: ${p => p.theme.text};
   letter-spacing: 0.0022em;
@@ -191,6 +212,8 @@ const Body = styled.div`
   align-items: left;
 `;
 
+const Form = styled.form``;
+
 const Description = styled.p`
   text-align: left;
   width: 90%;
@@ -199,24 +222,24 @@ const Description = styled.p`
   font-size: 14px;
 `;
 
-const Label = styled.div`
+const Label = styled.div<Props>`
   font-style: normal;
   font-weight: 700;
   font-size: 0.875rem;
   width: 80%;
   text-align: left;
+  color: ${props => props.Color};
   line-height: 20px;
-  color: ${p => p.theme.text};
   margin-bottom: 8px;
   margin-top: 32px;
 `;
 
 const BoxInput = styled.div<Props>`
   height: 48px;
-  width: 448px;
+  width: 100%;
   display: flex;
   align-items: center;
-  border: solid 2px ${props => props.successMail};
+  border: solid 2px ${props => props.Color};
   opacity: 0.8;
   border-radius: 12px;
   background-color: transparent;
@@ -262,7 +285,7 @@ const Icon = styled.i<Props>`
 
 const Button = styled.button`
   margin-top: 40px;
-  width: 448px;
+  width: 100%;
   height: 48px;
   font-size: 18px;
   padding: 10px;
