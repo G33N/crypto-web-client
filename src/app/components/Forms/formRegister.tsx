@@ -46,16 +46,19 @@ export function FormRegister() {
     AppwriteService.createUser(fullname, mail, password)
       .then(res => {
         console.log('SuccessRegister', res);
-
-        //------verifica cuenta mail-------//
-        AppwriteService.verificationUser(urlVerify)
-          .then(res => {
-            console.log('SuccessVerify', res);
-          })
-          .catch(error => {
-            console.log('ErrorVerify', error);
-          });
-        navigate('/login');
+        if (res) {
+          //------verifica cuenta mail-------//
+          AppwriteService.verificationUser(urlVerify)
+            .then(res => {
+              console.log('SuccessVerify', res);
+            })
+            .catch(error => {
+              console.log('ErrorVerify', error);
+            });
+          navigate('/login');
+        } else {
+          return alert('Ya existe un usuario con este mail');
+        }
       })
       .catch(error => {
         console.log('ErrorRegister', error);

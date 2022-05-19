@@ -34,8 +34,12 @@ export const AppwriteService = {
     await sdk.account.createAnonymousSession();
   },
 
-  async loginUser(mail, password): Promise<void> {
+  async loginUser(mail: string, password: string): Promise<void> {
     await sdk.account.createSession(mail, password);
+  },
+
+  async getToken(): Promise<void> {
+    await sdk.account.createJWT();
   },
 
   async getAuthStatus(): Promise<boolean> {
@@ -48,17 +52,21 @@ export const AppwriteService = {
     }
   },
 
-  async createUser(fullname, mail, password): Promise<boolean> {
+  async createUser(
+    fullname: string,
+    mail: string,
+    password: string,
+  ): Promise<boolean> {
     try {
       await sdk.account.create('unique()', mail, password, fullname);
       return true;
     } catch (err) {
-      console.error(err);
+      console.log(err);
       return false;
     }
   },
 
-  async verificationUser(urlVerify): Promise<boolean> {
+  async verificationUser(urlVerify: string): Promise<boolean> {
     try {
       await sdk.account.createVerification(urlVerify);
       return true;

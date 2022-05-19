@@ -30,13 +30,16 @@ export function FormLogin() {
   });
   const { isValid, touchedFields, errors } = formState;
 
-  const onSubmit = (data, e) => {
+  const onSubmit = data => {
     const { mail, password } = data;
-    e.preventDefault();
+    console.log('dataForm', data);
     AppwriteService.loginUser(mail, password)
       .then(res => {
         console.log('Success', res);
-        navigate('/dashboard');
+        localStorage.setItem('auth', 'tokenFake');
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 3000);
       })
       .catch(error => {
         console.log('Error', error);

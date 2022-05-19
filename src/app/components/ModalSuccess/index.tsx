@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import IconCheck from '../ModalAlert/assets/check.png';
+import IconCheck from '../ModalSuccess/assets/Check.png';
 
 export const ModalSuccess = ({
   openModal,
