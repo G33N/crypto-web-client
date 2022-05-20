@@ -1,59 +1,96 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import CountDownTimer from './CountDownTimer';
+import { AppwriteService } from 'services/appwrite';
+import { ModalAlert } from 'app/components/ModalAlert';
+import { ModalSuccess } from 'app/components/ModalSuccess';
 
 export const AccountVerify = () => {
   const { formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const onSubmit = data => {
-    alert(JSON.stringify(data));
-    //navegar a dashboard
+  const onSubmit = (data, e) => {
+    const { mail } = data;
+    e.preventDefault();
+    AppwriteService.verificationUser(mail)
+      .then(res => {
+        console.log('SuccessVerify', res);
+        setIsOpen(true);
+      })
+      .catch(error => {
+        console.log('Error', error);
+        setIsOpenAlert(true);
+      });
   };
 
   const { isValid, touchedFields, errors } = formState;
 
   return (
-    <Container>
-      <Head>
-        <Title>Verificación de seguridad</Title>
-      </Head>
-      <Body>
-        <TitleSecond>Confirmacion de Contacto</TitleSecond>
-        <Subtitle>
-          Se ha enviado un código OTP a tu correo electrónico:
-        </Subtitle>
-        <TextMail>ser*****@gmail.com</TextMail>
-        <TextIn>Ingresalo en el espacio a continuación.</TextIn>
-        <Label>Código de verificación de correo electrónico</Label>
-        <Wrapper>
-          <InputNum />
-          <InputNum />
-          <InputNum />
-          <InputNum />
-          <InputNum />
-        </Wrapper>
+    <>
+      <ModalAlert
+        openModal={isOpenAlert}
+        closeModal={setIsOpenAlert}
+        titleAlert={'Hubo un error'}
+        descriptionAlert={
+          'Ocurrió un error en el proceso de recuperación de contraseña. Por favor intentá de nuevo.'
+        }
+        labelButton={'Regresar'}
+        isVisibleButonSuport={false}
+      />
+      <ModalSuccess
+        openModal={isOpen}
+        closeModal={setIsOpen}
+        title={'Cuenta verificada corectamente'}
+        description={'Su cuenta ha sido verificada, puede seguir navegando.'}
+        labelButton={'Continuar'}
+        pathTo={'/dashboard'}
+        isVisibleButonClose={false}
+        isVisibleButonNavigate
+        isVisibleButonSuport={false}
+      />
+      <Container>
+        <Head>
+          <Title>Verificación de seguridad</Title>
+        </Head>
+        <Body>
+          <TitleSecond>Confirmacion de Contacto</TitleSecond>
+          <Subtitle>
+            Se ha enviado un código OTP a tu correo electrónico:
+          </Subtitle>
+          <TextMail>ser*****@gmail.com</TextMail>
+          <TextIn>Ingresalo en el espacio a continuación.</TextIn>
+          <Label>Código de verificación de correo electrónico</Label>
+          <Wrapper>
+            <InputNum />
+            <InputNum />
+            <InputNum />
+            <InputNum />
+            <InputNum />
+          </Wrapper>
 
-        {errors.mail && touchedFields.mail && (
-          <Validator>{errors.mail.message}</Validator>
-        )}
+          {errors.mail && touchedFields.mail && (
+            <Validator>{errors.mail.message}</Validator>
+          )}
 
-        <WrapperCounter>
-          <TextCounter>Reenviar código: </TextCounter>{' '}
-          <CountDownTimer minutes={3} seconds={0} />
-        </WrapperCounter>
-        <Button
-          type="submit"
-          disabled={!isValid}
-          onClick={handleSubmit(onSubmit)}
-        >
-          Verificar
-        </Button>
-      </Body>
-    </Container>
+          <WrapperCounter>
+            <TextCounter>Reenviar código: </TextCounter>{' '}
+            <CountDownTimer minutes={3} seconds={0} />
+          </WrapperCounter>
+          <Button
+            type="submit"
+            disabled={!isValid}
+            onClick={handleSubmit(onSubmit)}
+          >
+            Verificar
+          </Button>
+        </Body>
+      </Container>
+    </>
   );
 };
 
@@ -163,7 +200,7 @@ const WrapperCounter = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: #92c1fd;
+  color: ${p => p.theme.primary};
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
@@ -173,7 +210,7 @@ const WrapperCounter = styled.div`
 const TextCounter = styled.div`
   font-style: normal;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 22px;
   padding-right: 5px;
 `;
