@@ -89,7 +89,7 @@ export function PasswordChange() {
           <Title>Nueva Contrasena</Title>
         </Head>
         <Body>
-          <Form>
+          <Form onClick={handleSubmit(onSubmit)}>
             <Label
               Color={
                 (isValidating && 'black') ||
@@ -196,11 +196,7 @@ export function PasswordChange() {
               <Validator>{errors.passConfirm.message}</Validator>
             )}
 
-            <Button
-              type="submit"
-              disabled={!isValid}
-              onClick={handleSubmit(onSubmit)}
-            >
+            <Button type="submit" disabled={!isValid}>
               Continuar
             </Button>
           </Form>
