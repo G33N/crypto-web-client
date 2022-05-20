@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
@@ -8,26 +9,39 @@ import { ModalAlert } from 'app/components/ModalAlert';
 import { ModalSuccess } from 'app/components/ModalSuccess';
 
 export const AccountVerify = () => {
-  const { formState, handleSubmit } = useForm({
+  const { formState, handleSubmit, register } = useForm({
     mode: 'onChange',
   });
+
+  const messages = {
+    required: '* Este campo es obligatorio',
+    codigo: '* Ingresa el codigo de 6 digitos a ser***@gmail.com',
+  };
+
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const onSubmit = (data, e) => {
     const { mail } = data;
     e.preventDefault();
     AppwriteService.verificationUser(mail)
       .then(res => {
-        console.log('SuccessVerify', res);
-        setIsOpen(true);
+        if (res) {
+          console.log('SuccessUpdatePass', res);
+          alert('Su cuenta se verifico correctamente.');
+          navigate('/login');
+        } else {
+          return setIsOpenAlert(true);
+        }
+        navigate('/dashboard');
       })
       .catch(error => {
         console.log('Error', error);
         setIsOpenAlert(true);
       });
   };
-
   const { isValid, touchedFields, errors } = formState;
 
   return (
@@ -58,20 +72,19 @@ export const AccountVerify = () => {
           <Title>Verificación de seguridad</Title>
         </Head>
         <Body>
-          <TitleSecond>Confirmacion de Contacto</TitleSecond>
           <Subtitle>
             Se ha enviado un código OTP a tu correo electrónico:
           </Subtitle>
           <TextMail>ser*****@gmail.com</TextMail>
-          <TextIn>Ingresalo en el espacio a continuación.</TextIn>
+          <TextIn>Ingresa el codigo en el espacio a continuación.</TextIn>
           <Label>Código de verificación de correo electrónico</Label>
-          <Wrapper>
-            <InputNum />
-            <InputNum />
-            <InputNum />
-            <InputNum />
-            <InputNum />
-          </Wrapper>
+          <InputNum
+            type="email"
+            placeholder="Ingresa el codigo de verificacion"
+            {...register('codigo', {
+              required: messages.required,
+            })}
+          />
 
           {errors.mail && touchedFields.mail && (
             <Validator>{errors.mail.message}</Validator>
@@ -102,6 +115,14 @@ const Container = styled.div`
     padding-left: 20%;
     padding-right: 25%;
   }
+  @media (min-width: 720px) {
+    padding-left: 30%;
+    padding-right: 35%;
+  }
+  @media (min-width: 1340px) {
+    padding-left: 35%;
+    padding-right: 40%;
+  }
 `;
 const Head = styled.div`
   display: flex;
@@ -122,15 +143,6 @@ const Title = styled.h3`
 
 const Body = styled.div`
   text-align: left;
-`;
-
-const TitleSecond = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 22px;
-  color: ${p => p.theme.text};
-  margin-bottom: 16px;
 `;
 
 const Subtitle = styled.div`
@@ -170,18 +182,19 @@ const Label = styled.div`
   margin-bottom: 8px;
 `;
 
-const Wrapper = styled.div`
-  padding: 20px;
-`;
-
 const InputNum = styled.input`
-  box-sizing: border-box;
-  width: 32px;
-  height: 32px;
-  margin-left: 14px;
-  border: 1px solid #cecece;
-  border-radius: 8.64px;
+  width: 100%;
+  font-size: 0.875rem;
+  font-weight: normal;
+  height: 48px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid ${p => p.theme.text};
+  outline: none;
   ::placeholder {
+    color: ${p => p.theme.text};
+  }
+  &:active {
     color: ${p => p.theme.text};
   }
 `;
@@ -199,8 +212,9 @@ const Validator = styled.p`
 const WrapperCounter = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: end;
   align-items: center;
-  color: ${p => p.theme.primary};
+  color: #92c1fd;
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
@@ -210,7 +224,7 @@ const WrapperCounter = styled.div`
 const TextCounter = styled.div`
   font-style: normal;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 22px;
   padding-right: 5px;
 `;
