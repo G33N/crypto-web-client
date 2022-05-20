@@ -15,8 +15,6 @@ import Check from '../../assets/icons/Check.png';
 
 interface Props {
   successPass?: string;
-  successMail?: string;
-  success?: string;
   Color?: string;
 }
 
