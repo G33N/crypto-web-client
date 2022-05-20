@@ -1,62 +1,96 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import CountDownTimer from './CountDownTimer';
+import { AppwriteService } from 'services/appwrite';
+import { ModalAlert } from 'app/components/ModalAlert';
+import { ModalSuccess } from 'app/components/ModalSuccess';
 
-const messages = {
-  required: '* Este campo es obligatorio',
-  codigo: '* Ingresa el codigo de 6 digitos a ser***@gmail.com',
-};
 export const AccountVerify = () => {
-  const { formState, handleSubmit, register } = useForm({
+  const { formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const onSubmit = data => {
-    alert(JSON.stringify(data));
-    //navegar a dashboard
+  const onSubmit = (data, e) => {
+    const { mail } = data;
+    e.preventDefault();
+    AppwriteService.verificationUser(mail)
+      .then(res => {
+        console.log('SuccessVerify', res);
+        setIsOpen(true);
+      })
+      .catch(error => {
+        console.log('Error', error);
+        setIsOpenAlert(true);
+      });
   };
 
   const { isValid, touchedFields, errors } = formState;
 
   return (
-    <Container>
-      <Head>
-        <Title>Verificación de seguridad</Title>
-      </Head>
-      <Body>
-        <Subtitle>
-          Se ha enviado un código OTP a tu correo electrónico:
-        </Subtitle>
-        <TextMail>ser*****@gmail.com</TextMail>
-        <TextIn>Ingresa el codigo en el espacio a continuación.</TextIn>
-        <Label>Código de verificación de correo electrónico</Label>
-        <InputNum
-          type="email"
-          placeholder="Ingresa el codigo de verificacion"
-          {...register('codigo', {
-            required: messages.required,
-          })}
-        />
+    <>
+      <ModalAlert
+        openModal={isOpenAlert}
+        closeModal={setIsOpenAlert}
+        titleAlert={'Hubo un error'}
+        descriptionAlert={
+          'Ocurrió un error en el proceso de recuperación de contraseña. Por favor intentá de nuevo.'
+        }
+        labelButton={'Regresar'}
+        isVisibleButonSuport={false}
+      />
+      <ModalSuccess
+        openModal={isOpen}
+        closeModal={setIsOpen}
+        title={'Cuenta verificada corectamente'}
+        description={'Su cuenta ha sido verificada, puede seguir navegando.'}
+        labelButton={'Continuar'}
+        pathTo={'/dashboard'}
+        isVisibleButonClose={false}
+        isVisibleButonNavigate
+        isVisibleButonSuport={false}
+      />
+      <Container>
+        <Head>
+          <Title>Verificación de seguridad</Title>
+        </Head>
+        <Body>
+          <TitleSecond>Confirmacion de Contacto</TitleSecond>
+          <Subtitle>
+            Se ha enviado un código OTP a tu correo electrónico:
+          </Subtitle>
+          <TextMail>ser*****@gmail.com</TextMail>
+          <TextIn>Ingresalo en el espacio a continuación.</TextIn>
+          <Label>Código de verificación de correo electrónico</Label>
+          <Wrapper>
+            <InputNum />
+            <InputNum />
+            <InputNum />
+            <InputNum />
+            <InputNum />
+          </Wrapper>
 
-        {errors.mail && touchedFields.mail && (
-          <Validator>{errors.mail.message}</Validator>
-        )}
+          {errors.mail && touchedFields.mail && (
+            <Validator>{errors.mail.message}</Validator>
+          )}
 
-        <WrapperCounter>
-          <TextCounter>Reenviar código: </TextCounter>{' '}
-          <CountDownTimer minutes={3} seconds={0} />
-        </WrapperCounter>
-        <Button
-          type="submit"
-          disabled={!isValid}
-          onClick={handleSubmit(onSubmit)}
-        >
-          Verificar
-        </Button>
-      </Body>
-    </Container>
+          <WrapperCounter>
+            <TextCounter>Reenviar código: </TextCounter>{' '}
+            <CountDownTimer minutes={3} seconds={0} />
+          </WrapperCounter>
+          <Button
+            type="submit"
+            disabled={!isValid}
+            onClick={handleSubmit(onSubmit)}
+          >
+            Verificar
+          </Button>
+        </Body>
+      </Container>
+    </>
   );
 };
 
@@ -67,14 +101,6 @@ const Container = styled.div`
   @media (min-width: 480px) {
     padding-left: 20%;
     padding-right: 25%;
-  }
-  @media (min-width: 720px) {
-    padding-left: 30%;
-    padding-right: 35%;
-  }
-  @media (min-width: 1340px) {
-    padding-left: 35%;
-    padding-right: 40%;
   }
 `;
 const Head = styled.div`
@@ -96,6 +122,15 @@ const Title = styled.h3`
 
 const Body = styled.div`
   text-align: left;
+`;
+
+const TitleSecond = styled.div`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: ${p => p.theme.text};
+  margin-bottom: 16px;
 `;
 
 const Subtitle = styled.div`
@@ -135,19 +170,18 @@ const Label = styled.div`
   margin-bottom: 8px;
 `;
 
+const Wrapper = styled.div`
+  padding: 20px;
+`;
+
 const InputNum = styled.input`
-  width: 100%;
-  font-size: 0.875rem;
-  font-weight: normal;
-  height: 48px;
-  padding: 10px;
-  border-radius: 12px;
-  border: 1px solid ${p => p.theme.text};
-  outline: none;
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  margin-left: 14px;
+  border: 1px solid #cecece;
+  border-radius: 8.64px;
   ::placeholder {
-    color: ${p => p.theme.text};
-  }
-  &:active {
     color: ${p => p.theme.text};
   }
 `;
@@ -166,7 +200,7 @@ const WrapperCounter = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: #92c1fd;
+  color: ${p => p.theme.primary};
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
@@ -176,13 +210,13 @@ const WrapperCounter = styled.div`
 const TextCounter = styled.div`
   font-style: normal;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 22px;
   padding-right: 5px;
 `;
 
 const Button = styled.button`
-  width: 100%;
+  width: 80%;
   height: 48px;
   font-size: 18px;
   padding: 10px;
