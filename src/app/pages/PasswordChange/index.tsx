@@ -37,6 +37,13 @@ export function PasswordChange() {
     AppwriteService.updatePasssword(passConfirm)
       .then(res => {
         console.log('Success', res);
+        if (res) {
+          console.log('SuccessUpdatePass', res);
+          alert('La contrasena se modifico correctamente.');
+          navigate('/login');
+        } else {
+          return setIsOpen(true);
+        }
         navigate('/login');
       })
       .catch(error => {

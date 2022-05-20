@@ -15,7 +15,7 @@ export function HomePage() {
 
       <Conteiner>
         <Text> HOME PAGE</Text>
-        <Text>- Se ve sin estar logeado -</Text>
+        <Text> - Se ve sin haber iniciado sesion - </Text>
         <button onClick={() => setIsOpen(!isOpen)}>ver errores test</button>
         <ModalAlert
           openModal={isOpen}
@@ -34,7 +34,19 @@ export function HomePage() {
 const Conteiner = styled.div`
   margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
   padding: 4em;
-  background: papayawhip;
+  background: white;
+  @media (min-width: 480px) {
+    padding-left: 20%;
+    padding-right: 25%;
+  }
+  @media (min-width: 720px) {
+    padding-left: 30%;
+    padding-right: 35%;
+  }
+  @media (min-width: 1040px) {
+    padding-left: 35%;
+    padding-right: 40%;
+  }
 `;
 const Text = styled.p`
   font-size: 18px;
