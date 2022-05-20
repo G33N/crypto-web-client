@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AppwriteService } from '../../../services/appwrite';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled, { css } from 'styled-components/macro';
-import Arrow from './assets/Back.png';
+import Arrow from '../../assets/icons/Back.png';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from '../../components/Forms/components/CardValidationPass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -67,6 +67,9 @@ export function PasswordChange() {
         title={'contrasena modificada corretamente'}
         description={''}
         labelButton={'Continuar'}
+        pathTo={'/login'}
+        isVisibleButonClose={false}
+        isVisibleButonNavigate
         isVisibleButonSuport={false}
       />
       <Container>

@@ -6,9 +6,12 @@ import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { ModalAlert } from '../../components/ModalAlert';
+import Alert from '../../assets/icons/Alert.png';
+import Check from '../../assets/icons/Check.png';
 
 interface Props {
   success?: string;
+  Color?: string;
 }
 
 const messages = {
@@ -25,10 +28,16 @@ const patterns = {
 export function FormLogin() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+
+  const [iconShown, setIconShown] = useState(false);
+  const toggleIconVisiblity = () => {
+    setIconShown(iconShown ? false : true);
+  };
+
   const { register, formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
-  const { isValid, touchedFields, errors } = formState;
+  const { isValid, touchedFields, errors, isValidating, isDirty } = formState;
 
   const onSubmit = data => {
     const { mail, password } = data;
@@ -65,36 +74,75 @@ export function FormLogin() {
         isVisibleButonSuport={false}
       />
       <Form>
-        <Label htmlFor="mail">Correo electrónico</Label>
-        <Input
-          type="email"
-          placeholder="Ingrese su correo electrónico"
-          {...register('mail', {
-            required: messages.required,
-            pattern: {
-              value: patterns.mail,
-              message: messages.mail,
-            },
-            minLength: {
-              value: 5,
-              message: messages.mail,
-            },
-            maxLength: {
-              value: 50,
-              message: messages.mail,
-            },
-          })}
-          name="mail"
-        />
+        {/* //------ Input mail ----------// */}
+        <Label
+          Color={
+            (isValidating && 'black') ||
+            (touchedFields.mail && !errors.mail && 'green') ||
+            (touchedFields.mail && errors.mail && 'red')
+          }
+        >
+          Correo electrónico
+        </Label>
+
+        <BoxInput
+          Color={
+            (!isDirty && 'black') ||
+            (isDirty && !touchedFields.mail && 'blue') ||
+            (touchedFields.mail && !errors.mail && 'green') ||
+            'red'
+          }
+        >
+          <Input
+            type="email"
+            placeholder="Ingrese su correo electrónico"
+            {...register('mail', {
+              required: messages.required,
+              pattern: {
+                value: patterns.mail,
+                message: messages.mail,
+              },
+              minLength: {
+                value: 5,
+                message: messages.mail,
+              },
+              maxLength: {
+                value: 50,
+                message: messages.mail,
+              },
+            })}
+            name="mail"
+          />
+          <IconInput onClick={toggleIconVisiblity} hidden={!touchedFields.mail}>
+            {errors.mail && touchedFields.mail ? (
+              <Img src={Alert} />
+            ) : (
+              <Img src={Check} />
+            )}
+          </IconInput>
+        </BoxInput>
+
         {errors.mail && touchedFields.mail && (
-          <Validator>{errors.mail.message}</Validator>
+          <Validator>{errors.mail.message} </Validator>
         )}
-        <Label htmlFor="passsword">Contraseña </Label>
-        <InputBoxPass
-          success={
-            errors.password && touchedFields.password && errors.password.type
-              ? 'red'
-              : 'green'
+
+        {/* //------ Input pass ----------// */}
+
+        <Label
+          Color={
+            (isValidating && 'black') ||
+            (touchedFields.password && !errors.password && 'green') ||
+            (touchedFields.password && errors.password && 'red')
+          }
+        >
+          Contraseña{' '}
+        </Label>
+        <BoxInput
+          Color={
+            (!isDirty && 'black') ||
+            (isDirty && !touchedFields.password && 'blue') ||
+            (touchedFields.password && !errors.password && 'green') ||
+            'red'
           }
         >
           <InputPass
@@ -124,7 +172,7 @@ export function FormLogin() {
               <FontAwesomeIcon icon={faEyeSlash} />
             )}
           </Icon>
-        </InputBoxPass>
+        </BoxInput>
 
         {errors.password && touchedFields.password && errors.password.type && (
           <Validator>{errors.password.message}</Validator>
@@ -152,17 +200,6 @@ const Form = styled.form`
   text-align: center;
 `;
 
-const Label = styled.label`
-  font-size: 0.875rem;
-  color: ${p => p.theme.text};
-  font-weight: bold;
-  width: 100%;
-  line-height: 2;
-  text-align: left;
-  display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
-`;
 const Validator = styled.p`
   font-size: 0.6rem;
   color: ${p => p.theme.errorColor};
@@ -176,16 +213,57 @@ const Validator = styled.p`
 
 const Input = styled.input`
   width: 100%;
-  height: 48px;
   font-size: 0.875rem;
-  color: ${p => p.theme.text};
   font-weight: normal;
+  height: 4px;
   padding: 10px;
-  border-radius: 9px;
-  border-color: #cdcbcb;
-  border: 1px solid #cecece;
+  border: transparent;
+  outline: none;
   ::placeholder {
     color: ${p => p.theme.text};
+  }
+  &:active {
+    color: ${p => p.theme.text};
+  }
+`;
+
+const Label = styled.div<Props>`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.875rem;
+  width: 80%;
+  text-align: left;
+  color: ${props => props.Color};
+  line-height: 20px;
+  margin-bottom: 8px;
+  margin-top: 32px;
+`;
+
+const BoxInput = styled.div<Props>`
+  height: 48px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: solid 2px ${props => props.Color};
+  opacity: 0.8;
+  border-radius: 12px;
+  background-color: transparent;
+
+  ::placeholder {
+    color: '#787878';
+  }
+`;
+const Img = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
+const IconInput = styled.i<Props>`
+  padding-right: 10px;
+  color: ${props => props.success};
+  &:hover {
+    color: ${p => p.theme.text};
+    opacity: 0.8;
   }
 `;
 
@@ -205,19 +283,19 @@ const InputPass = styled.input`
   }
 `;
 
-const InputBoxPass = styled.div<Props>`
-  height: 48px;
-  display: flex;
-  align-items: center;
-  border: solid 1px ${props => props.success};
-  opacity: 0.8;
-  border-radius: 9px;
-  padding: 6px;
-  background-color: transparent;
-  ::placeholder {
-    color: ${p => p.theme.text};
-  }
-`;
+// const InputBoxPass = styled.div<Props>`
+//   height: 48px;
+//   display: flex;
+//   align-items: center;
+//   border: solid 1px ${props => props.success};
+//   opacity: 0.8;
+//   border-radius: 9px;
+//   padding: 6px;
+//   background-color: transparent;
+//   ::placeholder {
+//     color: ${p => p.theme.text};
+//   }
+// `;
 
 const Icon = styled.i<Props>`
   padding-right: 10px;

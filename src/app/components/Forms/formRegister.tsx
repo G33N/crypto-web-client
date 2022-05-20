@@ -10,10 +10,14 @@ import 'react-phone-input-2/lib/style.css';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { ModalAlert } from '../../components/ModalAlert';
 import { Theme, themes } from '../../../styles/theme/themes';
+import Alert from '../../assets/icons/Alert.png';
+import Check from '../../assets/icons/Check.png';
 
 interface Props {
   successPass?: string;
   successMail?: string;
+  success?: string;
+  Color?: string;
 }
 
 const messages = {
@@ -35,8 +39,13 @@ export function FormRegister() {
   const { register, getValues, formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
-  const { isValid, touchedFields, errors } = formState;
+  const { isValid, touchedFields, errors, isValidating, isDirty } = formState;
+
   const [isOpen, setIsOpen] = useState(false);
+  const [iconShown, setIconShown] = useState(false);
+  const toggleIconVisiblity = () => {
+    setIconShown(iconShown ? false : true);
+  };
 
   const onSubmit = (data, e) => {
     const { fullname, mail, password } = data;
@@ -88,8 +97,17 @@ export function FormRegister() {
         isVisibleButonSuport={false}
       />
       <Form>
-        <Label htmlFor="fullname">Nombre completo</Label>
-        <Input
+        {/* //------ Input fullname----------// */}
+        <Label
+          Color={
+            (isValidating && 'black') ||
+            (touchedFields.fullname && !errors.fullname && 'green') ||
+            (touchedFields.fullname && errors.fullname && 'red')
+          }
+        >
+          Nombre completo
+        </Label>
+        <InputFullname
           autoComplete="off"
           type="text"
           placeholder="Ingrese su nombre completo"
@@ -101,39 +119,80 @@ export function FormRegister() {
             },
           })}
           name="fullname"
+          Color={
+            (!isDirty && 'black') ||
+            (isDirty && !touchedFields.fullname && 'blue') ||
+            (touchedFields.mail && !errors.fulname && 'green') ||
+            'red'
+          }
         />
         {errors.fullname && touchedFields.fullname && (
           <Validator>{errors.fullname.message}</Validator>
         )}
 
-        <Label htmlFor="mail">Correo electronico</Label>
-        <Input
-          autoComplete="off"
-          type="email"
-          placeholder="Ingrese su correo electronico"
-          {...register('mail', {
-            required: messages.required,
-            pattern: {
-              value: patterns.mail,
-              message: messages.mail,
-            },
-            minLength: {
-              value: 5,
-              message: messages.mail,
-            },
-            maxLength: {
-              value: 50,
-              message: messages.mail,
-            },
-          })}
-          name="mail"
-          successPass={errors.mail && touchedFields.mail ? 'red' : 'green'}
-        />
+        {/* //------ Input mail ----------// */}
+        <Label
+          Color={
+            (isValidating && 'black') ||
+            (touchedFields.mail && !errors.mail && 'green') ||
+            (touchedFields.mail && errors.mail && 'red')
+          }
+        >
+          Correo electrónico
+        </Label>
+
+        <BoxInput
+          Color={
+            (!isDirty && 'black') ||
+            (isDirty && !touchedFields.mail && 'blue') ||
+            (touchedFields.mail && !errors.mail && 'green') ||
+            'red'
+          }
+        >
+          <Input
+            type="email"
+            placeholder="Ingrese su correo electrónico"
+            {...register('mail', {
+              required: messages.required,
+              pattern: {
+                value: patterns.mail,
+                message: messages.mail,
+              },
+              minLength: {
+                value: 5,
+                message: messages.mail,
+              },
+              maxLength: {
+                value: 50,
+                message: messages.mail,
+              },
+            })}
+            name="mail"
+          />
+          <IconInput onClick={toggleIconVisiblity} hidden={!touchedFields.mail}>
+            {errors.mail && touchedFields.mail ? (
+              <Img src={Alert} />
+            ) : (
+              <Img src={Check} />
+            )}
+          </IconInput>
+        </BoxInput>
+
         {errors.mail && touchedFields.mail && (
-          <Validator>{errors.mail.message}</Validator>
+          <Validator>{errors.mail.message} </Validator>
         )}
 
-        <Label htmlFor="phone">Numero telefonico</Label>
+        {/* //------ Input phone ----------// */}
+
+        <Label
+          Color={
+            (isValidating && 'black') ||
+            (touchedFields.phone && !errors.phone && 'green') ||
+            (touchedFields.phone && errors.phone && 'red')
+          }
+        >
+          Numero telefonico
+        </Label>
         <PhoneInput
           placeholder="Ingrese su numero telefonico"
           {...register('phone', {})}
@@ -160,7 +219,17 @@ export function FormRegister() {
           <Validator>{errors.phone.message}</Validator>
         )}
 
-        <Label htmlFor="passsword">Contraseña nueva</Label>
+        {/* //------ Input pass ----------// */}
+
+        <Label
+          Color={
+            (isValidating && 'black') ||
+            (touchedFields.password && !errors.password && 'green') ||
+            (touchedFields.password && errors.password && 'red')
+          }
+        >
+          Contrasena nueva
+        </Label>
 
         <InputBoxPass
           successPass={
@@ -208,7 +277,13 @@ export function FormRegister() {
           </>
         )}
 
-        <Label htmlFor="passwordConfirm">
+        <Label
+          Color={
+            (isValidating && 'black') ||
+            (touchedFields.passConfirm && !errors.passConfirm && 'green') ||
+            (touchedFields.passConfirm && errors.passConfirm && 'red')
+          }
+        >
           Confirmación de nueva contraseña
         </Label>
 
@@ -268,18 +343,46 @@ const BoxPass = styled.div`
   text-align: left;
   margin-top: 10px;
 `;
-
-const Label = styled.label`
+const Label = styled.div<Props>`
+  font-style: normal;
+  font-weight: 700;
   font-size: 0.875rem;
-  color: ${p => p.theme.text};
-  font-weight: bold;
-  width: 100%;
-  line-height: 2;
+  width: 80%;
   text-align: left;
-  display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
+  color: ${props => props.Color};
+  line-height: 20px;
+  margin-bottom: 8px;
+  margin-top: 32px;
 `;
+
+const BoxInput = styled.div<Props>`
+  height: 48px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: solid 2px ${props => props.Color};
+  opacity: 0.8;
+  border-radius: 12px;
+  background-color: transparent;
+
+  ::placeholder {
+    color: '#787878';
+  }
+`;
+const Img = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
+const IconInput = styled.i<Props>`
+  padding-right: 10px;
+  color: ${props => props.success};
+  &:hover {
+    color: ${p => p.theme.text};
+    opacity: 0.8;
+  }
+`;
+
 const Validator = styled.p`
   font-size: 0.6rem;
   color: ${p => p.theme.errorColor};
@@ -293,7 +396,7 @@ const Validator = styled.p`
 
 //revistar comportamiento en Active (azul)
 
-const Input = styled.input<Props>`
+const InputFullname = styled.input<Props>`
   width: 100%;
   height: 48px;
   font-size: 0.875rem;
@@ -301,7 +404,7 @@ const Input = styled.input<Props>`
   font-weight: normal;
   padding: 10px;
   border-radius: 12px;
-  border: 1px solid ${props => props.successMail};
+  border: 1px solid ${props => props.Color};
   ::placeholder {
     color: '#787878';
   }
@@ -310,7 +413,21 @@ const Input = styled.input<Props>`
     border-color: ${p => p.theme.primary};
   }
 `;
-
+const Input = styled.input<Props>`
+  width: 100%;
+  font-size: 0.875rem;
+  font-weight: normal;
+  height: 4px;
+  padding: 10px;
+  border: transparent;
+  outline: none;
+  ::placeholder {
+    color: ${p => p.theme.text};
+  }
+  &:active {
+    color: ${p => p.theme.text};
+  }
+`;
 const InputPass = styled.input`
   width: 100%;
   font-size: 0.875rem;

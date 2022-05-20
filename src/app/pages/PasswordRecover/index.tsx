@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AppwriteService } from '../../../services/appwrite';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled, { css } from 'styled-components/macro';
-import Arrow from './assets/Back.png';
 import { useForm } from 'react-hook-form';
 import { ModalAlert } from '../../components/ModalAlert';
 import { ModalSuccess } from '../../components/ModalSuccess';
-import Alert from './assets/alert.png';
-import Check from './assets/Check.png';
+import Alert from '../../assets/icons/Alert.png';
+import Check from '../../assets/icons/Check.png';
+import Arrow from '../../assets/icons/Back.png';
 
 interface Props {
-  successMail?: string;
-  failMail?: string;
+  success?: string;
   Color?: any;
 }
 const messages = {
@@ -26,16 +25,10 @@ const patterns = {
 };
 
 export const PasswordRecover = () => {
-  const navigate = useNavigate();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const { register, formState, handleSubmit } = useForm({ mode: 'onChange' });
   const { isValid, touchedFields, errors, isValidating, isDirty } = formState;
-
-  console.log('Error', errors);
-  console.log('TouchedFields', touchedFields);
-  console.log('isValid', isValid);
-  console.log('isValidating', isValidating);
 
   const onSubmit = (data, e) => {
     const { mail } = data;
@@ -77,6 +70,9 @@ export const PasswordRecover = () => {
           'Enviamos un mail a su correo electronico para que pueda recuperar su contrasena'
         }
         labelButton={'Continuar'}
+        pathTo={'/login'}
+        isVisibleButonClose={false}
+        isVisibleButonNavigate
         isVisibleButonSuport={false}
       />
       <Container>
@@ -248,6 +244,15 @@ const BoxInput = styled.div<Props>`
     color: '#787878';
   }
 `;
+
+const Icon = styled.i<Props>`
+  padding-right: 10px;
+  color: ${props => props.success};
+  &:hover {
+    color: ${p => p.theme.text};
+    opacity: 0.8;
+  }
+`;
 const Input = styled.input`
   width: 100%;
   font-size: 0.875rem;
@@ -272,15 +277,6 @@ const Validator = styled.p`
   display: block;
   margin-bottom: 13px;
   margin-top: 20px;
-`;
-
-const Icon = styled.i<Props>`
-  padding-right: 10px;
-  color: ${props => props.successMail};
-  &:hover {
-    color: ${p => p.theme.text};
-    opacity: 0.8;
-  }
 `;
 
 const Button = styled.button`

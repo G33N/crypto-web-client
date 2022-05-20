@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import IconCheck from '../ModalSuccess/assets/Check.png';
+import { ButtonLink } from '../ButtonLink';
 
 export const ModalSuccess = ({
   openModal,
@@ -8,6 +9,9 @@ export const ModalSuccess = ({
   title,
   description,
   labelButton,
+  pathTo,
+  isVisibleButonClose,
+  isVisibleButonNavigate,
   isVisibleButonSuport,
 }) => {
   return (
@@ -19,8 +23,12 @@ export const ModalSuccess = ({
               <Img src={IconCheck} />
               <Title>{title}</Title>
               <Description>{description}</Description>
-              <Button onClick={() => closeModal(false)}>{labelButton}</Button>
-
+              {isVisibleButonClose && (
+                <Button onClick={() => closeModal(false)}>{labelButton}</Button>
+              )}
+              {isVisibleButonNavigate && (
+                <ButtonLink path={pathTo} label={'Continuar'} />
+              )}
               {isVisibleButonSuport && (
                 <ButtonTwo type="submit">Contactar a soporte</ButtonTwo>
               )}
