@@ -283,20 +283,6 @@ const InputPass = styled.input`
   }
 `;
 
-// const InputBoxPass = styled.div<Props>`
-//   height: 48px;
-//   display: flex;
-//   align-items: center;
-//   border: solid 1px ${props => props.success};
-//   opacity: 0.8;
-//   border-radius: 9px;
-//   padding: 6px;
-//   background-color: transparent;
-//   ::placeholder {
-//     color: ${p => p.theme.text};
-//   }
-// `;
-
 const Icon = styled.i<Props>`
   padding-right: 10px;
   color: ${props => props.success};

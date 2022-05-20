@@ -240,11 +240,12 @@ export function FormRegister() {
           Contrasena nueva
         </Label>
 
-        <InputBoxPass
-          successPass={
-            errors.password && touchedFields.password && errors.password.type
-              ? 'red'
-              : 'green'
+        <BoxInput
+          Color={
+            (!isDirty && 'black') ||
+            (isDirty && !touchedFields.password && 'blue') ||
+            (touchedFields.mail && !errors.password && 'green') ||
+            'red'
           }
         >
           <InputPass
@@ -276,7 +277,7 @@ export function FormRegister() {
               <FontAwesomeIcon icon={faEyeSlash} />
             )}
           </IconPass>
-        </InputBoxPass>
+        </BoxInput>
 
         {errors.password && touchedFields.password && errors.password.type && (
           <>
@@ -296,9 +297,12 @@ export function FormRegister() {
           Confirmación de nueva contraseña
         </Label>
 
-        <InputBoxPass
-          successPass={
-            !errors.passConfirm && touchedFields.passConfirm ? 'green' : 'red'
+        <BoxInput
+          Color={
+            (!isDirty && 'black') ||
+            (isDirty && !touchedFields.passConfirm && 'blue') ||
+            (touchedFields.passConfirm && !errors.passConfirm && 'green') ||
+            'red'
           }
         >
           <InputPass
@@ -324,7 +328,7 @@ export function FormRegister() {
               <FontAwesomeIcon icon={faEyeSlash} />
             )}
           </Icon>
-        </InputBoxPass>
+        </BoxInput>
 
         {errors.passConfirm && touchedFields.passConfirm && (
           <Validator>{errors.passConfirm.message}</Validator>
@@ -433,19 +437,6 @@ const InputPass = styled.input`
   }
 `;
 
-const InputBoxPass = styled.div<Props>`
-  height: 48px;
-  display: flex;
-  align-items: center;
-  border: solid 2px ${props => props.successPass};
-  opacity: 0.8;
-  border-radius: 12px;
-  background-color: transparent;
-
-  ::placeholder {
-    color: '#787878';
-  }
-`;
 const IconPass = styled.i<Props>`
   padding-right: 10px;
   color: ${props => props.successPass};
