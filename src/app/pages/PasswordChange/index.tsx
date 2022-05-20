@@ -42,13 +42,13 @@ export function PasswordChange() {
           alert('La contrasena se modifico correctamente.');
           navigate('/login');
         } else {
-          return setIsOpen(true);
+          return setIsOpenAlert(true);
         }
         navigate('/login');
       })
       .catch(error => {
         console.log('Error', error);
-        setIsOpen(true);
+        setIsOpenAlert(true);
       });
   };
 

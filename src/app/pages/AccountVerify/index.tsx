@@ -1,141 +1,59 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { AppwriteService } from '../../../services/appwrite';
+import React from 'react';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
-import { ModalAlert } from '../../components/ModalAlert';
-import Arrow from '../../assets/icons/Back.png';
-import Alert from '../../assets/icons/Alert.png';
-import Check from '../../assets/icons/Check.png';
-
-interface Props {
-  successMail?: string;
-  failMail?: string;
-  Color?: any;
-}
-
-const messages = {
-  required: 'Este campo es obligatorio',
-  mail: 'Debes introducir una dirección de correo electronico correcta',
-  passConfirm: 'Las contrasenas deben ser iguales',
-};
-
-const patterns = {
-  fullname: /^[^-\s][a-zA-Z_\s-]+$/,
-  mail: /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-};
+import CountDownTimer from './CountDownTimer';
 
 export const AccountVerify = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { register, formState, handleSubmit } = useForm({
+  const { formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
 
-  const { isValid, touchedFields, errors, isValidating, isDirty } = formState;
-  const [iconShown, setIconShown] = useState(false);
-  const toggleIconVisiblity = () => {
-    setIconShown(iconShown ? false : true);
+  const onSubmit = data => {
+    alert(JSON.stringify(data));
+    //navegar a dashboard
   };
 
-  const onSubmit = (data, e) => {
-    const { mail } = data;
-    e.preventDefault();
-    AppwriteService.verificationUser(mail)
-      .then(res => {
-        console.log('SuccessVerify', res);
-      })
-      .catch(error => {
-        console.log('Error', error);
-        setIsOpen(true);
-      });
-  };
+  const { isValid, touchedFields, errors } = formState;
 
   return (
-    <>
-      <ModalAlert
-        openModal={isOpen}
-        closeModal={setIsOpen}
-        titleAlert={'Hubo un error'}
-        descriptionAlert={
-          'Ocurrió un error al cargar la información. Por favor intentá de nuevo.'
-        }
-        labelButton={'Regresar'}
-        isVisibleButonSuport={false}
-      />
-      <Container>
-        <Head>
-          <ButonBack to={'/login'}>
-            <Img src={Arrow} />
-          </ButonBack>
-          <Title>Verificación de seguridad</Title>
-        </Head>
-        <Body>
-          <p>
-            Ingresá el correo electrónico con el que estás registrado en la
-            aplicación.
-          </p>
-          <p>Te enviaremos un mail para validar tu cuenta.</p>
-          <Label
-            Color={
-              (isValidating && 'black') ||
-              (touchedFields.mail && !errors.mail && 'green') ||
-              (touchedFields.mail && errors.mail && 'red')
-            }
-          >
-            Correo electrónico
-          </Label>
+    <Container>
+      <Head>
+        <Title>Verificación de seguridad</Title>
+      </Head>
+      <Body>
+        <TitleSecond>Confirmacion de Contacto</TitleSecond>
+        <Subtitle>
+          Se ha enviado un código OTP a tu correo electrónico:
+        </Subtitle>
+        <TextMail>ser*****@gmail.com</TextMail>
+        <TextIn>Ingresalo en el espacio a continuación.</TextIn>
+        <Label>Código de verificación de correo electrónico</Label>
+        <Wrapper>
+          <InputNum />
+          <InputNum />
+          <InputNum />
+          <InputNum />
+          <InputNum />
+        </Wrapper>
 
-          <BoxInput
-            Color={
-              (!isDirty && 'black') ||
-              (isDirty && !touchedFields.mail && 'blue') ||
-              (touchedFields.mail && !errors.mail && 'green') ||
-              'red'
-            }
-          >
-            <Input
-              type="email"
-              placeholder="Ingrese su correo electrónico"
-              {...register('mail', {
-                required: messages.required,
-                pattern: {
-                  value: patterns.mail,
-                  message: messages.mail,
-                },
-                minLength: {
-                  value: 5,
-                  message: messages.mail,
-                },
-                maxLength: {
-                  value: 50,
-                  message: messages.mail,
-                },
-              })}
-              name="mail"
-            />
-            <Icon onClick={toggleIconVisiblity} hidden={!touchedFields.mail}>
-              {errors.mail && touchedFields.mail ? (
-                <Img src={Alert} />
-              ) : (
-                <Img src={Check} />
-              )}
-            </Icon>
-          </BoxInput>
-          {errors.mail && touchedFields.mail && (
-            <Validator>{errors.mail.message} </Validator>
-          )}
+        {errors.mail && touchedFields.mail && (
+          <Validator>{errors.mail.message}</Validator>
+        )}
 
-          <Button
-            type="submit"
-            disabled={!isValid}
-            onClick={handleSubmit(onSubmit)}
-          >
-            Continuar
-          </Button>
-        </Body>
-      </Container>
-    </>
+        <WrapperCounter>
+          <TextCounter>Reenviar código: </TextCounter>{' '}
+          <CountDownTimer minutes={3} seconds={0} />
+        </WrapperCounter>
+        <Button
+          type="submit"
+          disabled={!isValid}
+          onClick={handleSubmit(onSubmit)}
+        >
+          Verificar
+        </Button>
+      </Body>
+    </Container>
   );
 };
 
@@ -151,105 +69,117 @@ const Container = styled.div`
 const Head = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
-`;
-
-const Img = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const Icon = styled.i<Props>`
-  padding-right: 10px;
-  color: ${props => props.successMail};
-  &:hover {
-    color: ${p => p.theme.text};
-    opacity: 0.8;
-  }
-`;
-
-const BoxInput = styled.div<Props>`
-  height: 48px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  border: solid 2px ${props => props.Color};
-  opacity: 0.8;
-  border-radius: 12px;
-  background-color: transparent;
-
-  ::placeholder {
-    color: '#787878';
-  }
-`;
-const Input = styled.input`
-  width: 100%;
-  font-size: 0.875rem;
-  font-weight: normal;
-  padding-left: 10px;
-  border: transparent;
-  outline: none;
-  ::placeholder {
-    color: '#787878';
-  }
-  &:active {
-    color: ${p => p.theme.text};
-  }
-`;
-
-const ButonBack = styled(Link)`
-  cursor: pointer;
-  transition: 0.3s easy all;
-  border-radius: 5px;
-  color: ${p => p.theme.primary};
-  &:hover {
-    background: ${p => p.theme.textSecondary};
-  }
+  text-align: left;
 `;
 
 const Title = styled.h3`
-  padding-left: 16px;
-  width: 448px;
+  width: 100%;
   height: 32px;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 24px;
   color: ${p => p.theme.text};
   letter-spacing: 0.0022em;
   line-height: 32px;
-  font-style: normal;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 `;
 
 const Body = styled.div`
   text-align: left;
 `;
 
-const Label = styled.div<Props>`
+const TitleSecond = styled.div`
   font-style: normal;
   font-weight: 700;
-  font-size: 0.875rem;
-  width: 80%;
-  text-align: left;
-  color: ${props => props.Color};
+  font-size: 16px;
+  line-height: 22px;
+  color: ${p => p.theme.text};
+  margin-bottom: 16px;
+`;
+
+const Subtitle = styled.div`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: ${p => p.theme.text};
+  margin-bottom: 16px;
+`;
+
+const TextMail = styled.div`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
   line-height: 20px;
+  color: ${p => p.theme.text};
   margin-bottom: 8px;
-  margin-top: 32px;
+`;
+const TextIn = styled.div`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: ${p => p.theme.text};
+  margin-bottom: 24px;
+`;
+
+const Label = styled.div`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.75rem;
+  width: 100%;
+  text-align: left;
+  line-height: 20px;
+  color: ${p => p.theme.text};
+  margin-bottom: 8px;
+`;
+
+const Wrapper = styled.div`
+  padding: 20px;
+`;
+
+const InputNum = styled.input`
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  margin-left: 14px;
+  border: 1px solid #cecece;
+  border-radius: 8.64px;
+  ::placeholder {
+    color: ${p => p.theme.text};
+  }
 `;
 
 const Validator = styled.p`
   font-size: 0.6rem;
-  color: ${p => p.theme.errorColor};
+  color: ${p => p.theme.textSecondary};
   font-weight: bold;
   width: 100%;
   text-align: left;
   display: block;
   margin-bottom: 13px;
-  margin-top: 20px;
+`;
+
+const WrapperCounter = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #92c1fd;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 45px;
+`;
+
+const TextCounter = styled.div`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 22px;
+  padding-right: 5px;
 `;
 
 const Button = styled.button`
-  margin-top: 40px;
-  width: 100%;
+  width: 80%;
   height: 48px;
   font-size: 18px;
   padding: 10px;
