@@ -89,14 +89,14 @@ export function FormRegister() {
       <ModalAlert
         openModal={isOpen}
         closeModal={setIsOpen}
-        titleAlert={'Usuario y/o contraseña incorrectos'}
+        titleAlert={'Hubo un error'}
         descriptionAlert={
-          'El usuario y contraseña que ingresaste no coinciden.  Revisá los datos e intentá de nuevo.'
+          'Ocurrió un error al cargar la información. Por favor intentá de nuevo.'
         }
         labelButton={'Regresar'}
         isVisibleButonSuport={false}
       />
-      <Form>
+      <Form onClick={handleSubmit(onSubmit)}>
         {/* //------ Input fullname----------// */}
         <Label
           Color={
@@ -109,10 +109,10 @@ export function FormRegister() {
         </Label>
         <BoxInput
           Color={
-            (!isDirty && 'black') ||
-            (isDirty && !touchedFields.fullname && 'blue') ||
-            (touchedFields.fulname && !errors.fullname && 'green') ||
-            'red'
+            (isValidating && 'black') ||
+            (isDirty && !touchedFields.mail && 'blue') ||
+            (touchedFields.fullname && !errors.fullname && 'green') ||
+            (touchedFields.fullname && errors.fullname && 'red')
           }
         >
           <Input
@@ -127,12 +127,6 @@ export function FormRegister() {
               },
             })}
             name="fullname"
-            Color={
-              (!isDirty && 'black') ||
-              (isDirty && !touchedFields.fullname && 'blue') ||
-              (touchedFields.mail && !errors.fulname && 'green') ||
-              'red'
-            }
           />
         </BoxInput>
         {errors.fullname && touchedFields.fullname && (
@@ -265,10 +259,10 @@ export function FormRegister() {
 
           <IconPass
             onClick={togglePasswordVisiblity}
-            successPass={
-              errors.password && touchedFields.password && errors.password.type
-                ? 'red'
-                : 'green'
+            Color={
+              (isValidating && 'black') ||
+              (touchedFields.password && !errors.password && 'green') ||
+              (touchedFields.password && errors.password && 'red')
             }
           >
             {passwordShown ? (
@@ -318,8 +312,10 @@ export function FormRegister() {
 
           <Icon
             onClick={togglePasswordVisiblity}
-            successPass={
-              !errors.passConfirm && touchedFields.passConfirm ? 'green' : 'red'
+            Color={
+              (isValidating && 'black') ||
+              (touchedFields.password && !errors.password && 'green') ||
+              (touchedFields.password && errors.password && 'red')
             }
           >
             {passwordShown ? (
@@ -334,11 +330,7 @@ export function FormRegister() {
           <Validator>{errors.passConfirm.message}</Validator>
         )}
 
-        <Button
-          type="submit"
-          disabled={!isValid}
-          onClick={handleSubmit(onSubmit)}
-        >
+        <Button type="submit" disabled={!isValid}>
           Crear cuenta
         </Button>
       </Form>
@@ -389,7 +381,7 @@ const Img = styled.img`
 
 const IconInput = styled.i<Props>`
   padding-right: 10px;
-  color: ${props => props.success};
+  color: ${props => props.Color};
   &:hover {
     color: ${p => p.theme.text};
     opacity: 0.8;

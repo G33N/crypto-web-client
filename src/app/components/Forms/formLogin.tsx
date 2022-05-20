@@ -10,7 +10,6 @@ import Alert from '../../assets/icons/Alert.png';
 import Check from '../../assets/icons/Check.png';
 
 interface Props {
-  success?: string;
   Color?: string;
 }
 
@@ -41,11 +40,10 @@ export function FormLogin() {
 
   const onSubmit = data => {
     const { mail, password } = data;
-    console.log('dataForm', data);
     AppwriteService.loginUser(mail, password)
       .then(res => {
         console.log('Success', res);
-        localStorage.setItem('auth', 'tokenFake');
+        localStorage.setItem('auth', 'token');
         setTimeout(() => {
           navigate('/dashboard');
         }, 3000);
@@ -162,8 +160,10 @@ export function FormLogin() {
 
           <Icon
             onClick={togglePasswordVisiblity}
-            success={
-              errors.password && touchedFields.password ? 'red' : 'green'
+            Color={
+              (isValidating && 'black') ||
+              (touchedFields.password && !errors.password && 'green') ||
+              (touchedFields.password && errors.password && 'red')
             }
           >
             {passwordShown ? (
@@ -260,7 +260,7 @@ const Img = styled.img`
 
 const IconInput = styled.i<Props>`
   padding-right: 10px;
-  color: ${props => props.success};
+  color: ${props => props.Color};
   &:hover {
     color: ${p => p.theme.text};
     opacity: 0.8;
@@ -285,7 +285,7 @@ const InputPass = styled.input`
 
 const Icon = styled.i<Props>`
   padding-right: 10px;
-  color: ${props => props.success};
+  color: ${props => props.Color};
   &:hover {
     color: ${p => p.theme.text};
     opacity: 0.8;

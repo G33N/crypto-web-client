@@ -3,7 +3,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 const useAuth = () => {
-  const tokenSession = localStorage.getItem('token');
+  const tokenSession = localStorage.getItem('auth');
   if (tokenSession) {
     return true;
   } else {
