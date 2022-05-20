@@ -9,7 +9,7 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { ModalAlert } from '../../components/ModalAlert';
-import { Theme, themes } from '../../../styles/theme/themes';
+import { themes } from '../../../styles/theme/themes';
 import Alert from '../../assets/icons/Alert.png';
 import Check from '../../assets/icons/Check.png';
 
@@ -107,25 +107,34 @@ export function FormRegister() {
         >
           Nombre completo
         </Label>
-        <InputFullname
-          autoComplete="off"
-          type="text"
-          placeholder="Ingrese su nombre completo"
-          {...register('fullname', {
-            required: messages.required,
-            pattern: {
-              value: patterns.fullname,
-              message: messages.fullname,
-            },
-          })}
-          name="fullname"
+        <BoxInput
           Color={
             (!isDirty && 'black') ||
             (isDirty && !touchedFields.fullname && 'blue') ||
-            (touchedFields.mail && !errors.fulname && 'green') ||
+            (touchedFields.fulname && !errors.fullname && 'green') ||
             'red'
           }
-        />
+        >
+          <Input
+            autoComplete="off"
+            type="text"
+            placeholder="Ingrese su nombre completo"
+            {...register('fullname', {
+              required: messages.required,
+              pattern: {
+                value: patterns.fullname,
+                message: messages.fullname,
+              },
+            })}
+            name="fullname"
+            Color={
+              (!isDirty && 'black') ||
+              (isDirty && !touchedFields.fullname && 'blue') ||
+              (touchedFields.mail && !errors.fulname && 'green') ||
+              'red'
+            }
+          />
+        </BoxInput>
         {errors.fullname && touchedFields.fullname && (
           <Validator>{errors.fullname.message}</Validator>
         )}
@@ -394,25 +403,6 @@ const Validator = styled.p`
   margin-top: 20px;
 `;
 
-//revistar comportamiento en Active (azul)
-
-const InputFullname = styled.input<Props>`
-  width: 100%;
-  height: 48px;
-  font-size: 0.875rem;
-  color: ${p => p.theme.text};
-  font-weight: normal;
-  padding: 10px;
-  border-radius: 12px;
-  border: 1px solid ${props => props.Color};
-  ::placeholder {
-    color: '#787878';
-  }
-
-  &:active {
-    border-color: ${p => p.theme.primary};
-  }
-`;
 const Input = styled.input<Props>`
   width: 100%;
   font-size: 0.875rem;
