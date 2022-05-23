@@ -104,7 +104,7 @@ export function PasswordChange() {
               Color={
                 (!isDirty && 'black') ||
                 (isDirty && !touchedFields.password && 'blue') ||
-                (touchedFields.mail && !errors.password && 'green') ||
+                (touchedFields.password && !errors.password && 'green') ||
                 'red'
               }
             >

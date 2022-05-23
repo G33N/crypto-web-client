@@ -12,9 +12,9 @@ export const Dashboard = () => {
     AppwriteService.logout()
       .then(res => {
         console.log('Success', res);
-        localStorage.setItem('', '');
+        localStorage.setItem('auth', '');
         setTimeout(() => {
-          navigate('/home');
+          navigate('/');
         }, 3000);
       })
       .catch(error => {
