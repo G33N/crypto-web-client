@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AppwriteService } from 'services/appwrite';
 import styled from 'styled-components/macro';
 import Home from '../assets/icons/Home.svg';
+import Logo from '../assets/icons/logo.svg';
 import { navigationItems } from '../config';
 
 const Sidebar = () => {
@@ -37,6 +38,9 @@ const Sidebar = () => {
 
   return (
     <BoxSidebar>
+      <ImgConteiner>
+        <img src={Logo} alt="" />
+      </ImgConteiner>
       <div className="sidebar__items">
         {user && (
           <>
@@ -54,9 +58,9 @@ const Sidebar = () => {
                 {item.name}
               </LinkButton>
             ))}
-            {location.pathname !== '/login' && (
+            {/* {location.pathname !== '/login' && (
               <button onClick={logout}>logout</button>
-            )}
+            )} */}
           </>
         )}
         {!user && (
@@ -130,5 +134,12 @@ const Avatar = styled.div`
     width: 1.5rem;
     margin-right: 8px;
     color: ${p => p.theme.background};
+  }
+`;
+
+const ImgConteiner = styled.div`
+  img {
+    height: 4rem;
+    width: 250px;
   }
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import AvatarImage from '../assets/avatarImage2.jpg';
+import AvatarImage from '../assets/avatarImage.jpg';
 
 function Navbar(props) {
   return (
