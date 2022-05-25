@@ -32,5 +32,4 @@ const Input = styled.input`
   font-size: 18px;
   padding: 10px;
   color: ${p => p.theme.text};
-  }
 `;

@@ -44,6 +44,7 @@ export function FormLogin() {
       .then(res => {
         console.log('Success', res);
         localStorage.setItem('auth', 'token');
+        localStorage.setItem('user', JSON.stringify({ role: 'ADMIN' }));
         setTimeout(() => {
           navigate('/dashboard');
         }, 3000);

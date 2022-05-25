@@ -1,80 +1,128 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled from 'styled-components/macro';
-import { Helmet } from 'react-helmet-async';
-import { AppwriteService } from 'services/appwrite';
+import Navbar from './components/Navbar';
+import ButtonCard from './components/ButtonCard';
+import BalanceCard from './components/BalanceCard';
+import TransactionsCard from './components/TransactionsCard';
+import MarketCard from './components/MarketCard';
 
-export const Dashboard = () => {
-  let navigate = useNavigate();
-
-  const closeSession = () => {
-    AppwriteService.logout()
-      .then(res => {
-        console.log('Success', res);
-        localStorage.setItem('auth', '');
-        setTimeout(() => {
-          navigate('/');
-        }, 3000);
-      })
-      .catch(error => {
-        console.log('Error', error);
-      });
-  };
+export const Dashboard = (props: any) => {
+  const { userName } = props.props;
 
   return (
     <>
-      <Helmet>
-        <meta name="description" content="Omni wallet application Loginpage" />
-      </Helmet>
-
-      <Conteiner>
-        <p>RUTA SOLO CON LOGIN</p>
-        <Text>SOY EL DASHBOARD</Text>
-        <div></div>{' '}
-        <p>
-          BIENVENIDO ! <Button onClick={closeSession}>CERRAR SESION</Button>
-        </p>
-      </Conteiner>
+      <Container>
+        <Navbar userName={userName} />
+        <SubContainer>
+          <SectionOne>
+            <ColumnOne1>
+              <BalanceCard />
+              <ButtonCard />
+            </ColumnOne1>
+            <ColumnTwo1>
+              <TransactionsCard />
+            </ColumnTwo1>
+          </SectionOne>
+          <SectionTwo>
+            <ColumnOne2>
+              <MarketCard />
+            </ColumnOne2>
+          </SectionTwo>
+        </SubContainer>
+      </Container>
     </>
   );
 };
 
-const Conteiner = styled.div`
+const Container = styled.div`
   margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
-  padding: 4em;
-`;
-const Text = styled.p`
-  font-size: 2rem;
-  color: ${p => p.theme.textSecondary};
-  font-weight: bold;
-  width: 100%;
-  text-align: left;
-  display: block;
-  margin-bottom: 50px;
-  margin-top: 20px;
-`;
-const Button = styled.button`
-  background-color: ${p => p.theme.primary};
-  color: ${p => p.theme.textSecondary};
-  width: 250px;
-  height: 60px;
-  cursor: pointer;
-  text-decoration: none;
-  display: flex;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 1rem;
-  margin-top: 60px;
-  padding: 1rem;
-  border-radius: 0.75rem;
-
-  &:hover {
-    opacity: 0.8;
+  background: ${p => p.theme.background};
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    display: flex;
+    flex-direction: column;
+    margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
+    padding: 4em;
   }
+`;
 
-  &:active {
-    opacity: 0.4;
+const SubContainer = styled.div`
+  margin: 0.5rem 0;
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    height: 100%;
+  }
+`;
+const SectionOne = styled.div`
+  display: flex;
+  //  justify-content: space-between;
+  height: 40%;
+  gap: 2rem;
+  width: 100%;
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    flex-direction: column;
+    align-items: center;
+    height: max-content;
+  }
+`;
+const ColumnOne1 = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+`;
+
+const ColumnTwo1 = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 115%;
+  width: 100%;
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    height: max-content;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+const SectionTwo = styled.div`
+  display: flex;
+  gap: 2rem;
+  height: 26vh;
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    flex-direction: column;
+    height: max-content;
+    width: 100%;
+  }
+`;
+const ColumnOne2 = styled.div`
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+`;
+const MarketContainer = styled.div`
+  height: 60%;
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
   }
 `;

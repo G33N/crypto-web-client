@@ -5,6 +5,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import FontFaceObserver from 'fontfaceobserver';
+import { GlobalStyle } from 'styles/global-styles';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
@@ -21,6 +22,7 @@ import reportWebVitals from 'reportWebVitals';
 
 // Initialize languages
 import './locales/i18n';
+import { BrowserRouter } from 'react-router-dom';
 
 // Observe loading of Inter (to remove 'Inter', remove the <link> tag in
 // the index.html file and this observer)
@@ -39,7 +41,10 @@ ReactDOM.render(
     <ThemeProvider>
       <HelmetProvider>
         <React.StrictMode>
-          <App />
+          <BrowserRouter>
+            <App />
+            <GlobalStyle />
+          </BrowserRouter>
         </React.StrictMode>
       </HelmetProvider>
     </ThemeProvider>
