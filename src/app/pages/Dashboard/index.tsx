@@ -115,14 +115,3 @@ const ColumnOne2 = styled.div`
     width: 100%;
   }
 `;
-const MarketContainer = styled.div`
-  height: 60%;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
-    height: max-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-  }
-`;

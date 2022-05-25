@@ -1,39 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
+import Home from '../../../assets/icons/primary.svg';
+
 import { cardShadow, hoverEffect } from '../utils';
 function ButtonCard() {
   return (
     <InfoCard>
       <Row>
         <Card>
-          <CardContent>
-            <Digit>98</Digit>
-            <InfoContainer>
-              <Title>Vender</Title>
-            </InfoContainer>
-          </CardContent>
+          <Avatar>
+            <img src={Home} alt="" />
+          </Avatar>
+          <Title>Vender</Title>
         </Card>
         <Card>
-          <CardContent>
-            <Digit>98</Digit>
-            <InfoContainer>
-              <Title>Comprar</Title>
-            </InfoContainer>
-          </CardContent>
+          <Avatar>
+            <img src={Home} alt="" />
+          </Avatar>
+          <Title>Comprar</Title>
         </Card>
         <Card>
-          <CardContent>
-            <Digit>98</Digit>
-            <Title>Enviar</Title>
-          </CardContent>
+          <Avatar>
+            <img src={Home} alt="" />
+          </Avatar>
+          <Title>Enviar</Title>
         </Card>
         <Card>
-          <CardContent>
-            <Digit>98</Digit>
-            <InfoContainer>
-              <Title>Depositar</Title>
-            </InfoContainer>
-          </CardContent>
+          <Avatar>
+            <img src={Home} alt="" />
+          </Avatar>
+          <Title>Depositar</Title>
         </Card>
       </Row>
     </InfoCard>
@@ -43,8 +39,6 @@ function ButtonCard() {
 const InfoCard = styled.div`
   height: 14rem;
   width: 100%;
-  background-color: white;
-  border-radius: 1rem;
   padding: 1rem;
   color: white;
   @media screen and (min-width: 320px) and (max-width: 1080px) {
@@ -53,9 +47,10 @@ const InfoCard = styled.div`
 `;
 
 const Card = styled.div`
-  background-color: rgba(183, 194, 243, 0.3);
+  background-color: ${p => p.theme.background};
   border-radius: 1rem;
   margin-right: 15px;
+  padding: 1rem 1rem 0.3rem 1rem;
   box-shadow: ${cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
@@ -63,30 +58,25 @@ const Card = styled.div`
   }
 `;
 
-const CardContent = styled.div`
-  padding: 0.7rem 1rem 0.3rem 1rem;
-`;
-
 const Row = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 0.4rem;
-  ${({ justify }) =>
+  /* ${({ justify }) =>
     justify &&
     `
       justify-content:space-around;
       width:90%
-  `}
+  `} */
 `;
-const Digit = styled.div`
-  background-color: ${p => p.theme.text};
-  padding: 0.8rem 1rem;
-  font-size: 1.3rem;
-  border-radius: 1rem;
+const Avatar = styled.div`
+  img {
+    height: 1.5rem;
+    width: 1.5rem;
+    color: ${p => p.theme.background};
+  }
 `;
-const InfoContainer = styled.div`
-  margin-left: 0.7rem;
-`;
+
 const Title = styled.h3`
   color: black;
 `;

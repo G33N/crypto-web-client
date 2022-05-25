@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components/macro';
 import { StyleConstants } from 'styles/StyleConstants';
+import TransactionsCard from './components/TransactionsCard';
 
 export function TransactionPage() {
   return (
@@ -13,6 +14,7 @@ export function TransactionPage() {
       <Conteiner>
         <Text> TRANSACCION PAGE</Text>
         <Text> - Se ve solo si hs iniciado sesion - </Text>
+        <TransactionsCard />
       </Conteiner>
     </>
   );

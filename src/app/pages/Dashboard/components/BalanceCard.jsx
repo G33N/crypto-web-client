@@ -24,10 +24,11 @@ const Box = styled.div`
   border-radius: 1rem;
   display: flex;
   align-items: center;
+  box-shadow: ${hoverEffect};
   transition: 0.4s ease-in-out;
-  &:hover {
+  /* &:hover {
     box-shadow: ${hoverEffect};
-  }
+  } */
   @media screen and (min-width: 320px) and (max-width: 1080px) {
     margin-top: 2rem;
     margin-bottom: 2rem;
