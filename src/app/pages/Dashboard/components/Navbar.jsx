@@ -1,10 +1,38 @@
 import { i18n } from './i18n';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { AppwriteService } from 'services/appwrite';
 import React from 'react';
 import styled from 'styled-components';
 import AvatarImage from '../assets/avatarImage.jpg';
 
 function Navbar(props) {
   const { t } = i18n;
+  const navigate = useNavigate();
+
+  const useAuth = () => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const logout = () => {
+    AppwriteService.logout()
+      .then(res => {
+        console.log('Success', res);
+        localStorage.setItem('auth', '');
+        localStorage.removeItem('user');
+
+        setTimeout(() => {
+          navigate('/login');
+        }, 3000);
+      })
+      .catch(error => {
+        console.log('Error', error);
+      });
+  };
 
   return (
     <NavbarContainer>
@@ -12,9 +40,9 @@ function Navbar(props) {
         {t('navbar__title')}
         <span> {props.userName} </span>
       </Text>
-      <Avatar>
+      <AvatarButtonClose onClick={logout}>
         <img src={AvatarImage} alt="" />
-      </Avatar>
+      </AvatarButtonClose>
     </NavbarContainer>
   );
 }
@@ -29,7 +57,7 @@ const NavbarContainer = styled.nav`
     margin-bottom: 1rem;
   }
 `;
-const Avatar = styled.div`
+const AvatarButtonClose = styled.button`
   img {
     height: 4rem;
     width: 4rem;

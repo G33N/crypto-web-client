@@ -17,6 +17,7 @@ function App() {
       <div className="app">
         {location.pathname !== '/register' &&
           location.pathname !== '/login' &&
+          location.pathname !== '/home' &&
           location.pathname !== '/accountVerify' &&
           location.pathname !== '/passRecover' &&
           location.pathname !== '/passChange' && <Sidebar />}
