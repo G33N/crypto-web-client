@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Container } from 'styles/StyleElements';
 import {
+  Container,
   SubContainer,
   SectionOne,
   SectionTwo,
