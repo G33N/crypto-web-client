@@ -3,7 +3,6 @@ import styled from 'styled-components/macro';
 import { Logo } from './Logo';
 import { StyleConstants } from 'styles/StyleConstants';
 import { Nav } from './Nav';
-import { PageWrapper } from '../PageWrapper';
 
 export function NavBar() {
   return (
@@ -15,6 +14,16 @@ export function NavBar() {
     </Wrapper>
   );
 }
+
+const PageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  box-sizing: content-box;
+`;
 
 const Wrapper = styled.header`
   box-shadow: 0 1px 0 0 ${p => p.theme.borderLight};
@@ -33,11 +42,5 @@ const Wrapper = styled.header`
         /rgba?(\(\s*\d+\s*,\s*\d+\s*,\s*\d+)(?:\s*,.+?)?\)/,
         'rgba$1,0.75)',
       )};
-  }
-
-  ${PageWrapper} {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
   }
 `;
