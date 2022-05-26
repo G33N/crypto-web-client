@@ -1,10 +1,13 @@
 import React from 'react';
+import i18next from 'i18next';
 import styled from 'styled-components';
+import { StyleConstants } from '../../../../styles/StyleConstants';
 import Badge from '../../Dashboard/components/Badge';
 import BlueAlert from '../../../assets/icons/BlueAlert.png';
-import { cardShadow, hoverEffect } from '../../Dashboard/utils';
 
 function TransactionsCard() {
+  const { t } = i18next;
+
   return (
     <TransactionContainer>
       <CardContent>
@@ -14,13 +17,12 @@ function TransactionsCard() {
               <img src={BlueAlert} alt="" />
             </Avatar>
             <TextContainer>
-              <Title>Compra</Title>
+              <Title>{t('title')}Compra</Title>
               <SubTitle>03/02/2026 12:00hs.</SubTitle>
             </TextContainer>
           </Info>
           <Container>
             <Badge content="En Revision" paid />
-            <Price>En Revision</Price>
           </Container>
         </Invoice>
         <Invoice>
@@ -35,7 +37,6 @@ function TransactionsCard() {
           </Info>
           <Container>
             <Badge content="Fallida" late />
-            <Price>Fallida</Price>
           </Container>
         </Invoice>
         <Invoice>
@@ -50,7 +51,6 @@ function TransactionsCard() {
           </Info>
           <Container>
             <Badge content="En Revision" glow />
-            <Price>En Revision</Price>
           </Container>
         </Invoice>
         <Invoice>
@@ -65,7 +65,6 @@ function TransactionsCard() {
           </Info>
           <Container>
             <Badge content="En Proceso" paid />
-            <Price>En proceso</Price>
           </Container>
         </Invoice>
       </CardContent>
@@ -79,10 +78,10 @@ const TransactionContainer = styled.div`
   margin-top: 1rem;
   background-color: white;
   height: 140%;
-  box-shadow: ${cardShadow};
+  box-shadow: ${StyleConstants.cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
-    box-shadow: ${hoverEffect};
+    box-shadow: ${StyleConstants.hoverEffect};
   }
   @media screen and (min-width: 320px) and (max-width: 1080px) {
     width: 80%;
@@ -145,7 +144,5 @@ const Container = styled.div`
     gap: 0.6rem;
   }
 `;
-
-const Price = styled.div``;
 
 export default TransactionsCard;

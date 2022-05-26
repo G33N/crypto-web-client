@@ -1,0 +1,9 @@
+{
+  "accountVerify__title": "Verificar cuenta",
+  "accountVerify__subtitle": " Se ha enviado un código OTP a tu correo electrónico:",
+  "accountVerify__textInfo": "Ingresa el codigo en el espacio a continuación.",
+  "accountVerify__textLabel": " Código de verificación de correo electrónico",
+  "accountVerify__textPlaceholder": "Ingresa el codigo de verificacion",
+  "accountVerify__textCounter": "Reenviar codigo: ",
+  "accountVerify__actionButton": "Verificar"
+}

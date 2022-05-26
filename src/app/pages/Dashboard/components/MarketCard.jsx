@@ -1,7 +1,8 @@
 import React from 'react';
+import { i18n } from './i18n';
 import styled from 'styled-components';
+import { StyleConstants } from '../../../../styles/StyleConstants';
 import Alert from '../../../assets/icons/Alert.png';
-import { cardShadow, hoverEffect } from '../utils';
 
 const listado = [
   {
@@ -26,11 +27,12 @@ const listado = [
 ];
 
 function MarketCard() {
+  const { t } = i18n;
+
   return (
     <Card>
       <BoxTitle>
-        <Title>Transacciones</Title>
-        <LinkTitle>Ver todas</LinkTitle>
+        <Title>{t('marketCard__title')}</Title>
       </BoxTitle>
       <ul>
         {listado.map(({ id, name, price, change }) => (
@@ -59,10 +61,10 @@ const Card = styled.div`
   margin: 0;
   padding: 1rem;
   border-radius: 1rem;
-  box-shadow: ${cardShadow};
+  box-shadow: ${StyleConstants.cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
-    box-shadow: ${hoverEffect};
+    box-shadow: ${StyleConstants.hoverEffect};
   }
   @media screen and (min-width: 320px) and (max-width: 1080px) {
     height: max-content;
@@ -114,12 +116,6 @@ const SubTitle = styled.h5`
 
 const Title = styled.h5`
   text-align: start;
-  color: ${p => p.theme.text};
-  cursor: pointer;
-`;
-
-const LinkTitle = styled.h5`
-  text-align: end;
   color: ${p => p.theme.text};
   cursor: pointer;
 `;

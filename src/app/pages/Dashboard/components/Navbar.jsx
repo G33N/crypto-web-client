@@ -1,12 +1,15 @@
+import { i18n } from './i18n';
 import React from 'react';
 import styled from 'styled-components';
 import AvatarImage from '../assets/avatarImage.jpg';
 
 function Navbar(props) {
+  const { t } = i18n;
+
   return (
     <NavbarContainer>
       <Text>
-        Good morning,
+        {t('navbar__title')}
         <span> {props.userName} </span>
       </Text>
       <Avatar>

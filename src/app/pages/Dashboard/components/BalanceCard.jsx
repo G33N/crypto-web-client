@@ -1,14 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { hoverEffect } from '../utils';
+import { i18n } from './i18n';
+import { StyleConstants } from '../../../../styles/StyleConstants';
 function BalanceCard() {
+  const { t } = i18n;
+
   return (
     <Box>
       <CardContent flex={true}>
         <Slack>
           <SlackText>
-            <SlackHead>Billetera</SlackHead>
-            <SlackHead>Balance</SlackHead>
+            <SlackHead>{t('balanceCard__title')}</SlackHead>
+            <SlackHead>{t('balanceCard__subTitle')}</SlackHead>
             <SlackFoot>$ 0000000</SlackFoot>
           </SlackText>
         </Slack>
@@ -24,10 +27,10 @@ const Box = styled.div`
   border-radius: 1rem;
   display: flex;
   align-items: center;
-  box-shadow: ${hoverEffect};
+  box-shadow: ${StyleConstants.hoverEffect};
   transition: 0.4s ease-in-out;
   /* &:hover {
-    box-shadow: ${hoverEffect};
+    box-shadow:${StyleConstants.hoverEffect};
   } */
   @media screen and (min-width: 320px) and (max-width: 1080px) {
     margin-top: 2rem;

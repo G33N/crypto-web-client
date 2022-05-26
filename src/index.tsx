@@ -1,12 +1,11 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
-
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import FontFaceObserver from 'fontfaceobserver';
 import { GlobalStyle } from 'styles/global-styles';
-
+import '../src/app/';
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
 
@@ -20,8 +19,6 @@ import { ThemeProvider } from 'styles/theme/ThemeProvider';
 
 import reportWebVitals from 'reportWebVitals';
 
-// Initialize languages
-import './locales/i18n';
 import { BrowserRouter } from 'react-router-dom';
 
 // Observe loading of Inter (to remove 'Inter', remove the <link> tag in
@@ -51,13 +48,6 @@ ReactDOM.render(
   </Provider>,
   MOUNT_NODE,
 );
-
-// Hot reloadable translation json files
-if (module.hot) {
-  module.hot.accept(['./locales/i18n'], () => {
-    // No need to render the App again because i18next works with the hooks
-  });
-}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

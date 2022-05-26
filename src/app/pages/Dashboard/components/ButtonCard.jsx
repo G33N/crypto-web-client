@@ -1,9 +1,12 @@
+import { i18n } from './i18n';
 import React from 'react';
 import styled from 'styled-components';
+import { StyleConstants } from '../../../../styles/StyleConstants';
 import Home from '../../../assets/icons/primary.svg';
 
-import { cardShadow, hoverEffect } from '../utils';
 function ButtonCard() {
+  const { t } = i18n;
+
   return (
     <InfoCard>
       <Row>
@@ -11,25 +14,25 @@ function ButtonCard() {
           <Avatar>
             <img src={Home} alt="" />
           </Avatar>
-          <Title>Vender</Title>
+          <Title>{t('buttonCard__titleButton1')}</Title>
         </Card>
         <Card>
           <Avatar>
             <img src={Home} alt="" />
           </Avatar>
-          <Title>Comprar</Title>
+          <Title>{t('buttonCard__titleButton2')}</Title>
         </Card>
         <Card>
           <Avatar>
             <img src={Home} alt="" />
           </Avatar>
-          <Title>Enviar</Title>
+          <Title>{t('buttonCard__titleButton3')}</Title>
         </Card>
         <Card>
           <Avatar>
             <img src={Home} alt="" />
           </Avatar>
-          <Title>Depositar</Title>
+          <Title>{t('buttonCard__titleButton4')}</Title>
         </Card>
       </Row>
     </InfoCard>
@@ -51,10 +54,10 @@ const Card = styled.div`
   border-radius: 1rem;
   margin-right: 15px;
   padding: 1rem 1rem 0.3rem 1rem;
-  box-shadow: ${cardShadow};
+  box-shadow: ${StyleConstants.cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
-    box-shadow: ${hoverEffect};
+    box-shadow: ${StyleConstants.hoverEffect};
   }
 `;
 
@@ -62,12 +65,6 @@ const Row = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 0.4rem;
-  /* ${({ justify }) =>
-    justify &&
-    `
-      justify-content:space-around;
-      width:90%
-  `} */
 `;
 const Avatar = styled.div`
   img {

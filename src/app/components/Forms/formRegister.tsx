@@ -56,7 +56,7 @@ export function FormRegister() {
         console.log('SuccessRegister', res);
         if (res) {
           setIsOpen(true);
-          navigate('/login');
+          navigate('/accountVerify');
         } else {
           return alert('Ya existe un usuario con este mail');
         }

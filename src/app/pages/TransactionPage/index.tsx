@@ -1,7 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components/macro';
-import { StyleConstants } from 'styles/StyleConstants';
 import TransactionsCard from './components/TransactionsCard';
 
 export function TransactionPage() {
@@ -12,15 +11,13 @@ export function TransactionPage() {
       </Helmet>
 
       <Conteiner>
-        <Text> TRANSACCION PAGE</Text>
-        <Text> - Se ve solo si hs iniciado sesion - </Text>
+        <Text> TRANSACTION PAGE</Text>
         <TransactionsCard />
       </Conteiner>
     </>
   );
 }
 const Conteiner = styled.div`
-  margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
   padding: 4em;
   background: white;
 `;

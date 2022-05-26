@@ -2,9 +2,9 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AppwriteService } from 'services/appwrite';
 import styled from 'styled-components/macro';
-import Home from '../assets/icons/Home.svg';
-import Logo from '../assets/icons/logo.svg';
-import { navigationItems } from '../config';
+import Home from '../../assets/icons/Home.svg';
+import Logo from '../../assets/icons/logo.svg';
+import { navigationItems } from './config';
 
 const Sidebar = () => {
   const navigate = useNavigate();

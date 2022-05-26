@@ -1,13 +1,20 @@
 import React from 'react';
+import { i18n } from './i18n';
 import styled from 'styled-components';
+import { StyleConstants } from '../../../../styles/StyleConstants';
 import Badge from './Badge';
 import BlueAlert from '../../../assets/icons/BlueAlert.png';
-import { cardShadow, hoverEffect } from '../utils';
 
 function TransactionsCard() {
+  const { t } = i18n;
+
   return (
     <TransactionContainer>
       <CardContent>
+        <BoxTitle>
+          <TitleCard>{t('transactionCard__title')}</TitleCard>
+          <LinkTitle>{t('transactionCard__linkTitle')}</LinkTitle>
+        </BoxTitle>
         <Invoice>
           <Info>
             <Avatar>
@@ -79,10 +86,10 @@ const TransactionContainer = styled.div`
   margin-top: 1rem;
   background-color: white;
   height: 140%;
-  box-shadow: ${cardShadow};
+  box-shadow: ${StyleConstants.cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
-    box-shadow: ${hoverEffect};
+    box-shadow: ${StyleConstants.hoverEffect};
   }
   @media screen and (min-width: 320px) and (max-width: 1080px) {
     width: 80%;
@@ -97,6 +104,26 @@ const CardContent = styled.div`
     margin: 2rem 0;
   }
 `;
+
+const BoxTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+const LinkTitle = styled.h5`
+  margin-right: 30px;
+  text-align: end;
+  color: ${p => p.theme.text};
+  cursor: pointer;
+`;
+const TitleCard = styled.h5`
+  margin-left: 30px;
+  text-align: start;
+  color: ${p => p.theme.text};
+  cursor: pointer;
+`;
+
 const Invoice = styled.div`
   display: flex;
   align-items: center;
