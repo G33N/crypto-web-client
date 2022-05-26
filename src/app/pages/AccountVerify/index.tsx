@@ -1,6 +1,21 @@
 import React, { useState } from 'react';
+import { i18n } from './i18n';
+import {
+  Container,
+  Body,
+  Button,
+  Validator,
+  Head,
+  Title,
+  Subtitle,
+  TextCounter,
+  TextMail,
+  TextInfo,
+  Label,
+  InputNum,
+  WrapperCounter,
+} from './styles';
 import { useNavigate } from 'react-router-dom';
-import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import CountDownTimer from './CountDownTimer';
 import { AppwriteService } from 'services/appwrite';
@@ -10,6 +25,7 @@ import { Container } from 'styles/StyleElements';
 import { Button } from 'styles/StyleElements';
 
 export const AccountVerify = () => {
+  const { t } = i18n;
   const { formState, handleSubmit, register } = useForm({
     mode: 'onChange',
   });
@@ -70,18 +86,16 @@ export const AccountVerify = () => {
       />
       <Container>
         <Head>
-          <Title>Verificación de seguridad</Title>
+          <Title>{t('accountVerify__title')}</Title>
         </Head>
         <Body>
-          <Subtitle>
-            Se ha enviado un código OTP a tu correo electrónico:
-          </Subtitle>
+          <Subtitle>{t('accountVerify__subtitle')}</Subtitle>
           <TextMail>ser*****@gmail.com</TextMail>
-          <TextIn>Ingresa el codigo en el espacio a continuación.</TextIn>
-          <Label>Código de verificación de correo electrónico</Label>
+          <TextInfo>{t('accountVerify__textInfo')}</TextInfo>
+          <Label>{t('accountVerify__textLabel')}</Label>
           <InputNum
             type="email"
-            placeholder="Ingresa el codigo de verificacion"
+            placeholder={t('accountVerify__textPlaceholder')}
             {...register('codigo', {
               required: messages.required,
             })}
@@ -92,122 +106,14 @@ export const AccountVerify = () => {
           )}
 
           <WrapperCounter>
-            <TextCounter>Reenviar código: </TextCounter>{' '}
+            <TextCounter>{t('accountVerify__textCounter')}</TextCounter>{' '}
             <CountDownTimer minutes={3} seconds={0} />
           </WrapperCounter>
-          <Button
-            type="submit"
-            disabled={!isValid}
-            onClick={handleSubmit(onSubmit)}
-          >
-            Verificar
+          <Button type="submit" disabled onClick={handleSubmit(onSubmit)}>
+            {t('accountVerify__actionButton')}
           </Button>
         </Body>
       </Container>
     </>
   );
 };
-
-const Head = styled.div`
-  display: flex;
-  flex-direction: row;
-  text-align: left;
-`;
-
-const Title = styled.h3`
-  width: 100%;
-  height: 32px;
-  font-weight: 700;
-  font-size: 24px;
-  color: ${p => p.theme.text};
-  letter-spacing: 0.0022em;
-  line-height: 32px;
-  margin-bottom: 20px;
-`;
-
-const Body = styled.div`
-  text-align: left;
-`;
-
-const Subtitle = styled.div`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 22px;
-  color: ${p => p.theme.text};
-  margin-bottom: 16px;
-`;
-
-const TextMail = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 20px;
-  color: ${p => p.theme.text};
-  margin-bottom: 8px;
-`;
-const TextIn = styled.div`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  color: ${p => p.theme.text};
-  margin-bottom: 24px;
-`;
-
-const Label = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 0.75rem;
-  width: 100%;
-  text-align: left;
-  line-height: 20px;
-  color: ${p => p.theme.text};
-  margin-bottom: 8px;
-`;
-
-const InputNum = styled.input`
-  width: 100%;
-  font-size: 0.875rem;
-  font-weight: normal;
-  height: 48px;
-  padding: 10px;
-  border-radius: 12px;
-  border: 1px solid ${p => p.theme.borderLight};
-  outline: none;
-  ::placeholder {
-    color: ${p => p.theme.text};
-  }
-  &:active {
-    color: ${p => p.theme.text};
-  }
-`;
-
-const Validator = styled.p`
-  font-size: 0.6rem;
-  color: ${p => p.theme.textSecondary};
-  font-weight: bold;
-  width: 100%;
-  text-align: left;
-  display: block;
-  margin-bottom: 13px;
-`;
-
-const WrapperCounter = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: end;
-  align-items: center;
-  color: #92c1fd;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-`;
-
-const TextCounter = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 22px;
-  padding-right: 5px;
-`;

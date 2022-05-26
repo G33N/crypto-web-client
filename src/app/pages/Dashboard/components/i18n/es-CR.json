@@ -1,0 +1,16 @@
+{
+  "navbar__title": "Hola",
+
+  "balanceCard__title": "Billetera",
+  "balanceCard__subTitle": "Balance",
+
+  "buttonCard__titleButton1": "Vender",
+  "buttonCard__titleButton2": "Comprar",
+  "buttonCard__titleButton3": "Enviar",
+  "buttonCard__titleButton4": "Depositar",
+
+  "marketCard__title": "Mercados",
+
+  "transactionCard__title": "Transacciones",
+  "transactionCard__linkTitle": "Ver todas"
+}

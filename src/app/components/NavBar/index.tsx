@@ -11,11 +11,6 @@ export function NavBar() {
       <PageWrapper>
         <Logo />
         <Nav />
-        {/* {token && (
-          <button type="button" onClick={onLogout}>
-            Sign Out
-          </button>
-        )} */}
       </PageWrapper>
     </Wrapper>
   );

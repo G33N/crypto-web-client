@@ -11,6 +11,7 @@ import { themes } from '../../../styles/theme/themes';
 import PasswordOff from '../../assets/icons/Password off.svg';
 import PasswordOn from '../../assets/icons/Password on.svg';
 import Alert from '../../assets/icons/alert.svg';
+import { ModalSuccess } from '../ModalSuccess';
 
 interface Props {
   successPass?: string;
@@ -46,6 +47,7 @@ export function FormRegister() {
   } = formState;
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [iconShown, setIconShown] = useState(false);
   const toggleIconVisiblity = () => {
     setIconShown(iconShown ? false : true);
@@ -53,29 +55,21 @@ export function FormRegister() {
 
   const onSubmit = (data, e) => {
     const { fullname, mail, password } = data;
-    const urlVerify = 'http://localhost:3000/accountVerify';
 
     e.preventDefault();
     AppwriteService.createUser(fullname, mail, password)
       .then(res => {
         console.log('SuccessRegister', res);
         if (res) {
-          //------verifica cuenta mail-------//
-          AppwriteService.verificationUser(urlVerify)
-            .then(res => {
-              console.log('SuccessVerify', res);
-            })
-            .catch(error => {
-              console.log('ErrorVerify', error);
-            });
-          navigate('/login');
+          setIsOpen(true);
+          navigate('/accountVerify');
         } else {
           return alert('Ya existe un usuario con este mail');
         }
       })
       .catch(error => {
         console.log('ErrorRegister', error);
-        setIsOpen(true);
+        setIsOpenAlert(true);
       });
   };
 
@@ -91,8 +85,8 @@ export function FormRegister() {
   return (
     <>
       <ModalAlert
-        openModal={isOpen}
-        closeModal={setIsOpen}
+        openModal={isOpenAlert}
+        closeModal={setIsOpenAlert}
         titleAlert={'Hubo un error'}
         descriptionAlert={
           'Ocurrió un error al cargar la información. Por favor intentá de nuevo.'
@@ -100,7 +94,18 @@ export function FormRegister() {
         labelButton={'Regresar'}
         isVisibleButonSuport={false}
       />
-      <Form onClick={handleSubmit(onSubmit)}>
+      <ModalSuccess
+        openModal={isOpen}
+        closeModal={setIsOpen}
+        title={'PERFECTO'}
+        description={'El usuario se creo correctamente.'}
+        labelButton={'Continuar'}
+        pathTo={'/login'}
+        isVisibleButonClose={false}
+        isVisibleButonNavigate
+        isVisibleButonSuport={false}
+      />
+      <Form>
         {/* //------ Input fullname----------// */}
         <Label
           Color={
@@ -117,6 +122,10 @@ export function FormRegister() {
             (isDirty && !touchedFields.mail && 'blue') ||
             (touchedFields.mail && !errors.mail && 'green') ||
             'red'
+            (isValidating && 'black') ||
+            (isDirty && !touchedFields.fullname && 'blue') ||
+            (touchedFields.fullname && !errors.fullname && 'green') ||
+            (touchedFields.fullname && errors.fullname && 'red')
           }
         >
           <Input
@@ -238,7 +247,7 @@ export function FormRegister() {
           Color={
             (!isDirty && 'grey') ||
             (isDirty && !touchedFields.password && 'blue') ||
-            (touchedFields.mail && !errors.password && 'green') ||
+            (touchedFields.password && !errors.password && 'green') ||
             'red'
           }
         >
@@ -330,7 +339,11 @@ export function FormRegister() {
           <Validator>{errors.passConfirm.message}</Validator>
         )}
 
-        <Button type="submit" disabled={!isValid}>
+        <Button
+          type="submit"
+          disabled={!isValid}
+          onClick={handleSubmit(onSubmit)}
+        >
           Crear cuenta
         </Button>
       </Form>
