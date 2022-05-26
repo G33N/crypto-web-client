@@ -1,7 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import IconCheck from '../ModalSuccess/assets/Check.png';
+import IconCheck from '../../assets/icons/Check.svg';
 import { ButtonLink } from '../ButtonLink';
+import { ButtonTwo } from 'styles/StyleElements';
+import { ButtonThree } from 'styles/StyleElements';
 
 export const ModalSuccess = ({
   openModal,
@@ -24,13 +26,15 @@ export const ModalSuccess = ({
               <Title>{title}</Title>
               <Description>{description}</Description>
               {isVisibleButonClose && (
-                <Button onClick={() => closeModal(false)}>{labelButton}</Button>
+                <ButtonTwo onClick={() => closeModal(false)}>
+                  {labelButton}
+                </ButtonTwo>
               )}
               {isVisibleButonNavigate && (
                 <ButtonLink path={pathTo} label={'Continuar'} />
               )}
               {isVisibleButonSuport && (
-                <ButtonTwo type="submit">Contactar a soporte</ButtonTwo>
+                <ButtonThree type="submit">Contactar a soporte</ButtonThree>
               )}
             </Contenido>
           </ConteinerModal>
@@ -104,45 +108,6 @@ const Description = styled.div`
   justify-content: center;
   text-align: center;
   margin-bottom: 48px;
-`;
-
-const Button = styled.button`
-  width: 100%;
-  height: 56px;
-  font-size: 18px;
-  background-color: ${p => p.theme.primary};
-  border-color: transparent;
-  border-radius: 12px;
-  margin-bottom: 16px;
-  color: ${p => p.theme.background};
-  ::placeholder {
-    color: ${p => p.theme.textSecondary};
-    text-align: center;
-  }
-  ${props =>
-    props.disabled &&
-    css`
-      background: ${p => p.theme.secondary};
-    `}
-`;
-const ButtonTwo = styled.button`
-  width: 100%;
-  height: 56px;
-  font-size: 18px;
-  background-color: ${p => p.theme.background};
-  border: 2px solid ${p => p.theme.primary};
-  border-radius: 12px;
-  margin-bottom: 16px;
-  color: ${p => p.theme.primary};
-  ::placeholder {
-    color: ${p => p.theme.textSecondary};
-    text-align: center;
-  }
-  ${props =>
-    props.disabled &&
-    css`
-      background: ${p => p.theme.secondary};
-    `}
 `;
 
 const Img = styled.img`

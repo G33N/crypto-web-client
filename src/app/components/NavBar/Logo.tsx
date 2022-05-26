@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
-import Omnicrypto from './assets/moniflowcrypto.png';
+import Omnicrypto from '../../assets/icons/Moniflow.crypto.svg';
 
 export function Logo() {
   return (

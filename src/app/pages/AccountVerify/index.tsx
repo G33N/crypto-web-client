@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { StyleConstants } from 'styles/StyleConstants';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import CountDownTimer from './CountDownTimer';
 import { AppwriteService } from 'services/appwrite';
 import { ModalAlert } from 'app/components/ModalAlert';
 import { ModalSuccess } from 'app/components/ModalSuccess';
+import { Container } from 'styles/StyleElements';
+import { Button } from 'styles/StyleElements';
 
 export const AccountVerify = () => {
   const { formState, handleSubmit, register } = useForm({
@@ -107,23 +108,6 @@ export const AccountVerify = () => {
   );
 };
 
-const Container = styled.div`
-  margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
-  text-align: center;
-
-  @media (min-width: 480px) {
-    padding-left: 20%;
-    padding-right: 25%;
-  }
-  @media (min-width: 720px) {
-    padding-left: 30%;
-    padding-right: 35%;
-  }
-  @media (min-width: 1340px) {
-    padding-left: 35%;
-    padding-right: 40%;
-  }
-`;
 const Head = styled.div`
   display: flex;
   flex-direction: row;
@@ -189,7 +173,7 @@ const InputNum = styled.input`
   height: 48px;
   padding: 10px;
   border-radius: 12px;
-  border: 1px solid ${p => p.theme.text};
+  border: 1px solid ${p => p.theme.borderLight};
   outline: none;
   ::placeholder {
     color: ${p => p.theme.text};
@@ -218,7 +202,6 @@ const WrapperCounter = styled.div`
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
-  margin-bottom: 45px;
 `;
 
 const TextCounter = styled.div`
@@ -227,24 +210,4 @@ const TextCounter = styled.div`
   font-size: 14px;
   line-height: 22px;
   padding-right: 5px;
-`;
-
-const Button = styled.button`
-  width: 80%;
-  height: 48px;
-  font-size: 18px;
-  padding: 10px;
-  background-color: ${p => p.theme.primary};
-  border-color: transparent;
-  border-radius: 12px;
-  color: ${p => p.theme.background};
-  ::placeholder {
-    color: ${p => p.theme.textSecondary};
-    text-align: center;
-  }
-  ${props =>
-    props.disabled &&
-    css`
-      background: ${p => p.theme.secondary};
-    `}
 `;

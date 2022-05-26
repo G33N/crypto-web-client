@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppwriteService } from '../../../services/appwrite';
-import { StyleConstants } from 'styles/StyleConstants';
 import styled, { css } from 'styled-components/macro';
-import Arrow from '../../assets/icons/Back.png';
+import Arrow from '../../assets/icons/Back.svg';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from '../../components/Forms/components/CardValidationPass';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import PasswordOn from '../../assets/icons/Password on.svg';
+import PasswordOff from '../../assets/icons/Password off.svg';
 import { ModalAlert } from '../../components/ModalAlert';
 import { ModalSuccess } from '../../components/ModalSuccess';
+import { Container } from '../../../styles/StyleElements';
+import { Button } from 'styles/StyleElements';
+
 interface Props {
   successPass?: string;
   Color?: string;
@@ -17,7 +19,7 @@ interface Props {
 
 const messages = {
   required: 'Este campo es obligatorio',
-  passConfirm: 'Las contrasenas deben ser iguales',
+  passConfirm: 'Las contraseñas deben ser iguales',
 };
 const messageConfirmPass = 'Las contrasenas deben ser iguales';
 
@@ -86,7 +88,7 @@ export function PasswordChange() {
             {''}
             <Img src={Arrow} />
           </ButonBack>
-          <Title>Nueva Contrasena</Title>
+          <Title>Nueva Contraseña</Title>
         </Head>
         <Body>
           <Form onClick={handleSubmit(onSubmit)}>
@@ -97,14 +99,14 @@ export function PasswordChange() {
                 (touchedFields.password && errors.password && 'red')
               }
             >
-              Contrasena nueva
+              Contraseña nueva
             </Label>
 
             <BoxInput
               Color={
-                (!isDirty && 'black') ||
+                (!isDirty && 'grey') ||
                 (isDirty && !touchedFields.password && 'blue') ||
-                (touchedFields.mail && !errors.password && 'green') ||
+                (touchedFields.password && !errors.password && 'green') ||
                 'red'
               }
             >
@@ -126,15 +128,15 @@ export function PasswordChange() {
               <IconPass
                 onClick={togglePasswordVisiblity}
                 Color={
-                  (isValidating && 'black') ||
+                  (isValidating && 'grey') ||
                   (touchedFields.password && !errors.password && 'green') ||
                   (touchedFields.password && errors.password && 'red')
                 }
               >
                 {passwordShown ? (
-                  <FontAwesomeIcon icon={faEye} />
+                  <Img src={PasswordOn} />
                 ) : (
-                  <FontAwesomeIcon icon={faEyeSlash} />
+                  <Img src={PasswordOff} />
                 )}
               </IconPass>
             </BoxInput>
@@ -159,7 +161,7 @@ export function PasswordChange() {
 
             <BoxInput
               Color={
-                (!isDirty && 'black') ||
+                (!isDirty && 'grey') ||
                 (isDirty && !touchedFields.passConfirm && 'blue') ||
                 (touchedFields.passConfirm && !errors.passConfirm && 'green') ||
                 'red'
@@ -179,15 +181,15 @@ export function PasswordChange() {
               <Icon
                 onClick={togglePasswordVisiblity}
                 Color={
-                  (isValidating && 'black') ||
+                  (isValidating && 'grey') ||
                   (touchedFields.password && !errors.password && 'green') ||
                   (touchedFields.password && errors.password && 'red')
                 }
               >
                 {passwordShown ? (
-                  <FontAwesomeIcon icon={faEye} />
+                  <Img src={PasswordOn} />
                 ) : (
-                  <FontAwesomeIcon icon={faEyeSlash} />
+                  <Img src={PasswordOff} />
                 )}
               </Icon>
             </BoxInput>
@@ -205,24 +207,6 @@ export function PasswordChange() {
     </>
   );
 }
-
-const Container = styled.div`
-  margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
-  padding: 4em;
-
-  @media (min-width: 480px) {
-    padding-left: 20%;
-    padding-right: 25%;
-  }
-  @media (min-width: 720px) {
-    padding-left: 30%;
-    padding-right: 35%;
-  }
-  @media (min-width: 1040px) {
-    padding-left: 35%;
-    padding-right: 40%;
-  }
-`;
 
 const Head = styled.div`
   display: flex;
@@ -300,7 +284,7 @@ const BoxInput = styled.div<Props>`
   width: 100%;
   display: flex;
   align-items: center;
-  border: solid 2px ${props => props.Color};
+  border: solid 1px ${props => props.Color};
   opacity: 0.8;
   border-radius: 12px;
   background-color: transparent;
@@ -334,25 +318,4 @@ const InputPass = styled.input`
   &:active {
     color: ${p => p.theme.text};
   }
-`;
-
-const Button = styled.button`
-  margin-top: 40px;
-  width: 80%;
-  height: 48px;
-  font-size: 18px;
-  padding: 10px;
-  background-color: ${p => p.theme.primary};
-  border-color: transparent;
-  border-radius: 12px;
-  color: ${p => p.theme.background};
-  ::placeholder {
-    color: ${p => p.theme.textSecondary};
-    text-align: center;
-  }
-  ${props =>
-    props.disabled &&
-    css`
-      background: ${p => p.theme.secondary};
-    `}
 `;

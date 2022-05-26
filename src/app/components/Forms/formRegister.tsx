@@ -4,14 +4,13 @@ import { AppwriteService } from '../../../services/appwrite';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from './components/CardValidationPass';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { ModalAlert } from '../../components/ModalAlert';
 import { themes } from '../../../styles/theme/themes';
-import Alert from '../../assets/icons/Alert.png';
-import Check from '../../assets/icons/Check.png';
+import PasswordOff from '../../assets/icons/Password off.svg';
+import PasswordOn from '../../assets/icons/Password on.svg';
+import Alert from '../../assets/icons/alert.svg';
 
 interface Props {
   successPass?: string;
@@ -37,7 +36,14 @@ export function FormRegister() {
   const { register, getValues, formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
-  const { isValid, touchedFields, errors, isValidating, isDirty } = formState;
+  const {
+    isValid,
+    touchedFields,
+    errors,
+    isValidating,
+    isDirty,
+    isSubmitting,
+  } = formState;
 
   const [isOpen, setIsOpen] = useState(false);
   const [iconShown, setIconShown] = useState(false);
@@ -98,7 +104,7 @@ export function FormRegister() {
         {/* //------ Input fullname----------// */}
         <Label
           Color={
-            (isValidating && 'black') ||
+            (isValidating && 'grey') ||
             (touchedFields.fullname && !errors.fullname && 'green') ||
             (touchedFields.fullname && errors.fullname && 'red')
           }
@@ -107,10 +113,10 @@ export function FormRegister() {
         </Label>
         <BoxInput
           Color={
-            (isValidating && 'black') ||
+            (!isDirty && 'grey') ||
             (isDirty && !touchedFields.mail && 'blue') ||
-            (touchedFields.fullname && !errors.fullname && 'green') ||
-            (touchedFields.fullname && errors.fullname && 'red')
+            (touchedFields.mail && !errors.mail && 'green') ||
+            'red'
           }
         >
           <Input
@@ -134,7 +140,7 @@ export function FormRegister() {
         {/* //------ Input mail ----------// */}
         <Label
           Color={
-            (isValidating && 'black') ||
+            (isValidating && 'grey') ||
             (touchedFields.mail && !errors.mail && 'green') ||
             (touchedFields.mail && errors.mail && 'red')
           }
@@ -144,7 +150,7 @@ export function FormRegister() {
 
         <BoxInput
           Color={
-            (!isDirty && 'black') ||
+            (!isDirty && 'grey') ||
             (isDirty && !touchedFields.mail && 'blue') ||
             (touchedFields.mail && !errors.mail && 'green') ||
             'red'
@@ -171,11 +177,7 @@ export function FormRegister() {
             name="mail"
           />
           <IconInput onClick={toggleIconVisiblity} hidden={!touchedFields.mail}>
-            {errors.mail && touchedFields.mail ? (
-              <Img src={Alert} />
-            ) : (
-              <Img src={Check} />
-            )}
+            {errors.mail && touchedFields.mail ? <Img src={Alert} /> : ''}
           </IconInput>
         </BoxInput>
 
@@ -199,7 +201,7 @@ export function FormRegister() {
           {...register('phone', {})}
           onChange={handleOnChange}
           inputStyle={{
-            borderColor: `${themes.light.text}`,
+            borderColor: `${themes.light.borderLight}`,
             width: '100%',
             height: '48px',
             borderRadius: '12px',
@@ -207,7 +209,7 @@ export function FormRegister() {
             color: `${themes.light.text}`,
           }}
           buttonStyle={{
-            borderColor: `${themes.light.text}`,
+            borderColor: `${themes.light.borderLight}`,
             height: '48px',
             width: '15%',
             background: 'white',
@@ -229,12 +231,12 @@ export function FormRegister() {
             (touchedFields.password && errors.password && 'red')
           }
         >
-          Contrasena nueva
+          Contraseña nueva
         </Label>
 
         <BoxInput
           Color={
-            (!isDirty && 'black') ||
+            (!isDirty && 'grey') ||
             (isDirty && !touchedFields.password && 'blue') ||
             (touchedFields.mail && !errors.password && 'green') ||
             'red'
@@ -258,15 +260,15 @@ export function FormRegister() {
           <IconPass
             onClick={togglePasswordVisiblity}
             Color={
-              (isValidating && 'black') ||
+              (isValidating && 'grey') ||
               (touchedFields.password && !errors.password && 'green') ||
               (touchedFields.password && errors.password && 'red')
             }
           >
             {passwordShown ? (
-              <FontAwesomeIcon icon={faEye} />
+              <Img src={PasswordOn} />
             ) : (
-              <FontAwesomeIcon icon={faEyeSlash} />
+              <Img src={PasswordOff} />
             )}
           </IconPass>
         </BoxInput>
@@ -291,7 +293,7 @@ export function FormRegister() {
 
         <BoxInput
           Color={
-            (!isDirty && 'black') ||
+            (!isDirty && 'grey') ||
             (isDirty && !touchedFields.passConfirm && 'blue') ||
             (touchedFields.passConfirm && !errors.passConfirm && 'green') ||
             'red'
@@ -311,15 +313,15 @@ export function FormRegister() {
           <Icon
             onClick={togglePasswordVisiblity}
             Color={
-              (isValidating && 'black') ||
+              (isValidating && 'grey') ||
               (touchedFields.password && !errors.password && 'green') ||
               (touchedFields.password && errors.password && 'red')
             }
           >
             {passwordShown ? (
-              <FontAwesomeIcon icon={faEye} />
+              <Img src={PasswordOn} />
             ) : (
-              <FontAwesomeIcon icon={faEyeSlash} />
+              <Img src={PasswordOff} />
             )}
           </Icon>
         </BoxInput>
@@ -343,14 +345,13 @@ const Form = styled.form`
 `;
 
 const BoxPass = styled.div`
-  text-align: left;
   margin-top: 10px;
 `;
 const Label = styled.div<Props>`
   font-style: normal;
   font-weight: 700;
   font-size: 0.875rem;
-  width: 80%;
+  width: 90%;
   text-align: left;
   color: ${props => props.Color};
   line-height: 20px;
@@ -362,14 +363,15 @@ const BoxInput = styled.div<Props>`
   height: 48px;
   width: 100%;
   display: flex;
+
   align-items: center;
-  border: solid 2px ${props => props.Color};
+  border: solid 1px ${props => props.Color};
   opacity: 0.8;
   border-radius: 12px;
   background-color: transparent;
 
   ::placeholder {
-    color: '#787878';
+    color: ${p => p.theme.text};
   }
 `;
 const Img = styled.img`
@@ -420,7 +422,7 @@ const InputPass = styled.input`
   border: transparent;
   outline: none;
   ::placeholder {
-    color: '#787878';
+    color: ${p => p.theme.text};
   }
   &:active {
     color: ${p => p.theme.text};

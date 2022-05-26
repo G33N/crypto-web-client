@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppwriteService } from '../../../services/appwrite';
-import { StyleConstants } from 'styles/StyleConstants';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { ModalAlert } from '../../components/ModalAlert';
 import { ModalSuccess } from '../../components/ModalSuccess';
-import Alert from '../../assets/icons/Alert.png';
-import Check from '../../assets/icons/Check.png';
-import Arrow from '../../assets/icons/Back.png';
+import Alert from '../../assets/icons/alert.svg';
+import Arrow from '../../assets/icons/Back.svg';
+import { Container } from '../../../styles/StyleElements';
+import { Button } from 'styles/StyleElements';
 
 interface Props {
   success?: string;
@@ -101,7 +101,7 @@ export const PasswordRecover = () => {
 
             <BoxInput
               Color={
-                (!isDirty && 'black') ||
+                (!isDirty && 'grey') ||
                 (isDirty && !touchedFields.mail && 'blue') ||
                 (touchedFields.mail && !errors.mail && 'green') ||
                 'red'
@@ -128,11 +128,7 @@ export const PasswordRecover = () => {
                 name="mail"
               />
               <Icon onClick={toggleIconVisiblity} hidden={!touchedFields.mail}>
-                {errors.mail && touchedFields.mail ? (
-                  <Img src={Alert} />
-                ) : (
-                  <Img src={Check} />
-                )}
+                {errors.mail && touchedFields.mail ? <Img src={Alert} /> : ''}
               </Icon>
             </BoxInput>
             {errors.mail && touchedFields.mail && (
@@ -152,24 +148,6 @@ export const PasswordRecover = () => {
     </>
   );
 };
-
-const Container = styled.div`
-  margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
-  padding: 4em;
-
-  @media (min-width: 480px) {
-    padding-left: 20%;
-    padding-right: 25%;
-  }
-  @media (min-width: 720px) {
-    padding-left: 30%;
-    padding-right: 35%;
-  }
-  @media (min-width: 1040px) {
-    padding-left: 35%;
-    padding-right: 40%;
-  }
-`;
 
 const Head = styled.div`
   display: flex;
@@ -235,7 +213,7 @@ const BoxInput = styled.div<Props>`
   width: 100%;
   display: flex;
   align-items: center;
-  border: solid 2px ${props => props.Color};
+  border: solid 1px ${props => props.Color};
   opacity: 0.8;
   border-radius: 12px;
   background-color: transparent;
@@ -277,25 +255,4 @@ const Validator = styled.p`
   display: block;
   margin-bottom: 13px;
   margin-top: 20px;
-`;
-
-const Button = styled.button`
-  margin-top: 40px;
-  width: 100%;
-  height: 48px;
-  font-size: 18px;
-  padding: 10px;
-  background-color: ${p => p.theme.primary};
-  border-color: transparent;
-  border-radius: 12px;
-  color: ${p => p.theme.background};
-  ::placeholder {
-    color: ${p => p.theme.textSecondary};
-    text-align: center;
-  }
-  ${props =>
-    props.disabled &&
-    css`
-      background: ${p => p.theme.secondary};
-    `}
 `;

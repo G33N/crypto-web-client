@@ -4,6 +4,7 @@ import { StyleConstants } from 'styles/StyleConstants';
 import styled from 'styled-components/macro';
 import { Helmet } from 'react-helmet-async';
 import { AppwriteService } from 'services/appwrite';
+import { Container } from 'styles/StyleElements';
 
 export const Dashboard = () => {
   let navigate = useNavigate();
@@ -28,22 +29,18 @@ export const Dashboard = () => {
         <meta name="description" content="Omni wallet application Loginpage" />
       </Helmet>
 
-      <Conteiner>
+      <Container>
         <p>RUTA SOLO CON LOGIN</p>
         <Text>SOY EL DASHBOARD</Text>
         <div></div>{' '}
         <p>
           BIENVENIDO ! <Button onClick={closeSession}>CERRAR SESION</Button>
         </p>
-      </Conteiner>
+      </Container>
     </>
   );
 };
 
-const Conteiner = styled.div`
-  margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
-  padding: 4em;
-`;
 const Text = styled.p`
   font-size: 2rem;
   color: ${p => p.theme.textSecondary};

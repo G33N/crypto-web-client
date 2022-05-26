@@ -1,6 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Alert from '../ModalAlert/assets/alert.png';
+import { ButtonTwo } from 'styles/StyleElements';
+import { ButtonThree } from 'styles/StyleElements';
+import Alert from '../../assets/icons/alert.svg';
 
 export const ModalAlert = ({
   openModal,
@@ -19,10 +21,12 @@ export const ModalAlert = ({
               <Img src={Alert} />
               <Title>{titleAlert}</Title>
               <Description>{descriptionAlert}</Description>
-              <Button onClick={() => closeModal(false)}>{labelButton}</Button>
+              <ButtonTwo onClick={() => closeModal(false)}>
+                {labelButton}
+              </ButtonTwo>
 
               {isVisibleButonSuport && (
-                <ButtonTwo type="submit">Contactar a soporte</ButtonTwo>
+                <ButtonThree type="submit">Contactar a soporte</ButtonThree>
               )}
             </Contenido>
           </ConteinerModal>
@@ -96,45 +100,6 @@ const Description = styled.div`
   justify-content: center;
   text-align: center;
   margin-bottom: 48px;
-`;
-
-const Button = styled.button`
-  width: 100%;
-  height: 56px;
-  font-size: 18px;
-  background-color: ${p => p.theme.primary};
-  border-color: transparent;
-  border-radius: 12px;
-  margin-bottom: 16px;
-  color: ${p => p.theme.background};
-  ::placeholder {
-    color: ${p => p.theme.textSecondary};
-    text-align: center;
-  }
-  ${props =>
-    props.disabled &&
-    css`
-      background: ${p => p.theme.secondary};
-    `}
-`;
-const ButtonTwo = styled.button`
-  width: 100%;
-  height: 56px;
-  font-size: 18px;
-  background-color: ${p => p.theme.background};
-  border: 2px solid ${p => p.theme.primary};
-  border-radius: 12px;
-  margin-bottom: 16px;
-  color: ${p => p.theme.primary};
-  ::placeholder {
-    color: ${p => p.theme.textSecondary};
-    text-align: center;
-  }
-  ${props =>
-    props.disabled &&
-    css`
-      background: ${p => p.theme.secondary};
-    `}
 `;
 
 const Img = styled.img`
