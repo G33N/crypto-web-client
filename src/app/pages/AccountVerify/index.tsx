@@ -63,19 +63,17 @@ export const AccountVerify = () => {
       <ModalAlert
         openModal={isOpenAlert}
         closeModal={setIsOpenAlert}
-        titleAlert={'Hubo un error'}
-        descriptionAlert={
-          'Ocurrió un error en el proceso de recuperación de contraseña. Por favor intentá de nuevo.'
-        }
-        labelButton={'Regresar'}
+        titleAlert={t('accountVerify__tittleAlert')}
+        descriptionAlert={t('accountVerify__descriptionAlert')}
+        labelButton={t('accountVerify__labelButtonAlert')}
         isVisibleButonSuport={false}
       />
       <ModalSuccess
         openModal={isOpen}
         closeModal={setIsOpen}
-        title={'Cuenta verificada corectamente'}
-        description={'Su cuenta ha sido verificada, puede seguir navegando.'}
-        labelButton={'Continuar'}
+        title={t('accountVerify__tittleSuccess')}
+        description={t('accountVerify__descriptionSuccess')}
+        labelButton={t('accountVerify__labelButtonSuccess')}
         pathTo={'/dashboard'}
         isVisibleButonClose={false}
         isVisibleButonNavigate

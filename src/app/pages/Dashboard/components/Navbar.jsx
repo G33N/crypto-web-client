@@ -63,6 +63,7 @@ const AvatarButtonClose = styled.button`
     width: 4rem;
     border-radius: 4rem;
   }
+  border-radius: 4rem;
 `;
 
 const Text = styled.h1`

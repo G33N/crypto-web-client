@@ -37,42 +37,69 @@ const Sidebar = () => {
   };
 
   return (
+    // <BoxSidebar>
+    //   <ImgConteiner>
+    //     <img src={Logo} alt="" />
+    //   </ImgConteiner>
+    //   <div className="sidebar__items">
+    //     {user && (
+    //       <>
+    //         {navigationItems.sidebar.map(item => (
+    //           <LinkButton
+    //             key={item.text}
+    //             to={item.to}
+    //             className={
+    //               location.pathname.includes(item.to) ? 'sidebar_active' : ''
+    //             }
+    //           >
+    //             <Avatar>
+    //               <img src={Home} alt="" />
+    //             </Avatar>{' '}
+    //             {item.name}
+    //           </LinkButton>
+    //         ))}
+    //         {/* {location.pathname !== '/login' && (
+    //           <button onClick={logout}>logout</button>
+    //         )} */}
+    //       </>
+    //     )}
+    //     {!user && (
+    //       <Link
+    //         to="/login"
+    //         className={location.pathname === '/login' ? 'sidebar_active' : ''}
+    //       >
+    //         Login
+    //       </Link>
+    //     )}
+    //   </div>
+    // </BoxSidebar>
+
+    ///**** BoxSideBar sin ruta protegida */
     <BoxSidebar>
       <ImgConteiner>
         <img src={Logo} alt="" />
       </ImgConteiner>
       <div className="sidebar__items">
-        {user && (
-          <>
-            {navigationItems.sidebar.map(item => (
-              <LinkButton
-                key={item.text}
-                to={item.to}
-                className={
-                  location.pathname.includes(item.to) ? 'sidebar_active' : ''
-                }
-              >
-                <Avatar>
-                  <img src={Home} alt="" />
-                </Avatar>{' '}
-                {item.name}
-              </LinkButton>
-            ))}
-            {/* {location.pathname !== '/login' && (
-              <button onClick={logout}>logout</button>
-            )} */}
-          </>
-        )}
-        {!user && (
-          <Link
-            to="/login"
-            className={location.pathname === '/login' ? 'sidebar_active' : ''}
-          >
-            Login
-          </Link>
-        )}
+        <>
+          {navigationItems.sidebar.map(item => (
+            <LinkButton
+              key={item.text}
+              to={item.to}
+              className={
+                location.pathname.includes(item.to) ? 'sidebar_active' : ''
+              }
+            >
+              <Avatar>
+                <img src={Home} alt="" />
+              </Avatar>{' '}
+              {item.name}
+            </LinkButton>
+          ))}
+        </>
       </div>
     </BoxSidebar>
+
+    ///**** Fin BoxSideBar sin ruta protegida */
   );
 };
 

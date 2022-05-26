@@ -33,6 +33,7 @@
     "fontfaceobserver": "2.1.0",
     "husky": "7.0.4",
     "i18n-js": "3.8.0",
+    "i18next": "21.8.4",
     "immer-reducer": "0.7.13",
     "inquirer": "7.3.3",
     "inquirer-directory": "2.2.0",

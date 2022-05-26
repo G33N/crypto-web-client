@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppwriteService } from '../../../services/appwrite';
-import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from './components/CardValidationPass';
 import PhoneInput from 'react-phone-input-2';
@@ -12,11 +11,20 @@ import PasswordOff from '../../assets/icons/Password off.svg';
 import PasswordOn from '../../assets/icons/Password on.svg';
 import Alert from '../../assets/icons/alert.svg';
 import { ModalSuccess } from '../ModalSuccess';
-
-interface Props {
-  successPass?: string;
-  Color?: string;
-}
+import {
+  Form,
+  Label,
+  BoxInput,
+  Input,
+  Validator,
+  IconInput,
+  InputPass,
+  Img,
+  IconPass,
+  BoxPass,
+  Icon,
+  Button,
+} from './styles';
 
 const messages = {
   required: '* Este campo es obligatorio',
@@ -271,13 +279,11 @@ export function FormRegister() {
           </IconPass>
         </BoxInput>
 
-        {errors.password && touchedFields.password && errors.password.type && (
-          <>
-            <BoxPass>
-              <CardValidationPass type={errors.password.type} />
-            </BoxPass>
-          </>
-        )}
+        <>
+          <BoxPass>
+            <CardValidationPass type={errors?.password?.type} />
+          </BoxPass>
+        </>
 
         <Label
           Color={
@@ -339,132 +345,3 @@ export function FormRegister() {
     </>
   );
 }
-
-// ----- Styles ------ //
-
-const Form = styled.form`
-  text-align: center;
-`;
-
-const BoxPass = styled.div`
-  margin-top: 10px;
-`;
-const Label = styled.div<Props>`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 0.875rem;
-  width: 90%;
-  text-align: left;
-  color: ${props => props.Color};
-  line-height: 20px;
-  margin-bottom: 8px;
-  margin-top: 32px;
-`;
-
-const BoxInput = styled.div<Props>`
-  height: 48px;
-  width: 100%;
-  display: flex;
-
-  align-items: center;
-  border: solid 1px ${props => props.Color};
-  opacity: 0.8;
-  border-radius: 12px;
-  background-color: transparent;
-
-  ::placeholder {
-    color: ${p => p.theme.text};
-  }
-`;
-const Img = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const IconInput = styled.i<Props>`
-  padding-right: 10px;
-  color: ${props => props.Color};
-  &:hover {
-    color: ${p => p.theme.text};
-    opacity: 0.8;
-  }
-`;
-
-const Validator = styled.p`
-  font-size: 0.6rem;
-  color: ${p => p.theme.errorColor};
-  font-weight: bold;
-  width: 100%;
-  text-align: left;
-  display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
-`;
-
-const Input = styled.input<Props>`
-  width: 100%;
-  font-size: 0.875rem;
-  font-weight: normal;
-  height: 4px;
-  padding: 10px;
-  border: transparent;
-  outline: none;
-  ::placeholder {
-    color: ${p => p.theme.text};
-  }
-  &:active {
-    color: ${p => p.theme.text};
-  }
-`;
-const InputPass = styled.input`
-  width: 100%;
-  font-size: 0.875rem;
-  font-weight: normal;
-  padding-left: 10px;
-  border: transparent;
-  outline: none;
-  ::placeholder {
-    color: ${p => p.theme.text};
-  }
-  &:active {
-    color: ${p => p.theme.text};
-  }
-`;
-
-const IconPass = styled.i<Props>`
-  padding-right: 10px;
-  color: ${props => props.successPass};
-  &:hover {
-    color: ${p => p.theme.text};
-    opacity: 0.8;
-  }
-`;
-const Icon = styled.i<Props>`
-  padding-right: 10px;
-  color: ${props => props.successPass};
-  &:hover {
-    color: ${p => p.theme.text};
-    opacity: 0.8;
-  }
-`;
-
-const Button = styled.button`
-  margin-top: 40px;
-  width: 100%;
-  height: 48px;
-  font-size: 18px;
-  padding: 10px;
-  border-color: transparent;
-  background-color: ${p => p.theme.primary};
-  border-radius: 12px;
-  color: ${p => p.theme.background};
-  ::placeholder {
-    color: ${p => p.theme.text};
-    text-align: center;
-  }
-  ${props =>
-    props.disabled &&
-    css`
-      background: ${p => p.theme.secondary};
-    `}
-`;

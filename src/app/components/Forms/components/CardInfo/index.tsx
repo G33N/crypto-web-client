@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components/macro';
+import { Wrapper, Title, Description } from '../../styles';
 
 export function CardInfo(props: any) {
   return (
@@ -9,27 +9,3 @@ export function CardInfo(props: any) {
     </Wrapper>
   );
 }
-
-const Wrapper = styled.div`
-  display: flex-center;
-  align-items: left;
-  position: relative;
-`;
-
-const Title = styled.div`
-  font-size: 1rem;
-  font-weight: bold;
-  font-style: normal;
-  color: ${p => p.theme.text};
-  font-weight: 700;
-  margin-right: 1rem;
-  line-height: 2rem;
-`;
-
-const Description = styled.div`
-  font-size: 0.875rem;
-  color: ${p => p.theme.text};
-  font-weight: 400;
-  font-style: regular;
-  line-height: 1.375rem;
-`;
