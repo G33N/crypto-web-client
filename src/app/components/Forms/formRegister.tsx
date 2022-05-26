@@ -37,14 +37,7 @@ export function FormRegister() {
   const { register, getValues, formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
-  const {
-    isValid,
-    touchedFields,
-    errors,
-    isValidating,
-    isDirty,
-    isSubmitting,
-  } = formState;
+  const { isValid, touchedFields, errors, isValidating, isDirty } = formState;
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
@@ -119,13 +112,9 @@ export function FormRegister() {
         <BoxInput
           Color={
             (!isDirty && 'grey') ||
-            (isDirty && !touchedFields.mail && 'blue') ||
-            (touchedFields.mail && !errors.mail && 'green') ||
-            'red'
-            (isValidating && 'black') ||
             (isDirty && !touchedFields.fullname && 'blue') ||
             (touchedFields.fullname && !errors.fullname && 'green') ||
-            (touchedFields.fullname && errors.fullname && 'red')
+            'red'
           }
         >
           <Input

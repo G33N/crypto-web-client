@@ -2,12 +2,12 @@ import React from 'react';
 import { i18n } from './i18n';
 import styled from 'styled-components';
 import { StyleConstants } from '../../../../styles/StyleConstants';
-import Alert from '../../../assets/icons/Alert.png';
+import alert from '../../../assets/icons/alert.svg';
 
 const listado = [
   {
     id: '1',
-    image: 'Alert',
+    image: 'alert',
     name: 'moneda1',
     price: '2066',
     change: '95',
@@ -39,7 +39,7 @@ function MarketCard() {
           <li key={id}>
             <Project>
               <Avatar>
-                <img src={Alert} alt="" />
+                <img src={alert} alt="" />
               </Avatar>
               <Detail>
                 <TitleTransaction>{name}</TitleTransaction>

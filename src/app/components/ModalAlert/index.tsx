@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { ButtonTwo } from 'styles/StyleElements';
 import { ButtonThree } from 'styles/StyleElements';
 import Alert from '../../assets/icons/alert.svg';

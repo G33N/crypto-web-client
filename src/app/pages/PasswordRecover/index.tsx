@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppwriteService } from '../../../services/appwrite';
-import styled, { css } from 'styled-components/macro';
+import styled from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { ModalAlert } from '../../components/ModalAlert';
 import { ModalSuccess } from '../../components/ModalSuccess';

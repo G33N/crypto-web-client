@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { i18n } from './i18n';
 import {
-  Container,
   Body,
-  Button,
   Validator,
   Head,
   Title,
@@ -21,8 +19,7 @@ import CountDownTimer from './CountDownTimer';
 import { AppwriteService } from 'services/appwrite';
 import { ModalAlert } from 'app/components/ModalAlert';
 import { ModalSuccess } from 'app/components/ModalSuccess';
-import { Container } from 'styles/StyleElements';
-import { Button } from 'styles/StyleElements';
+import { Container, Button } from 'styles/StyleElements';
 
 export const AccountVerify = () => {
   const { t } = i18n;

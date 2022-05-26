@@ -1,11 +1,6 @@
 import * as React from 'react';
-
-import { useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import { AppwriteService } from 'services/appwrite';
 import { Container } from 'styles/StyleElements';
 import {
-  Container,
   SubContainer,
   SectionOne,
   SectionTwo,
@@ -24,7 +19,7 @@ export const Dashboard = (props: any) => {
 
   return (
     <>
- <Container>
+      <Container>
         <Navbar userName={userName} />
         <SubContainer>
           <SectionOne>

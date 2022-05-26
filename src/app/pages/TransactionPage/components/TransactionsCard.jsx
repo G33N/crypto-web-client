@@ -3,7 +3,7 @@ import i18next from 'i18next';
 import styled from 'styled-components';
 import { StyleConstants } from '../../../../styles/StyleConstants';
 import Badge from '../../Dashboard/components/Badge';
-import BlueAlert from '../../../assets/icons/BlueAlert.png';
+import BlueAlert from '../../../assets/icons/alertblue.svg';
 
 function TransactionsCard() {
   const { t } = i18next;

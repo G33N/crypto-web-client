@@ -3,7 +3,7 @@ import { i18n } from './i18n';
 import styled from 'styled-components';
 import { StyleConstants } from '../../../../styles/StyleConstants';
 import Badge from './Badge';
-import BlueAlert from '../../../assets/icons/BlueAlert.png';
+import alertblue from '../../../assets/icons/alertblue.svg';
 
 function TransactionsCard() {
   const { t } = i18n;
@@ -18,7 +18,7 @@ function TransactionsCard() {
         <Invoice>
           <Info>
             <Avatar>
-              <img src={BlueAlert} alt="" />
+              <img src={alertblue} alt="" />
             </Avatar>
             <TextContainer>
               <Title>Compra</Title>
@@ -33,7 +33,7 @@ function TransactionsCard() {
         <Invoice>
           <Info>
             <Avatar>
-              <img src={BlueAlert} alt="" />
+              <img src={alertblue} alt="" />
             </Avatar>
             <TextContainer>
               <Title>Venta</Title>
@@ -48,7 +48,7 @@ function TransactionsCard() {
         <Invoice>
           <Info>
             <Avatar>
-              <img src={BlueAlert} alt="" />
+              <img src={alertblue} alt="" />
             </Avatar>
             <TextContainer>
               <Title>Compra</Title>
@@ -63,7 +63,7 @@ function TransactionsCard() {
         <Invoice>
           <Info>
             <Avatar>
-              <img src={BlueAlert} alt="" />
+              <img src={alertblue} alt="" />
             </Avatar>
             <TextContainer>
               <Title>Venta</Title>

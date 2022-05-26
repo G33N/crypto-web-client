@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import IconCheck from '../../assets/icons/Check.svg';
 import { ButtonLink } from '../ButtonLink';
 import { ButtonTwo } from 'styles/StyleElements';
