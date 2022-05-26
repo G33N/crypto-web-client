@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { StyleConstants } from 'styles/StyleConstants';
 import styled from 'styled-components/macro';
 import { FormLogin } from 'app/components/Forms/formLogin';
+import { Container } from 'styles/StyleElements';
 
 export const LoginPage = () => {
   return (
@@ -12,7 +12,7 @@ export const LoginPage = () => {
         <meta name="description" content="Omni wallet application Loginpage" />
       </Helmet>
 
-      <Conteiner>
+      <Container>
         <Title>Iniciar Sesión</Title>
 
         <FormLogin />
@@ -21,28 +21,10 @@ export const LoginPage = () => {
           <Label> ¿No tenes cuenta? </Label>
           <Links to="/register">Crear cuenta</Links>
         </BoxNavigation>
-      </Conteiner>
+      </Container>
     </>
   );
 };
-
-const Conteiner = styled.div`
-  margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
-  padding: 4em;
-  background: white;
-  @media (min-width: 480px) {
-    padding-left: 20%;
-    padding-right: 25%;
-  }
-  @media (min-width: 720px) {
-    padding-left: 30%;
-    padding-right: 35%;
-  }
-  @media (min-width: 1040px) {
-    padding-left: 35%;
-    padding-right: 40%;
-  }
-`;
 
 const Title = styled.div`
   font-style: normal;
@@ -66,14 +48,14 @@ const BoxNavigation = styled.div`
   text-align: center;
 `;
 const Links = styled(Link)`
-  color: ${p => p.theme.text};
+  color: ${p => p.theme.primary};
   text-decoration: none;
   font-weight: 700;
   font-style: normal;
   font-size: 0.875rem;
   line-height: 1.375rem;
   &:hover {
-    text-decoration: underline;
+    text-decoration: none;
     opacity: 0.8;
   }
   &:active {

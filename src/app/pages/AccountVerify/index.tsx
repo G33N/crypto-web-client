@@ -21,6 +21,8 @@ import CountDownTimer from './CountDownTimer';
 import { AppwriteService } from 'services/appwrite';
 import { ModalAlert } from 'app/components/ModalAlert';
 import { ModalSuccess } from 'app/components/ModalSuccess';
+import { Container } from 'styles/StyleElements';
+import { Button } from 'styles/StyleElements';
 
 export const AccountVerify = () => {
   const { t } = i18n;

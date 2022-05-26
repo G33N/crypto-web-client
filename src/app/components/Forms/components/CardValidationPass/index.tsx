@@ -1,48 +1,48 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faCircle } from '@fortawesome/free-solid-svg-icons';
+import Check from '../../../../assets/icons/Check.svg';
+import Oval from '../../../../assets/icons/Oval.svg';
 
 export const CardValidationPass = (props?: any) => {
   console.log('props', props);
   return (
     <Wrapper>
-      <Title> La contrasena debe tener al menos:</Title>
+      <Title> La contraseña debe tener al menos:</Title>
       <Row>
         {props.type === 'oneUppercase' ? (
-          <Circle>
-            <FontAwesomeIcon icon={faCircle} />
-          </Circle>
-        ) : (
           <Icon>
-            <FontAwesomeIcon icon={faCheck} />
+            <Img src={Check} />
           </Icon>
+        ) : (
+          <Circle>
+            <ImgTwo src={Oval} />
+          </Circle>
         )}
 
         <Description>Una mayuscula.</Description>
       </Row>
       <Row>
         {props.type === 'oneLowercase' ? (
-          <Circle>
-            <FontAwesomeIcon icon={faCircle} />
-          </Circle>
-        ) : (
           <Icon>
-            <FontAwesomeIcon icon={faCheck} />
+            <Img src={Check} />
           </Icon>
+        ) : (
+          <Circle>
+            <ImgTwo src={Oval} />
+          </Circle>
         )}
 
         <Description>Una minuscula.</Description>
       </Row>
       <Row>
         {props.type === 'oneNumber' ? (
-          <Circle>
-            <FontAwesomeIcon icon={faCircle} />
-          </Circle>
-        ) : (
           <Icon>
-            <FontAwesomeIcon icon={faCheck} />
+            <Img src={Check} />
           </Icon>
+        ) : (
+          <Circle>
+            <ImgTwo src={Oval} />
+          </Circle>
         )}
 
         <Description>Al menos un numero.</Description>
@@ -50,11 +50,11 @@ export const CardValidationPass = (props?: any) => {
       <Row>
         {props.type === 'minLenght' ? (
           <Icon>
-            <FontAwesomeIcon icon={faCheck} />
+            <Img src={Check} />
           </Icon>
         ) : (
           <Circle>
-            <FontAwesomeIcon icon={faCircle} />
+            <ImgTwo src={Oval} />
           </Circle>
         )}
         <Description>8 digitos.</Description>
@@ -103,4 +103,16 @@ const Circle = styled.i`
   font-size: 12px;
   color: ${p => p.theme.text};
   padding-right: 15px;
+  width: 24px;
+  height: 24px;
+`;
+
+const Img = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
+const ImgTwo = styled.img`
+  width: 12px;
+  height: 12px;
 `;

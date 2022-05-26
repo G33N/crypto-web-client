@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components/macro';
-import { StyleConstants } from 'styles/StyleConstants';
+import { Container } from 'styles/StyleElements';
 import { ModalAlert } from '../../components/ModalAlert';
 
 export function HomePage() {
@@ -13,7 +13,7 @@ export function HomePage() {
         <meta name="description" content="Omni wallet application homepage" />
       </Helmet>
 
-      <Conteiner>
+      <Container>
         <Text> HOME PAGE</Text>
         <Text> - Se ve sin haber iniciado sesion - </Text>
         <button onClick={() => setIsOpen(!isOpen)}>ver errores test</button>
@@ -27,27 +27,11 @@ export function HomePage() {
           labelButton={'Regresar'}
           isVisibleButonSuport
         />
-      </Conteiner>
+      </Container>
     </>
   );
 }
-const Conteiner = styled.div`
-  margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
-  padding: 4em;
-  background: white;
-  @media (min-width: 480px) {
-    padding-left: 20%;
-    padding-right: 25%;
-  }
-  @media (min-width: 720px) {
-    padding-left: 30%;
-    padding-right: 35%;
-  }
-  @media (min-width: 1040px) {
-    padding-left: 35%;
-    padding-right: 40%;
-  }
-`;
+
 const Text = styled.p`
   font-size: 18px;
   color: ${p => p.theme.textSecondary};

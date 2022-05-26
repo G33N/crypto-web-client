@@ -1,7 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Arrow from './assets/Back.png';
+import Arrow from './assets/Back.svg';
 import { useForm } from 'react-hook-form';
+import { Button } from 'styles/StyleElements';
 
 const messages = {
   required: 'Este campo es obligatorio',
@@ -201,25 +202,4 @@ const Input = styled.input`
   ::placeholder {
     color: ${p => p.theme.text};
   }
-`;
-
-const Button = styled.button`
-  margin-top: 40px;
-  width: 100%;
-  height: 48px;
-  font-size: 18px;
-  padding: 10px;
-  background-color: ${p => p.theme.primary};
-  border-color: transparent;
-  border-radius: 12px;
-  color: ${p => p.theme.background};
-  ::placeholder {
-    color: ${p => p.theme.textSecondary};
-    text-align: center;
-  }
-  ${props =>
-    props.disabled &&
-    css`
-      background: ${p => p.theme.secondary};
-    `}
 `;

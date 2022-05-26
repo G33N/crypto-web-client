@@ -3,11 +3,10 @@ import { AppwriteService } from '../../../services/appwrite';
 import { Link, useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { ModalAlert } from '../../components/ModalAlert';
-import Alert from '../../assets/icons/Alert.png';
-import Check from '../../assets/icons/Check.png';
+import PasswordOff from '../../assets/icons/Password off.svg';
+import PasswordOn from '../../assets/icons/Password on.svg';
+import Alert from '../../assets/icons/alert.svg';
 
 interface Props {
   Color?: string;
@@ -86,7 +85,7 @@ export function FormLogin() {
 
         <BoxInput
           Color={
-            (!isDirty && 'black') ||
+            (!isDirty && 'grey') ||
             (isDirty && !touchedFields.mail && 'blue') ||
             (touchedFields.mail && !errors.mail && 'green') ||
             'red'
@@ -113,11 +112,7 @@ export function FormLogin() {
             name="mail"
           />
           <IconInput onClick={toggleIconVisiblity} hidden={!touchedFields.mail}>
-            {errors.mail && touchedFields.mail ? (
-              <Img src={Alert} />
-            ) : (
-              <Img src={Check} />
-            )}
+            {errors.mail && touchedFields.mail ? <Img src={Alert} /> : ''}
           </IconInput>
         </BoxInput>
 
@@ -138,7 +133,7 @@ export function FormLogin() {
         </Label>
         <BoxInput
           Color={
-            (!isDirty && 'black') ||
+            (!isDirty && 'grey') ||
             (isDirty && !touchedFields.password && 'blue') ||
             (touchedFields.password && !errors.password && 'green') ||
             'red'
@@ -162,15 +157,15 @@ export function FormLogin() {
           <Icon
             onClick={togglePasswordVisiblity}
             Color={
-              (isValidating && 'black') ||
+              (isValidating && 'red') ||
               (touchedFields.password && !errors.password && 'green') ||
               (touchedFields.password && errors.password && 'red')
             }
           >
             {passwordShown ? (
-              <FontAwesomeIcon icon={faEye} />
+              <Img src={PasswordOn} />
             ) : (
-              <FontAwesomeIcon icon={faEyeSlash} />
+              <Img src={PasswordOff} />
             )}
           </Icon>
         </BoxInput>
@@ -245,7 +240,7 @@ const BoxInput = styled.div<Props>`
   width: 100%;
   display: flex;
   align-items: center;
-  border: solid 2px ${props => props.Color};
+  border: solid 1px ${props => props.Color};
   opacity: 0.8;
   border-radius: 12px;
   background-color: transparent;
@@ -254,6 +249,7 @@ const BoxInput = styled.div<Props>`
     color: '#787878';
   }
 `;
+
 const Img = styled.img`
   width: 24px;
   height: 24px;
@@ -324,7 +320,8 @@ const ButtonRecover = styled(Link)`
   line-height: 22px;
   text-align: center;
   letter-spacing: 0.003em;
-  color: ${p => p.theme.text};
+  color: ${p => p.theme.primary};
   border: none;
+  text-decoration: none;
   background-color: transparent;
 `;
