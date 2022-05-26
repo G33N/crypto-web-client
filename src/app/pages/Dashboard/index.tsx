@@ -3,31 +3,37 @@ import { useNavigate } from 'react-router-dom';
 import { StyleConstants } from 'styles/StyleConstants';
 import styled from 'styled-components/macro';
 import { Helmet } from 'react-helmet-async';
+import { AppwriteService } from 'services/appwrite';
 
-export const Dashboard = ({ useAuth }) => {
-  let auth = useAuth();
+export const Dashboard = () => {
   let navigate = useNavigate();
+
+  const closeSession = () => {
+    AppwriteService.logout()
+      .then(res => {
+        console.log('Success', res);
+        localStorage.setItem('auth', '');
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
+      })
+      .catch(error => {
+        console.log('Error', error);
+      });
+  };
 
   return (
     <>
       <Helmet>
-        <title>LoginPage</title>
         <meta name="description" content="Omni wallet application Loginpage" />
       </Helmet>
 
       <Conteiner>
-        <span>RUTA SOLO CON LOGIN</span>
+        <p>RUTA SOLO CON LOGIN</p>
         <Text>SOY EL DASHBOARD</Text>
         <div></div>{' '}
         <p>
-          BIENVENIDO {auth.user}!{' '}
-          <Button
-            onClick={() => {
-              auth.signout(() => navigate('/'));
-            }}
-          >
-            CERRAR SESION
-          </Button>
+          BIENVENIDO ! <Button onClick={closeSession}>CERRAR SESION</Button>
         </p>
       </Conteiner>
     </>
@@ -48,7 +54,7 @@ const Text = styled.p`
   margin-bottom: 50px;
   margin-top: 20px;
 `;
-const Button = styled.div`
+const Button = styled.button`
   background-color: ${p => p.theme.primary};
   color: ${p => p.theme.textSecondary};
   width: 250px;

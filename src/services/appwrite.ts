@@ -25,13 +25,21 @@ export const AppwriteService = {
       return true;
     } catch (err) {
       console.error(err);
-      alert('Something went wrong. Please try again later.');
+      alert('Ocurrio un error , verifique su conexion e intente nuevamente.');
       return false;
     }
   },
 
   async login(): Promise<void> {
     await sdk.account.createAnonymousSession();
+  },
+
+  async loginUser(mail: string, password: string): Promise<void> {
+    await sdk.account.createSession(mail, password);
+  },
+
+  async getToken(): Promise<void> {
+    await sdk.account.createJWT();
   },
 
   async getAuthStatus(): Promise<boolean> {
@@ -44,9 +52,42 @@ export const AppwriteService = {
     }
   },
 
-  async createUser(fullname, mail, password): Promise<boolean> {
+  async createUser(
+    fullname: string,
+    mail: string,
+    password: string,
+  ): Promise<boolean> {
     try {
       await sdk.account.create('unique()', mail, password, fullname);
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  },
+
+  async verificationUser(urlVerify: string): Promise<boolean> {
+    try {
+      await sdk.account.createVerification(urlVerify);
+      return true;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  },
+
+  async recoverPasssword(mail, url): Promise<boolean> {
+    try {
+      await sdk.account.createRecovery(mail, url);
+      return true;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  },
+  async updatePasssword(password): Promise<boolean> {
+    try {
+      await sdk.account.updatePassword(password);
       return true;
     } catch (err) {
       console.error(err);
