@@ -12,7 +12,7 @@ export const BoxInput = styled.div<Props>`
   width: 100%;
   display: flex;
   align-items: center;
-  border: solid ${props => props.Border} ${props => props.Color};
+  border: solid 1px ${props => props.Color};
   opacity: 0.8;
   border-radius: 12px;
   background-color: transparent;
@@ -257,7 +257,7 @@ export const Label = styled.div<Props>`
   font-style: normal;
   font-weight: 700;
   font-size: 0.875rem;
-  width: 80%;
+  width: 90%;
   text-align: left;
   color: ${props => props.Color};
   line-height: 20px;

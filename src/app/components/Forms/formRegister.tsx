@@ -11,6 +11,7 @@ import PasswordOff from '../../assets/icons/Password off.svg';
 import PasswordOn from '../../assets/icons/Password on.svg';
 import Alert from '../../assets/icons/alert.svg';
 import { ModalSuccess } from '../ModalSuccess';
+import { i18n } from './i18n';
 import {
   Form,
   Label,
@@ -41,7 +42,7 @@ const patterns = {
 
 export function FormRegister() {
   const navigate = useNavigate();
-
+  const { t } = i18n;
   const { register, getValues, formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
@@ -88,19 +89,17 @@ export function FormRegister() {
       <ModalAlert
         openModal={isOpenAlert}
         closeModal={setIsOpenAlert}
-        titleAlert={'Hubo un error'}
-        descriptionAlert={
-          'Ocurrió un error al cargar la información. Por favor intentá de nuevo.'
-        }
-        labelButton={'Regresar'}
+        titleAlert={t('formRegister__titleAlert')}
+        descriptionAlert={t('formRegister__descriptionAlert')}
+        labelButton={t('formRegister__labelButtonAlert')}
         isVisibleButonSuport={false}
       />
       <ModalSuccess
         openModal={isOpen}
         closeModal={setIsOpen}
-        title={'PERFECTO'}
-        description={'El usuario se creo correctamente.'}
-        labelButton={'Continuar'}
+        title={t('formRegister__tittleSuccess')}
+        description={t('formRegister__descriptionSuccess')}
+        labelButton={t('formRegister__labelButtonSuccess')}
         pathTo={'/login'}
         isVisibleButonClose={false}
         isVisibleButonNavigate
@@ -128,7 +127,7 @@ export function FormRegister() {
           <Input
             autoComplete="off"
             type="text"
-            placeholder="Ingrese su nombre completo"
+            placeholder={t('formRegister__textPlaceholderFullname')}
             {...register('fullname', {
               required: messages.required,
               pattern: {
@@ -164,7 +163,7 @@ export function FormRegister() {
         >
           <Input
             type="email"
-            placeholder="Ingrese su correo electrónico"
+            placeholder={t('formRegister__textPlaceholderEmail')}
             {...register('mail', {
               required: messages.required,
               pattern: {
@@ -203,7 +202,7 @@ export function FormRegister() {
           Numero telefonico
         </Label>
         <PhoneInput
-          placeholder="Ingrese su numero telefonico"
+          placeholder={t('formRegister__textPlaceholderPhoneNumber')}
           {...register('phone', {})}
           onChange={handleOnChange}
           inputStyle={{
@@ -249,7 +248,7 @@ export function FormRegister() {
           }
         >
           <InputPass
-            placeholder="Ingrese su contraseña"
+            placeholder={t('formRegister__textPlaceholderPass')}
             type={passwordShown ? 'text' : 'password'}
             {...register('password', {
               required: messages.required,
@@ -304,7 +303,7 @@ export function FormRegister() {
           }
         >
           <InputPass
-            placeholder="Ingrese nuevamente su contraseña"
+            placeholder={t('formRegister__textPlaceholderPasConfirm')}
             type={passwordShown ? 'text' : 'password'}
             {...register('passConfirm', {
               required: messages.required,

@@ -6,6 +6,7 @@ import { ModalAlert } from '../../components/ModalAlert';
 import PasswordOff from '../../assets/icons/Password off.svg';
 import PasswordOn from '../../assets/icons/Password on.svg';
 import Alert from '../../assets/icons/alert.svg';
+import { i18n } from './i18n';
 import {
   Form,
   Label,
@@ -34,7 +35,7 @@ const patterns = {
 export function FormLogin() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-
+  const { t } = i18n;
   const [iconShown, setIconShown] = useState(false);
   const toggleIconVisiblity = () => {
     setIconShown(iconShown ? false : true);
@@ -72,11 +73,9 @@ export function FormLogin() {
       <ModalAlert
         openModal={isOpen}
         closeModal={setIsOpen}
-        titleAlert={'Usuario y/o contraseña incorrectos'}
-        descriptionAlert={
-          'El usuario y contraseña que ingresaste no coinciden.  Revisá los datos e intentá de nuevo.'
-        }
-        labelButton={'Regresar'}
+        titleAlert={t('formLogin__titleAlert')}
+        descriptionAlert={t('formLogin__descriptionAlert')}
+        labelButton={t('formLogin__labelButtonAlert')}
         isVisibleButonSuport={false}
       />
       <Form>
@@ -100,14 +99,14 @@ export function FormLogin() {
           }
           Border={
             (!isDirty && '1px') ||
-            (isDirty && !touchedFields.mail && '2px') ||
+            (isDirty && !touchedFields.mail && '1px') ||
             (touchedFields.mail && !errors.mail && '1px') ||
             '2px'
           }
         >
           <Input
             type="email"
-            placeholder="Ingrese su correo electrónico"
+            placeholder={t('formLogin__textPlaceholderEmail')}
             {...register('mail', {
               required: messages.required,
               pattern: {
@@ -154,7 +153,7 @@ export function FormLogin() {
           }
         >
           <InputPass
-            placeholder="Ingrese su contraseña"
+            placeholder={t('formLogin__textPlaceholderPass')}
             type={passwordShown ? 'text' : 'password'}
             {...register('password', {
               required: messages.required,

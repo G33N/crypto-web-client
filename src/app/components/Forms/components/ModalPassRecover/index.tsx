@@ -2,6 +2,7 @@ import React from 'react';
 import Arrow from './assets/Back.svg';
 import { useForm } from 'react-hook-form';
 import { Button } from 'styles/StyleElements';
+import { i18n } from '../../i18n';
 import {
   Overlay,
   LabelModal,
@@ -29,7 +30,7 @@ export const ModalPassRecover = ({ openModal, closeModal }) => {
   const { register, formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
-
+  const { t } = i18n;
   const onSubmit = data => {
     alert(JSON.stringify(data));
     //navegar a dashboard
@@ -58,7 +59,7 @@ export const ModalPassRecover = ({ openModal, closeModal }) => {
               <LabelModal htmlFor="mail">Correo electrónico</LabelModal>
               <InputModal
                 type="email"
-                placeholder="Ingrese su correo electrónico"
+                placeholder={t('ModalPassRecover__textPlaceholderEmail')}
                 {...register('mail', {
                   required: messages.required,
                   pattern: {
