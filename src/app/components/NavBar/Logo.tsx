@@ -1,24 +1,11 @@
 import * as React from 'react';
-import styled from 'styled-components/macro';
+import { WrapperLogo, Img } from './styles';
 import Omnicrypto from '../../assets/icons/Moniflow.crypto.svg';
 
 export function Logo() {
   return (
-    <Wrapper>
+    <WrapperLogo>
       <Img src={Omnicrypto} />
-    </Wrapper>
+    </WrapperLogo>
   );
 }
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Img = styled.img`
-  width: 265.26px;
-  height: 30px;
-  left: 24px;
-  top: 38px;
-  border-radius: 0px;
-`;

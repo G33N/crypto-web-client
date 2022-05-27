@@ -9,6 +9,7 @@ import PasswordOff from '../../assets/icons/Password off.svg';
 import { ModalAlert } from '../../components/ModalAlert';
 import { ModalSuccess } from '../../components/ModalSuccess';
 import { Container, Button } from '../../../styles/StyleElements';
+import { i18n } from './i18n';
 import {
   Head,
   ButonBack,
@@ -33,6 +34,7 @@ const messageConfirmPass = 'Las contrasenas deben ser iguales';
 
 export function PasswordChange() {
   const navigate = useNavigate();
+  const { t } = i18n;
 
   const { register, getValues, formState, handleSubmit } = useForm({
     mode: 'onChange',
@@ -72,19 +74,17 @@ export function PasswordChange() {
       <ModalAlert
         openModal={isOpenAlert}
         closeModal={setIsOpenAlert}
-        titleAlert={'Hubo un error'}
-        descriptionAlert={
-          'Ocurrió un error en el proceso de recuperación de contraseña. Por favor intentá de nuevo.'
-        }
-        labelButton={'Regresar'}
+        titleAlert={t('PasswordChange__tittleAlert')}
+        descriptionAlert={t('PasswordChange__descriptionAlert')}
+        labelButton={t('PasswordChange__labelButtonAlert')}
         isVisibleButonSuport={false}
       />
       <ModalSuccess
         openModal={isOpen}
         closeModal={setIsOpen}
-        title={'contrasena modificada corretamente'}
-        description={''}
-        labelButton={'Continuar'}
+        title={t('PasswordChange__tittleSuccess')}
+        description={t('PasswordChange__tittleSuccess')}
+        labelButton={t('PasswordChange__tittleSuccess')}
         pathTo={'/login'}
         isVisibleButonClose={false}
         isVisibleButonNavigate
@@ -119,7 +119,7 @@ export function PasswordChange() {
               }
             >
               <InputPass
-                placeholder="Ingrese su contraseña"
+                placeholder={t('PasswordChange__textPlaceholderPass')}
                 type={passwordShown ? 'text' : 'password'}
                 {...register('password', {
                   required: messages.required,
@@ -176,7 +176,7 @@ export function PasswordChange() {
               }
             >
               <InputPass
-                placeholder="Ingrese nuevamente su contraseña"
+                placeholder={t('PasswordChange__textPlaceholderPassConfirm')}
                 type={passwordShown ? 'text' : 'password'}
                 {...register('passConfirm', {
                   required: messages.required,

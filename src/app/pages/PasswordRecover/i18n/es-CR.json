@@ -1,0 +1,11 @@
+{
+  "PasswordRecover__tittleAlert": "Usuario y/o contraseña incorrectos",
+  "PasswordRecover__descriptionAlert": "El usuario y contraseña que ingresaste no coinciden.  Revisá los datos e intentá de nuevo.",
+  "PasswordRecover__labelButtonAlert": "Regresar",
+
+  "PasswordRecover__tittleSuccess": "PERFECTO",
+  "PasswordRecover__descriptionSuccess": "Enviamos un mail a su correo electrónico para que pueda recuperar su contraseña",
+  "PasswordRecover__labelButtonSuccess": "Continuar",
+
+  "PasswordRecover__textPlaceholderEmail": "Ingrese su correo electrónico"
+}

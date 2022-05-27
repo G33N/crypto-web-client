@@ -2,12 +2,14 @@ import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 
 interface Props {
-  successPass?: string;
-  Color?: string;
+  success?: string;
+  Color?: any;
 }
 
 export const Body = styled.div`
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
 `;
 
 export const BoxInput = styled.div<Props>`
@@ -25,11 +27,6 @@ export const BoxInput = styled.div<Props>`
   }
 `;
 
-export const BoxPass = styled.div`
-  text-align: left;
-  margin-top: 10px;
-`;
-
 export const ButonBack = styled(Link)`
   cursor: pointer;
   transition: 0.3s easy all;
@@ -41,9 +38,15 @@ export const ButonBack = styled(Link)`
   }
 `;
 
-export const Form = styled.form`
-  text-align: center;
+export const Description = styled.p`
+  text-align: left;
+  width: 90%;
+  font-weight: 400;
+  line-height: 20px;
+  font-size: 14px;
 `;
+
+export const Form = styled.form``;
 
 export const Head = styled.div`
   display: flex;
@@ -53,23 +56,19 @@ export const Head = styled.div`
 
 export const Icon = styled.i<Props>`
   padding-right: 10px;
-  color: ${props => props.successPass};
+  color: ${props => props.success};
   &:hover {
     color: ${p => p.theme.text};
     opacity: 0.8;
   }
 `;
 
-export const IconPass = styled.i<Props>`
-  padding-right: 10px;
-  color: ${props => props.successPass};
-  &:hover {
-    color: ${p => p.theme.text};
-    opacity: 0.8;
-  }
+export const Img = styled.img`
+  width: 24px;
+  height: 24px;
 `;
 
-export const InputPass = styled.input`
+export const Input = styled.input`
   width: 100%;
   font-size: 0.875rem;
   font-weight: normal;
@@ -82,11 +81,6 @@ export const InputPass = styled.input`
   &:active {
     color: ${p => p.theme.text};
   }
-`;
-
-export const Img = styled.img`
-  width: 24px;
-  height: 24px;
 `;
 
 export const Label = styled.div<Props>`

@@ -1,0 +1,12 @@
+{
+  "PasswordChange__tittleAlert": "Hubo un error",
+  "PasswordChange__descriptionAlert": "Ocurrió un error en el proceso de recuperación de contraseña. Por favor intentá de nuevo.",
+  "PasswordChange__labelButtonAlert": "Regresar",
+
+  "PasswordChange__tittleSuccess": "contraseña verificada correctamente",
+  "PasswordChange__descriptionSuccess": "Su contraseña ha sido verificada.",
+  "PasswordChange__labelButtonSuccess": "Continuar",
+
+  "PasswordChange__textPlaceholderPass": "Ingrese su contraseña",
+  "PasswordChange__textPlaceholderPassConfirm": "Ingrese nuevamente su contraseña"
+}

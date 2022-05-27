@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import styled from 'styled-components/macro';
+import { Text } from './styles';
 import { Container } from 'styles/StyleElements';
 import { ModalAlert } from '../../components/ModalAlert';
+import { i18n } from './i18n';
 
 export function HomePage() {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = i18n;
 
   return (
     <>
@@ -20,25 +22,12 @@ export function HomePage() {
         <ModalAlert
           openModal={isOpen}
           closeModal={setIsOpen}
-          titleAlert={'Has superado el límite de intentos'}
-          descriptionAlert={
-            'Por seguridad, hemos bloqueado tu usuario temporalmente debido a que ingresaste de forma errónea tu contraseña muchas veces. Podés intentarlo de nuevo más tarde.'
-          }
-          labelButton={'Regresar'}
+          titleAlert={t('HomePage_titleAlert')}
+          descriptionAlert={t('HomePage__descriptionAlert')}
+          labelButton={t('HomePage__labelButtonAlert')}
           isVisibleButonSuport
         />
       </Container>
     </>
   );
 }
-
-const Text = styled.p`
-  font-size: 18px;
-  color: ${p => p.theme.textSecondary};
-  font-weight: bold;
-  width: 100%;
-  text-align: left;
-  display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
-`;
