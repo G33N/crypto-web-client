@@ -28,12 +28,12 @@ function ButtonCard() {
           </Avatar>
           <Title>{t('buttonCard__titleButton3')}</Title>
         </Card>
-        <Card>
+        <LastCard>
           <Avatar>
             <img src={Home} alt="" />
           </Avatar>
           <Title>{t('buttonCard__titleButton4')}</Title>
-        </Card>
+        </LastCard>
       </Row>
     </InfoCard>
   );
@@ -50,6 +50,22 @@ const InfoCard = styled.div`
 `;
 
 const Card = styled.div`
+  width: 128px;
+  height: 72px;
+  background-color: ${p => p.theme.background};
+  border-radius: 1rem;
+  margin-right: 42px;
+  padding: 1rem 1rem 0.3rem 1rem;
+  box-shadow: ${StyleConstants.cardShadow};
+  transition: 0.4s ease-in-out;
+  &:hover {
+    box-shadow: ${StyleConstants.hoverEffect};
+  }
+`;
+
+const LastCard = styled.div`
+  width: 128px;
+  height: 72px;
   background-color: ${p => p.theme.background};
   border-radius: 1rem;
   margin-right: 15px;
@@ -75,6 +91,7 @@ const Avatar = styled.div`
 
 const Title = styled.h3`
   color: black;
+  font-size: 15px;
 `;
 
 export default ButtonCard;

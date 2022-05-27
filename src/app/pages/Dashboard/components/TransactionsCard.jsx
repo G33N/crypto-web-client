@@ -96,7 +96,7 @@ function TransactionsCard() {
 }
 
 const TransactionContainer = styled.div`
-  width: 30rem;
+  width: 414px;
   border-radius: 1rem;
   background-color: white;
   height: max-content;
