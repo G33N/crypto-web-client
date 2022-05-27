@@ -3,10 +3,8 @@ import {
   Container,
   SubContainer,
   SectionOne,
-  SectionTwo,
   ColumnOne1,
   ColumnTwo1,
-  ColumnOne2,
 } from './styles';
 import Navbar from './components/Navbar';
 import ButtonCard from './components/ButtonCard';
@@ -26,16 +24,12 @@ export const Dashboard = (props: any) => {
             <ColumnOne1>
               <BalanceCard />
               <ButtonCard />
+              <MarketCard />
             </ColumnOne1>
             <ColumnTwo1>
               <TransactionsCard />
             </ColumnTwo1>
           </SectionOne>
-          <SectionTwo>
-            <ColumnOne2>
-              <MarketCard />
-            </ColumnOne2>
-          </SectionTwo>
         </SubContainer>
       </Container>
     </>

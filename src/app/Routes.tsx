@@ -30,7 +30,7 @@ const MainRoutes = () => (
         <Route path="/" element={<Navigate replace to="dashboard" />} />
         <Route
           path="dashboard"
-          element={<Dashboard props={{ userName: 'Test crypto' }} />}
+          element={<Dashboard props={{ userName: 'Test' }} />}
         />
         <Route path="tabs" element={<Tabs />}>
           <Route path="/tabs" element={<Navigate replace to="tab1" />} />

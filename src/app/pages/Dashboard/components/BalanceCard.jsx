@@ -22,7 +22,7 @@ function BalanceCard() {
 
 const Box = styled.div`
   background-color: ${p => p.theme.background};
-  height: 50%;
+  height: 40%;
   width: 100%;
   border-radius: 1rem;
   display: flex;

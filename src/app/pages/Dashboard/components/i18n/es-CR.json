@@ -10,6 +10,11 @@
   "buttonCard__titleButton4": "Depositar",
 
   "marketCard__title": "Mercados",
+  "marketCard__errorMessageApi": "tenemos un problema de conexion , aguarde unos segundos y reintente traer las cotizaciones nuevamente.",
+  "marketCard__tableTitle1": "",
+  "marketCard__tableTitle2": "nombre",
+  "marketCard__tableTitle3": "Ultimo Precio",
+  "marketCard__tableTitle4": "Cambio 24h",
 
   "transactionCard__title": "Transacciones",
   "transactionCard__linkTitle": "Ver todas"

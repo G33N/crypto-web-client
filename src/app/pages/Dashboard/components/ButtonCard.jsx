@@ -40,7 +40,7 @@ function ButtonCard() {
 }
 
 const InfoCard = styled.div`
-  height: 14rem;
+  height: 7rem;
   width: 100%;
   padding: 1rem;
   color: white;
@@ -64,7 +64,6 @@ const Card = styled.div`
 const Row = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 0.4rem;
 `;
 const Avatar = styled.div`
   img {

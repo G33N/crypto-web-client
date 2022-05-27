@@ -2,8 +2,64 @@ import React from 'react';
 import { i18n } from './i18n';
 import styled from 'styled-components';
 import { StyleConstants } from '../../../../styles/StyleConstants';
-import Badge from './Badge';
 import alertblue from '../../../assets/icons/alertblue.svg';
+
+const listado = [
+  {
+    id: '1',
+    operacion: 'Venta',
+    estado: 'Fallida',
+    precio: '23455',
+    fecha: '03/02/2026',
+    hora: '12:00hs',
+    color: 'fail',
+  },
+  {
+    id: '2',
+    operacion: 'Deposito',
+    estado: 'En Revision',
+    precio: '23455',
+    fecha: '03/02/2026',
+    hora: '',
+    color: 'paid',
+  },
+  {
+    id: '3',
+    operacion: 'Compra',
+    estado: 'En Proceso',
+    fecha: '03/02/2026',
+    precio: '23455',
+    hora: '',
+    color: 'glow',
+  },
+  {
+    id: '4',
+    operacion: 'Venta',
+    estado: 'Aprovado',
+    fecha: '03/02/2026',
+    hora: '12:00hs',
+    precio: '23455',
+    color: 'paid',
+  },
+  {
+    id: '5',
+    operacion: 'Deposito',
+    estado: 'En Revision',
+    precio: '23455',
+    fecha: '03/02/2026',
+    hora: '',
+    color: 'paid',
+  },
+  {
+    id: '6',
+    operacion: 'Deposito',
+    estado: 'En Revision',
+    precio: '23455',
+    fecha: '03/02/2026',
+    hora: '',
+    color: 'paid',
+  },
+];
 
 function TransactionsCard() {
   const { t } = i18n;
@@ -15,77 +71,35 @@ function TransactionsCard() {
           <TitleCard>{t('transactionCard__title')}</TitleCard>
           <LinkTitle>{t('transactionCard__linkTitle')}</LinkTitle>
         </BoxTitle>
-        <Invoice>
-          <Info>
-            <Avatar>
-              <img src={alertblue} alt="" />
-            </Avatar>
-            <TextContainer>
-              <Title>Compra</Title>
-              <SubTitle>03/02/2026 12:00hs.</SubTitle>
-            </TextContainer>
-          </Info>
-          <Container>
-            <Badge content="" paid />
-            <Price>En Revision</Price>
-          </Container>
-        </Invoice>
-        <Invoice>
-          <Info>
-            <Avatar>
-              <img src={alertblue} alt="" />
-            </Avatar>
-            <TextContainer>
-              <Title>Venta</Title>
-              <SubTitle>02/05/22</SubTitle>
-            </TextContainer>
-          </Info>
-          <Container>
-            <Badge content="" late />
-            <Price>Fallida</Price>
-          </Container>
-        </Invoice>
-        <Invoice>
-          <Info>
-            <Avatar>
-              <img src={alertblue} alt="" />
-            </Avatar>
-            <TextContainer>
-              <Title>Compra</Title>
-              <SubTitle>03/02/2026 12:00hs.</SubTitle>
-            </TextContainer>
-          </Info>
-          <Container>
-            <Badge content=" " glow />
-            <Price>En Revision</Price>
-          </Container>
-        </Invoice>
-        <Invoice>
-          <Info>
-            <Avatar>
-              <img src={alertblue} alt="" />
-            </Avatar>
-            <TextContainer>
-              <Title>Venta</Title>
-              <SubTitle>02/05/22</SubTitle>
-            </TextContainer>
-          </Info>
-          <Container>
-            <Badge content="" paid />
-            <Price>En proceso</Price>
-          </Container>
-        </Invoice>
+        {listado.map(({ id, operacion, estado, fecha, hora, precio }) => (
+          <Invoice>
+            <Info>
+              <Avatar>
+                <img src={alertblue} alt="" />
+              </Avatar>
+              <TextContainer>
+                <Title>{operacion}</Title>
+                <SubTitle>
+                  {fecha} {hora}
+                </SubTitle>
+              </TextContainer>
+            </Info>
+            <Container>
+              <SubTitle>{estado}</SubTitle>
+              <Price>{precio}</Price>
+            </Container>
+          </Invoice>
+        ))}
       </CardContent>
     </TransactionContainer>
   );
 }
 
 const TransactionContainer = styled.div`
-  width: 35rem;
+  width: 30rem;
   border-radius: 1rem;
-  margin-top: 1rem;
   background-color: white;
-  height: 140%;
+  height: max-content;
   box-shadow: ${StyleConstants.cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
@@ -129,7 +143,6 @@ const Invoice = styled.div`
   align-items: center;
   justify-content: space-around;
   margin: 0.4rem;
-  padding-top: 0.6rem;
   @media screen and (min-width: 320px) and (max-width: 1080px) {
     flex-direction: column;
     gap: 1rem;
@@ -147,8 +160,8 @@ const Info = styled.div`
 `;
 const Avatar = styled.div`
   img {
-    height: 3.5rem;
-    width: 3.5rem;
+    height: 2rem;
+    width: 2rem;
     border-radius: 3.5rem;
   }
 `;
