@@ -10,7 +10,7 @@ function BalanceCard() {
       <CardContent flex={true}>
         <Slack>
           <SlackText>
-            <SlackHead>{t('balanceCard__title')}</SlackHead>
+            <SlackTitle>{t('balanceCard__title')}</SlackTitle>
             <SlackHead>{t('balanceCard__subTitle')}</SlackHead>
             <SlackFoot>$ 0000000</SlackFoot>
           </SlackText>
@@ -61,11 +61,47 @@ const SlackText = styled.div`
 `;
 
 const SlackHead = styled.h2`
-  font-weight: 500;
+  position: absolute;
+  width: 78px;
+  height: 27px;
+  left: 319px;
+  top: 205px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
 `;
-const SlackFoot = styled.p`
+
+const SlackTitle = styled.p`
+  position: absolute;
+  width: 101px;
+  height: 36px;
+  left: 319px;
+  top: 152px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
   color: ${p => p.theme.text};
-  font-size: 40px;
+`;
+
+const SlackFoot = styled.div`
+  color: ${p => p.theme.text};
+  position: absolute;
+  width: 372px;
+  height: 72px;
+  left: 319px;
+  top: 240px;
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 72px;
 `;
 
 export default BalanceCard;

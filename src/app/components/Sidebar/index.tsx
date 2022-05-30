@@ -178,6 +178,8 @@ const ImgConteiner = styled.div`
 `;
 
 const ImgFondo = styled.div`
+  bottom: -25;
+  left: 0;
   img {
     width: 600px;
     height: 400px;
