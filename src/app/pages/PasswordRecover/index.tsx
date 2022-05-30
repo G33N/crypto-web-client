@@ -1,7 +1,20 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {
+  Head,
+  ButonBack,
+  Description,
+  Title,
+  Img,
+  Body,
+  Label,
+  Form,
+  BoxInput,
+  Icon,
+  Input,
+  Validator,
+} from './styles';
 import { AppwriteService } from '../../../services/appwrite';
-import styled from 'styled-components/macro';
+
 import { useForm } from 'react-hook-form';
 import { ModalAlert } from '../../components/ModalAlert';
 import { ModalSuccess } from '../../components/ModalSuccess';
@@ -9,11 +22,8 @@ import Alert from '../../assets/icons/alert.svg';
 import Arrow from '../../assets/icons/Back.svg';
 import { Container } from '../../../styles/StyleElements';
 import { Button } from 'styles/StyleElements';
+import { i18n } from './i18n';
 
-interface Props {
-  success?: string;
-  Color?: any;
-}
 const messages = {
   required: '* Este campo es obligatorio',
   mail: '* Debes introducir una dirección de correo electronico correcta',
@@ -29,6 +39,7 @@ export const PasswordRecover = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { register, formState, handleSubmit } = useForm({ mode: 'onChange' });
   const { isValid, touchedFields, errors, isValidating, isDirty } = formState;
+  const { t } = i18n;
 
   const onSubmit = (data, e) => {
     const { mail } = data;
@@ -55,21 +66,17 @@ export const PasswordRecover = () => {
       <ModalAlert
         openModal={isOpenAlert}
         closeModal={setIsOpenAlert}
-        titleAlert={'Usuario y/o contraseña incorrectos'}
-        descriptionAlert={
-          'El usuario y contraseña que ingresaste no coinciden.  Revisá los datos e intentá de nuevo.'
-        }
-        labelButton={'Regresar'}
+        titleAlert={t('PasswordRecover__tittleAlert')}
+        descriptionAlert={t('PasswordRecover__descriptionAlert')}
+        labelButton={t('PasswordRecover__labelButtonAlert')}
         isVisibleButonSuport={false}
       />
       <ModalSuccess
         openModal={isOpen}
         closeModal={setIsOpen}
-        title={'PERFECTO'}
-        description={
-          'Enviamos un mail a su correo electronico para que pueda recuperar su contrasena'
-        }
-        labelButton={'Continuar'}
+        title={t('PasswordRecover__tittleSuccess')}
+        description={t('PasswordRecover__descriptionSuccess')}
+        labelButton={t('PasswordRecover__labelButtonSuccess')}
         pathTo={'/login'}
         isVisibleButonClose={false}
         isVisibleButonNavigate
@@ -109,7 +116,7 @@ export const PasswordRecover = () => {
             >
               <Input
                 type="email"
-                placeholder="Ingrese su correo electrónico"
+                placeholder={t('PasswordRecover__textPlaceholderEmail')}
                 {...register('mail', {
                   required: messages.required,
                   pattern: {
@@ -148,111 +155,3 @@ export const PasswordRecover = () => {
     </>
   );
 };
-
-const Head = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const Img = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const ButonBack = styled(Link)`
-  cursor: pointer;
-  transition: 0.3s easy all;
-  border-radius: 5px;
-  color: ${p => p.theme.primary};
-  margin-right: 10px;
-  &:hover {
-    background: ${p => p.theme.textSecondary};
-  }
-`;
-
-const Title = styled.h3`
-  font-weight: 700;
-  font-size: 24px;
-  color: ${p => p.theme.text};
-  letter-spacing: 0.0022em;
-  line-height: 32px;
-  margin-bottom: 24px;
-`;
-
-const Body = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-`;
-
-const Form = styled.form``;
-
-const Description = styled.p`
-  text-align: left;
-  width: 90%;
-  font-weight: 400;
-  line-height: 20px;
-  font-size: 14px;
-`;
-
-const Label = styled.div<Props>`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 0.875rem;
-  width: 80%;
-  text-align: left;
-  color: ${props => props.Color};
-  line-height: 20px;
-  margin-bottom: 8px;
-  margin-top: 32px;
-`;
-
-const BoxInput = styled.div<Props>`
-  height: 48px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  border: solid 1px ${props => props.Color};
-  opacity: 0.8;
-  border-radius: 12px;
-  background-color: transparent;
-
-  ::placeholder {
-    color: '#787878';
-  }
-`;
-
-const Icon = styled.i<Props>`
-  padding-right: 10px;
-  color: ${props => props.success};
-  &:hover {
-    color: ${p => p.theme.text};
-    opacity: 0.8;
-  }
-`;
-const Input = styled.input`
-  width: 100%;
-  font-size: 0.875rem;
-  font-weight: normal;
-  padding-left: 10px;
-  border: transparent;
-  outline: none;
-  ::placeholder {
-    color: '#787878';
-  }
-  &:active {
-    color: ${p => p.theme.text};
-  }
-`;
-
-const Validator = styled.p`
-  font-size: 0.6rem;
-  color: ${p => p.theme.errorColor};
-  font-weight: bold;
-  width: 100%;
-  text-align: left;
-  display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
-`;

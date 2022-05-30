@@ -42,7 +42,11 @@ const MainRoutes = () => (
         <Route path="settings" element={<SettingsPage />} />
         <Route path="support" element={<SupportPage />} />
       </Route>
+      <Route path="transaction" element={<TransactionPage />} />
+      <Route path="settings" element={<SettingsPage />} />
+      <Route path="support" element={<SupportPage />} />
     </Route>
+    {/* </Route> */}
 
     {/** Public Routes */}
     <Route path="/home" element={<HomePage />} />

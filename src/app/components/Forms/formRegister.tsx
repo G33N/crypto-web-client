@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppwriteService } from '../../../services/appwrite';
-import styled, { css } from 'styled-components/macro';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from './components/CardValidationPass';
 import PhoneInput from 'react-phone-input-2';
@@ -12,11 +11,21 @@ import PasswordOff from '../../assets/icons/Password off.svg';
 import PasswordOn from '../../assets/icons/Password on.svg';
 import Alert from '../../assets/icons/alert.svg';
 import { ModalSuccess } from '../ModalSuccess';
-
-interface Props {
-  successPass?: string;
-  Color?: string;
-}
+import { i18n } from './i18n';
+import {
+  Form,
+  Label,
+  BoxInput,
+  Input,
+  Validator,
+  IconInput,
+  InputPass,
+  Img,
+  IconPass,
+  BoxPass,
+  Icon,
+  Button,
+} from './styles';
 
 const messages = {
   required: '* Este campo es obligatorio',
@@ -33,7 +42,7 @@ const patterns = {
 
 export function FormRegister() {
   const navigate = useNavigate();
-
+  const { t } = i18n;
   const { register, getValues, formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
@@ -80,19 +89,17 @@ export function FormRegister() {
       <ModalAlert
         openModal={isOpenAlert}
         closeModal={setIsOpenAlert}
-        titleAlert={'Hubo un error'}
-        descriptionAlert={
-          'Ocurrió un error al cargar la información. Por favor intentá de nuevo.'
-        }
-        labelButton={'Regresar'}
+        titleAlert={t('formRegister__titleAlert')}
+        descriptionAlert={t('formRegister__descriptionAlert')}
+        labelButton={t('formRegister__labelButtonAlert')}
         isVisibleButonSuport={false}
       />
       <ModalSuccess
         openModal={isOpen}
         closeModal={setIsOpen}
-        title={'PERFECTO'}
-        description={'El usuario se creo correctamente.'}
-        labelButton={'Continuar'}
+        title={t('formRegister__tittleSuccess')}
+        description={t('formRegister__descriptionSuccess')}
+        labelButton={t('formRegister__labelButtonSuccess')}
         pathTo={'/login'}
         isVisibleButonClose={false}
         isVisibleButonNavigate
@@ -120,7 +127,7 @@ export function FormRegister() {
           <Input
             autoComplete="off"
             type="text"
-            placeholder="Ingrese su nombre completo"
+            placeholder={t('formRegister__textPlaceholderFullname')}
             {...register('fullname', {
               required: messages.required,
               pattern: {
@@ -156,7 +163,7 @@ export function FormRegister() {
         >
           <Input
             type="email"
-            placeholder="Ingrese su correo electrónico"
+            placeholder={t('formRegister__textPlaceholderEmail')}
             {...register('mail', {
               required: messages.required,
               pattern: {
@@ -195,7 +202,7 @@ export function FormRegister() {
           Numero telefonico
         </Label>
         <PhoneInput
-          placeholder="Ingrese su numero telefonico"
+          placeholder={t('formRegister__textPlaceholderPhoneNumber')}
           {...register('phone', {})}
           onChange={handleOnChange}
           inputStyle={{
@@ -241,7 +248,7 @@ export function FormRegister() {
           }
         >
           <InputPass
-            placeholder="Ingrese su contraseña"
+            placeholder={t('formRegister__textPlaceholderPass')}
             type={passwordShown ? 'text' : 'password'}
             {...register('password', {
               required: messages.required,
@@ -271,13 +278,11 @@ export function FormRegister() {
           </IconPass>
         </BoxInput>
 
-        {errors.password && touchedFields.password && errors.password.type && (
-          <>
-            <BoxPass>
-              <CardValidationPass type={errors.password.type} />
-            </BoxPass>
-          </>
-        )}
+        <>
+          <BoxPass>
+            <CardValidationPass type={errors?.password?.type} />
+          </BoxPass>
+        </>
 
         <Label
           Color={
@@ -298,7 +303,7 @@ export function FormRegister() {
           }
         >
           <InputPass
-            placeholder="Ingrese nuevamente su contraseña"
+            placeholder={t('formRegister__textPlaceholderPasConfirm')}
             type={passwordShown ? 'text' : 'password'}
             {...register('passConfirm', {
               required: messages.required,
@@ -339,132 +344,3 @@ export function FormRegister() {
     </>
   );
 }
-
-// ----- Styles ------ //
-
-const Form = styled.form`
-  text-align: center;
-`;
-
-const BoxPass = styled.div`
-  margin-top: 10px;
-`;
-const Label = styled.div<Props>`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 0.875rem;
-  width: 90%;
-  text-align: left;
-  color: ${props => props.Color};
-  line-height: 20px;
-  margin-bottom: 8px;
-  margin-top: 32px;
-`;
-
-const BoxInput = styled.div<Props>`
-  height: 48px;
-  width: 100%;
-  display: flex;
-
-  align-items: center;
-  border: solid 1px ${props => props.Color};
-  opacity: 0.8;
-  border-radius: 12px;
-  background-color: transparent;
-
-  ::placeholder {
-    color: ${p => p.theme.text};
-  }
-`;
-const Img = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const IconInput = styled.i<Props>`
-  padding-right: 10px;
-  color: ${props => props.Color};
-  &:hover {
-    color: ${p => p.theme.text};
-    opacity: 0.8;
-  }
-`;
-
-const Validator = styled.p`
-  font-size: 0.6rem;
-  color: ${p => p.theme.errorColor};
-  font-weight: bold;
-  width: 100%;
-  text-align: left;
-  display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
-`;
-
-const Input = styled.input<Props>`
-  width: 100%;
-  font-size: 0.875rem;
-  font-weight: normal;
-  height: 4px;
-  padding: 10px;
-  border: transparent;
-  outline: none;
-  ::placeholder {
-    color: ${p => p.theme.text};
-  }
-  &:active {
-    color: ${p => p.theme.text};
-  }
-`;
-const InputPass = styled.input`
-  width: 100%;
-  font-size: 0.875rem;
-  font-weight: normal;
-  padding-left: 10px;
-  border: transparent;
-  outline: none;
-  ::placeholder {
-    color: ${p => p.theme.text};
-  }
-  &:active {
-    color: ${p => p.theme.text};
-  }
-`;
-
-const IconPass = styled.i<Props>`
-  padding-right: 10px;
-  color: ${props => props.successPass};
-  &:hover {
-    color: ${p => p.theme.text};
-    opacity: 0.8;
-  }
-`;
-const Icon = styled.i<Props>`
-  padding-right: 10px;
-  color: ${props => props.successPass};
-  &:hover {
-    color: ${p => p.theme.text};
-    opacity: 0.8;
-  }
-`;
-
-const Button = styled.button`
-  margin-top: 40px;
-  width: 100%;
-  height: 48px;
-  font-size: 18px;
-  padding: 10px;
-  border-color: transparent;
-  background-color: ${p => p.theme.primary};
-  border-radius: 12px;
-  color: ${p => p.theme.background};
-  ::placeholder {
-    color: ${p => p.theme.text};
-    text-align: center;
-  }
-  ${props =>
-    props.disabled &&
-    css`
-      background: ${p => p.theme.secondary};
-    `}
-`;

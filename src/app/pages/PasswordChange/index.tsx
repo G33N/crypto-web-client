@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { AppwriteService } from '../../../services/appwrite';
-import styled from 'styled-components/macro';
+import { useNavigate } from 'react-router-dom';
 import Arrow from '../../assets/icons/Back.svg';
 import { useForm } from 'react-hook-form';
 import { CardValidationPass } from '../../components/Forms/components/CardValidationPass';
@@ -9,13 +8,23 @@ import PasswordOn from '../../assets/icons/Password on.svg';
 import PasswordOff from '../../assets/icons/Password off.svg';
 import { ModalAlert } from '../../components/ModalAlert';
 import { ModalSuccess } from '../../components/ModalSuccess';
-import { Container } from '../../../styles/StyleElements';
-import { Button } from 'styles/StyleElements';
-
-interface Props {
-  successPass?: string;
-  Color?: string;
-}
+import { Container, Button } from '../../../styles/StyleElements';
+import { i18n } from './i18n';
+import {
+  Head,
+  ButonBack,
+  Body,
+  Form,
+  Label,
+  Title,
+  Img,
+  BoxInput,
+  IconPass,
+  InputPass,
+  BoxPass,
+  Validator,
+  Icon,
+} from './styles';
 
 const messages = {
   required: 'Este campo es obligatorio',
@@ -25,6 +34,7 @@ const messageConfirmPass = 'Las contrasenas deben ser iguales';
 
 export function PasswordChange() {
   const navigate = useNavigate();
+  const { t } = i18n;
 
   const { register, getValues, formState, handleSubmit } = useForm({
     mode: 'onChange',
@@ -64,19 +74,17 @@ export function PasswordChange() {
       <ModalAlert
         openModal={isOpenAlert}
         closeModal={setIsOpenAlert}
-        titleAlert={'Hubo un error'}
-        descriptionAlert={
-          'Ocurrió un error en el proceso de recuperación de contraseña. Por favor intentá de nuevo.'
-        }
-        labelButton={'Regresar'}
+        titleAlert={t('PasswordChange__tittleAlert')}
+        descriptionAlert={t('PasswordChange__descriptionAlert')}
+        labelButton={t('PasswordChange__labelButtonAlert')}
         isVisibleButonSuport={false}
       />
       <ModalSuccess
         openModal={isOpen}
         closeModal={setIsOpen}
-        title={'contrasena modificada corretamente'}
-        description={''}
-        labelButton={'Continuar'}
+        title={t('PasswordChange__tittleSuccess')}
+        description={t('PasswordChange__tittleSuccess')}
+        labelButton={t('PasswordChange__tittleSuccess')}
         pathTo={'/login'}
         isVisibleButonClose={false}
         isVisibleButonNavigate
@@ -111,7 +119,7 @@ export function PasswordChange() {
               }
             >
               <InputPass
-                placeholder="Ingrese su contraseña"
+                placeholder={t('PasswordChange__textPlaceholderPass')}
                 type={passwordShown ? 'text' : 'password'}
                 {...register('password', {
                   required: messages.required,
@@ -168,7 +176,7 @@ export function PasswordChange() {
               }
             >
               <InputPass
-                placeholder="Ingrese nuevamente su contraseña"
+                placeholder={t('PasswordChange__textPlaceholderPassConfirm')}
                 type={passwordShown ? 'text' : 'password'}
                 {...register('passConfirm', {
                   required: messages.required,
@@ -207,115 +215,3 @@ export function PasswordChange() {
     </>
   );
 }
-
-const Head = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const Img = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const ButonBack = styled(Link)`
-  cursor: pointer;
-  transition: 0.3s easy all;
-  border-radius: 5px;
-  color: ${p => p.theme.primary};
-  margin-right: 10px;
-  &:hover {
-    background: ${p => p.theme.textSecondary};
-  }
-`;
-
-const Title = styled.h3`
-  font-weight: 700;
-  font-size: 24px;
-  color: ${p => p.theme.text};
-  letter-spacing: 0.0022em;
-  line-height: 32px;
-  margin-bottom: 24px;
-`;
-
-const Body = styled.div`
-  text-align: left;
-`;
-
-const Form = styled.form`
-  text-align: center;
-`;
-const IconPass = styled.i<Props>`
-  padding-right: 10px;
-  color: ${props => props.successPass};
-  &:hover {
-    color: ${p => p.theme.text};
-    opacity: 0.8;
-  }
-`;
-const Icon = styled.i<Props>`
-  padding-right: 10px;
-  color: ${props => props.successPass};
-  &:hover {
-    color: ${p => p.theme.text};
-    opacity: 0.8;
-  }
-`;
-
-const BoxPass = styled.div`
-  text-align: left;
-  margin-top: 10px;
-`;
-const Label = styled.div<Props>`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 0.875rem;
-  width: 80%;
-  text-align: left;
-  color: ${props => props.Color};
-  line-height: 20px;
-  margin-bottom: 8px;
-  margin-top: 32px;
-`;
-
-const BoxInput = styled.div<Props>`
-  height: 48px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  border: solid 1px ${props => props.Color};
-  opacity: 0.8;
-  border-radius: 12px;
-  background-color: transparent;
-
-  ::placeholder {
-    color: '#787878';
-  }
-`;
-
-const Validator = styled.p`
-  font-size: 0.6rem;
-  color: ${p => p.theme.errorColor};
-  font-weight: bold;
-  width: 100%;
-  text-align: left;
-  display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
-`;
-
-const InputPass = styled.input`
-  width: 100%;
-  font-size: 0.875rem;
-  font-weight: normal;
-  padding-left: 10px;
-  border: transparent;
-  outline: none;
-  ::placeholder {
-    color: '#787878';
-  }
-  &:active {
-    color: ${p => p.theme.text};
-  }
-`;

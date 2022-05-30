@@ -5,5 +5,13 @@
   "accountVerify__textLabel": " Código de verificación de correo electrónico",
   "accountVerify__textPlaceholder": "Ingresa el codigo de verificacion",
   "accountVerify__textCounter": "Reenviar codigo: ",
-  "accountVerify__actionButton": "Verificar"
+  "accountVerify__actionButton": "Verificar",
+
+  "accountVerify__tittleAlert": "Hubo un error",
+  "accountVerify__descriptionAlert": "Ocurrió un error en el proceso de recuperación de contraseña. Por favor intentá de nuevo.",
+  "accountVerify__labelButtonAlert": "Regresar",
+
+  "accountVerify__tittleSuccess": "Cuenta verificada corectamente",
+  "accountVerify__descriptionSuccess": "Su cuenta ha sido verificada, puede seguir navegando.",
+  "accountVerify__labelButtonSuccess": "Continuar"
 }

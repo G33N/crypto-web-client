@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
-import styled from 'styled-components/macro';
+import { WrapperNav } from './styles';
 import { ButtonLink } from '../ButtonLink';
 
 export function Nav() {
   const location = useLocation();
 
   return (
-    <Wrapper>
+    <WrapperNav>
       {location.pathname !== '/register' && (
         <ButtonLink path="/register" label="Register" />
       )}
@@ -20,14 +20,6 @@ export function Nav() {
           <ButtonLink path="/register" label="Register" />
         </>
       )}
-    </Wrapper>
+    </WrapperNav>
   );
 }
-
-const Wrapper = styled.nav`
-  display: flex;
-  margin-right: -1rem;
-
-  @media (min-width: 480px) {
-    .ButtonLink {display: none;
-  }`;

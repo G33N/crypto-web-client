@@ -1,118 +1,73 @@
 import * as React from 'react';
-import styled from 'styled-components/macro';
 import Check from '../../../../assets/icons/Check.svg';
 import Oval from '../../../../assets/icons/Oval.svg';
+import {
+  Wrapper,
+  TitleCardPass,
+  Row,
+  IconCardPass,
+  DescriptionCardPass,
+  Circle,
+  Img,
+  ImgTwo,
+} from '../../styles';
 
 export const CardValidationPass = (props?: any) => {
   console.log('props', props);
   return (
     <Wrapper>
-      <Title> La contraseña debe tener al menos:</Title>
+      <TitleCardPass> La contraseña debe tener al menos:</TitleCardPass>
       <Row>
         {props.type === 'oneUppercase' ? (
-          <Icon>
-            <Img src={Check} />
-          </Icon>
-        ) : (
           <Circle>
             <ImgTwo src={Oval} />
           </Circle>
+        ) : (
+          <IconCardPass>
+            <Img src={Check} />
+          </IconCardPass>
         )}
 
-        <Description>Una mayuscula.</Description>
+        <DescriptionCardPass>Una mayuscula.</DescriptionCardPass>
       </Row>
       <Row>
         {props.type === 'oneLowercase' ? (
-          <Icon>
+          <IconCardPass>
             <Img src={Check} />
-          </Icon>
+          </IconCardPass>
         ) : (
           <Circle>
             <ImgTwo src={Oval} />
           </Circle>
         )}
 
-        <Description>Una minuscula.</Description>
+        <DescriptionCardPass>Una minuscula.</DescriptionCardPass>
       </Row>
       <Row>
         {props.type === 'oneNumber' ? (
-          <Icon>
+          <IconCardPass>
             <Img src={Check} />
-          </Icon>
+          </IconCardPass>
         ) : (
           <Circle>
             <ImgTwo src={Oval} />
           </Circle>
         )}
 
-        <Description>Al menos un numero.</Description>
+        <DescriptionCardPass>Al menos un numero.</DescriptionCardPass>
       </Row>
       <Row>
         {props.type === 'minLenght' ? (
-          <Icon>
+          <IconCardPass>
             <Img src={Check} />
-          </Icon>
+          </IconCardPass>
         ) : (
           <Circle>
             <ImgTwo src={Oval} />
           </Circle>
         )}
-        <Description>8 digitos.</Description>
+        <DescriptionCardPass>8 digitos.</DescriptionCardPass>
       </Row>
     </Wrapper>
   );
 };
-
-// ----- Styles ------ //
-
-const Wrapper = styled.div`
-  align-items: left;
-`;
-
-const Row = styled.div`
-  display: flex;
-  margin-right: -1rem;
-  padding: 5px;
-`;
-
-const Title = styled.div`
-  font-size: 12px;
-  width: 216px;
-  font-weight: 400;
-  color: ${p => p.theme.text};
-  margin-right: 1rem;
-`;
-
-const Description = styled.div`
-  color: ${p => p.theme.text};
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 16px;
-`;
-
-const Icon = styled.i`
-  font-size: 15px;
-  color: #4caf50;
-  padding-right: 15px;
-
-  &:active {
-    color: #4caf50;
-  }
-`;
-const Circle = styled.i`
-  font-size: 12px;
-  color: ${p => p.theme.text};
-  padding-right: 15px;
-  width: 24px;
-  height: 24px;
-`;
-
-const Img = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const ImgTwo = styled.img`
-  width: 12px;
-  height: 12px;
-`;
