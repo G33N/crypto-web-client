@@ -9,6 +9,7 @@ export const Title = styled.div`
   letter-spacing: 0.0022em;
   color: ${p => p.theme.text};
   margin-right: 1rem;
+  min-width: 448px;
 `;
 export const Label = styled.div`
   font-style: normal;
