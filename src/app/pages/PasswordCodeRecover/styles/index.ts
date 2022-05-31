@@ -16,7 +16,7 @@ export const InputNum = styled.input`
   height: 32px;
   margin-left: 14px;
   border: 1px solid #cecece;
-  border-radius: 8.64px;
+  border-radius: 8px;
   ::placeholder {
     color: ${p => p.theme.text};
   }
