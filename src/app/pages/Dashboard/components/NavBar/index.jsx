@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AppwriteService } from 'services/appwrite';
 import React from 'react';
 import styled from 'styled-components';
-import AvatarImage from '../assets/avatarImage.jpg';
+import AvatarImage from '../../assets/avatarImage.jpg';
 
 function Navbar(props) {
   const { t } = i18n;

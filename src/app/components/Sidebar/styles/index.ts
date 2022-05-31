@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
+import globo from '../../../assets/images/globopeque.png';
 
 export const BoxSidebar = styled.div`
   width: 250px;
   background-color: black;
+  background-image: url(${globo});
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100%;
   color: #ebf8fe;
   padding-top: 20px;
   padding-left: 8px;
@@ -86,11 +91,7 @@ export const ImgConteiner = styled.div`
     height: 4rem;
     width: 200px;
   }
-`;
-
-export const ImgFondo = styled.div`
-  background-repeat: no-repeat;
-  background-position: bottom left;
+  z-position: 1;
 `;
 
 export const ConteinerFondo = styled.div`

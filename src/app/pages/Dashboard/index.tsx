@@ -6,7 +6,7 @@ import {
   ColumnOne1,
   ColumnTwo1,
 } from './styles';
-import Navbar from './components/Navbar';
+import Navbar from './components/NavBar';
 import ButtonCard from './components/ButtonCard';
 import BalanceCard from './components/BalanceCard';
 import TransactionsCard from './components/TransactionsCard';

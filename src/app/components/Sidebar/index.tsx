@@ -6,14 +6,13 @@ import {
   ImgConteiner,
   LinkButton,
   Avatar,
-  ImgFondo,
   ConteinerFondo,
   ButtonLogout,
 } from './styles';
 import Home from '../../assets/icons/Home.svg';
 import Logo from '../../assets/icons/logo.svg';
-import fondoGlobo from '../../assets/images/fondoGlobo.png';
 import { navigationItems } from './config';
+import { Links } from 'app/pages/LoginPage/styles';
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -48,27 +47,25 @@ const Sidebar = () => {
   return (
     <BoxSidebar>
       <ImgConteiner>
-        <img src={Logo} alt="" />
+        <Links to="/dashboard">
+          <img src={Logo} alt="" />
+        </Links>
       </ImgConteiner>
       <div className="sidebar__items">
-        {user && (
-          <>
-            {navigationItems.sidebar.map(item => (
-              <LinkButton
-                key={item.text}
-                to={item.to}
-                className={
-                  location.pathname.includes(item.to) ? 'sidebar_active' : ''
-                }
-              >
-                <Avatar>
-                  <img src={Home} alt="" />
-                </Avatar>{' '}
-                {item.name}
-              </LinkButton>
-            ))}
-          </>
-        )}
+        {navigationItems.sidebar.map(item => (
+          <LinkButton
+            key={item.text}
+            to={item.to}
+            className={
+              location.pathname.includes(item.to) ? 'sidebar_active' : ''
+            }
+          >
+            <Avatar>
+              <img src={Home} alt="" />
+            </Avatar>{' '}
+            {item.name}
+          </LinkButton>
+        ))}
       </div>
       <ConteinerFondo>
         <ButtonLogout onClick={logout}>
@@ -78,9 +75,6 @@ const Sidebar = () => {
           Cerrar Sesion
         </ButtonLogout>
       </ConteinerFondo>
-      <ImgFondo>
-        <img src={fondoGlobo} alt="" />
-      </ImgFondo>
     </BoxSidebar>
   );
 };
