@@ -16,16 +16,16 @@ export function RegisterPage() {
       </Helmet>
 
       <Container>
-        <Title>Crear una cuenta</Title>
+        <Title>{t('RegisterPage_title')}</Title>
         <CardInfo
-          title={t('RegisterPage__title')}
-          description={t('RegisterPage__description')}
+          title={t('RegisterPage__titleCardInfo')}
+          description={t('RegisterPage__descriptionCardInfo')}
         />
         <FormRegister />
 
         <BoxNavigation>
-          <Label> ¿Ya estas registrado ? </Label>
-          <Links to="/login">Iniciar Sesión</Links>
+          <Label>{t('RegisterPage_label')} </Label>
+          <Links to="/login">{t('RegisterPage_links')}</Links>
         </BoxNavigation>
       </Container>
     </>

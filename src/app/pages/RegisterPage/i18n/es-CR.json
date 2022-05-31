@@ -1,4 +1,9 @@
 {
-  "RegisterPage__title": "Informacion de usuario",
-  "RegisterPage__description": "Ingresá tu nombre, nro telefónico y correo para comenzar el proceso de tu registro"
+  "RegisterPage_title": "Crear una cuenta",
+
+  "RegisterPage__titleCardInfo": "Informacion de usuario",
+  "RegisterPage__descriptionCardInfo": "Ingresá tu nombre, nro telefónico y correo para comenzar el proceso de tu registro",
+
+  "RegisterPage_label": "¿Ya estas registrado ?",
+  "RegisterPage_links": "Iniciar Sesión"
 }

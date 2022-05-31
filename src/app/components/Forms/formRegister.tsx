@@ -221,15 +221,18 @@ export function FormRegister() {
         {errors.phone && touchedFields.phone && (
           <Validator>{errors.phone.message}</Validator>
         )}
+
         {/* //------ Input pass ----------// */}
-        <Label>
-          Color=
-          {(isValidating && 'black') ||
+
+        <Label
+          Color={
+            (isValidating && 'black') ||
             (touchedFields.password && !errors.password && 'green') ||
-            (touchedFields.password && errors.password && 'red')}
+            (touchedFields.password && errors.password && 'red')
+          }
+        >
           Contraseña nueva
         </Label>
-
         <BoxInput
           Color={
             (!isDirty && 'grey') ||

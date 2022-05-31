@@ -15,17 +15,13 @@ export const LoginPage = () => {
       </Helmet>
 
       <Container>
-        <Title>Iniciar Sesión</Title>
-        {/* <CardInfo
-          title={t('LoginPage__title')}
-          description={t('RegisterPage__description')}
-        /> */}
+        <Title>{t('LoginPage__title')}</Title>
 
         <FormLogin />
 
         <BoxNavigation>
-          <Label> ¿No tenes cuenta? </Label>
-          <Links to="/register">Crear cuenta</Links>
+          <Label>{t('LoginPage__label')}</Label>
+          <Links to="/register">{t('LoginPage__link')}</Links>
         </BoxNavigation>
       </Container>
     </>
