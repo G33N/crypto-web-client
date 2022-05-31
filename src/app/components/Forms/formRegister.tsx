@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { CardValidationPass } from './components/CardValidationPass';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { ModalAlert } from '../../components/ModalAlert';
+import { ModalAlert } from '../ModalAlert';
 import { themes } from '../../../styles/theme/themes';
 import PasswordOff from '../../assets/icons/Password off.svg';
 import PasswordOn from '../../assets/icons/Password on.svg';
@@ -141,7 +141,6 @@ export function FormRegister() {
         {errors.fullname && touchedFields.fullname && (
           <Validator>{errors.fullname.message}</Validator>
         )}
-
         {/* //------ Input mail ----------// */}
         <Label
           Color={
@@ -152,7 +151,6 @@ export function FormRegister() {
         >
           Correo electrónico
         </Label>
-
         <BoxInput
           Color={
             (!isDirty && 'grey') ||
@@ -185,13 +183,10 @@ export function FormRegister() {
             {errors.mail && touchedFields.mail ? <Img src={Alert} /> : ''}
           </IconInput>
         </BoxInput>
-
         {errors.mail && touchedFields.mail && (
           <Validator>{errors.mail.message} </Validator>
         )}
-
         {/* //------ Input phone ----------// */}
-
         <Label
           Color={
             (isValidating && 'black') ||
@@ -226,16 +221,12 @@ export function FormRegister() {
         {errors.phone && touchedFields.phone && (
           <Validator>{errors.phone.message}</Validator>
         )}
-
         {/* //------ Input pass ----------// */}
-
-        <Label
-          Color={
-            (isValidating && 'black') ||
+        <Label>
+          Color=
+          {(isValidating && 'black') ||
             (touchedFields.password && !errors.password && 'green') ||
-            (touchedFields.password && errors.password && 'red')
-          }
-        >
+            (touchedFields.password && errors.password && 'red')}
           Contraseña nueva
         </Label>
 
@@ -252,14 +243,7 @@ export function FormRegister() {
             type={passwordShown ? 'text' : 'password'}
             {...register('password', {
               required: messages.required,
-              validate: {
-                oneUppercase: value => value && /^(?=.*?[A-Z])/.test(value),
-                oneLowercase: value => value && /^(?=.*?[a-z])/.test(value),
-                oneNumber: value => value && /^(?=.*?[0-9])/.test(value),
-                minLength: value => value && /.{8,}/.test(value),
-              },
             })}
-            name="password"
           />
 
           <IconPass
@@ -277,13 +261,15 @@ export function FormRegister() {
             )}
           </IconPass>
         </BoxInput>
-
         <>
           <BoxPass>
-            <CardValidationPass type={errors?.password?.type} />
+            <CardValidationPass
+              valueOfNewPassword={getValues().password?.toString()}
+            />
+
+            {/* <CardValidationPass type={errors?.password?.type} /> */}
           </BoxPass>
         </>
-
         <Label
           Color={
             (isValidating && 'black') ||
@@ -293,7 +279,6 @@ export function FormRegister() {
         >
           Confirmación de nueva contraseña
         </Label>
-
         <BoxInput
           Color={
             (!isDirty && 'grey') ||
@@ -328,11 +313,9 @@ export function FormRegister() {
             )}
           </Icon>
         </BoxInput>
-
         {errors.passConfirm && touchedFields.passConfirm && (
           <Validator>{errors.passConfirm.message}</Validator>
         )}
-
         <Button
           type="submit"
           disabled={!isValid}

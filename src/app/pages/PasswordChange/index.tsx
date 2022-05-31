@@ -152,7 +152,7 @@ export function PasswordChange() {
             {errors.password && touchedFields.password && errors.password.type && (
               <>
                 <BoxPass>
-                  <CardValidationPass type={errors.password.type} />
+                  {/* <CardValidationPass type={errors.password.type} /> */}
                 </BoxPass>
               </>
             )}

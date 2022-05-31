@@ -194,6 +194,11 @@ export const Img = styled.img`
   height: 24px;
 `;
 
+export const Img2 = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
 export const ImgPassRecover = styled.img`
   width: 24px;
   height: 24px;
