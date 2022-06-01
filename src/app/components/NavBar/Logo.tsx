@@ -6,7 +6,7 @@ import { Links } from 'app/pages/LoginPage/styles';
 export function Logo() {
   return (
     <WrapperLogo>
-      <Links to="/">
+      <Links to="/home">
         <Img src={Omnicrypto} />
       </Links>
     </WrapperLogo>

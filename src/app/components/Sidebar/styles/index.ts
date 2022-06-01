@@ -41,6 +41,12 @@ export const BoxSidebar = styled.div`
       color: ${p => p.theme.background};
       background-color: ${p => p.theme.secondary};
     }
+
+    .sidebar__lasItem {
+      position: absolute;      
+      bottom; 10px;     
+    }
+
   }
 `;
 
@@ -64,12 +70,16 @@ export const ButtonLogout = styled.button`
   align-items: center;
   font-size: 18px;
   text-decoration: none;
+  padding: 10px;
+  border-color: transparent;
   color: ${p => p.theme.background};
-  background-color: ${p => p.theme.text};
+  background-color: transparent;
   &:hover {
-    color: ${p => p.theme.primary};
     opacity: 0.8;
     cursor: pointer;
+    background-color: ${p => p.theme.primary};
+    padding: 10px;
+    border-radius: 0.75rem;
   }
 
   &:active {
@@ -95,5 +105,5 @@ export const ImgConteiner = styled.div`
 `;
 
 export const ConteinerFondo = styled.div`
-  position: bottom;
+  background-position: bottom;
 `;

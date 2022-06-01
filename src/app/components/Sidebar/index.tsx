@@ -9,7 +9,7 @@ import {
   ConteinerFondo,
   ButtonLogout,
 } from './styles';
-import Home from '../../assets/icons/Home.svg';
+import IconClose from '../../assets/icons/IconClose.svg';
 import Logo from '../../assets/icons/logo.svg';
 import { navigationItems } from './config';
 import { Links } from 'app/pages/LoginPage/styles';
@@ -47,7 +47,7 @@ const Sidebar = () => {
   return (
     <BoxSidebar>
       <ImgConteiner>
-        <Links to="/">
+        <Links to="/home">
           <img src={Logo} alt="" />
         </Links>
       </ImgConteiner>
@@ -61,20 +61,20 @@ const Sidebar = () => {
             }
           >
             <Avatar>
-              <img src={Home} alt="" />
+              <img src={item.icon} alt="" />
             </Avatar>{' '}
             {item.name}
           </LinkButton>
         ))}
       </div>
-      <ConteinerFondo>
+      <div className="sidebar__lasItem">
         <ButtonLogout onClick={logout}>
           <Avatar>
-            <img src={Home} alt="" />
+            <img src={IconClose} alt="" />
           </Avatar>
           Cerrar Sesion
         </ButtonLogout>
-      </ConteinerFondo>
+      </div>
     </BoxSidebar>
   );
 };
