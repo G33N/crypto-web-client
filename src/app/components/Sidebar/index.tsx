@@ -47,7 +47,7 @@ const Sidebar = () => {
   return (
     <BoxSidebar>
       <ImgConteiner>
-        <Links to="/dashboard">
+        <Links to="/">
           <img src={Logo} alt="" />
         </Links>
       </ImgConteiner>

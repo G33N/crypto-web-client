@@ -72,7 +72,7 @@ table {
 }
 
 .inner-content{
-    padding-top:70px;
+    padding-top:20px;
     padding-left:40px;
 }
 

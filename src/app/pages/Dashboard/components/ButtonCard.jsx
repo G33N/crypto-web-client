@@ -2,7 +2,10 @@ import { i18n } from './i18n';
 import React from 'react';
 import styled from 'styled-components';
 import { StyleConstants } from '../../../../styles/StyleConstants';
-import Home from '../../../assets/icons/primary.svg';
+import Accounts from '../../../assets/icons/Accounts.svg';
+import Questions from '../../../assets/icons/Question.svg';
+import Settings from '../../../assets/icons/Settings.svg';
+import Transactions from '../../../assets/icons/Transactions.svg';
 
 function ButtonCard() {
   const { t } = i18n;
@@ -12,25 +15,25 @@ function ButtonCard() {
       <Row>
         <Card>
           <Avatar>
-            <img src={Home} alt="" />
+            <img src={Transactions} alt="" />
           </Avatar>
           <Title>{t('buttonCard__titleButton1')}</Title>
         </Card>
         <Card>
           <Avatar>
-            <img src={Home} alt="" />
+            <img src={Accounts} alt="" />
           </Avatar>
           <Title>{t('buttonCard__titleButton2')}</Title>
         </Card>
         <Card>
           <Avatar>
-            <img src={Home} alt="" />
+            <img src={Settings} alt="" />
           </Avatar>
           <Title>{t('buttonCard__titleButton3')}</Title>
         </Card>
         <LastCard>
           <Avatar>
-            <img src={Home} alt="" />
+            <img src={Questions} alt="" />
           </Avatar>
           <Title>{t('buttonCard__titleButton4')}</Title>
         </LastCard>
