@@ -1,54 +1,30 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { GlobalStyle } from 'styles/global-styles';
-import ProtectedRoute from '../Auth/ProtectedRoute';
-
+import { useLocation } from 'react-router-dom';
+import MainRoutes from './Routes';
+import Sidebar from './components/Sidebar';
 import { NavBar } from './components/NavBar';
-import { HomePage } from './pages/HomePage/Loadable';
-import { Dashboard } from './pages/Dashboard';
-import { LoginPage } from './pages/LoginPage/Loadable';
-import { RegisterPage } from './pages/RegisterPage/Loadable';
-import { PasswordCodeRecover } from './pages/PasswordCodeRecover';
-import { PasswordRecover } from './pages/PasswordRecover';
-import { PasswordChange } from './pages/PasswordChange';
-import { AccountVerify } from './pages/AccountVerify';
-import { useTranslation } from 'react-i18next';
 
-export default function App() {
-  const { i18n } = useTranslation();
+function App() {
+  const location = useLocation();
 
   return (
-    <BrowserRouter>
-      <Helmet
-        defaultTitle="Omni Crypto Wallet"
-        htmlAttributes={{ lang: i18n.language }}
-      >
-        <meta name="description" content="Omni Crypto Wallet" />
-      </Helmet>
-
-      <NavBar />
-
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/passCodeRecover" element={<PasswordCodeRecover />} />
-        <Route path="/passRecover" element={<PasswordRecover />} />
-        <Route path="/passChange" element={<PasswordChange />} />
-        <Route path="/accountVerify" element={<AccountVerify />} />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="*" element={<Navigate replace to="/" />} />
-      </Routes>
-      <GlobalStyle />
-    </BrowserRouter>
+    <>
+      {location.pathname !== '/dashboard' &&
+        location.pathname !== '/transaction' &&
+        location.pathname !== '/tabs' &&
+        location.pathname !== '/support' &&
+        location.pathname !== '/settings' && <NavBar />}
+      <div className="app">
+        {location.pathname !== '/register' &&
+          location.pathname !== '/login' &&
+          location.pathname !== '/home' &&
+          location.pathname !== '/accountVerify' &&
+          location.pathname !== '/passRecover' &&
+          location.pathname !== '/passChange' && <Sidebar />}
+        <MainRoutes />
+      </div>
+    </>
   );
 }
+
+export default App;

@@ -1,0 +1,28 @@
+{
+  "formLogin__titleAlert": "Usuario y/o contraseña incorrectos",
+  "formLogin__descriptionAlert": "El usuario y contraseña que ingresaste no coinciden.  Revisá los datos e intentá de nuevo.",
+  "formLogin__labelButtonAlert": "Regresar",
+
+  "formLogin__textPlaceholderEmail": "Ingrese su correo electrónico",
+  "formLogin__textPlaceholderPass": "Ingrese su contraseña",
+
+  "formRegister__titleAlert": "Ya existe un usuario con este mail",
+  "formRegister__descriptionAlert": "Ocurrió un error al cargar la información. Por favor intentá de nuevo.",
+  "formRegister__labelButtonAlert": "Regresar",
+
+  "formRegister__tittleSuccess": "PERFECTO",
+  "formRegister__descriptionSuccess": "El usuario se creo correctamente.",
+  "formRegister__labelButtonSuccess": "Continuar",
+
+  "formRegister__textPlaceholderFullname": "Ingrese su nombre completo",
+
+  "formRegister__textPlaceholderEmail": "Ingrese su correo electrónico",
+
+  "formRegister__textPlaceholderPhoneNumber": "Ingrese su numero telefonico",
+
+  "formRegister__textPlaceholderPass": "Ingrese su contraseña",
+
+  "formRegister__textPlaceholderPasConfirm": "Ingrese nuevamente su contraseña",
+
+  "ModalPassRecover__textPlaceholderEmail": "Ingrese su correo electrónico"
+}

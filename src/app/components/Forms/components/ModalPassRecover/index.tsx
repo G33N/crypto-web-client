@@ -1,7 +1,19 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import Arrow from './assets/Back.png';
+import Arrow from './assets/Back.svg';
 import { useForm } from 'react-hook-form';
+import { Button } from 'styles/StyleElements';
+import { i18n } from '../../i18n';
+import {
+  Overlay,
+  LabelModal,
+  ConteinerModal,
+  InputModal,
+  HeadModal,
+  Contenido,
+  ValidatorModal,
+  ButonClose,
+  ImgPassRecover,
+} from '../../styles';
 
 const messages = {
   required: 'Este campo es obligatorio',
@@ -18,7 +30,7 @@ export const ModalPassRecover = ({ openModal, closeModal }) => {
   const { register, formState, handleSubmit } = useForm({
     mode: 'onChange',
   });
-
+  const { t } = i18n;
   const onSubmit = data => {
     alert(JSON.stringify(data));
     //navegar a dashboard
@@ -34,7 +46,7 @@ export const ModalPassRecover = ({ openModal, closeModal }) => {
             <HeadModal>
               <ButonClose onClick={() => closeModal(false)}>
                 {' '}
-                <Img src={Arrow} />
+                <ImgPassRecover src={Arrow} />
               </ButonClose>
               <h3>Restablecer contraseña</h3>
             </HeadModal>
@@ -44,10 +56,10 @@ export const ModalPassRecover = ({ openModal, closeModal }) => {
                 Ingresá el correo electrónico con el que estás registrado en la
                 aplicación.
               </p>
-              <Label htmlFor="mail">Correo electrónico</Label>
-              <Input
+              <LabelModal htmlFor="mail">Correo electrónico</LabelModal>
+              <InputModal
                 type="email"
-                placeholder="Ingrese su correo electrónico"
+                placeholder={t('ModalPassRecover__textPlaceholderEmail')}
                 {...register('mail', {
                   required: messages.required,
                   pattern: {
@@ -66,7 +78,7 @@ export const ModalPassRecover = ({ openModal, closeModal }) => {
                 name="mail"
               />
               {errors.mail && touchedFields.mail && (
-                <Validator>{errors.mail.message}</Validator>
+                <ValidatorModal>{errors.mail.message}</ValidatorModal>
               )}
               <Button
                 type="submit"
@@ -82,144 +94,3 @@ export const ModalPassRecover = ({ openModal, closeModal }) => {
     </>
   );
 };
-// ----- Styles ------ //
-
-const Overlay = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const ConteinerModal = styled.div`
-  width: 600px;
-  min-height: 400px;
-  background: #fff;
-  position: relative;
-  border-radius: 5px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding: 20px;
-`;
-
-const HeadModal = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  h3 {
-    font-weight: 700;
-    position: absolute;
-    font-size: 24px;
-    color: ${p => p.theme.text};
-    letter-spacing: 0.0022em;
-    line-height: 32px;
-    font-style: normal;
-    left: 16.67%;
-    right: 16.68%;
-    top: 20px;
-  }
-`;
-
-const ButonClose = styled.button`
-  position: relative;
-  top: 20px;
-  right: 20px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  transition: 0.3s easy all;
-  border-radius: 5px;
-  color: ${p => p.theme.primary};
-  &:hover {
-    background: ${p => p.theme.textSecondary};
-  }
-`;
-
-const Img = styled.img`
-  width: 24px;
-  height: 24px;
-  top: 38px;
-  display: flex;
-`;
-
-const Contenido = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  p {
-    font-weight: 400;
-    font-style: normal;
-    font-size: 14px;
-    margin-top: 24px;
-    line-height: 20px;
-    display: flex;
-    align-items: center;
-    color: ${p => p.theme.text};
-    float: right;
-  }
-`;
-
-const Label = styled.label`
-  font-size: 0.875rem;
-  color: ${p => p.theme.text};
-  font-weight: bold;
-  width: 100%;
-  line-height: 2;
-  text-align: left;
-  display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
-`;
-const Validator = styled.p`
-  font-size: 0.6rem;
-  color: ${p => p.theme.textSecondary};
-  font-weight: bold;
-  width: 100%;
-  text-align: left;
-  display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 48px;
-  font-size: 0.875rem;
-  color: ${p => p.theme.text};
-  font-weight: normal;
-  padding: 10px;
-  border-radius: 12px;
-  border-color: #cdcbcb;
-  border: inset 1px;
-  ::placeholder {
-    color: ${p => p.theme.text};
-  }
-`;
-
-const Button = styled.button`
-  margin-top: 40px;
-  width: 100%;
-  height: 48px;
-  font-size: 18px;
-  padding: 10px;
-  background-color: ${p => p.theme.primary};
-  border-color: transparent;
-  border-radius: 12px;
-  color: ${p => p.theme.background};
-  ::placeholder {
-    color: ${p => p.theme.textSecondary};
-    text-align: center;
-  }
-  ${props =>
-    props.disabled &&
-    css`
-      background: ${p => p.theme.secondary};
-    `}
-`;

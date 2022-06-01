@@ -1,24 +1,14 @@
 import * as React from 'react';
-import styled from 'styled-components/macro';
-import Omnicrypto from './assets/moniflowcrypto.png';
+import { WrapperLogo, Img } from './styles';
+import Omnicrypto from '../../assets/icons/Moniflow.crypto.svg';
+import { Links } from 'app/pages/LoginPage/styles';
 
 export function Logo() {
   return (
-    <Wrapper>
-      <Img src={Omnicrypto} />
-    </Wrapper>
+    <WrapperLogo>
+      <Links to="/home">
+        <Img src={Omnicrypto} />
+      </Links>
+    </WrapperLogo>
   );
 }
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Img = styled.img`
-  width: 265.26px;
-  height: 30px;
-  left: 24px;
-  top: 38px;
-  border-radius: 0px;
-`;

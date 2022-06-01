@@ -2,86 +2,32 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { CardInfo } from 'app/components/Forms/components/CardInfo';
 import { FormRegister } from 'app/components/Forms/formRegister';
-import { StyleConstants } from 'styles/StyleConstants';
-import styled from 'styled-components/macro';
-import { Link } from 'react-router-dom';
+import { Container } from 'styles/StyleElements';
+import { Title, BoxNavigation, Label, Links } from './styles';
+import { i18n } from './i18n';
 
 export function RegisterPage() {
+  const { t } = i18n;
+
   return (
     <>
       <Helmet>
         <meta name="description" content="Omni wallet application Loginpage" />
       </Helmet>
 
-      <Conteiner>
-        <Title>Crear una cuenta</Title>
+      <Container>
+        <Title>{t('RegisterPage_title')}</Title>
         <CardInfo
-          title="Informacion de usuario"
-          description="Ingresa tu nombre, numero telefonico y correo electronico para comenzar
-        tu proceso de registro."
+          title={t('RegisterPage__titleCardInfo')}
+          description={t('RegisterPage__descriptionCardInfo')}
         />
         <FormRegister />
 
         <BoxNavigation>
-          <Label> ¿Ya estas registrado ? </Label>
-          <Links to="/login">Iniciar Sesión</Links>
+          <Label>{t('RegisterPage_label')} </Label>
+          <Links to="/login">{t('RegisterPage_links')}</Links>
         </BoxNavigation>
-      </Conteiner>
+      </Container>
     </>
   );
 }
-const Conteiner = styled.div`
-  margin-top: ${StyleConstants.NAV_BAR_HEIGHT};
-  padding: 4em;
-
-  @media (min-width: 480px) {
-    padding-left: 20%;
-    padding-right: 25%;
-  }
-  @media (min-width: 720px) {
-    padding-left: 30%;
-    padding-right: 35%;
-  }
-  @media (min-width: 1040px) {
-    padding-left: 35%;
-    padding-right: 40%;
-  }
-`;
-
-const Title = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 32px;
-  letter-spacing: 0.0022em;
-  color: ${p => p.theme.text};
-  margin-right: 1rem;
-  margin-bottom: 24px;
-`;
-const Label = styled.div`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 0.75rem;
-  text-align: center;
-  color: ${p => p.theme.text};
-  margin-bottom: 13px;
-  margin-top: 28px;
-`;
-const BoxNavigation = styled.div`
-  text-align: center;
-`;
-const Links = styled(Link)`
-  color: ${p => p.theme.text};
-  text-decoration: none;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 0.875rem;
-  line-height: 1.375rem;
-  &:hover {
-    text-decoration: underline;
-    opacity: 0.8;
-  }
-  &:active {
-    opacity: 0.4;
-  }
-`;

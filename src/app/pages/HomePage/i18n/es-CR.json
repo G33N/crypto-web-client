@@ -1,0 +1,5 @@
+{
+  "HomePage_titleAlert": "Has superado el límite de intentos",
+  "HomePage__descriptionAlert": "Por seguridad, hemos bloqueado tu usuario temporalmente debido a que ingresaste de forma errónea tu contraseña muchas veces. Podés intentarlo de nuevo más tarde.",
+  "HomePage__labelButtonAlert": "Regresar"
+}
