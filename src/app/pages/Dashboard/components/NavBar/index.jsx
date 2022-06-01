@@ -51,6 +51,7 @@ const NavbarContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   height: 10%;
+  margin-bottom: 3rem;
   @media screen and (min-width: 320px) and (max-width: 1080px) {
     flex-direction: column;
     margin-bottom: 1rem;

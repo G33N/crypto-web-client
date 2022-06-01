@@ -74,6 +74,11 @@ table {
 .inner-content{
     padding-top:20px;
     padding-left:40px;
+    padding-right:40px;
+    padding-bottom:40px;
+    width: 100%;
+    height: 100%;
+    background-color: ${p => p.theme.backgroundDashboard};
 }
 
 h1{
