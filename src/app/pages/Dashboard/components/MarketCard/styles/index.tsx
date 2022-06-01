@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { StyleConstants } from '../../../../../../styles/StyleConstants';
 
 export const Card = styled.div`
-  height: max-content;
-  width: max-content;
+  width: 660px;
+  height: 520px;
   background-color: white;
   margin: 0;
   padding: 1rem;
