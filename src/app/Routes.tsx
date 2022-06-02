@@ -15,7 +15,7 @@ import Tab2 from './pages/SwiftPage/Tab2';
 import Tab3 from './pages/SwiftPage/Tab3';
 
 import ProtectedRoutes from '../Auth/ProtectedRoutes';
-import PermissionDenied from './components/PermissionDenied';
+import PermissionDenied from './pages/PermissionDenied';
 import { HomePage } from './pages/HomePage';
 import { PasswordCodeRecover } from './pages/PasswordCodeRecover';
 import { PasswordChange } from './pages/PasswordChange';
@@ -25,28 +25,27 @@ import { AccountVerify } from './pages/AccountVerify';
 const MainRoutes = () => (
   <Routes>
     {/** Protected Routes */}
-    {/* <Route path="/" element={<ProtectedRoutes />}> */}
-    <Route path="/" element={<InnerContent />}>
-      <Route path="/" element={<Navigate replace to="dashboard" />} />
-      <Route
-        path="dashboard"
-        element={<Dashboard props={{ userName: 'Test' }} />}
-      />
-      <Route path="tabs" element={<Tabs />}>
-        <Route path="/tabs" element={<Navigate replace to="tab1" />} />
-        <Route path="tab1" element={<Tab1 />} />
-        <Route path="tab2" element={<Tab2 />} />
-        <Route path="tab3" element={<Tab3 />} />
+    <Route path="/" element={<ProtectedRoutes />}>
+      <Route path="/" element={<InnerContent />}>
+        <Route path="/" element={<Navigate replace to="dashboard" />} />
+        <Route
+          path="dashboard"
+          element={<Dashboard props={{ userName: 'Test' }} />}
+        />
+        <Route path="tabs" element={<Tabs />}>
+          <Route path="/tabs" element={<Navigate replace to="tab1" />} />
+          <Route path="tab1" element={<Tab1 />} />
+          <Route path="tab2" element={<Tab2 />} />
+          <Route path="tab3" element={<Tab3 />} />
+        </Route>
+        <Route path="transaction" element={<TransactionPage />} />
+        <Route path="settings" element={<SettingsPage />} />
+        <Route path="support" element={<SupportPage />} />
       </Route>
       <Route path="transaction" element={<TransactionPage />} />
       <Route path="settings" element={<SettingsPage />} />
       <Route path="support" element={<SupportPage />} />
     </Route>
-    <Route path="transaction" element={<TransactionPage />} />
-    <Route path="settings" element={<SettingsPage />} />
-    <Route path="support" element={<SupportPage />} />
-    {/* </Route> */}
-    {/* </Route> */}
 
     {/** Public Routes */}
     <Route path="/home" element={<HomePage />} />

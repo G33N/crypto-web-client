@@ -70,15 +70,9 @@ table {
     padding:20px;
     text-decoration: none;
 }
-
-.inner-content{
-    padding-top:20px;
-    padding-left:40px;
-    padding-right:40px;
-    padding-bottom:40px;
-    width: 100%;
-    height: 100%;
-    background-color: ${p => p.theme.backgroundDashboard};
+.tab_active{
+    color:#365262!important;
+    text-decoration: underline!important;
 }
 
 h1{
@@ -90,9 +84,5 @@ h2{
     color:#365262;
     font-size:20px;
     font-weight: 500;
-}
-.tab_active{
-    color:#365262!important;
-    text-decoration: underline!important;
 }
  `;
