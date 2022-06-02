@@ -22,6 +22,9 @@ export const BoxSidebar = styled.div<Props>`
   padding-top: 20px;
   padding-left: 8px;
   padding-right: 8px;
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    width: auto;
+  }
 
   .sidebar__items {
     display: flex;

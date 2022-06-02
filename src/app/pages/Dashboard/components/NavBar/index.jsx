@@ -1,25 +1,14 @@
 import { i18n } from '../i18n';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { AppwriteService } from 'services/appwrite';
+import { useNavigate } from 'react-router-dom';
 import { StyleConstants } from '../../../../../styles/StyleConstants';
 import React from 'react';
 import styled from 'styled-components';
 import AvatarImage from '../../assets/avatarImage.jpg';
 import Bell from '../../../../assets/icons/Bell.svg';
-import { Container } from 'styles/StyleElements';
 
 function Navbar(props) {
   const { t } = i18n;
   const navigate = useNavigate();
-
-  const useAuth = () => {
-    const user = localStorage.getItem('user');
-    if (user) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   const goToSettings = () => {
     navigate('/settings');
@@ -52,10 +41,6 @@ const NavbarContainer = styled.nav`
   align-items: center;
   height: 10%;
   margin-bottom: 3rem;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
-    flex-direction: column;
-    margin-bottom: 1rem;
-  }
 `;
 
 const ContainerButtonNavBar = styled.div`
