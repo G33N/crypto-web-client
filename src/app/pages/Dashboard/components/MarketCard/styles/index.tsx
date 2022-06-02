@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import { StyleConstants } from '../../../../../../styles/StyleConstants';
+import {
+  StyleConstants,
+  device,
+} from '../../../../../../styles/StyleConstants';
 
 export const Card = styled.div`
   width: 660px;
@@ -13,7 +16,7 @@ export const Card = styled.div`
   &:hover {
     box-shadow: ${StyleConstants.hoverEffect};
   }
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
+  @media screen and (${device.mobileS}) and (${device.mobileL}) {
     position: absolute;
     width: 328px;
     height: 355px;
@@ -42,7 +45,7 @@ export const Avatar = styled.div`
     width: 3rem;
     border-radius: 4rem;
   }
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
+  @media screen and (${device.mobileS}) and (${device.mobileL}) {
     img {
       height: 1.5rem;
       width: 1.5rem;
@@ -61,7 +64,7 @@ export const TitleTransaction = styled.h3`
   margin-left: 2rem;
   padding-right: 6rem;
   font-weight: 500;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
+  @media screen and (${device.mobileS}) and (${device.mobileL}) {
     font-size: 1rem;
   }
 `;

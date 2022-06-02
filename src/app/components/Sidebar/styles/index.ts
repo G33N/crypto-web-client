@@ -1,11 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import globo from '../../../assets/images/globopeque.png';
-import {
-  btnReset,
-  StyleResponsive,
-  v,
-} from '../../../../styles/StyleConstants';
+import { btnReset, device, v } from '../../../../styles/StyleConstants';
 
 interface Props {
   isOpen?: boolean;
@@ -26,7 +22,7 @@ export const BoxSidebar = styled.div<Props>`
   padding-top: 20px;
   padding-left: 8px;
   padding-right: 8px;
-  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+  @media screen and (${device.mobileS}) and (${device.mobileL}) {
     width: auto;
     z-index: 1;
   }
@@ -116,8 +112,16 @@ export const SSidebarButton = styled.button<Props>`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   transform: ${({ isOpen }) => (!isOpen ? `rotate(180deg)` : `initial`)};
+  @media screen and (${device.mobileS}) and (${device.mobileL}) {
+  }
+`;
+export const BoxButton = styled.div`
+  display: none;
+  @media screen and (${device.mobileS}) and (${device.mobileL}) {
+    display: block !important;
+    color: white;
+  }
 `;
 
 export const ButtonLogout = styled.button`

@@ -11,6 +11,7 @@ import {
   SLinkIcon,
   Avatar,
   ButtonLogout,
+  BoxButton,
 } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
@@ -22,7 +23,7 @@ import { Links } from 'app/pages/LoginPage/styles';
 const Sidebar = () => {
   const navigate = useNavigate();
 
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const logout = () => {
     AppwriteService.logout()
@@ -47,7 +48,9 @@ const Sidebar = () => {
           isOpen={sidebarOpen}
           onClick={() => setSidebarOpen(p => !p)}
         >
-          <FontAwesomeIcon icon={faAngleRight} />
+          <BoxButton>
+            <FontAwesomeIcon icon={faAngleRight} />
+          </BoxButton>
         </SSidebarButton>
       </>
       <ImgConteiner>

@@ -18,6 +18,7 @@ import Logo from '../../../../assets/icons/logo.svg';
 function Navbar(props) {
   const { t } = i18n;
   const navigate = useNavigate();
+  const notification = false;
 
   const goToSettings = () => {
     navigate('/settings');
@@ -25,24 +26,24 @@ function Navbar(props) {
 
   return (
     <>
-      {/* <ImgConteiner hidden={false}>
+      <ImgConteiner hidden={false}>
         <SLink to="/home">
           <img src={Logo} alt="" />
         </SLink>
-      </ImgConteiner> */}
-
+      </ImgConteiner>
       <NavbarContainer>
         <Text>
           {t('navbar__title')}
           {props.userName}
         </Text>
         <ContainerButtonNavBar>
-          {/* <Card>
-          <Avatar>
-            <img src={Bell} alt="" />
-          </Avatar>
-        </Card> */}
-
+          {notification && (
+            <Card>
+              <Avatar>
+                <img src={Bell} alt="" />
+              </Avatar>
+            </Card>
+          )}
           <AvatarButtonClose onClick={goToSettings}>
             <img src={AvatarImage} alt="" />
           </AvatarButtonClose>

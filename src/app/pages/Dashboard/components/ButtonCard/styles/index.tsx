@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
   StyleConstants,
-  StyleResponsive,
+  device,
 } from '../../../../../../styles/StyleConstants';
 
 export const InfoCard = styled.div`
@@ -9,7 +9,7 @@ export const InfoCard = styled.div`
   width: 100%;
   padding: 1rem;
   color: white;
-  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+  @media screen and (${device.mobileS}) and (${device.mobileL}) {
     height: max-content;
     width: 80%;
   }
@@ -27,7 +27,7 @@ export const Card = styled.div`
   &:hover {
     box-shadow: ${StyleConstants.hoverEffect};
   }
-  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+  @media screen and (${device.mobileS}) and (${device.mobileL}) {
     height: max-content;
 
     width: 80%;

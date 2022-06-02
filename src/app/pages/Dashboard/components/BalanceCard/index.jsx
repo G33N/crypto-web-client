@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { i18n } from '../i18n';
-import {
-  StyleConstants,
-  StyleResponsive,
-} from '../../../../../styles/StyleConstants';
+import { device } from '../../../../../styles/StyleConstants';
 function BalanceCard() {
   const { t } = i18n;
 
@@ -31,7 +28,7 @@ const Box = styled.div`
   display: flex;
   align-items: center;
   transition: 0.4s ease-in-out;
-  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+  @media screen and (${device.mobileS}) and (${device.mobileL}) {
     position: absolute;
     width: 328px;
     height: 140px;
@@ -46,7 +43,7 @@ const CardContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+  @media screen and (${device.mobileS}) and (${device.mobileL}) {
     flex-direction: column;
     gap: 1rem;
   }

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   StyleConstants,
-  StyleResponsive,
+  device,
   v,
 } from '../../../../../../styles/StyleConstants';
 
@@ -13,7 +13,7 @@ export const NavbarContainer = styled.nav`
   height: 10%;
   margin-bottom: 3rem;
 
-  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+  @media screen and (${device.mobileS}) and (${device.mobileL}) {
     background-color: black;
     justify-content: space-evenly;
     padding-bottom: 80px;
@@ -34,7 +34,7 @@ export const AvatarButtonClose = styled.button`
   }
   border-radius: 4rem;
 
-  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+  @media screen and (${device.mobileS}) and (${device.mobileL}) {
     img {
       height: 2rem;
       width: 2rem;
@@ -71,7 +71,7 @@ export const Text = styled.div`
   color: #484258;
   font-size: 24px;
 
-  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+  @media screen and (${device.mobileS}) and (${device.mobileL}) {
     color: #ffffff;
     font-size: 18px;
   }
@@ -88,14 +88,15 @@ export const SLink = styled(Link)`
 
 export const ImgConteiner = styled.div`
   margin-left: 20px;
+  display: none;
   img {
     height: 4rem;
     width: 200px;
   }
 
-  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+  @media screen and (${device.mobileS}) and (${device.mobileL}) {
     background-color: black;
     padding: 20px;
+    display: block;
   }
-  // z-position: 1;
 `;
