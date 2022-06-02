@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AppwriteService } from 'services/appwrite';
 import {
   BoxSidebar,
@@ -12,6 +12,8 @@ import {
   Avatar,
   ButtonLogout,
 } from './styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import IconClose from '../../assets/icons/IconClose.svg';
 import Logo from '../../assets/icons/logo.svg';
 import { navigationItems } from './config';
@@ -19,7 +21,6 @@ import { Links } from 'app/pages/LoginPage/styles';
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -46,7 +47,7 @@ const Sidebar = () => {
           isOpen={sidebarOpen}
           onClick={() => setSidebarOpen(p => !p)}
         >
-          <img src={IconClose} alt="" />
+          <FontAwesomeIcon icon={faAngleRight} />
         </SSidebarButton>
       </>
       <ImgConteiner>
