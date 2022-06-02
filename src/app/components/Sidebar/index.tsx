@@ -11,7 +11,6 @@ import {
   SLinkIcon,
   Avatar,
   ButtonLogout,
-  BoxButton,
 } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
@@ -48,9 +47,7 @@ const Sidebar = () => {
           isOpen={sidebarOpen}
           onClick={() => setSidebarOpen(p => !p)}
         >
-          <BoxButton>
-            <FontAwesomeIcon icon={faAngleRight} />
-          </BoxButton>
+          <FontAwesomeIcon icon={faAngleRight} />
         </SSidebarButton>
       </>
       <ImgConteiner>

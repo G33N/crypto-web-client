@@ -1,7 +1,10 @@
 import React from 'react';
 import i18next from 'i18next';
 import styled from 'styled-components';
-import { StyleConstants, device } from '../../../../styles/StyleConstants';
+import {
+  StyleConstants,
+  StyleResponsive,
+} from '../../../../styles/StyleConstants';
 import Badge from '../../Dashboard/components/Badge';
 import BlueAlert from '../../../assets/icons/alertblue.svg';
 
@@ -83,7 +86,7 @@ const TransactionContainer = styled.div`
   &:hover {
     box-shadow: ${StyleConstants.hoverEffect};
   }
-  @media screen and (${device.mobileS}) and (${device.mobileL}) {
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     width: 80%;
     display: flex;
     justify-content: center;
@@ -92,7 +95,7 @@ const TransactionContainer = styled.div`
 `;
 
 const CardContent = styled.div`
-  @media screen and (${device.mobileS}) and (${device.mobileL}) {
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     margin: 2rem 0;
   }
 `;
@@ -102,7 +105,7 @@ const Invoice = styled.div`
   justify-content: space-around;
   margin: 0.4rem;
   padding-top: 0.6rem;
-  @media screen and (${device.mobileS}) and (${device.mobileL}) {
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     flex-direction: column;
     gap: 1rem;
   }
@@ -111,7 +114,7 @@ const Info = styled.div`
   display: flex;
   align-items: center;
   width: 50%;
-  @media screen and (${device.mobileS}) and (${device.mobileL}) {
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     flex-direction: column;
     width: 100%;
     text-align: center;
@@ -138,7 +141,7 @@ const Container = styled.div`
   justify-content: space-between;
   width: 30%;
   align-items: center; */
-  @media screen and (${device.mobileS}) and (${device.mobileL}) {
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     width: 100%;
     flex-direction: column;
     gap: 0.6rem;

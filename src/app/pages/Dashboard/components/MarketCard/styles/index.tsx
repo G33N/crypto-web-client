@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
   StyleConstants,
-  device,
+  StyleResponsive,
 } from '../../../../../../styles/StyleConstants';
 
 export const Card = styled.div`
@@ -16,7 +16,7 @@ export const Card = styled.div`
   &:hover {
     box-shadow: ${StyleConstants.hoverEffect};
   }
-  @media screen and (${device.mobileS}) and (${device.mobileL}) {
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     position: absolute;
     width: 328px;
     height: 355px;
@@ -45,7 +45,7 @@ export const Avatar = styled.div`
     width: 3rem;
     border-radius: 4rem;
   }
-  @media screen and (${device.mobileS}) and (${device.mobileL}) {
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     img {
       height: 1.5rem;
       width: 1.5rem;
@@ -64,7 +64,7 @@ export const TitleTransaction = styled.h3`
   margin-left: 2rem;
   padding-right: 6rem;
   font-weight: 500;
-  @media screen and (${device.mobileS}) and (${device.mobileL}) {
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     font-size: 1rem;
   }
 `;
