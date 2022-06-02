@@ -10,7 +10,7 @@ interface Props {
 export const BoxSidebar = styled.div<Props>`
   width: ${({ isOpen }) => (!isOpen ? `auto` : v.sidebarWidth)};
   height: 100vh;
-  // padding: ${v.lgSpacing};
+  padding: ${v.lgSpacing};
   position: relative;
   //  width: 250px;
   background-color: black;
@@ -112,19 +112,6 @@ export const SSidebarButton = styled.button<Props>`
   transform: ${({ isOpen }) => (!isOpen ? `rotate(180deg)` : `initial`)};
 `;
 
-export const LinkButton = styled(Link)`
-  text-decoration: none;
-  color: ${p => p.theme.background};
-  &:hover {
-    color: ${p => p.theme.background};
-    opacity: 0.8;
-    cursor: pointer;
-  }
-
-  &:active {
-  }
-`;
-
 export const ButtonLogout = styled.button`
   display: flex;
   flex-direction: row;
@@ -132,7 +119,7 @@ export const ButtonLogout = styled.button`
   align-items: center;
   font-size: 18px;
   text-decoration: none;
-  padding: 10px;
+  padding: calc(${v.smSpacing} - 2px) 0;
   border-color: transparent;
   color: ${p => p.theme.background};
   background-color: transparent;

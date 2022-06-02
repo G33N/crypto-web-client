@@ -5,7 +5,6 @@ import {
   BoxSidebar,
   SSidebarButton,
   ImgConteiner,
-  LinkButton,
   SLinkContainer,
   SLink,
   SLinkLabel,
@@ -23,15 +22,6 @@ const Sidebar = () => {
   const { pathname } = useLocation();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  // const searchClickHandler = () => {
-  //   if (!sidebarOpen) {
-  //     setSidebarOpen(true);
-  //     searchRef.current.focus();
-  //   } else {
-  //     // search functionality
-  //   }
-  // };
 
   const logout = () => {
     AppwriteService.logout()
@@ -52,17 +42,19 @@ const Sidebar = () => {
   return (
     <BoxSidebar isOpen={sidebarOpen}>
       <>
-        {/* <SSidebarButton
+        <SSidebarButton
           isOpen={sidebarOpen}
           onClick={() => setSidebarOpen(p => !p)}
         >
           <img src={IconClose} alt="" />
-        </SSidebarButton> */}
+        </SSidebarButton>
       </>
       <ImgConteiner>
-        <Links to="/home">
-          <img src={Logo} alt="" />
-        </Links>
+        {sidebarOpen && (
+          <Links to="/home">
+            <img src={Logo} alt="" />
+          </Links>
+        )}
       </ImgConteiner>
       {navigationItems.sidebar.map(item => (
         <SLinkContainer key={item.name}>
@@ -83,28 +75,15 @@ const Sidebar = () => {
         </SLinkContainer>
       ))}
 
-      {/* <div className="sidebar__items">
-        {navigationItems.sidebar.map(item => (
-          <LinkButton
-            key={item.text}
-            to={item.to}
-            className={
-              location.pathname.includes(item.to) ? 'sidebar_active' : ''
-            }
-          >
-            <Avatar>
-              <img src={item.icon} alt="" />
-            </Avatar>{' '}
-            {item.name}
-          </LinkButton>
-        ))}
-      </div> */}
       <div className="sidebar__lasItem">
-        <ButtonLogout onClick={logout}>
+        <ButtonLogout
+          onClick={logout}
+          style={!sidebarOpen ? { width: `fit-content` } : {}}
+        >
           <Avatar>
             <img src={IconClose} alt="" />
           </Avatar>
-          Cerrar Sesion
+          {sidebarOpen && <SLinkLabel> Cerrar Sesion</SLinkLabel>}
         </ButtonLogout>
       </div>
     </BoxSidebar>
