@@ -12,16 +12,21 @@ export const TransactionContainer = styled.div`
     box-shadow: ${StyleConstants.hoverEffect};
   }
   @media screen and (min-width: 320px) and (max-width: 1080px) {
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    width: 328px;
+    height: 443px;
+    left: 16px;
+    top: 809px;
   }
 `;
 
 export const CardContent = styled.div`
   @media screen and (min-width: 320px) and (max-width: 1080px) {
-    margin: 2rem 0;
+    margin: 0px;
+    padding: 0px;
+    width: max-content;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -37,6 +42,9 @@ export const LinkTitle = styled.h5`
   text-align: end;
   color: ${p => p.theme.text};
   cursor: pointer;
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    margin-right: 3px;
+  }
 `;
 
 export const TitleCard = styled.h5`
@@ -44,6 +52,9 @@ export const TitleCard = styled.h5`
   text-align: start;
   color: ${p => p.theme.text};
   cursor: pointer;
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    margin-right: 3px;
+  }
 `;
 
 export const Invoice = styled.div`
@@ -52,8 +63,7 @@ export const Invoice = styled.div`
   justify-content: space-around;
   margin: 0.4rem;
   @media screen and (min-width: 320px) and (max-width: 1080px) {
-    flex-direction: column;
-    gap: 1rem;
+    width: 120%;
   }
 `;
 
@@ -62,7 +72,7 @@ export const Info = styled.div`
   align-items: center;
   width: 50%;
   @media screen and (min-width: 320px) and (max-width: 1080px) {
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
     text-align: center;
   }
@@ -72,17 +82,28 @@ export const Avatar = styled.div`
   img {
     height: 2rem;
     width: 2rem;
-    border-radius: 3.5rem;
+    border-radius: 50%;
+  }
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    height: 1rem;
+    width: 1rem;
   }
 `;
 
 export const TextContainer = styled.div`
   margin-left: 1rem;
+
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    font-size: 12px;
+  }
 `;
 
 export const Title = styled.h4``;
 export const SubTitle = styled.h5`
   font-weight: 400;
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    font-size: 12px;
+  }
 `;
 
 export const Container = styled.div`

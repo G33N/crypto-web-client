@@ -63,11 +63,12 @@ const Sidebar = () => {
             to={item.to}
             style={!sidebarOpen ? { width: `fit-content` } : {}}
           >
-            <SLinkIcon>
-              <img src={item.icon} alt="" />
-            </SLinkIcon>
             {sidebarOpen && (
               <>
+                <SLinkIcon>
+                  <img src={item.icon} alt="" />
+                </SLinkIcon>
+
                 <SLinkLabel>{item.name}</SLinkLabel>
                 {/* if notifications are at 0 or null, do not display */}
               </>
@@ -77,15 +78,17 @@ const Sidebar = () => {
       ))}
 
       <div className="sidebar__lasItem">
-        <ButtonLogout
-          onClick={logout}
-          style={!sidebarOpen ? { width: `fit-content` } : {}}
-        >
-          <Avatar>
-            <img src={IconClose} alt="" />
-          </Avatar>
-          {sidebarOpen && <SLinkLabel> Cerrar Sesion</SLinkLabel>}
-        </ButtonLogout>
+        {sidebarOpen && (
+          <ButtonLogout
+            onClick={logout}
+            style={!sidebarOpen ? { width: `fit-content` } : {}}
+          >
+            <Avatar>
+              <img src={IconClose} alt="" />
+            </Avatar>
+            <SLinkLabel> Cerrar Sesion</SLinkLabel>
+          </ButtonLogout>
+        )}
       </div>
     </BoxSidebar>
   );

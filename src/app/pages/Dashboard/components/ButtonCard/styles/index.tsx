@@ -1,12 +1,16 @@
 import styled from 'styled-components';
-import { StyleConstants } from '../../../../../../styles/StyleConstants';
+import {
+  StyleConstants,
+  StyleResponsive,
+} from '../../../../../../styles/StyleConstants';
 
 export const InfoCard = styled.div`
   height: 7rem;
   width: 100%;
   padding: 1rem;
   color: white;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    height: max-content;
     width: 80%;
   }
 `;
@@ -22,6 +26,11 @@ export const Card = styled.div`
   transition: 0.4s ease-in-out;
   &:hover {
     box-shadow: ${StyleConstants.hoverEffect};
+  }
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    height: max-content;
+
+    width: 80%;
   }
 `;
 

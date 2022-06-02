@@ -14,9 +14,11 @@ export const Card = styled.div`
     box-shadow: ${StyleConstants.hoverEffect};
   }
   @media screen and (min-width: 320px) and (max-width: 1080px) {
-    height: max-content;
-    width: 75%;
-    margin-top: 1rem;
+    position: absolute;
+    width: 328px;
+    height: 355px;
+    left: 16px;
+    top: 430px;
   }
 `;
 
@@ -40,6 +42,12 @@ export const Avatar = styled.div`
     width: 3rem;
     border-radius: 4rem;
   }
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    img {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+  }
 `;
 
 export const Detail = styled.div`
@@ -48,6 +56,7 @@ export const Detail = styled.div`
   align-items: center;
   margin-left: 2rem;
 `;
+
 export const TitleTransaction = styled.h3`
   margin-left: 2rem;
   padding-right: 6rem;

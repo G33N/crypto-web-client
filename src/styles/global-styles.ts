@@ -75,11 +75,13 @@ table {
     text-decoration: underline!important;
 }
 
-h1{
-    color:#365262;
-    font-size:30px;
-    font-weight: 500;
-}
+// h1{
+//     color:#365262;
+//     font-size:30px;
+//     font-weight: 500;
+// }
+
+
 h2{
     color:#365262;
     font-size:20px;

@@ -21,22 +21,22 @@ import { AccountVerify } from './pages/AccountVerify';
 const MainRoutes = () => (
   <Routes>
     {/** Protected Routes */}
-    <Route path="/" element={<ProtectedRoutes />}>
-      <Route path="/" element={<InnerContent />}>
-        <Route path="/" element={<Navigate replace to="dashboard" />} />
-        <Route
-          path="dashboard"
-          element={<Dashboard props={{ userName: 'Test' }} />}
-        />
-        <Route path="tabs" element={<SwiftPage />} />
-        <Route path="transaction" element={<TransactionPage />} />
-        <Route path="settings" element={<SettingsPage />} />
-        <Route path="support" element={<SupportPage />} />
-      </Route>
+    {/* <Route path="/" element={<ProtectedRoutes />}> */}
+    <Route path="/" element={<InnerContent />}>
+      <Route path="/" element={<Navigate replace to="dashboard" />} />
+      <Route
+        path="dashboard"
+        element={<Dashboard props={{ userName: 'Test' }} />}
+      />
+      <Route path="tabs" element={<SwiftPage />} />
       <Route path="transaction" element={<TransactionPage />} />
       <Route path="settings" element={<SettingsPage />} />
       <Route path="support" element={<SupportPage />} />
     </Route>
+    <Route path="transaction" element={<TransactionPage />} />
+    <Route path="settings" element={<SettingsPage />} />
+    <Route path="support" element={<SupportPage />} />
+    {/* </Route> */}
 
     {/** Public Routes */}
     <Route path="/home" element={<HomePage />} />

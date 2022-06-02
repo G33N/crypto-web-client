@@ -19,6 +19,8 @@ export enum StyleResponsive {
 
 export const v = {
   sidebarWidth: `300px`,
+  movileSidebarWidth: `100%`,
+  movileSidebarHeight: `147px`,
   smSpacing: `8px`,
   mdSpacing: `16px`,
   lgSpacing: `24px`,
