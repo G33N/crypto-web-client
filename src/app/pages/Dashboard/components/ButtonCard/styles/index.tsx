@@ -10,8 +10,11 @@ export const InfoCard = styled.div`
   padding: 1rem;
   color: white;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    height: max-content;
-    width: 80%;
+    position: absolute;
+    width: 72px;
+    height: 90px;
+    left: 16px;
+    top: 316px;
   }
 `;
 
@@ -28,9 +31,7 @@ export const Card = styled.div`
     box-shadow: ${StyleConstants.hoverEffect};
   }
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    height: max-content;
-
-    width: 80%;
+    margin-right: 5px;
   }
 `;
 

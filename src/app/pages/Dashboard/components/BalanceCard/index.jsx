@@ -45,7 +45,6 @@ const CardContent = styled.div`
   justify-content: space-between;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     flex-direction: column;
-    gap: 1rem;
   }
 `;
 
@@ -63,9 +62,11 @@ const SlackHead = styled.h2`
   font-size: 18px;
   line-height: 27px;
   /* identical to box height */
-
   display: flex;
   align-items: center;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    font-size: 14px;
+  }
 `;
 
 const SlackTitle = styled.p`
@@ -74,15 +75,22 @@ const SlackTitle = styled.p`
   font-size: 24px;
   line-height: 36px;
   color: ${p => p.theme.text};
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    font-size: 20px;
+    line-height: 8px;
+  }
 `;
 
 const SlackFoot = styled.div`
   color: ${p => p.theme.text};
-
   font-style: normal;
   font-weight: 500;
   font-size: 48px;
   line-height: 72px;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    font-size: 36px;
+    line-height: 42px;
+  }
 `;
 
 export default BalanceCard;

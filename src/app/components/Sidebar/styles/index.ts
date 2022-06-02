@@ -105,6 +105,7 @@ export const SLinkLabel = styled.span`
 `;
 
 export const SSidebarButton = styled.button<Props>`
+  visibility: hidden;
   ${btnReset};
   position: absolute;
   top: ${v.xxlSpacing};
@@ -118,6 +119,9 @@ export const SSidebarButton = styled.button<Props>`
   justify-content: center;
   cursor: pointer;
   transform: ${({ isOpen }) => (!isOpen ? `rotate(180deg)` : `initial`)};
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    visibility: visible;
+  }
 `;
 
 export const ButtonLogout = styled.button`
@@ -158,7 +162,6 @@ export const ImgConteiner = styled.div`
     height: 4rem;
     width: 200px;
   }
-  // z-position: 1;
 `;
 
 export const ConteinerFondo = styled.div`
