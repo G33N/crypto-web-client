@@ -52,12 +52,12 @@ const Sidebar = () => {
   return (
     <BoxSidebar isOpen={sidebarOpen}>
       <>
-        <SSidebarButton
+        {/* <SSidebarButton
           isOpen={sidebarOpen}
           onClick={() => setSidebarOpen(p => !p)}
         >
           <img src={IconClose} alt="" />
-        </SSidebarButton>
+        </SSidebarButton> */}
       </>
       <ImgConteiner>
         <Links to="/home">
@@ -70,7 +70,9 @@ const Sidebar = () => {
             to={item.to}
             style={!sidebarOpen ? { width: `fit-content` } : {}}
           >
-            <SLinkIcon>{/* <img src={item.icon} alt="" /> */}</SLinkIcon>
+            <SLinkIcon>
+              <img src={item.icon} alt="" />
+            </SLinkIcon>
             {sidebarOpen && (
               <>
                 <SLinkLabel>{item.name}</SLinkLabel>
