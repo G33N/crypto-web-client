@@ -70,10 +70,9 @@ table {
     padding:20px;
     text-decoration: none;
 }
-
-.inner-content{
-    padding-top:20px;
-    padding-left:40px;
+.tab_active{
+    color:#365262!important;
+    text-decoration: underline!important;
 }
 
 h1{
@@ -85,9 +84,5 @@ h2{
     color:#365262;
     font-size:20px;
     font-weight: 500;
-}
-.tab_active{
-    color:#365262!important;
-    text-decoration: underline!important;
 }
  `;

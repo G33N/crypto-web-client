@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 
 export const Container = styled.div`
-  background: ${p => p.theme.background};
+  background: ${p => p.theme.backgroundDashboard};
   @media screen and (min-width: 320px) and (max-width: 1080px) {
     display: flex;
     flex-direction: column;

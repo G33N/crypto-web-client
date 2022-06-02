@@ -1,9 +1,18 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import globo from '../../../assets/images/globopeque.png';
+import { btnReset, v } from '../../../../styles/StyleConstants';
 
-export const BoxSidebar = styled.div`
-  width: 250px;
+interface Props {
+  isOpen?: boolean;
+}
+
+export const BoxSidebar = styled.div<Props>`
+  width: ${({ isOpen }) => (!isOpen ? `auto` : v.sidebarWidth)};
+  height: 100vh;
+  // padding: ${v.lgSpacing};
+  position: relative;
+  //  width: 250px;
   background-color: black;
   background-image: url(${globo});
   background-repeat: no-repeat;
@@ -43,11 +52,64 @@ export const BoxSidebar = styled.div`
     }
 
     .sidebar__lasItem {
-      position: absolute;      
-      bottom; 10px;     
+      position: absolute;
+      bottom: 10px;
     }
-
   }
+`;
+
+export const SLinkContainer = styled.div`
+  border-radius: ${v.borderRadius};
+  margin: 8px 0;
+  color: ${p => p.theme.background};
+  &:hover {
+    color: ${p => p.theme.background};
+    background-color: ${p => p.theme.primary};
+  }
+  &:active {
+    text-decoration: none !important;
+    color: ${p => p.theme.background};
+    background-color: ${p => p.theme.secondary};
+  }
+`;
+
+export const SLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  font-size: 16px;
+  padding: calc(${v.smSpacing} - 2px) 0;
+`;
+
+export const SLinkIcon = styled.div`
+  padding: ${v.smSpacing} ${v.mdSpacing};
+  display: flex;
+  svg {
+    font-size: 20px;
+  }
+`;
+
+export const SLinkLabel = styled.span`
+  display: block;
+  flex: 1;
+  margin-left: ${v.smSpacing};
+`;
+
+export const SSidebarButton = styled.button<Props>`
+  ${btnReset};
+  position: absolute;
+  top: ${v.xxlSpacing};
+  right: ${({ isOpen }) => (isOpen ? `-16px` : `-40px`)};
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: ${({ isOpen }) => (!isOpen ? `rotate(180deg)` : `initial`)};
 `;
 
 export const LinkButton = styled(Link)`
@@ -101,7 +163,7 @@ export const ImgConteiner = styled.div`
     height: 4rem;
     width: 200px;
   }
-  z-position: 1;
+  // z-position: 1;
 `;
 
 export const ConteinerFondo = styled.div`
