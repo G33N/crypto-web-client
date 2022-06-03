@@ -1,9 +1,9 @@
 import { i18n } from './../i18n';
 import React from 'react';
-import IconButton1 from '../../../../assets/icons/Moni in.svg';
-import IconButton2 from '../../../../assets/icons/Moni out.svg';
-import IconButton3 from '../../../../assets/icons/Deposit.svg';
-import IconButton4 from '../../../../assets/icons/Withdrawals.svg';
+import IconButton1 from '../../../../assets/icons/Withdrawals.svg';
+import IconButton2 from '../../../../assets/icons/Deposit.svg';
+import IconButton3 from '../../../../assets/icons/Moni out.svg';
+import IconButton4 from '../../../../assets/icons/Moni in.svg';
 import { Avatar, Card, LastCard, Title, Row, InfoCard } from './styles';
 
 function ButtonCard() {

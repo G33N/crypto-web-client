@@ -24,7 +24,7 @@ export const Card = styled.div`
   background-color: ${p => p.theme.background};
   border-radius: 1rem;
   margin-right: 42px;
-  padding: 1rem 1rem 0.3rem 1rem;
+  padding: 1rem;
   box-shadow: ${StyleConstants.cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
@@ -55,10 +55,10 @@ export const Row = styled.div`
 `;
 export const Avatar = styled.div`
   text-align: center;
-  margin-top: 8px;
+
   img {
-    height: 22px;
-    width: 22px;
+    height: 32px;
+    width: 32px;
     color: ${p => p.theme.background};
   }
 `;
