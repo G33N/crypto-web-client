@@ -32,11 +32,9 @@ function BalanceCard() {
       );
       const response = res.data;
       const resultado = response.find(change => change.id === 'tether');
-      if (resultado === 'tether') {
-        setArrowChange(true);
-        console.log('arrowChange:', arrowChange);
+      if (resultado.price_change_percentage_24h < 0) {
+        setArrowChange(false);
       }
-
       setCoins(resultado.price_change_percentage_24h);
     } catch (error) {
       console.error(error);
