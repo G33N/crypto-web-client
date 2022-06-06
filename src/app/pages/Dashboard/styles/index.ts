@@ -54,7 +54,6 @@ export const ColumnTwo1 = styled.div`
   height: 115%;
   width: 100%;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    height: max-content;
     justify-content: center;
     align-items: center;
   }

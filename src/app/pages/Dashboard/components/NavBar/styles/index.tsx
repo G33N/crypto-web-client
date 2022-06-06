@@ -84,6 +84,10 @@ export const SLink = styled(Link)`
   color: inherit;
   font-size: 16px;
   padding: calc(${v.smSpacing} - 2px) 0;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    padding: 0px;
+    margin: 0px;
+  }
 `;
 
 export const ImgConteiner = styled.div`
@@ -96,7 +100,9 @@ export const ImgConteiner = styled.div`
 
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     background-color: black;
-    padding: 20px;
+    padding: 20px 20px 20px 50px;
+    margin-left: 0px;
+
     display: block;
   }
 `;
