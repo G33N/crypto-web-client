@@ -7,6 +7,7 @@ import { StyleResponsive } from '../../../../../styles/StyleConstants';
 import PasswordOff from '../../../../assets/icons/Password off.svg';
 import PasswordOn from '../../../../assets/icons/Password on.svg';
 import BackUp from '../../../../assets/icons/Back Up.svg';
+import ArrowDown from '../../../../assets/icons/Arrow down.svg';
 
 function BalanceCard() {
   const { t } = i18n;
@@ -16,7 +17,6 @@ function BalanceCard() {
     mode: 'onChange',
   });
   const [iconShown, setIconShown] = useState(false);
-  const usdtChange = 'test';
   const coinBalance = 'USDT';
   const toggleIconVisiblity = () => {
     setIconShown(iconShown ? false : true);
@@ -25,23 +25,17 @@ function BalanceCard() {
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
+  const changePositive = true;
 
   const getData = async () => {
     try {
       const res = await axios.get(
         'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false',
       );
-      const change = res.data[2].price_change_percentage_24h;
-      // if (change.res.data[2].symbol == 'usdt') {
-      //   setCoins(change);
-      // } else {
-      //   searchCoins(y la funcion para buscar la usdt)?
-      // }
-
-      setCoins(change);
-      console.log('data Resultado: ', res.data[2]);
-      console.log('data Resultado symbol: ', res.data[2].symbol);
-      console.log('resultado: ', res.data[2].price_change_percentage_24h);
+      const response = res.data;
+      const resultado = response.find(change => change.id === 'tether');
+      console.log(resultado);
+      setCoins(resultado.price_change_percentage_24h);
     } catch (error) {
       console.error(error);
     }
@@ -87,8 +81,17 @@ function BalanceCard() {
                   {...register('balance')}
                   name="balance"
                 />
-                <Img src={BackUp} />
-                <p>{coins}%</p>
+                {changePositive ? (
+                  <>
+                    <Img src={BackUp} />
+                    <p>{coins}%</p>
+                  </>
+                ) : (
+                  <>
+                    <Img src={ArrowDown} />
+                    <p>{coins}%</p>
+                  </>
+                )}
               </BoxInput>
             </SlackFoot>
           </SlackText>
@@ -216,6 +219,7 @@ export const BoxInput = styled.div`
     font-weight: 700;
     line-height: 30px;
     color: #4caf50;
+    color: red;
   }
   ::placeholder {
     color: ${p => p.theme.text};
