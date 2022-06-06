@@ -16,16 +16,14 @@ function BalanceCard() {
   const { register } = useForm({
     mode: 'onChange',
   });
-  const [iconShown, setIconShown] = useState(false);
+
   const coinBalance = 'USDT';
-  const toggleIconVisiblity = () => {
-    setIconShown(iconShown ? false : true);
-  };
+
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
-  const changePositive = true;
+  const [arrowChange, setArrowChange] = useState();
 
   const getData = async () => {
     try {
@@ -34,7 +32,11 @@ function BalanceCard() {
       );
       const response = res.data;
       const resultado = response.find(change => change.id === 'tether');
-      console.log(resultado);
+      if (resultado === 'tether') {
+        setArrowChange(true);
+        console.log('arrowChange:', arrowChange);
+      }
+
       setCoins(resultado.price_change_percentage_24h);
     } catch (error) {
       console.error(error);
@@ -81,15 +83,15 @@ function BalanceCard() {
                   {...register('balance')}
                   name="balance"
                 />
-                {changePositive ? (
+                {arrowChange ? (
                   <>
                     <Img src={BackUp} />
-                    <p>{coins}%</p>
+                    <p style={{ color: 'green' }}>{coins}%</p>
                   </>
                 ) : (
                   <>
                     <Img src={ArrowDown} />
-                    <p>{coins}%</p>
+                    <p style={{ color: 'red' }}>{coins}%</p>
                   </>
                 )}
               </BoxInput>
@@ -218,8 +220,6 @@ export const BoxInput = styled.div`
     font-size: 20px;
     font-weight: 700;
     line-height: 30px;
-    color: #4caf50;
-    color: red;
   }
   ::placeholder {
     color: ${p => p.theme.text};
