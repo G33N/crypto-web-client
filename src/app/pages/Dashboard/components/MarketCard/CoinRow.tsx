@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, TitleTransaction, Title } from './styles';
+import { Avatar, RowTableb, TitleTransaction, Title, RowTable } from './styles';
 
 const CoinRow = ({ coin, index }) => {
   return (
@@ -10,20 +10,18 @@ const CoinRow = ({ coin, index }) => {
         </Avatar>
       </td>
       <td>
-        <TitleTransaction>{coin.name}</TitleTransaction>
+        <RowTableb>
+          <TitleTransaction>{coin.name}</TitleTransaction>
+          <TitleTransaction>{coin.symbol.toUpperCase()}</TitleTransaction>
+        </RowTableb>
       </td>
+      <RowTable>
+        <td>
+          <Title>${coin.current_price.toLocaleString()}</Title>
+        </td>
 
-      <td>
-        <Title>${coin.current_price.toLocaleString()}</Title>
-      </td>
-
-      <td
-        className={
-          coin.price_change_percentage_24h > 0 ? 'text-success' : 'text-danger'
-        }
-      >
-        {coin.price_change_percentage_24h}
-      </td>
+        <td>{coin.price_change_percentage_24h}</td>
+      </RowTable>
     </tr>
   );
 };

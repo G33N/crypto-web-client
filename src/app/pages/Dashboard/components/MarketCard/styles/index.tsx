@@ -39,7 +39,7 @@ export const Project = styled.div`
 `;
 
 export const Avatar = styled.div`
-  margin-left: 2rem;
+  //margin-left: 2rem;
   img {
     height: 3rem;
     width: 3rem;
@@ -56,13 +56,13 @@ export const Avatar = styled.div`
 export const Detail = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  // align-items: center;
   margin-left: 2rem;
 `;
 
 export const TitleTransaction = styled.h3`
-  margin-left: 2rem;
-  padding-right: 6rem;
+  //margin-left: 2rem;
+  // padding-right: 6rem;
   font-weight: 500;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     font-size: 1rem;
@@ -70,23 +70,43 @@ export const TitleTransaction = styled.h3`
 `;
 
 export const SubTitle = styled.h5`
-  padding-right: 2rem;
+  //padding-right: 2rem;
   font-weight: 300;
-  padding-left: 4rem;
+  // padding-left: 4rem;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    // padding: 0px;
+    font-size: 12px;
+  }
 `;
 
 export const Title = styled.h5`
-  text-align: start;
+  //  text-align: start;
   color: ${p => p.theme.text};
   cursor: pointer;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    display: none;
   }
 `;
 
 export const Box = styled.div`
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    height: max-content;
-    width: max-content;
+    display: none;
+  }
+`;
+
+export const RowTable = styled.div`
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    display: flex;
+    flex-direction: column;
+    //   align-items: center;
+  }
+`;
+
+export const RowTableb = styled.div`
+  display: flex;
+  flex-direction: row;
+  // align-items: stretch;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    display: flex;
+    flex-direction: column;
   }
 `;
