@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { i18n } from '../i18n';
+import { i18n } from '../_i18n';
 import axios from 'axios';
 import { Card, Title, BoxTitle } from './styles';
 import TableCoins from './TableCoins';

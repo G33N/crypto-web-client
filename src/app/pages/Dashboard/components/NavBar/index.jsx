@@ -1,4 +1,4 @@
-import { i18n } from '../i18n';
+import { i18n } from '../_i18n';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import {

@@ -20,7 +20,7 @@ export const Card = styled.div`
     position: absolute;
     width: 328px;
     height: 355px;
-    left: 16px;
+    left: 36px;
     top: 430px;
   }
 `;
@@ -79,4 +79,14 @@ export const Title = styled.h5`
   text-align: start;
   color: ${p => p.theme.text};
   cursor: pointer;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    display: none;
+  }
+`;
+
+export const Box = styled.div`
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    height: max-content;
+    width: max-content;
+  }
 `;

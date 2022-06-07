@@ -1,4 +1,4 @@
-import { i18n } from './../i18n';
+import { i18n } from '../_i18n';
 import React from 'react';
 import IconButton1 from '../../../../assets/icons/Withdrawals.svg';
 import IconButton2 from '../../../../assets/icons/Deposit.svg';

@@ -5,7 +5,7 @@ import {
   StyleConstants,
   StyleResponsive,
 } from '../../../../styles/StyleConstants';
-import Badge from '../../Dashboard/components/Badge';
+import Badge from '../../../../utils/Badge';
 import BlueAlert from '../../../assets/icons/alertblue.svg';
 
 function TransactionsCard() {

@@ -15,7 +15,7 @@ export const TransactionContainer = styled.div`
     position: absolute;
     width: 328px;
     height: 443px;
-    left: 16px;
+    left: 36px;
     top: 809px;
   }
 `;

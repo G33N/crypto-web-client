@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { i18n } from '../i18n';
+import { i18n } from '../_i18n';
 import PasswordOff from '../../../../assets/icons/Password off.svg';
 import PasswordOn from '../../../../assets/icons/Password on.svg';
 import BackUp from '../../../../assets/icons/Back Up.svg';
 import ArrowDown from '../../../../assets/icons/Arrow down.svg';
 import {
+  BoxArrow,
   Box,
+  BoxInput,
   CardContent,
-  Slack,
-  SlackText,
-  SlackHead,
-  SlackTitle,
   Icon,
   Img,
-  SlackFoot,
-  BoxInput,
   InputPass,
+  Slack,
+  SlackHead,
+  SlackTitle,
+  SlackText,
+  SlackFoot,
 } from './styles';
 
 function BalanceCard() {
@@ -43,7 +44,7 @@ function BalanceCard() {
       );
       const response = res.data;
       const resultado = response.find(change => change.id === 'tether');
-      if (resultado.price_change_percentage_24h > 0) {
+      if (resultado.price_change_percentage_24h < 0) {
         setArrowChange(true);
       }
       setCoins(resultado.price_change_percentage_24h);
@@ -93,15 +94,15 @@ function BalanceCard() {
                   name="balance"
                 />
                 {arrowChange ? (
-                  <>
+                  <BoxArrow>
                     <Img src={BackUp} />
                     <p style={{ color: 'green' }}>{coins}%</p>
-                  </>
+                  </BoxArrow>
                 ) : (
-                  <>
+                  <BoxArrow>
                     <Img src={ArrowDown} />
                     <p style={{ color: 'red' }}>{coins}%</p>
-                  </>
+                  </BoxArrow>
                 )}
               </BoxInput>
             </SlackFoot>

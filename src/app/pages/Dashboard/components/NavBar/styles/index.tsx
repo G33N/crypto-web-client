@@ -102,7 +102,6 @@ export const ImgConteiner = styled.div`
     background-color: black;
     padding: 20px 20px 20px 50px;
     margin-left: 0px;
-
     display: block;
   }
 `;

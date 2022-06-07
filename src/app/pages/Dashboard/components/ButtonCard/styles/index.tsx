@@ -13,7 +13,7 @@ export const InfoCard = styled.div`
     position: absolute;
     width: 72px;
     height: 90px;
-    left: 16px;
+    left: 36px;
     top: 316px;
   }
 `;

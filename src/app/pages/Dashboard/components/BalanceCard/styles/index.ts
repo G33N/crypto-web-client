@@ -10,11 +10,11 @@ export const Box = styled.div`
   align-items: center;
   transition: 0.4s ease-in-out;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    position: absolute;
+    margin-top: -100px;
     width: 328px;
     height: 140px;
-    left: 16px;
-    top: 160px;
+    margin-left: 36px;
+    align-items: center;
   }
 `;
 
@@ -103,6 +103,12 @@ export const InputPass = styled.input`
   &:active {
     color: ${p => p.theme.text};
   }
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    height: 30px;
+    width: 50%;
+    font-size: 30px;
+    font-weight: 300;
+  }
 `;
 
 export const BoxInput = styled.div`
@@ -114,6 +120,7 @@ export const BoxInput = styled.div`
   opacity: 0.8;
   border-radius: 12px;
   background-color: transparent;
+  justify-content: space-between;
   p {
     font-size: 20px;
     font-weight: 700;
@@ -121,5 +128,26 @@ export const BoxInput = styled.div`
   }
   ::placeholder {
     color: ${p => p.theme.text};
+  }
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    p {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 20px;
+    }
+  }
+`;
+
+export const BoxArrow = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    p {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 20px;
+    }
   }
 `;
