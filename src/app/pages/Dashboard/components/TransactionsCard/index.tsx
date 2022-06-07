@@ -1,5 +1,5 @@
 import React from 'react';
-import { i18n } from '../i18n';
+import { i18n } from '../_i18n';
 import Icon1 from '../../../../assets/icons/Moni in.svg';
 import Icon2 from '../../../../assets/icons/Moni out.svg';
 import Icon3 from '../../../../assets/icons/Deposit.svg';

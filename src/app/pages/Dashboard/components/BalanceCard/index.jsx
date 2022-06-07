@@ -1,9 +1,73 @@
-import React from 'react';
-import styled from 'styled-components';
-import { i18n } from '../i18n';
-import { StyleConstants } from '../../../../../styles/StyleConstants';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { i18n } from '../_i18n';
+import PasswordOff from '../../../../assets/icons/Password off.svg';
+import PasswordOn from '../../../../assets/icons/Password on.svg';
+import BackUp from '../../../../assets/icons/Back Up.svg';
+import ArrowDown from '../../../../assets/icons/Arrow down.svg';
+import {
+  BoxArrow,
+  Box,
+  BoxInput,
+  CardContent,
+  Icon,
+  Img,
+  InputPass,
+  Slack,
+  SlackHead,
+  SlackTitle,
+  SlackText,
+  SlackFoot,
+} from './styles';
+
 function BalanceCard() {
   const { t } = i18n;
+  const [coins, setCoins] = useState([]);
+  const [totalBalance, setTotalBalance] = useState([]);
+  const { register } = useForm({
+    mode: 'onChange',
+  });
+
+  const coinBalance = 'USDT';
+
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
+  const [arrowChange, setArrowChange] = useState();
+
+  const getData = async () => {
+    try {
+      const res = await axios.get(
+        'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false',
+      );
+      const response = res.data;
+      const resultado = response.find(change => change.id === 'tether');
+      if (resultado.price_change_percentage_24h < 0) {
+        setArrowChange(true);
+      }
+      setCoins(resultado.price_change_percentage_24h);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getDataBalance = async () => {
+    try {
+      const res = await axios.get('http://localhost:8000/api/account/list');
+      setTotalBalance(res.data.balance);
+      console.log('Resultado de balance data: ', res.data);
+    } catch (error) {
+      setTotalBalance('7.033,22');
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getDataBalance();
+    getData();
+  }, []);
 
   return (
     <Box>
@@ -11,77 +75,42 @@ function BalanceCard() {
         <Slack>
           <SlackText>
             <SlackTitle>{t('balanceCard__title')}</SlackTitle>
-            <SlackHead>{t('balanceCard__subTitle')}</SlackHead>
-            <SlackFoot>$ 0000000</SlackFoot>
+            <SlackHead>
+              {t('balanceCard__subTitle')}
+              <Icon onClick={togglePasswordVisiblity}>
+                {passwordShown ? (
+                  <Img src={PasswordOn} />
+                ) : (
+                  <Img src={PasswordOff} />
+                )}
+              </Icon>
+            </SlackHead>
+            <SlackFoot>
+              <BoxInput>
+                <InputPass
+                  value={`$ ${totalBalance}  ${coinBalance}`}
+                  type={passwordShown ? 'text' : 'password'}
+                  {...register('balance')}
+                  name="balance"
+                />
+                {arrowChange ? (
+                  <BoxArrow>
+                    <Img src={BackUp} />
+                    <p style={{ color: 'green' }}>{coins}%</p>
+                  </BoxArrow>
+                ) : (
+                  <BoxArrow>
+                    <Img src={ArrowDown} />
+                    <p style={{ color: 'red' }}>{coins}%</p>
+                  </BoxArrow>
+                )}
+              </BoxInput>
+            </SlackFoot>
           </SlackText>
         </Slack>
       </CardContent>
     </Box>
   );
 }
-
-const Box = styled.div`
-  background-color: ${p => p.theme.background};
-  height: 200px;
-  width: 660px;
-  border-radius: 1rem;
-  display: flex;
-  align-items: center;
-  transition: 0.4s ease-in-out;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    height: max-content;
-    width: 80%;
-  }
-`;
-
-const CardContent = styled.div`
-  margin: 1rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
-    flex-direction: column;
-    gap: 1rem;
-  }
-`;
-
-const Slack = styled.div`
-  display: flex;
-`;
-
-const SlackText = styled.div`
-  color: ${p => p.theme.background};
-`;
-
-const SlackHead = styled.h2`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 27px;
-  /* identical to box height */
-
-  display: flex;
-  align-items: center;
-`;
-
-const SlackTitle = styled.p`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 36px;
-  color: ${p => p.theme.text};
-`;
-
-const SlackFoot = styled.div`
-  color: ${p => p.theme.text};
-
-  font-style: normal;
-  font-weight: 500;
-  font-size: 48px;
-  line-height: 72px;
-`;
 
 export default BalanceCard;

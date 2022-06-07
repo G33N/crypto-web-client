@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import globo from '../../../assets/images/globopeque.png';
-import { btnReset, v } from '../../../../styles/StyleConstants';
+import {
+  btnReset,
+  StyleResponsive,
+  v,
+} from '../../../../styles/StyleConstants';
 
 interface Props {
   isOpen?: boolean;
@@ -22,8 +26,9 @@ export const BoxSidebar = styled.div<Props>`
   padding-top: 20px;
   padding-left: 8px;
   padding-right: 8px;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     width: auto;
+    z-index: 1;
   }
 
   .sidebar__items {
@@ -100,6 +105,7 @@ export const SLinkLabel = styled.span`
 `;
 
 export const SSidebarButton = styled.button<Props>`
+  visibility: hidden;
   ${btnReset};
   position: absolute;
   top: ${v.xxlSpacing};
@@ -113,6 +119,9 @@ export const SSidebarButton = styled.button<Props>`
   justify-content: center;
   cursor: pointer;
   transform: ${({ isOpen }) => (!isOpen ? `rotate(180deg)` : `initial`)};
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    visibility: visible;
+  }
 `;
 
 export const ButtonLogout = styled.button`
@@ -153,7 +162,6 @@ export const ImgConteiner = styled.div`
     height: 4rem;
     width: 200px;
   }
-  // z-position: 1;
 `;
 
 export const ConteinerFondo = styled.div`

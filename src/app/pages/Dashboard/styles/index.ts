@@ -1,11 +1,12 @@
 import styled from 'styled-components/macro';
+import { StyleResponsive } from '../../../../styles/StyleConstants';
 
 export const Container = styled.div`
   background: ${p => p.theme.backgroundDashboard};
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
+
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     display: flex;
     flex-direction: column;
-    padding: 4em;
   }
 `;
 
@@ -16,8 +17,7 @@ export const SubContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4rem;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
-    height: 100%;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
   }
 `;
 export const SectionOne = styled.div`
@@ -26,10 +26,11 @@ export const SectionOne = styled.div`
   height: 40%;
   gap: 2rem;
   width: 100%;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     flex-direction: column;
     align-items: center;
-    height: max-content;
+    height: 100%;
+    width: 80%;
   }
 `;
 export const ColumnOne1 = styled.div`
@@ -38,7 +39,7 @@ export const ColumnOne1 = styled.div`
   justify-content: center;
   align-items: center;
   gap: 3rem;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -52,8 +53,7 @@ export const ColumnTwo1 = styled.div`
   flex-direction: column;
   height: 115%;
   width: 100%;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
-    height: max-content;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     justify-content: center;
     align-items: center;
   }
@@ -63,14 +63,14 @@ export const SectionTwo = styled.div`
   display: flex;
   gap: 2rem;
   height: 26vh;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     flex-direction: column;
     height: max-content;
     width: 100%;
   }
 `;
 export const ColumnOne2 = styled.div`
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     display: flex;
     justify-content: center;
     align-items: center;

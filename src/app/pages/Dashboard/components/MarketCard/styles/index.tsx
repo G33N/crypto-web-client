@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import { StyleConstants } from '../../../../../../styles/StyleConstants';
+import {
+  StyleConstants,
+  StyleResponsive,
+} from '../../../../../../styles/StyleConstants';
 
 export const Card = styled.div`
   width: 660px;
@@ -13,10 +16,12 @@ export const Card = styled.div`
   &:hover {
     box-shadow: ${StyleConstants.hoverEffect};
   }
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
-    height: max-content;
-    width: 75%;
-    margin-top: 1rem;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    position: absolute;
+    width: 328px;
+    height: 355px;
+    left: 36px;
+    top: 430px;
   }
 `;
 
@@ -40,6 +45,12 @@ export const Avatar = styled.div`
     width: 3rem;
     border-radius: 4rem;
   }
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    img {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+  }
 `;
 
 export const Detail = styled.div`
@@ -48,11 +59,12 @@ export const Detail = styled.div`
   align-items: center;
   margin-left: 2rem;
 `;
+
 export const TitleTransaction = styled.h3`
   margin-left: 2rem;
   padding-right: 6rem;
   font-weight: 500;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     font-size: 1rem;
   }
 `;
@@ -67,4 +79,14 @@ export const Title = styled.h5`
   text-align: start;
   color: ${p => p.theme.text};
   cursor: pointer;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    display: none;
+  }
+`;
+
+export const Box = styled.div`
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    height: max-content;
+    width: max-content;
+  }
 `;

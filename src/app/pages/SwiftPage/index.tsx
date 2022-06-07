@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Conteiner, Text } from './styles';
 
-export function TabInner() {
+export function SwiftPage() {
   return (
     <>
       <Helmet>
@@ -10,8 +10,8 @@ export function TabInner() {
       </Helmet>
 
       <Conteiner>
-        <Text> SWIFT PAGE PRINCIPAL</Text>
-        <Text> - Se ve solo si hs iniciado sesion - </Text>
+        <Text> SWift PAGE</Text>
+        <Text> - Se ve solo si has iniciado sesion - </Text>
       </Conteiner>
     </>
   );
