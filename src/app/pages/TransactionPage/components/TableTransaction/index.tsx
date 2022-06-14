@@ -7,7 +7,7 @@ import DataTable from 'react-data-table-component';
 import { FilterComponent } from '../FilterTable';
 import { ModalDetailTransaction } from '../ModalDetailTransaction';
 import { Button } from './styles';
-import { Row } from 'app/components/Forms/styles';
+import Badge from '../../../../../utils/Badge';
 
 export const TableTransaction = () => {
   const columns = [
@@ -29,7 +29,7 @@ export const TableTransaction = () => {
     },
     {
       name: 'Estado',
-      selector: row => row.estado,
+      cell: row => <Badge content={row.estado} />,
       sortable: true,
     },
     {
