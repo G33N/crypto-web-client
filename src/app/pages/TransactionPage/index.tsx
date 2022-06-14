@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components/macro';
-import TransactionsCard from './components/TransactionsCard';
+import { TableTransaction } from './components/TableTransaction';
 
 export function TransactionPage() {
   return (
@@ -12,7 +12,7 @@ export function TransactionPage() {
 
       <Conteiner>
         <Text> TRANSACTION PAGE</Text>
-        <TransactionsCard />
+        <TableTransaction />
       </Conteiner>
     </>
   );
