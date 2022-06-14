@@ -9,7 +9,7 @@
   "buttonCard__titleButton3": "Enviar",
   "buttonCard__titleButton4": "Depositar",
 
-  "marketCard__title": "Mercados",
+  "marketCard__title": "Mercado",
   "marketCard__errorMessageApi": "tenemos un problema de conexion , aguarde unos segundos y reintente traer las cotizaciones nuevamente.",
   "marketCard__tableTitle1": "",
   "marketCard__tableTitle2": "Nombre",

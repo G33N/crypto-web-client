@@ -2,8 +2,9 @@ import React from 'react';
 import {
   Avatar,
   TitleTransaction,
+  RowTablePrice,
   RowTableb,
-  Title,
+  TitleCoin,
   RowTable,
   Wrapper,
 } from './styles';
@@ -12,13 +13,11 @@ const CoinRow = ({ coin, index }) => {
   return (
     <tr>
       <Wrapper>
-        <RowTable>
+        <Avatar>
           <td>
-            <Avatar>
-              <img src={coin.image} alt="" />
-            </Avatar>
+            <img src={coin.image} alt="" />
           </td>
-        </RowTable>
+        </Avatar>
 
         <RowTable>
           <td>{coin.name}</td>
@@ -27,11 +26,11 @@ const CoinRow = ({ coin, index }) => {
             <TitleTransaction>({coin.symbol.toUpperCase()})</TitleTransaction>
           </td>
         </RowTable>
-        <RowTableb>
+        <RowTablePrice>
           <td>
-            <Title>${coin.current_price.toLocaleString()}</Title>
+            <TitleCoin>${coin.current_price.toLocaleString()}</TitleCoin>
           </td>
-        </RowTableb>
+        </RowTablePrice>
 
         <RowTableb>
           <td>{coin.price_change_percentage_24h}</td>

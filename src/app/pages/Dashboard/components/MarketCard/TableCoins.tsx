@@ -1,7 +1,13 @@
 import React from 'react';
 import CoinRow from './CoinRow';
 import { i18n } from '../_i18n';
-import { Box, TableCoin } from './styles';
+import {
+  TableCoin,
+  TitleRowTable,
+  Wrapper,
+  TitleRowTablePrice,
+  TitleRowTableb,
+} from './styles';
 
 const TableCoins = ({ coins, search }) => {
   const { t } = i18n;
@@ -22,13 +28,27 @@ const TableCoins = ({ coins, search }) => {
   return (
     <TableCoin>
       <thead>
-        <Box>
+        <Wrapper>
+          <TitleRowTable>
+            <td>{t('marketCard__tableTitle2')}</td>
+          </TitleRowTable>
+          <TitleRowTablePrice>
+            <td>{t('marketCard__tableTitle3')}</td>
+          </TitleRowTablePrice>
+
+          <TitleRowTableb>
+            <td>{t('marketCard__tableTitle4')}</td>
+          </TitleRowTableb>
+        </Wrapper>
+
+        {/* <Box>
           <tr>
+
             {titles.map((title, i) => (
               <td key={i}>{title}</td>
             ))}
           </tr>
-        </Box>
+        </Box> */}
       </thead>
 
       <tbody>

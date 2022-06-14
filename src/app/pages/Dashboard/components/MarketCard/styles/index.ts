@@ -39,6 +39,7 @@ export const Project = styled.div`
 `;
 
 export const Avatar = styled.div`
+  padding: 5px;
   img {
     height: 2.5rem;
     width: 2.5rem;
@@ -60,14 +61,27 @@ export const TitleTransaction = styled.div`
   }
 `;
 
-export const SubTitle = styled.h5`
+export const SubTitle = styled.p`
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
   }
 `;
 
-export const Title = styled.h5`
+export const Title = styled.p`
   color: ${p => p.theme.text};
-  cursor: pointer;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+  //border: 1px solid grey;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+  }
+`;
+
+export const TitleCoin = styled.p`
+  color: ${p => p.theme.text};
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
   text-align: center;
   //border: 1px solid grey;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
@@ -75,7 +89,7 @@ export const Title = styled.h5`
 `;
 
 export const Box = styled.div`
-  border: 1px solid violet;
+  //border: 1px solid violet;
   width: 100%;
   text-align: center;
   border-collapse: separate;
@@ -85,24 +99,75 @@ export const Box = styled.div`
   }
 `;
 
+export const TitleRowTable = styled.div`
+  //border: 1px solid red;
+  color: ${p => p.theme.text};
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 21px;
+  margin-left: 5px;
+  width: 65%;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    visibility: hidden;
+  }
+`;
+
 export const RowTable = styled.div`
   //border: 1px solid red;
   display: flex;
-  justify-content: start;
-  width: 30%;
+  justify-content: stretch;
+  margin-left: 5px;
+  width: 50%;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     flex-direction: column;
   }
 `;
 
-export const RowTableb = styled.div`
+export const RowTablePrice = styled.div`
   //border: 1px solid orange;
   display: flex;
-
-  justify-content: end;
-  width: 70%;
+  justify-content: center;
+  width: 50%;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     flex-direction: column;
+  }
+`;
+
+export const TitleRowTablePrice = styled.div`
+  //border: 1px solid orange;
+  color: ${p => p.theme.text};
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 21px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    visibility: hidden;
+  }
+`;
+
+export const RowTableb = styled.div`
+  //border: 1px solid cadetblue;
+  display: flex;
+  justify-content: end;
+  width: 50%;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    flex-direction: column;
+  }
+`;
+
+export const TitleRowTableb = styled.div`
+  //border: 1px solid cadetblue;
+  color: ${p => p.theme.text};
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 21px;
+  display: flex;
+  justify-content: end;
+  width: 50%;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    visibility: hidden;
   }
 `;
 
