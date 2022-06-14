@@ -9,7 +9,7 @@ function MarketCard() {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState('');
 
-  const limit = 6;
+  const limit = 7;
 
   const getData = async () => {
     try {

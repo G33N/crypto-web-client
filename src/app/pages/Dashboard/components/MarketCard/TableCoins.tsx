@@ -1,7 +1,7 @@
 import React from 'react';
 import CoinRow from './CoinRow';
 import { i18n } from '../_i18n';
-import { Box, RowTable } from './styles';
+import { Box, TableCoin } from './styles';
 
 const TableCoins = ({ coins, search }) => {
   const { t } = i18n;
@@ -20,7 +20,7 @@ const TableCoins = ({ coins, search }) => {
   if (!coins) return <div>{t('marketCard__errorMessageAApi')}</div>;
 
   return (
-    <table className="table table-dark mt-4 table-hover">
+    <TableCoin>
       <thead>
         <Box>
           <tr>
@@ -36,7 +36,7 @@ const TableCoins = ({ coins, search }) => {
           <CoinRow key={coin.id} coin={coin} index={index + 1} />
         ))}
       </tbody>
-    </table>
+    </TableCoin>
   );
 };
 

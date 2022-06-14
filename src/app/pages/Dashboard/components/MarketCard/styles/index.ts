@@ -14,7 +14,7 @@ export const Card = styled.div`
   box-shadow: ${StyleConstants.cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
-    box-shadow: ${StyleConstants.hoverEffect};
+    //box-shadow: ${StyleConstants.hoverEffect};
   }
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     position: absolute;
@@ -39,12 +39,11 @@ export const Project = styled.div`
 `;
 
 export const Avatar = styled.div`
-  //margin-left: 2rem;
   img {
-    height: 3rem;
-    width: 3rem;
-    border-radius: 4rem;
+    height: 2.5rem;
+    width: 2.5rem;
   }
+  //border: 1px solid blue;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     img {
       height: 1.5rem;
@@ -53,60 +52,79 @@ export const Avatar = styled.div`
   }
 `;
 
-export const Detail = styled.div`
-  display: flex;
-  flex-direction: row;
-  // align-items: center;
-  margin-left: 2rem;
-`;
+export const TitleTransaction = styled.div`
+  //border: 1px solid yellow;
 
-export const TitleTransaction = styled.h3`
-  //margin-left: 2rem;
-  // padding-right: 6rem;
-  font-weight: 500;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    font-size: 1rem;
+    color: grey;
   }
 `;
 
 export const SubTitle = styled.h5`
-  //padding-right: 2rem;
-  font-weight: 300;
-  // padding-left: 4rem;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    // padding: 0px;
-    font-size: 12px;
   }
 `;
 
 export const Title = styled.h5`
-  //  text-align: start;
   color: ${p => p.theme.text};
   cursor: pointer;
+  text-align: center;
+  //border: 1px solid grey;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
   }
 `;
 
 export const Box = styled.div`
+  border: 1px solid violet;
+  width: 100%;
+  text-align: center;
+  border-collapse: separate;
+  justify-content: end;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     display: none;
   }
 `;
 
 export const RowTable = styled.div`
+  //border: 1px solid red;
+  display: flex;
+  justify-content: start;
+  width: 30%;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    display: flex;
     flex-direction: column;
-    //   align-items: center;
   }
 `;
 
 export const RowTableb = styled.div`
+  //border: 1px solid orange;
   display: flex;
-  flex-direction: row;
-  // align-items: stretch;
+
+  justify-content: end;
+  width: 70%;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    display: flex;
     flex-direction: column;
   }
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  //border: 1px solid;
+  //width: 100%;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+`;
+
+/****tabla***/
+
+export const TableCoin = styled.table`
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+
+  // border: 1px solid green;
 `;

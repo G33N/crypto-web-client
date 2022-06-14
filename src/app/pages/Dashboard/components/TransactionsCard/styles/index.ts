@@ -9,7 +9,7 @@ export const TransactionContainer = styled.div`
   box-shadow: ${StyleConstants.cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
-    box-shadow: ${StyleConstants.hoverEffect};
+    // box-shadow: ${StyleConstants.hoverEffect};
   }
   @media screen and (min-width: 320px) and (max-width: 1080px) {
     position: absolute;
