@@ -6,19 +6,12 @@ import {
   RowTableb,
   TitleCoin,
   RowTable,
-  Img,
   BoxArrow,
   ResponsiveBox,
   Wrapper,
 } from './styles';
-import BackUp from '../../../../assets/icons/Back Up.svg';
-import ArrowDown from '../../../../assets/icons/Arrow down.svg';
-import { isRejected } from '@reduxjs/toolkit';
 
 const CoinRow = ({ coin, index }) => {
-  const [arrowChange, setArrowChange] = useState(false);
-  console.log('arrowChange: ', arrowChange);
-  console.log('CoinPrice: ', coin.price_change_percentage_24h);
   return (
     <tr>
       <Wrapper>
@@ -42,15 +35,20 @@ const CoinRow = ({ coin, index }) => {
             </td>
           </RowTablePrice>
           <RowTableb>
-            {arrowChange ? (
-              <BoxArrow>
-                +
-                <p style={{ color: 'green' }}>
-                  {coin.price_change_percentage_24h}%
-                </p>
+            {coin.price_change_percentage_24h > 0 ? (
+              <BoxArrow
+                ColorPrice={
+                  coin.price_change_percentage_24h > 0 ? 'green' : 'red'
+                }
+              >
+                <p>{coin.price_change_percentage_24h}%</p>
               </BoxArrow>
             ) : (
-              <BoxArrow>
+              <BoxArrow
+                ColorPrice={
+                  coin.price_change_percentage_24h > 0 ? 'green' : 'red'
+                }
+              >
                 <p style={{ color: 'red' }}>
                   {coin.price_change_percentage_24h}%
                 </p>

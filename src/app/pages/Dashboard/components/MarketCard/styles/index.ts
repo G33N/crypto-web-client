@@ -3,6 +3,9 @@ import {
   StyleConstants,
   StyleResponsive,
 } from '../../../../../../styles/StyleConstants';
+interface Props {
+  ColorPrice?: string;
+}
 
 export const Card = styled.div`
   position: absolute;
@@ -151,13 +154,14 @@ export const TitleRowTablePrice = styled.div`
   }
 `;
 
-export const BoxArrow = styled.div`
+export const BoxArrow = styled.i<Props>`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     p {
+      color: ${props => props.ColorPrice};
       font-size: 12px;
       font-weight: 500;
       line-height: 16px;
