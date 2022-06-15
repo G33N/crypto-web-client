@@ -2,10 +2,13 @@ import styled from 'styled-components';
 import { StyleConstants } from '../../../../../../styles/StyleConstants';
 
 export const TransactionContainer = styled.div`
+  position: absolute;
   width: 414px;
+  height: 520px;
+  left: 987px;
+  top: 136px;
   border-radius: 1rem;
   background-color: white;
-  height: max-content;
   box-shadow: ${StyleConstants.cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
@@ -17,16 +20,6 @@ export const TransactionContainer = styled.div`
     height: 443px;
     left: 36px;
     top: 809px;
-  }
-`;
-
-export const CardContent = styled.div`
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
-    margin: 0px;
-    padding: 0px;
-    width: max-content;
-    justify-content: center;
-    align-items: center;
   }
 `;
 
@@ -59,8 +52,9 @@ export const TitleCard = styled.h5`
 
 export const Invoice = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: 0.4rem;
   @media screen and (min-width: 320px) and (max-width: 1080px) {
     width: 120%;
@@ -69,8 +63,9 @@ export const Invoice = styled.div`
 
 export const Info = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
-  width: 50%;
+
   @media screen and (min-width: 320px) and (max-width: 1080px) {
     flex-direction: row;
     width: 100%;
@@ -99,19 +94,23 @@ export const TextContainer = styled.div`
 `;
 
 export const Title = styled.h4``;
-export const SubTitle = styled.h5`
+
+export const SubTitle = styled.div`
   font-weight: 400;
+  font-size: 12px;
+  color: grey;
   @media screen and (min-width: 320px) and (max-width: 1080px) {
     font-size: 12px;
+    color: grey;
   }
 `;
 
 export const Container = styled.div`
   margin-left: 1rem;
-  /* display: flex;
+  display: flex;
   justify-content: space-between;
   width: 30%;
-  align-items: center; */
+  align-items: center;
   @media screen and (min-width: 320px) and (max-width: 1080px) {
     width: 100%;
     flex-direction: column;
@@ -119,4 +118,13 @@ export const Container = styled.div`
   }
 `;
 
-export const Price = styled.div``;
+export const Price = styled.div`
+  font-size: 14px;
+  font-weight: 700;
+  color: black;
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    font-size: 14px;
+    font-weight: 700;
+    color: black;
+  }
+`;

@@ -5,12 +5,14 @@ import {
 } from '../../../../../../styles/StyleConstants';
 
 export const Card = styled.div`
+  position: absolute;
   width: 660px;
   height: 520px;
+  top: 472px;
+  left: 295px;
   background-color: white;
-  margin: 0;
-  padding: 1rem;
-  border-radius: 1rem;
+  border-radius: 12px;
+  padding: 16px;
   box-shadow: ${StyleConstants.cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
@@ -18,18 +20,17 @@ export const Card = styled.div`
   }
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     position: absolute;
+    //border: 1px solid blue;
     width: 328px;
     height: 355px;
-    left: 36px;
+    left: 56px;
     top: 430px;
   }
 `;
 
 export const BoxTitle = styled.div`
+  //border: 1px solid blue;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 `;
 
 export const Project = styled.div`
@@ -47,8 +48,8 @@ export const Avatar = styled.div`
   //border: 1px solid blue;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     img {
-      height: 1.5rem;
-      width: 1.5rem;
+      height: 2rem;
+      width: 2rem;
     }
   }
 `;
@@ -61,39 +62,36 @@ export const TitleTransaction = styled.div`
   }
 `;
 
-export const SubTitle = styled.p`
-  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-  }
-`;
-
-export const Title = styled.p`
+export const Title = styled.div`
   color: ${p => p.theme.text};
   font-weight: 600;
   font-size: 18px;
   line-height: 27px;
-  text-align: center;
   //border: 1px solid grey;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
   }
 `;
 
-export const TitleCoin = styled.p`
+export const TitleCoin = styled.div`
   color: ${p => p.theme.text};
   font-weight: 400;
   font-size: 14px;
-  line-height: 24px;
+  line-height: 21px;
   text-align: center;
   //border: 1px solid grey;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
   }
 `;
 
-export const Box = styled.div`
-  //border: 1px solid violet;
-  width: 100%;
-  text-align: center;
-  border-collapse: separate;
-  justify-content: end;
+export const WrapperBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  //border: 1px solid;
+  //width: 100%;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     display: none;
   }
@@ -107,9 +105,6 @@ export const TitleRowTable = styled.div`
   line-height: 21px;
   margin-left: 5px;
   width: 65%;
-  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    visibility: hidden;
-  }
 `;
 
 export const RowTable = styled.div`
@@ -127,12 +122,21 @@ export const RowTablePrice = styled.div`
   //border: 1px solid orange;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 50%;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    flex-direction: column;
+    justify-content: end;
   }
 `;
 
+export const Img = styled.img`
+  width: 24px;
+  height: 24px;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    width: 14px;
+    height: 14px;
+  }
+`;
 export const TitleRowTablePrice = styled.div`
   //border: 1px solid orange;
   color: ${p => p.theme.text};
@@ -143,7 +147,21 @@ export const TitleRowTablePrice = styled.div`
   display: flex;
   justify-content: center;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    visibility: hidden;
+    justify-content: space-between;
+  }
+`;
+
+export const BoxArrow = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    p {
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 16px;
+    }
   }
 `;
 
@@ -151,9 +169,27 @@ export const RowTableb = styled.div`
   //border: 1px solid cadetblue;
   display: flex;
   justify-content: end;
+  align-items: center;
   width: 50%;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    //border: 1px solid cadetblue;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+  }
+`;
+
+export const ResponsiveBox = styled.div`
+  //border: 1px solid cadetblue;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    //border: 1px solid cadetblue;
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    margin-left: 5px;
   }
 `;
 
@@ -166,9 +202,6 @@ export const TitleRowTableb = styled.div`
   display: flex;
   justify-content: end;
   width: 50%;
-  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    visibility: hidden;
-  }
 `;
 
 export const Wrapper = styled.div`
@@ -176,9 +209,9 @@ export const Wrapper = styled.div`
   flex-direction: row;
   align-items: center;
   //border: 1px solid;
-  //width: 100%;
+
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: space-around;
   }
@@ -187,9 +220,9 @@ export const Wrapper = styled.div`
 /****tabla***/
 
 export const TableCoin = styled.table`
-  border-collapse: collapse;
   width: 100%;
   font-size: 14px;
-
-  // border: 1px solid green;
+  @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
+    //border: 1px solid green;
+  }
 `;

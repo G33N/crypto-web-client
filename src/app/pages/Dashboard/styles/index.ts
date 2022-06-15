@@ -3,7 +3,8 @@ import { StyleResponsive } from '../../../../styles/StyleConstants';
 
 export const Container = styled.div`
   background: ${p => p.theme.backgroundDashboard};
-
+  width: 1024px;
+  height: 1440px;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     display: flex;
     flex-direction: column;
@@ -22,7 +23,7 @@ export const SubContainer = styled.div`
 `;
 export const SectionOne = styled.div`
   display: flex;
-  //  justify-content: space-between;
+  //justify-content: space-between;
   height: 40%;
   gap: 2rem;
   width: 100%;

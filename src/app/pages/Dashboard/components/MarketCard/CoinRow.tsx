@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Avatar,
   TitleTransaction,
@@ -6,10 +6,19 @@ import {
   RowTableb,
   TitleCoin,
   RowTable,
+  Img,
+  BoxArrow,
+  ResponsiveBox,
   Wrapper,
 } from './styles';
+import BackUp from '../../../../assets/icons/Back Up.svg';
+import ArrowDown from '../../../../assets/icons/Arrow down.svg';
+import { isRejected } from '@reduxjs/toolkit';
 
 const CoinRow = ({ coin, index }) => {
+  const [arrowChange, setArrowChange] = useState(false);
+  console.log('arrowChange: ', arrowChange);
+  console.log('CoinPrice: ', coin.price_change_percentage_24h);
   return (
     <tr>
       <Wrapper>
@@ -26,15 +35,29 @@ const CoinRow = ({ coin, index }) => {
             <TitleTransaction>({coin.symbol.toUpperCase()})</TitleTransaction>
           </td>
         </RowTable>
-        <RowTablePrice>
-          <td>
-            <TitleCoin>${coin.current_price.toLocaleString()}</TitleCoin>
-          </td>
-        </RowTablePrice>
-
-        <RowTableb>
-          <td>{coin.price_change_percentage_24h}</td>
-        </RowTableb>
+        <ResponsiveBox>
+          <RowTablePrice>
+            <td>
+              <TitleCoin>${coin.current_price.toLocaleString()}</TitleCoin>
+            </td>
+          </RowTablePrice>
+          <RowTableb>
+            {arrowChange ? (
+              <BoxArrow>
+                +
+                <p style={{ color: 'green' }}>
+                  {coin.price_change_percentage_24h}%
+                </p>
+              </BoxArrow>
+            ) : (
+              <BoxArrow>
+                <p style={{ color: 'red' }}>
+                  {coin.price_change_percentage_24h}%
+                </p>
+              </BoxArrow>
+            )}
+          </RowTableb>
+        </ResponsiveBox>
       </Wrapper>
     </tr>
   );

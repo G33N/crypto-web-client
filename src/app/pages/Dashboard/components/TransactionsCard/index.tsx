@@ -7,7 +7,6 @@ import Icon4 from '../../../../assets/icons/Withdrawals.svg';
 import {
   Avatar,
   BoxTitle,
-  CardContent,
   Container,
   TitleCard,
   Title,
@@ -88,33 +87,29 @@ function TransactionsCard() {
 
   return (
     <TransactionContainer>
-      <CardContent>
-        <BoxTitle>
-          <TitleCard>{t('transactionCard__title')}</TitleCard>
-          <LinkTitle>{t('transactionCard__linkTitle')}</LinkTitle>
-        </BoxTitle>
-        {listado.map(
-          ({ id, image, operacion, estado, fecha, hora, precio }) => (
-            <Invoice>
-              <Info>
-                <Avatar>
-                  <img src={image} alt="" />
-                </Avatar>
-                <TextContainer>
-                  <Title>{operacion}</Title>
-                  <SubTitle>
-                    {fecha} {hora}
-                  </SubTitle>
-                </TextContainer>
-              </Info>
-              <Container>
-                <SubTitle>{estado}</SubTitle>
-                <Price>{precio}</Price>
-              </Container>
-            </Invoice>
-          ),
-        )}
-      </CardContent>
+      <BoxTitle>
+        <TitleCard>{t('transactionCard__title')}</TitleCard>
+        <LinkTitle>{t('transactionCard__linkTitle')}</LinkTitle>
+      </BoxTitle>
+      {listado.map(({ id, image, operacion, estado, fecha, hora, precio }) => (
+        <Invoice>
+          <Info>
+            <Avatar>
+              <img src={image} alt="" />
+            </Avatar>
+            <TextContainer>
+              <Title>{operacion}</Title>
+              <SubTitle>
+                {fecha} {hora}
+              </SubTitle>
+            </TextContainer>
+          </Info>
+          <Container>
+            <SubTitle>{estado}</SubTitle>
+            <Price>{precio}</Price>
+          </Container>
+        </Invoice>
+      ))}
     </TransactionContainer>
   );
 }

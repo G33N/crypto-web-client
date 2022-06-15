@@ -12,7 +12,6 @@ export const NavbarContainer = styled.nav`
   align-items: center;
   height: 10%;
   margin-bottom: 3rem;
-
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
     background-color: black;
     justify-content: space-evenly;

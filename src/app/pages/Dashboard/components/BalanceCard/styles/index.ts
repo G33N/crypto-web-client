@@ -3,17 +3,24 @@ import { StyleResponsive } from '../../../../../../styles/StyleConstants';
 
 export const Box = styled.div`
   background-color: ${p => p.theme.background};
-  height: 200px;
+  position: absolute;
   width: 660px;
+  height: 200px;
+  left: 295px;
+  top: 140px;
+  height: 200px;
+
   border-radius: 1rem;
   display: flex;
   align-items: center;
   transition: 0.4s ease-in-out;
   @media screen and (min-width: ${StyleResponsive.mobileS}) and (max-width: ${StyleResponsive.mobileL}) {
-    margin-top: -100px;
+    margin-left: 36px;
+    position: absolute;
     width: 328px;
     height: 140px;
-    margin-left: 36px;
+    left: 16px;
+    top: 160px;
     align-items: center;
   }
 `;
